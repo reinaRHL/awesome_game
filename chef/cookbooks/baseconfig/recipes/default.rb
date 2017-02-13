@@ -16,8 +16,6 @@ execute 'ntp_restart' do
   command 'service ntp restart'
 end
 
-# Exercise 6 packages
-
 # Install nginx via apt-get
 package "nginx"
 # Override the default nginx config with the one in our cookbook.
