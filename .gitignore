@@ -7,3 +7,6 @@
 Gemfile.lock
 log/*
 .bundle
+
+web-app/node_modules
+web-app/npm-debug.log
