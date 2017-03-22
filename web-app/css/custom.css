@@ -1,0 +1,32 @@
+/*navbar*/
+.nav {
+  display: flex; /* or inline-flex */
+  justify-content: space-between;
+  padding-top: 0px;
+  border-bottom: solid gray 0.01em;
+  list-style: none;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+
+
+}
+/*navbar title and icon aligment*/
+ul li span {
+    display: block;
+}
+
+/*icons*/
+.pic-size {
+    height: 41px;
+    width: 36px;
+}
+
+/*dropdown*/
+/*right aligment does not work*/
+ul.dropdown-menu#dropdown1 {
+  right: 0px !important;
+  width: auto !important;
+  
+  left: auto !important;
+}
