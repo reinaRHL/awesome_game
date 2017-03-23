@@ -108,3 +108,48 @@ border: 1px solid white;
 /* */
 
 /* end login page css */
+
+/*Game start*/
+#gameStart{
+  position: absolute;
+    top: 25%;
+    left: 25%;
+}
+
+#gameStart img, #gameStart button{
+  margin-top: 2em
+}
+
+#gameContainer {
+  position: relative; 
+  height: 100vh;
+  text-align: center
+}
+
+/*iPhone5*/
+@media screen and (min-width: 320px) {
+    #gameStart{
+      left: 20%
+  }
+}
+
+/*iPhone6*/
+@media screen and (min-width: 375px) {
+    #gameStart{
+      left: 25%
+  }
+}
+
+/*iPad*/
+@media screen and (min-width: 768px) {
+    #gameStart{
+      left: 35%
+  }
+}
+
+/*iPadpro*/
+@media screen and (min-width: 1024px) {
+    #gameStart{
+      left: 40%
+  }
+}
