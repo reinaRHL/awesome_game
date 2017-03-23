@@ -79,6 +79,14 @@ padding-bottom: 5%;
 border: 1px solid white;
 }
 
+#loginPressed{
+  margin-bottom: 2%;
+}
+
+#newAccount{
+  text-decoration: underline;
+}
+
 
 /* center modal in middle of page vertically and set height */
 .modal {
@@ -121,7 +129,7 @@ border: 1px solid white;
 }
 
 #gameContainer {
-  position: relative; 
+  position: relative;
   height: 100vh;
   text-align: center
 }

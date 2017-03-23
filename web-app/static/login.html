@@ -25,7 +25,7 @@
               <span id="errorContent"></span>
               <div class="form-group">
                 <label>Username</label>
-                <input type="input" class="form-control"  placeholder="Enter username">
+                <input type="input" id="unSignup" class="form-control"  placeholder="Enter username">
 
                 <label>Password</label>
                 <input type="password" id="pwSignup" class="form-control password_show" placeholder="Enter password">
@@ -56,14 +56,14 @@
       <h2> Welcome back to Awesome Game! </h2>
       <div class="form-group">
         <label>Username</label>
-        <input type="input" class="form-control"  placeholder="Enter username">
+        <input type="input" id="unLogin" class="form-control"  placeholder="Enter username">
 
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Enter password">
+        <input type="password" id="pwLogin" class="form-control" placeholder="Enter password">
 
-        <button type="button" class="btn btn-primary">Login</button>
-        <br />
-        <small id="newAccount" class="form-text text-muted" data-toggle="modal" data-target="#signupModal">Don't have an account?</small>
+        <button id="loginPressed" onclick="login_Submit()" type="button" class="btn btn-primary">Login</button>
+          <br />
+        <small id="newAccount" onclick="open_SignupModal()"class="form-text text-muted" data-toggle="modal" data-target="#signupModal">Don't have an account?</small>
 
       </div>
 
