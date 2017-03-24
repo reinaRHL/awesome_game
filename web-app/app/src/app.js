@@ -12,6 +12,8 @@ app.use(morgan('dev'));
 
 
 
-app.listen(PORT, function () {
+const server = app.listen(PORT, function () {
 	console.log('web-app started on port ' + PORT);
 });
+
+const io = require('socket.io')(server);
