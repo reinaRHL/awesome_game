@@ -1,3 +1,4 @@
+
 # Make sure the Apt package lists are up to date, so we're downloading versions that exist.
 cookbook_file "apt-sources.list" do
   path "/etc/apt/sources.list"
@@ -8,6 +9,7 @@ end
 
 # Base configuration recipe in Chef.
 package "wget"
+
 package "ntp"
 cookbook_file "ntp.conf" do
   path "/etc/ntp.conf"
@@ -25,4 +27,11 @@ end
 # Reload nginx to pick up new nginx config
 service "nginx" do
   action :reload
+end
+
+mysql_service 'mysql' do
+  port '3306'
+  version '5.7'
+  initial_root_password 'hello'
+  action [:create, :start,:restart]
 end

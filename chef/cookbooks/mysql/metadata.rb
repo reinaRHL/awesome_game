@@ -1,0 +1,22 @@
+name 'mysql'
+maintainer 'Chef Software, Inc.'
+maintainer_email 'cookbooks@chef.io'
+license 'Apache 2.0'
+description 'Provides mysql_service, mysql_config, and mysql_client resources'
+version '8.3.0'
+
+supports 'amazon'
+supports 'redhat'
+supports 'centos'
+supports 'scientific'
+supports 'oracle'
+supports 'fedora'
+supports 'debian'
+supports 'ubuntu'
+supports 'suse'
+supports 'opensuse'
+supports 'opensuseleap'
+
+source_url 'https://github.com/chef-cookbooks/mysql'
+issues_url 'https://github.com/chef-cookbooks/mysql/issues'
+chef_version '>= 12.1' if respond_to?(:chef_version)
