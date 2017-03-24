@@ -5,5 +5,5 @@ name "webserver"
 run_list(
     "recipe[apache2]",
     "recipe[openssl]",
-    "recipe[mysql::server]"
+    "recipe[mysql]"
 )
