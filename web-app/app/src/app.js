@@ -38,5 +38,5 @@ io.on('connection', function (socket) {
 /// This is for chatting feature 
 /// there's separate chat.html but it can be incoporated into lobby later
 app.get('/chat', function(req, res){
-	res.sendFile(path.resolve('../../static/chat.html'));
+	res.sendFile(path.resolve('../static/chat.html'));
 });
