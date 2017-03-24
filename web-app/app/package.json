@@ -2,10 +2,10 @@
   "name": "web-app",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server/app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node src/server/app.js",
-    "nodemon": "node_modules/nodemon/bin/nodemon.js src/server/app.js"
+    "start": "node src/app.js",
+    "nodemon": "node_modules/nodemon/bin/nodemon.js src/app.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
