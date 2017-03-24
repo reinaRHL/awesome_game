@@ -78,11 +78,15 @@ padding-left: 2%;
 padding-bottom: 5%;
 border: 1px solid white;
 }
-
+.text-muted{
+  color: lightblue !important;
+}
 #loginPressed{
   margin-bottom: 2%;
 }
-
+#newAccount:hover{
+  cursor: pointer;
+}
 #newAccount{
   text-decoration: underline;
 }
