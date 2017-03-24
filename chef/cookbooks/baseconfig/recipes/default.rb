@@ -32,5 +32,6 @@ end
 mysql_service 'mysql' do
   port '3306'
   version '5.7'
+  initial_root_password 'hello'
   action [:create, :start,:restart]
 end
