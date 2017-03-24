@@ -1,68 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Awesome Game</title>
-		<link rel="stylesheet" href="css/custom.css">
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="css/bootswatch.css">
-	</head>
-	<body>
-		<header>
-	        <nav>
-	          <ul class="nav navbar-inverse navbar-fixed-bottom">
-	            <li><a href="#Lobby"><img src="img/lobby.png" alt="Lobby" class="pic-size"><span class="title-text">Lobby</span></a></li>
-	            <li><a href="#Game"><img src="img/game.png" alt="Game" class="pic-size"><span class="title-text">Game</span></a></li>
-	            <li class="active"><a href="#friends"><img src="img/friends.png" alt="friends" class="pic-size"><span class="title-text">Friends</span></a></li>
-	          </ul>
-	        </nav>
-	      </header>
-		<header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
-		  <div >
-		    <nav role="navigation">
-		      <ul class="nav ">
-		      	<li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Settings</a>
-		          <ul  class="dropdown-menu" id = "dorpdown1">
-		          	<li><a href="#">Profile</a> </li>
-		            <li> <a href="#">Membership</a> </li>
-		            <li> <a href="#">News</a> </li>
-		            
-		            <li> <a href="#">Game Center</a> </li>
-		            <li class="divider"></li>
-		            <li> <a href="#">Log out</a> </li>
-		          </ul>
-		        </li>
-		        
-		        <li>
-		          <a href="#">Invite</a>
-		        </li>
- 
-		        <li>
-		          <a href="#">Shop</a>
-		        </li>
-
-		        <li>
-		          <a href="#">Search</a>
-		        </li>
-
-		      </ul>
-
-		    </nav>
-		  </div>
-		</header>
-
-		<div class="container" id = "gameContainer">
-			<div id ="gameStart">
-				<h4>Game</h4>
-	            <img src="img/quiz.png" alt="Quiz" height ="150">
-	            <div><button type="button" class="btn btn-primary">Find</button></div>
-	        </div>
-	        
-        </div>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</body>
+<head>
+  <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example - example-scope-data-model-production</title>
+	<link rel="stylesheet" href="css/bootswatch.css">
+	<link rel="stylesheet" href="css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="js/template.js"></script>
+</head>
+<body ng-app="indexApp">
+  <div ng-controller="indexCtrl">
+		<nav>
+			<ul class="nav nav-pills">
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Lobby</a></li>
+				<li><a href="#">Logout</a></li>
+			</ul>
+		</nav>
+		<div class="jumbotron" id="profileOverview">
+			<h1><em>Hello  </em>{{username}}</h1>
+			<h2>Score:</h2>
+			<span class="fa-stack fa-5x scoreInfo">
+				<span class="fa fa-superpowers fa-stack-2x"></span>
+				<span class="fa-stack-1x calendar-text">{{score}}</span>
+			</span>
+			<h2>Games Played:</h2>
+				<span class="fa fa-gamepad fa-5x" aria-hidden="true"></span> 
+				<h2> {{gamesPlayed}} </h2>
+			<h2>Games Won:</h2>
+				<span class="fa fa-trophy fa-5x" aria-hidden="true"></span> 
+				<h2> {{gamesWon}} </h2>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/fd9dba5260.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -1,4 +1,10 @@
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope) {
-    $scope.name = "John Doe";
-});
+(function(angular) {
+  'use strict';
+angular.module('indexApp', [])
+  .controller('indexCtrl', ['$scope', function($scope) {
+    $scope.username = 'FakeUser';
+    $scope.score = '200';
+    $scope.gamesPlayed = '12';
+    $scope.gamesWon = '2';
+  }]);
+})(window.angular);
