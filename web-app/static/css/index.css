@@ -1,0 +1,19 @@
+body{
+    margin: 2em;
+}
+#profileOverview{
+    margin: 2em;
+    padding: 2em;
+    text-align: center;
+}
+em{
+    color: #eea236;
+    font-weight: bold;
+    font-size: 1.2em;
+    font-style: normal;
+}
+.calendar-text { font-size: .4em; }
+
+.scoreInfo{
+    color: #f5c88a !important;
+}
