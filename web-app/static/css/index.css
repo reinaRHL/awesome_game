@@ -17,3 +17,11 @@ em{
 .profile-gameHistory th, .profile-gameHistory td{
     font-size: 1.2em;
 }
+
+
+/*iPhone5*/
+@media screen and (min-width: 320px) {
+    .nav.nav-tabs{
+      font-size: 0.7em
+  }
+}

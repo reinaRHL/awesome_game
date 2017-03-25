@@ -26,17 +26,17 @@ var connections =[];
 
 io.on('connection', function (socket) {
 	connections.push(socket);
-	console.log("connected: %s sockets connected", connections.length);
+	console.log("Connected: %s sockets connected", connections.length);
 
   	socket.on('disconnect', function (data) {
 		connections.splice(connections.indexOf(socket),1);
-		console.log("disconnected: %s sockets connected", connections.length);
+		console.log("Disconnected: %s sockets connected", connections.length);
   	});
 
   	// send message in Chatroom
   	// need to fix this to pass the real username
-  	socket.on('send message', function(data){
-  		io.sockets.emit('new message', {msg:data, name:"Username"});
+  	socket.on('sendMessage', function(data){
+  		io.sockets.emit('newMessage', {msg:data, name:"Username"});
   	})
 });
 
@@ -44,5 +44,5 @@ io.on('connection', function (socket) {
 /// This is for chatting feature 
 /// there's separate chat.html but it can be incoporated into lobby later
 app.get('/chat', function(req, res){
-	res.sendFile(path.resolve('../static/chat.html'));
+	res.sendFile(path.resolve('../../static/chat.html'));
 });
