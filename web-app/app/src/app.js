@@ -31,7 +31,12 @@ io.on('connection', function (socket) {
   	socket.on('disconnect', function (data) {
 		connections.splice(connections.indexOf(socket),1);
 		console.log("disconnected: %s sockets connected", connections.length);
-  });
+  	});
+
+  	// send message in Chatroom
+  	socket.on('send message', function(data){
+  		io.sockets.emit('new message', {msg:data});
+  	})
 });
 
 
