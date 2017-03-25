@@ -1,0 +1,19 @@
+body{
+    margin: 2em;
+}
+#profile{
+    text-align: center;
+}
+em{
+    color: #eea236;
+    font-weight: bold;
+    font-style: normal;
+}
+.calendar-text { font-size: .4em; }
+
+.scoreInfo{
+    color: #eea236 !important;
+}
+.profile-gameHistory th, .profile-gameHistory td{
+    font-size: 1.2em;
+}
