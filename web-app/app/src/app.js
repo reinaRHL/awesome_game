@@ -34,8 +34,9 @@ io.on('connection', function (socket) {
   	});
 
   	// send message in Chatroom
+  	// need to fix this to pass the real username
   	socket.on('send message', function(data){
-  		io.sockets.emit('new message', {msg:data});
+  		io.sockets.emit('new message', {msg:data, name:"Username"});
   	})
 });
 

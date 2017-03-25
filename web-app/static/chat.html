@@ -61,7 +61,7 @@
 			});
 
 			socket.on('new message', function(data){
-				$chatDisplay.append('<div class ="well">' + data.msg + '</div>');
+				$chatDisplay.append('<div class ="well">' + data.name + ": " + data.msg + '</div>');
 			})
 		})
 
