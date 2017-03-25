@@ -28,6 +28,11 @@ module.exports = function(sequelize, DataType) {
 				User.hasMany(models.Session, {
 					foreignKey: 'user_id'
 				});
+				User.belongsToMany(models.Game, {
+					through: 'User_Game',
+					onDelete: 'NO ACTION',
+					foreignKey: 'game_id'
+				});
 			}	
 		}
 	});

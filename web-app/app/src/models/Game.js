@@ -20,7 +20,11 @@ module.exports = function(sequelize, DataType) {
 	}, {
 		classMethods: {
 			associate: function (models) {
-				
+				Game.belongsToMany(models.User, {
+					through: 'User_Game',
+					onDelete: 'NO ACTION',
+					foreignKey: 'user_id'
+				});
 			}
 		}
 	});
