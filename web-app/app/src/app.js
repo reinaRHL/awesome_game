@@ -43,6 +43,37 @@ io.on('connection', function (socket) {
 
 /// This is for chatting feature 
 /// there's separate chat.html but it can be incoporated into lobby later
-app.get('/chat', function(req, res){
-	res.sendFile(path.resolve('../../static/chat.html'));
+app.get('/friends', function(req, res){
+	res.sendFile(path.resolve('../../static/index.html'));
 });
+
+app.get('/js/chat.js', function(req, res){
+	res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
+    res.setHeader('Cache-Control', 'max-age=1800');
+    
+	res.sendFile(path.resolve('../../static/js/chat.js'));
+});
+
+app.get('/js/template.js', function(req, res){
+	res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
+    res.setHeader('Cache-Control', 'max-age=1800');
+    
+	res.sendFile(path.resolve('../../static/js/template.js'));
+});
+
+app.get('/css/bootswatch.css', function(req, res){
+	res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/css');
+    res.setHeader('Cache-Control', 'max-age=1800');
+    res.sendFile(path.resolve('../../static/css/bootswatch.css'));
+});
+
+app.get('/css/index.css', function(req, res){
+	res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/css');
+    res.setHeader('Cache-Control', 'max-age=1800');
+    res.sendFile(path.resolve('../../static/css/index.css'));
+});
+
