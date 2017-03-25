@@ -184,7 +184,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Which of the following Ivy League universities has its official motto in Hebrew as well as in Latin?",
          "correct_answer":"Yale University",
          "incorrect_answers":[
@@ -196,7 +196,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the name of the very first video uploaded to YouTube?",
          "correct_answer":"Me at the zoo",
          "incorrect_answers":[
@@ -208,7 +208,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"In 2013 how much money was lost by Nigerian scams?",
          "correct_answer":"$12.7 Billion",
          "incorrect_answers":[
@@ -220,7 +220,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"After how many years would you celebrate your crystal anniversary?",
          "correct_answer":"15",
          "incorrect_answers":[
@@ -232,7 +232,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Which of these companies does NOT manufacture automobiles?",
          "correct_answer":"Ducati",
          "incorrect_answers":[
@@ -244,7 +244,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Who is a co-founder of music streaming service Spotify?",
          "correct_answer":"Daniel Ek",
          "incorrect_answers":[
@@ -256,7 +256,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What was the destination of the missing flight MH370?",
          "correct_answer":"Beijing",
          "incorrect_answers":[
@@ -268,7 +268,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"A factiod is what?",
          "correct_answer":"A falsehood",
          "incorrect_answers":[
@@ -280,7 +280,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the unit of currency in Laos?",
          "correct_answer":"Kip",
          "incorrect_answers":[
@@ -292,7 +292,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Which of the following buildings is example of a structure primarily built in the Art Deco architectural style?",
          "correct_answer":"Niagara Mohawk Building",
          "incorrect_answers":[
@@ -304,7 +304,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What alcoholic drink is mainly made from juniper berries?",
          "correct_answer":"Gin",
          "incorrect_answers":[
@@ -316,7 +316,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What did the Spanish autonomous community of Catalonia ban in 2010, that took effect in 2012?",
          "correct_answer":"Bullfighting",
          "incorrect_answers":[
@@ -328,7 +328,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Which Italian automobile manufacturer gained majority control of U.S. automobile manufacturer Chrysler in 2011?",
          "correct_answer":"Fiat",
          "incorrect_answers":[
@@ -340,7 +340,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"Which of these is the name of a Japanese system of alternative medicine, literally meaning &quot;finger pressure&quot;?",
          "correct_answer":"Shiatsu",
          "incorrect_answers":[
@@ -352,7 +352,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the name given to Indian food cooked over charcoal in a clay oven?",
          "correct_answer":"Tandoori",
          "incorrect_answers":[
@@ -364,7 +364,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the German word for &quot;spoon&quot;?",
          "correct_answer":"L&ouml;ffel",
          "incorrect_answers":[
@@ -376,7 +376,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the romanized Japanese word for &quot;university&quot;?",
          "correct_answer":"Daigaku",
          "incorrect_answers":[
@@ -388,7 +388,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the Swedish word for &quot;window&quot;?",
          "correct_answer":"F&ouml;nster",
          "incorrect_answers":[
@@ -400,7 +400,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"easy",
          "question":"What is the Italian word for &quot;tomato&quot;?",
          "correct_answer":"Pomodoro",
          "incorrect_answers":[
@@ -412,7 +412,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What is the romanized Russian word for &quot;winter&quot;?",
          "correct_answer":"Zima",
          "incorrect_answers":[
@@ -424,7 +424,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What is the name of the popular animatronic singing fish prop, singing such hits such as &quot;Don&#039;t Worry, Be Happy&quot;?",
          "correct_answer":"Big Mouth Billy Bass",
          "incorrect_answers":[
@@ -436,7 +436,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What country saw a world record 315 million voters turn out for elections on May 20, 1991?",
          "correct_answer":"India",
          "incorrect_answers":[
@@ -448,7 +448,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"The term &quot;scientist&quot; was coined in which year?",
          "correct_answer":"1833",
          "incorrect_answers":[
@@ -460,7 +460,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"On average, Americans consume 100 pounds of what per second?",
          "correct_answer":"Chocolate",
          "incorrect_answers":[
@@ -472,7 +472,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"According to the United States&#039; CDC, one in how many Americans die annually due to smoking?",
          "correct_answer":"Five",
          "incorrect_answers":[
@@ -484,7 +484,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"Who is the founder of &quot;The Lego Group&quot;?",
          "correct_answer":"Ole Kirk Christiansen",
          "incorrect_answers":[
@@ -496,7 +496,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What is a dead mall?",
          "correct_answer":"A mall with high vacancy rates or low consumer foot traffic",
          "incorrect_answers":[
@@ -508,7 +508,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"Which country has the record for the worlds largest orgy?",
          "correct_answer":"Japan",
          "incorrect_answers":[
@@ -520,7 +520,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What is the last letter of the Greek alphabet?",
          "correct_answer":"Omega",
          "incorrect_answers":[
@@ -532,7 +532,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What character was once considered to be the 27th letter of the alphabet?",
          "correct_answer":"Ampersand",
          "incorrect_answers":[
@@ -544,7 +544,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"When was Nintendo founded?",
          "correct_answer":"September 23rd, 1889",
          "incorrect_answers":[
@@ -556,7 +556,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"The new One World Trade Center in Manhattan, New York City was designed by which architect? ",
          "correct_answer":"David Childs",
          "incorrect_answers":[
@@ -568,7 +568,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"Amsterdam Centraal station is twinned with what station?",
          "correct_answer":"London Liverpool Street",
          "incorrect_answers":[
@@ -580,7 +580,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"Which of the following carbonated soft drinks were introduced first?",
          "correct_answer":"Dr. Pepper",
          "incorrect_answers":[
@@ -592,7 +592,7 @@
       {
          "category":"General Knowledge",
          "type":"multiple",
-         "difficulty":"medium",
+         "difficulty":"hard",
          "question":"What was the soft drink Pepsi originally introduced as?",
          "correct_answer":"Brad&#039;s Drink",
          "incorrect_answers":[
