@@ -12,8 +12,7 @@ module.exports = function(sequelize, DataType) {
 		gamesWon: {
 			type: DataType.INTEGER,
 			field: 'games_won'
-		}
-		,
+		},
 		gamesPlayed: {
 			type: DataType.INTEGER,
 			field: 'games_played'
