@@ -4,6 +4,33 @@ $(document).ready(function(){
 	var $message = $('#btn-input');
 	var $chatDisplay = $('#chatDisplay');
 
+	var option = window.location.pathname.substring(1);
+
+
+	// Javascript to enable link to tab
+var url = document.location.toString();
+if (url.match('#')) {
+    $('.nav-tabs a[href="#' + url.split('#')[1] + '-tab"]').tab('show');
+} //add a suffix
+
+// Change hash for page-reload
+$('.nav-tabs a').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+})
+
+
+	switch (option) {
+                case "profile":
+                    $('ul li:nth-child(1)').tab('show')
+                    break;
+                case "lobby":
+                    $('ul li:nth-child(2)').tab('show')
+                    break;
+                case "friends":
+                    $('ul li:nth-child(3)').tab('show')
+                    break
+            }
+
 	// $("nav li").click(function() {
  //        if ($('ul li:nth-child(1)').hasClass('active')) {
  //            history.pushState(null, null, 'profile');
