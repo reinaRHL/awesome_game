@@ -77,3 +77,12 @@ app.get('/css/index.css', function(req, res){
     res.sendFile(path.resolve('../../static/css/index.css'));
 });
 
+app.get('/img/avatar.png', function(req, res){
+	res.statusCode = 200;
+    res.setHeader('Content-Type', 'img/png');
+    res.setHeader('Cache-Control', 'max-age=1800');
+    res.sendFile(path.resolve('../../static/img/avatar.png'));
+});
+
+
+
