@@ -23,6 +23,6 @@ $(document).ready(function(){
 
 	socket.on('newMessage', function(data){
 
-		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-10 col-xs-10"><div class="messages msg_sent"><p>'+data.msg+'</p><time datetime="2009-11-13T20:00">'+data.name+' • 51 min</time></div></div><div class="col-md-2 col-xs-2 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div></div>');
+		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+data.msg+'</p><time datetime="2009-11-13T20:00">'+data.name+' • 51 min</time></div></div><div class="col-md-3 col-xs-3 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div>');
 	})
 })
