@@ -1,5 +1,9 @@
+
+// Facebook share dialog feature
+
 $(document).ready(function(){
 
+  // Facebook JS SDK initialization
 	window.fbAsyncInit = function() {
     	FB.init({
         	appId      : '1006722016094891',
@@ -9,6 +13,7 @@ $(document).ready(function(){
       	
       	FB.AppEvents.logPageView();
 
+      // Share button on index page
     	$('#shareBtn').click(function(){
 			FB.ui({
 		      method: 'share',
@@ -18,7 +23,8 @@ $(document).ready(function(){
     		}, function(response){});
       	});
 
-
+    // Share the result button. 
+    // Will be added later.  
 		$('#shareResultBtn').click(function(){
 			FB.ui({
 		      method: 'share',
