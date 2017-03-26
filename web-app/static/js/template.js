@@ -1,12 +1,22 @@
 (function(angular) {
   'use strict';
 angular.module('indexApp', [])
-  .controller('indexCtrl', ['$scope', function($scope) {
-    $scope.username = 'FakeUser';
+  .controller('indexCtrl' , function($scope, $http) {
+    
     $scope.score = '200';
     $scope.gamesPlayed = '12';
     $scope.gamesWon = '2';
-  }]);
+    $scope.init = function(){
+      console.log("hey");
+      $http.get( "/api/user").then(function( data ) {
+        console.log('get');
+          $scope.username = data.username;
+          $scope.score = data.score;
+          $scope.gamesPlayed = data.gamesPlayed;
+          $scope.gamesWon = data.gamesWon;
+      });
+    }
+  });
 
 })(window.angular);
 

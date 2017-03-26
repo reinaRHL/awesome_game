@@ -119,8 +119,9 @@ app.get('/img/avatar.png', function(req, res){
 app.get('/index', function(req, res){
     res.sendFile(path.resolve('../static/index.html'));
 });
-app.get('api/user', function(req, res){
+app.get('/api/user', function(req, res){
   // dummy data for now
+  res.setHeader('Content-Type', 'text/json');
   res.send({
     username: 'hello',
     score: 1,
@@ -129,9 +130,9 @@ app.get('api/user', function(req, res){
     lastLoggedIn: null
   });
 });
-app.get('api/user/friends', function(req, res){
+app.get('/api/user/friends', function(req, res){
 
 });
-app.get('api/games', function(req, res){
+app.get('/api/games', function(req, res){
 
 });
