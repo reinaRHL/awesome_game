@@ -20,6 +20,26 @@ app.use(cookieParser());
 // Middleware
 app.use(morgan('dev'));
 
+function isAuthenticated(req, res, next) {
+
+    // do check for valid key
+    var seshKey = req.cookies.key;
+
+    models.Session.count({
+            where: {
+                key: seshKey
+              }
+        })
+        .then(function(authenticated) {
+          if(authenticated == 1){
+            return next();
+          }else{
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM LOGIN
+    res.redirect('/login');
+    }
+  });
+}
+
 // Routes
 
 const server = app.listen(PORT, function () {
@@ -50,6 +70,7 @@ io.on('connection', function (socket) {
 /// This is for chatting feature
 /// there's separate chat.html but it can be incoporated into lobby later
 
+//signup
 app.post('/signup', function(req,res){
   var uname = req.body['username'];
   var pass = req.body['password'];
@@ -67,20 +88,18 @@ app.post('/signup', function(req,res){
     });
   });
 
-
-
-
-
+//login
 app.post('/login', function(req, res){
   var uname = req.body['username'];
   var pass = req.body['password'];
 
+// does user exist?
   models.User.count({
     where:{
       username: uname
     }
   }).then(function(found){
-    if(found == 1){
+    if(found == 1){ //user exists in DB.
       models.User.findOne({
         where:{
           username: uname
@@ -97,7 +116,7 @@ app.post('/login', function(req, res){
           return sha.digest('hex');
           };
 
-          models.Session.create({
+          models.Session.create({ //generate session key
             key: generateKey()
           }).then(function (send_the_response){
             res.cookie('key', send_the_response.key);
@@ -106,14 +125,14 @@ app.post('/login', function(req, res){
             res.send(JSON.stringify('/friends')); //redirect
             console.log("That user is in DB");
         });
-      }else{
+      }else{ //bcrypt fails
         res.status(401);
         res.end();
       }
       }); // bcrypt
       });
     }
-    else{
+    else{ //not found
       res.status(401);
       res.end();
     }
@@ -127,7 +146,7 @@ app.get('/', function(req,res){
   res.end();
 })
 
-app.get('/friends', function(req, res){
+app.get('/friends', isAuthenticated, function(req, res){
 	res.sendFile(path.resolve('../static/index.html'));
 });
 
