@@ -68,6 +68,7 @@ function getCookie(cookie, cname) {
 }
 
 io.use(function(socket, next) {
+    
 
     var seshKey = getCookie(socket.request.headers.cookie, "key");
 
@@ -78,12 +79,25 @@ io.use(function(socket, next) {
         })
         .then(function(session) {
           if(session == 1){
+            models.Session.findOne({
+                where: {
+                    key: seshKey
+                  }
+            }).then(function(session) {
+                models.User.findOne({
+                where: {
+                    id: session.user_id
+                  }
+                }).then(function(user) {
+                  io.sockets.emit('onlineUser', {name:user.username});
+                });
+              })
             next();
           }else{
     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM LOGIN
-              next(new Error('Authentication error'));      
-    }
-  });
+            next(new Error('Authentication error'));      
+          }
+        });
 });
 
 io.on('connection', function (socket) {
@@ -98,6 +112,7 @@ io.on('connection', function (socket) {
   	// send message in Chatroom
   	// need to fix this to pass the real username
   	socket.on('sendMessage', function(data){
+      console.log(socket.request.headers.cookie+ "cookie is")
       var seshKey = getCookie(socket.request.headers.cookie, "key");
       models.Session.findOne({
             where: {
