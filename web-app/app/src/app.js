@@ -50,25 +50,75 @@ const io = require('socket.io')(server);
 
 var connections =[];
 
+
+//io user Authentication
+function getCookie(cookie, cname) {
+    var name = cname + "=";
+    var ca = cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+io.use(function(socket, next) {
+
+    var seshKey = getCookie(socket.request.headers.cookie, "key");
+
+    models.Session.count({
+            where: {
+                key: seshKey
+              }
+        })
+        .then(function(session) {
+          if(session == 1){
+            next();
+          }else{
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM LOGIN
+              next(new Error('Authentication error'));      
+    }
+  });
+});
+
 io.on('connection', function (socket) {
 	connections.push(socket);
 	console.log("Connected: %s sockets connected", connections.length);
 
   	socket.on('disconnect', function (data) {
-		connections.splice(connections.indexOf(socket),1);
-		console.log("Disconnected: %s sockets connected", connections.length);
+  		connections.splice(connections.indexOf(socket),1);
+  		console.log("Disconnected: %s sockets connected", connections.length);
   	});
 
   	// send message in Chatroom
   	// need to fix this to pass the real username
   	socket.on('sendMessage', function(data){
-  		io.sockets.emit('newMessage', {msg:data, name:"Username"});
+      var seshKey = getCookie(socket.request.headers.cookie, "key");
+      models.Session.findOne({
+            where: {
+                key: seshKey
+              }
+        }).then(function(session) {
+            models.User.findOne({
+            where: {
+                id: session.user_id
+              }
+            }).then(function(user) {
+              io.sockets.emit('newMessage', {msg:data, name:user.username});
+            });
+          })
+  		
   	})
 });
 
 
-/// This is for chatting feature
-/// there's separate chat.html but it can be incoporated into lobby later
+
+
 
 //signup
 app.post('/signup', function(req,res){
