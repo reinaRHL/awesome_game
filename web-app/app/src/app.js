@@ -134,6 +134,7 @@ app.post('/login', function(req, res){
           models.Session.create({ //generate session key
             key: generateKey()
           }).then(function (send_the_response){
+            send_the_response.setUser(nextstep.id);
             res.cookie('key', send_the_response.key);
             res.setHeader("Content-Type", "application/json; charset=UTF-8");
             res.status(200);
