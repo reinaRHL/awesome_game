@@ -137,7 +137,7 @@ app.post('/login', function(req, res){
             res.cookie('key', send_the_response.key);
             res.setHeader("Content-Type", "application/json; charset=UTF-8");
             res.status(200);
-            res.send(JSON.stringify('/friends')); //redirect
+            res.send(JSON.stringify('/profile')); //redirect
             console.log("That user is in DB");
         });
       }else{ //bcrypt fails
@@ -161,7 +161,7 @@ app.get('/', function(req,res){
   res.end();
 })
 
-app.get('/friends', isAuthenticated, function(req, res){
+app.get('/profile', isAuthenticated, function(req, res){
 	res.sendFile(path.resolve('../static/index.html'));
 });
 
