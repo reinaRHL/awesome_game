@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var $message = $('#btn-input');
 	var $chatDisplay = $('#chatDisplay');
 	var option = window.location.pathname.substring(1);
-	$('a[href="#'+ option +'"]').tab('show')
+	
 // toggle tabs based on url
 	switch (option) {
                 case "profile":
@@ -32,18 +32,26 @@ $(document).ready(function(){
             }
      })
  
-	
+	// sendMessage
 	$messageButton.click(function(e){
 		
 		socket.emit('sendMessage', $message.val());
 		$message.val('');
 	});
+
+	$("#btn-input").keydown(function(e){
+        if(e.which === 13){
+            $messageButton.click();
+        }
+    });
+
 	socket.on('newMessage', function(data){
 		var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+data.msg+'</p><time>'+data.name+' • '+myDate+'</time></div></div><div class="col-md-3 col-xs-3 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div>');
 		
 	})
 
+// onlineusers
 	socket.on('onlineUser', function(data){
 		$("#friendsDropdown").append('<li><a href="#">'+data.name+'</a></li><li class="divider"></li>')
 	})
