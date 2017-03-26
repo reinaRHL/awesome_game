@@ -18,12 +18,44 @@ em{
     font-size: 1.2em;
 }
 
-/*Friends dropdown*/
+/*Friends List*/
 
 #friendsDropdown {
   min-width:auto;
   width:100%;
 }
+
+#friendsList{
+	height: calc(100vh - 105px);
+    margin-bottom: 0;
+}
+
+#chatBox{
+	position: fixed;
+    bottom: 0;
+    
+    left: 0;
+    right: 0;
+}
+
+#friendsList > div.panel-body{
+	height:inherit;
+}
+
+#chatDisplay{
+	height: calc(100vh - 155px) !important;
+    overflow: scroll !important;
+}
+
+#chatDisplay > div > div.col-md-3.col-xs-3.avatar{
+	padding:0;
+}
+
+#chatDisplay p{
+	word-wrap: break-word;
+}
+
+    
 
 
 /*iPhone5*/
