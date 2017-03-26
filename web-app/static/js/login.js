@@ -13,22 +13,58 @@ $("#password_show_checkbox").click(function () {
 
  });
 
+ $("#log_in").submit(function(e) {
+   var s = document.getElementById('errorContent_Login');
+
+     e.preventDefault(); // Prevents the page from refreshing
+     $.ajax({
+       type: "POST",
+       url: '/login',
+       statusCode: {
+         401: function(){
+           s.innerHTML = "Credentials entered are incorrect."
+         }
+       },
+       data: $("#log_in").serialize(),
+       success: function(data){
+           window.location.href = data;
+       }
+     });
+ });
+
+ $("#sign_up").submit(function(e) {
+   var username = document.getElementById('unSignup');
+   var password = document.getElementById('pwSignup');
+   var password_confirm = document.getElementById('pwConfirm');
+   var s = document.getElementById('errorContent');
+   e.preventDefault(); // Prevents the page from refreshing
+
+
+   if(password.value != password_confirm.value && username.value != ""){
+       //display error
+       s.innerHTML = "Passwords don't match."
+       //console.log("not same value");
+     }else{
+     $.ajax({
+       type: "POST",
+       url: '/signup',
+       statusCode: {
+         401: function(){
+           s.innerHTML = "Username is already taken."
+         }
+       },
+       data: $("#sign_up").serialize(),
+       success: function(data){
+           window.location.href = data;
+       }
+     });
+
+   }
+ });
+
+
 });
 
-function signupSubmit(){
-  //when signup Submit button is pressed
-  var s = document.getElementById('errorContent');
-  var password = document.getElementById('pwSignup');
-  var password_confirm = document.getElementById('pwConfirm');
-
-  if(password.value === password_confirm.value){
-    // now submit the values to the DB as a user
-    s.innerHTML = "Correct";
-  }else{
-    // notify the user of incorrect credentials entered
-    s.innerHTML = "Passwords don't match.";
-  }
-}
 
 function open_SignupModal(){
   //clear modal contents for signup everytime button is clicked
@@ -39,13 +75,4 @@ function open_SignupModal(){
   uname.value = "";
   password.value = "";
   password_confirm.value = "";
-}
-
-function login_Submit(){
-  //user has pressed login button => make request to check
-  //if DB credentials match to what user has entered
-  var uname = document.getElementById('unLogin');
-  var pw = document.getElementById('pwLogin');
-
-  //make request
 }
