@@ -108,6 +108,9 @@ app.get('/img/avatar.png', function(req, res){
     res.setHeader('Cache-Control', 'max-age=1800');
     res.sendFile(path.resolve('../static/img/avatar.png'));
 });
+app.get('/index', function(req, res){
+    res.sendFile(path.resolve('../static/index.html'));
+});
 
 
 
