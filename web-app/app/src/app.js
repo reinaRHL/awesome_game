@@ -119,8 +119,19 @@ app.get('/img/avatar.png', function(req, res){
 app.get('/index', function(req, res){
     res.sendFile(path.resolve('../static/index.html'));
 });
-
-app.get('/index', function(req, res){
-    res.sendFile(path.resolve('../static/index.html'));
+app.get('api/user', function(req, res){
+  // dummy data for now
+  res.send({
+    username: 'hello',
+    score: 1,
+    gamesWon: 1,
+    gamesPlayed: 1,
+    lastLoggedIn: null
+  });
 });
+app.get('api/user/friends', function(req, res){
 
+});
+app.get('api/games', function(req, res){
+
+});
