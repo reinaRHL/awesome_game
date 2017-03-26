@@ -19,6 +19,15 @@ $(document).ready(function(){
       });
 
 
+$('#shareResultBtn').click(function(){
+
+       FB.ui({
+      method: 'share',
+      display: 'popup',
+      href: 'http://imgur.com/424rzw1',
+      description: "I won! We can replace the link once game is hosted."
+    }, function(response){});
+      });
 
 
 
@@ -39,3 +48,4 @@ $(document).ready(function(){
 
 
 });
+
