@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	window.fbAsyncInit = function() {
+  window.fbAsyncInit = function() {
       FB.init({
         appId      : '1006722016094891',
         xfbml      : true,
@@ -8,8 +8,22 @@ $(document).ready(function(){
       });
       FB.AppEvents.logPageView();
 
+      $('#shareBtn').click(function(){
 
- };
+        FB.ui({
+      method: 'share',
+      display: 'popup',
+      href: 'http://imgur.com/1UuGwBL',
+      description: "This is awesome game! We can replace the link once game is hosted."
+    }, function(response){});
+      });
+
+
+
+
+
+    
+  };
 
 
     (function(d, s, id){
