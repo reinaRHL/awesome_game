@@ -97,20 +97,10 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group">
-                     <a class="list-group-item">
-                        <span class="badge">players: 4</span>
-                        Game Players Looking 
-                        <p class="text-primary">Created By John </p>
-                     </a>
-                     <a class="list-group-item">
-                        <span class="badge">players: 2</span>
-                        Game Players Looking 
-                        <p class="text-primary">Created By timtam </p>
-                     </a>
-                     <a class="list-group-item">
-                        <span class="badge">players: 1</span>
-                        Game Players Looking 
-                        <p class="text-primary">Created By mmmaxxx </p>
+                     <a class="list-group-item" ng-repeat="game in games">
+                        <span class="badge">players: {{game.playersUsername.length}}</span>
+                        {{game.title}}
+                        <p class="text-primary">Created By {{game.createdBy}} </p>
                      </a>
                   </ul>
                   <button class="btn btn-primary btn-lg">Create a Game</button>
