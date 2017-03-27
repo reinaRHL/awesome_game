@@ -17,16 +17,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <form>
             <div id="wrapper2">
               <h2> Sign-up </h2>
               <span id="errorContent"></span>
               <div class="form-group">
+               <form id="sign_up" action="/signup" method="post">
                 <label>Username</label>
-                <input type="input" id="unSignup" class="form-control"  placeholder="Enter username">
+                <input name="username" type="input" id="unSignup" class="form-control"  placeholder="Enter username">
 
                 <label>Password</label>
-                <input type="password" id="pwSignup" class="form-control password_show" placeholder="Enter password">
+                <input name="password" type="password" id="pwSignup" class="form-control password_show" placeholder="Enter password">
 
                 <label>Confirm Password</label>
                 <input type="password" id="pwConfirm" class="form-control password_show" placeholder="Re-enter password">
@@ -37,9 +37,9 @@
 
               </div>
               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="signupSubmit()">Submit</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
             </div>
-          </form>
         </div>
 
 
@@ -49,20 +49,22 @@
   <!-- end Sign-up Modal -->
 
   <!-- main login screen -->
-  <form>
     <div id="wrapper">
       <h2> Welcome back to Awesome Game! </h2>
+      <span id="errorContent_Login"></span>
+
       <div class="form-group">
+      <form id="log_in" action="/login" method="post">
         <label>Username</label>
-        <input type="input" id="unLogin" class="form-control"  placeholder="Enter username">
+        <input name="username" type="input" id="unLogin" class="form-control"  placeholder="Enter username">
 
         <label>Password</label>
-        <input type="password" id="pwLogin" class="form-control" placeholder="Enter password">
+        <input name="password" type="password" id="pwLogin" class="form-control" placeholder="Enter password">
 
-        <button id="loginPressed" onclick="login_Submit()" type="button" class="btn btn-primary">Login</button>
+        <button id="loginPressed" type="submit" class="btn btn-primary">Login</button>
+      </form>
           <br />
         <small id="newAccount" onclick="open_SignupModal()"class="form-text text-muted" data-toggle="modal" data-target="#signupModal">Don't have an account?</small>
-
       </div>
 
 
@@ -73,7 +75,6 @@
       </div>
 
     </div>
-  </form>
   <script type="text/javascript" src="js/login.js"></script>
   <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

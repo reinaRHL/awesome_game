@@ -3,53 +3,56 @@ $(document).ready(function(){
 	var $messageButton = $('#btn-chat');
 	var $message = $('#btn-input');
 	var $chatDisplay = $('#chatDisplay');
-
 	var option = window.location.pathname.substring(1);
-
-
-	// Javascript to enable link to tab
-var url = document.location.toString();
-if (url.match('#')) {
-    $('.nav-tabs a[href="#' + url.split('#')[1] + '-tab"]').tab('show');
-} //add a suffix
-
-// Change hash for page-reload
-$('.nav-tabs a').on('shown.bs.tab', function (e) {
-    window.location.hash = e.target.hash;
-})
-
-
+	
+// toggle tabs based on url
 	switch (option) {
                 case "profile":
-                    $('ul li:nth-child(1)').tab('show')
+                    $('a[href="#'+ option +'"]').tab('show')
                     break;
                 case "lobby":
-                    $('ul li:nth-child(2)').tab('show')
+                    $('a[href="#'+ option +'"]').tab('show')
                     break;
                 case "friends":
-                    $('ul li:nth-child(3)').tab('show')
+                    $('a[href="#friendsList"]').tab('show')
                     break
             }
-
-	// $("nav li").click(function() {
- //        if ($('ul li:nth-child(1)').hasClass('active')) {
- //            history.pushState(null, null, 'profile');
- //        } else if ($('ul li:nth-child(2)').hasClass('active')) {
- //            history.pushState(null, null, 'lobby');
- //        } else if ($('ul li:nth-child(3)').hasClass('active')) {
- //            history.pushState(null, null, 'friends');
- //        }
- //        return false;
- //    });
-	
+// push tabs to url
+    $( "nav li" ).on( "click", function() {
+    	switch ($( this ).text()) {
+                case "Profile":
+                    history.pushState(null, null, 'profile');
+                    break;
+                case "Lobby":
+                    history.pushState(null, null, 'lobby');
+                    break;
+                case "Friends":
+                    history.pushState(null, null, 'friends');
+                    break
+            }
+     })
+ 
+	// sendMessage
 	$messageButton.click(function(e){
 		
 		socket.emit('sendMessage', $message.val());
 		$message.val('');
 	});
 
-	socket.on('newMessage', function(data){
+	$("#btn-input").keydown(function(e){
+        if(e.which === 13){
+            $messageButton.click();
+        }
+    });
 
-		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+data.msg+'</p><time datetime="2009-11-13T20:00">'+data.name+' • 51 min</time></div></div><div class="col-md-3 col-xs-3 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div>');
+	socket.on('newMessage', function(data){
+		var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+data.msg+'</p><time>'+data.name+' • '+myDate+'</time></div></div><div class="col-md-3 col-xs-3 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div>');
+		
+	})
+
+// onlineusers
+	socket.on('onlineUser', function(data){
+		$("#friendsDropdown").append('<li><a href="#">'+data.name+'</a></li><li class="divider"></li>')
 	})
 })
