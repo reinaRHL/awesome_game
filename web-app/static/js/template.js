@@ -6,7 +6,12 @@ angular.module('indexApp', [])
         return $http.get( "/api/user").success(function( resp ) {
 			return resp;
 		});
-      }
+      },
+	  getGames : function(){
+		  return $http.get("/api/games").success(function (resp){
+			  return resp;
+		  })
+	  }
     }
   }])
   .controller('indexCtrl' , ['webServices', '$scope',function(webServices, $scope, $timeout) {
@@ -16,6 +21,9 @@ angular.module('indexApp', [])
           $scope.gamesPlayed = user.data.gamesPlayed;
           $scope.gamesWon = user.data.gamesWon;
 	  });
+	  webServices.getGames().then(function (resp){
+		  $scope.games = resp.data.games;
+	  })
   }])
 .directive( 'elemReady', function( $parse ) {
 return {
