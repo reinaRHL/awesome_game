@@ -20,32 +20,20 @@ angular.module('indexApp', [])
           $scope.score = user.data.score;
           $scope.gamesPlayed = user.data.gamesPlayed;
           $scope.gamesWon = user.data.gamesWon;
+          popScore($scope.score);
 	  });
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
-	  })
-  }])
-.directive( 'elemReady', function( $parse ) {
-return {
-	restrict: 'A',
-	link: function( $scope, elem, attrs ) {    
-		elem.ready(function(){
-			$scope.$apply(function(){
-				var func = $parse(attrs.elemReady);
-				//popScore();
-			})
-		})
-	}
-	}
-})
+	  });
+  }]);
 })();
 
 
-var popScore = function(){
+var popScore = function(initScore){
   // Animate the element's value from 0 to to current user's score:
     var $el = $("#playerScore");
     console.log($el.text());
-    var score = parseInt($el.text());
+    var score = parseInt(initScore);
     $({someValue: 0}).animate({someValue: score}, { // from 0 to users score
         duration: 2000, // 2 sec
         easing:'swing', // smooth transitioning
