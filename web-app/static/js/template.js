@@ -1,12 +1,32 @@
-(function(angular) {
-  'use strict';
+(function() {
 angular.module('indexApp', [])
-  .controller('indexCtrl', ['$scope', function($scope) {
-    $scope.username = 'FakeUser';
-    $scope.score = '200';
-    $scope.gamesPlayed = '12';
-    $scope.gamesWon = '2';
+  .factory('webServices', ['$http', function($http){
+    return {
+      getUser : function(){
+        return $http.get( "/api/user").success(function( resp ) {
+			return resp;
+		});
+      },
+	  getGames : function(){
+		  return $http.get("/api/games").success(function (resp){
+			  return resp;
+		  })
+	  }
+    }
+  }])
+  .controller('indexCtrl' , ['webServices', '$scope',function(webServices, $scope, $timeout) {
+	  webServices.getUser().then(function(user){
+          $scope.username = user.data.username;
+          $scope.score = user.data.score;
+          $scope.gamesPlayed = user.data.gamesPlayed;
+          $scope.gamesWon = user.data.gamesWon;
+          popScore($scope.score);
+	  });
+	  webServices.getGames().then(function (resp){
+		  $scope.games = resp.data.games;
+	  });
   }]);
+<<<<<<< HEAD
 })(window.angular);
 
 $(document).ready(function (){
@@ -14,6 +34,16 @@ $(document).ready(function (){
     var $el = $("#playerScore");
     console.log($el.text());
     var score = parseInt($el.text());
+=======
+})();
+
+
+var popScore = function(initScore){
+  // Animate the element's value from 0 to to current user's score:
+    var $el = $("#playerScore");
+    console.log($el.text());
+    var score = parseInt(initScore);
+>>>>>>> feature/user-profile
     $({someValue: 0}).animate({someValue: score}, { // from 0 to users score
         duration: 2000, // 2 sec
         easing:'swing', // smooth transitioning
@@ -22,10 +52,19 @@ $(document).ready(function (){
             $el.text(commaSeparateNumber(Math.round(this.someValue)));
         }
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/user-profile
    function commaSeparateNumber(val){
       while (/(\d+)(\d{3})/.test(val.toString())){
         val = val.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
       }
       return val;
     }
+<<<<<<< HEAD
 });
+=======
+
+}
+>>>>>>> feature/user-profile
