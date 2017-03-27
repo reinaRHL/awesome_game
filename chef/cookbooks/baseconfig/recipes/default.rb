@@ -60,10 +60,10 @@ end
 
 ###Begin game app
 # Populate the DB
-execute "populate_db" do
-  cwd "/home/ubuntu/project/web-app/app/src"
-  command "node populateDb.js"
-end
+# execute "populate_db" do
+#   cwd "/home/ubuntu/project/web-app/app/src"
+#   command "node populateDb.js"
+# end
 # Add a service file for running the music app on startup
 cookbook_file "musicapp.service" do
     path "/etc/systemd/system/musicapp.service"
