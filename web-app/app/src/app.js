@@ -228,11 +228,11 @@ app.get('/', function(req,res){
 })
 
 app.get('/home', isAuthenticated, function(req, res){
-	res.sendFile(path.resolve('../../static/index.html'));
+	res.sendFile(path.resolve('../static/index.html'));
 });
 
 app.get('/login', function(req, res){
-  res.sendFile(path.resolve('../../static/login.html'));
+  res.sendFile(path.resolve('../static/login.html'));
 });
 
 
@@ -241,7 +241,7 @@ app.get('/js/login.js', function(req, res){
   res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
   res.setHeader('Cache-Control', 'max-age=1800');
 
-  res.sendFile(path.resolve('../../static/js/login.js'));
+  res.sendFile(path.resolve('../static/js/login.js'));
 });
 
 app.get('/js/chat.js', function(req, res){
@@ -249,7 +249,7 @@ app.get('/js/chat.js', function(req, res){
   res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
   res.setHeader('Cache-Control', 'max-age=1800');
 
-	res.sendFile(path.resolve('../../static/js/chat.js'));
+	res.sendFile(path.resolve('../static/js/chat.js'));
 });
 
 app.get('/js/share.js', function(req, res){
@@ -265,28 +265,28 @@ app.get('/js/template.js', function(req, res){
     res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
     res.setHeader('Cache-Control', 'max-age=1800');
 
-	res.sendFile(path.resolve('../../static/js/template.js'));
+	res.sendFile(path.resolve('../static/js/template.js'));
 });
 
 app.get('/css/bootswatch.css', function(req, res){
 	res.statusCode = 200;
   res.setHeader('Content-Type', 'text/css');
   res.setHeader('Cache-Control', 'max-age=1800');
-  res.sendFile(path.resolve('../../static/css/bootswatch.css'));
+  res.sendFile(path.resolve('../static/css/bootswatch.css'));
 });
 
 app.get('/css/index.css', function(req, res){
 	res.statusCode = 200;
   res.setHeader('Content-Type', 'text/css');
   res.setHeader('Cache-Control', 'max-age=1800');
-  res.sendFile(path.resolve('../../static/css/index.css'));
+  res.sendFile(path.resolve('../static/css/index.css'));
 });
 
 app.get('/css/custom.css', function(req, res){
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/css');
   res.setHeader('Cache-Control', 'max-age=1800');
-  res.sendFile(path.resolve('../../static/css/custom.css'));
+  res.sendFile(path.resolve('../static/css/custom.css'));
 });
 
 

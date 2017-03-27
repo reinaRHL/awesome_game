@@ -34,11 +34,7 @@
                         <h3>Score:</h3>
                         <span class="fa-stack fa-5x ">
                         <span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
-<<<<<<< HEAD
                         <span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
-=======
-                        <span id="playerScore" class="fa-stack-1x calendar-text scoreInfo"></span>
->>>>>>> feature/user-profile
                         </span>
                      </div>
                      <div class="col-md-4 col-xs-12">
@@ -103,27 +99,10 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group">
-<<<<<<< HEAD
-                     <a class="list-group-item">
-                        <span class="badge">players: 4</span>
-                        Game Players Looking
-                        <p class="text-primary">Created By John </p>
-                     </a>
-                     <a class="list-group-item">
-                        <span class="badge">players: 2</span>
-                        Game Players Looking
-                        <p class="text-primary">Created By timtam </p>
-                     </a>
-                     <a class="list-group-item">
-                        <span class="badge">players: 1</span>
-                        Game Players Looking
-                        <p class="text-primary">Created By mmmaxxx </p>
-=======
                      <a class="list-group-item" ng-repeat="game in games">
                         <span class="badge">players: {{game.playersUsername.length}}</span>
                         {{game.title}}
                         <p class="text-primary">Created By {{game.createdBy}} </p>
->>>>>>> feature/user-profile
                      </a>
                   </ul>
                   <button class="btn btn-primary btn-lg">Create a Game</button>
@@ -132,34 +111,6 @@
             </div>
             <div class="tab-pane fade panel panel-default" id="friendsList">
                <div class="panel-body">
-<<<<<<< HEAD
-
-			        	<div class="panel panel-default">
-			                <div class="btn-group btn-block">
-
-				                    <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends Online <span class="caret"></span></button>
-				                    <ul class="dropdown-menu" id="friendsDropdown">
-				                      
-				                    </ul>
-
-
-			                </div>
-			                <div class="panel-body msg_container_base" id="chatDisplay">
-
-
-			                </div>
-              
-			                    <div class="input-group" id="chatBox">
-
-			                        <input id="btn-input" type="text" class="form-control  chat_input" placeholder="Write your message here...">
-			                        <span class="input-group-btn">
-			                        <button class="btn btn-primary " id="btn-chat">Send</button>
-			                        </span>
-			                    </div>
-
-			    		</div>
-
-=======
                 <div class="panel panel-default">
                     <div class="btn-group btn-block">
                         <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends Online <span class="caret"></span></button>
@@ -178,7 +129,6 @@
                         </span>
                     </div> 
                 </div>
->>>>>>> feature/user-profile
                </div>
                <!-- /.row -->
             </div>
