@@ -17,10 +17,23 @@ angular.module('indexApp', [])
           $scope.gamesWon = user.data.gamesWon;
 	  });
   }])
+.directive( 'elemReady', function( $parse ) {
+return {
+	restrict: 'A',
+	link: function( $scope, elem, attrs ) {    
+		elem.ready(function(){
+			$scope.$apply(function(){
+				var func = $parse(attrs.elemReady);
+				popScore();
+			})
+		})
+	}
+	}
+})
 })();
 
-function popScore(){
 
+var popScore = function(){
   // Animate the element's value from 0 to to current user's score:
     var $el = $("#playerScore");
     console.log($el.text());

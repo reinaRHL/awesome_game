@@ -19,10 +19,10 @@
                <li><a href="#profile" aria-expanded="true">Logout</a></li>
             </ul>
          </nav>
-        <h1><em>Hello  </em>{{username}}</h1>
          <div class="tab-content">
             <div class="tab-pane fade active in panel panel-default" id="profile">
                <div class="panel-body">
+                <h1><em>Hello  </em>{{username}}</h1>
                   <div clas="row">
                      <div class="col-md-4 col-xs-12">
                         <h3>Games Played:</h3>
@@ -33,7 +33,7 @@
                         <h3>Score:</h3>
                         <span class="fa-stack fa-5x ">
                         <span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
-                        <span class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
+                        <span elem-ready="popScore()" id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
                         </span>
                      </div>
                      <div class="col-md-4 col-xs-12">
