@@ -32,7 +32,7 @@ return {
 		elem.ready(function(){
 			$scope.$apply(function(){
 				var func = $parse(attrs.elemReady);
-				popScore();
+				//popScore();
 			})
 		})
 	}
