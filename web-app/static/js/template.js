@@ -1,26 +1,25 @@
-(function(angular) {
-  'use strict';
+(function() {
 angular.module('indexApp', [])
-  .controller('indexCtrl' , function($scope, $http) {
-    
-    $scope.score = '200';
-    $scope.gamesPlayed = '12';
-    $scope.gamesWon = '2';
-    $scope.init = function(){
-      console.log("hey");
-      $http.get( "/api/user").then(function( data ) {
-        console.log('get');
-          $scope.username = data.username;
-          $scope.score = data.score;
-          $scope.gamesPlayed = data.gamesPlayed;
-          $scope.gamesWon = data.gamesWon;
-      });
+  .factory('webServices', ['$http', function($http){
+    return {
+      getUser : function(){
+        return $http.get( "/api/user").success(function( resp ) {
+			return resp;
+		});
+      }
     }
-  });
+  }])
+  .controller('indexCtrl' , ['webServices', '$scope',function(webServices, $scope, $timeout) {
+	  webServices.getUser().then(function(user){
+          $scope.username = user.data.username;
+          $scope.score = user.data.score;
+          $scope.gamesPlayed = user.data.gamesPlayed;
+          $scope.gamesWon = user.data.gamesWon;
+	  });
+  }])
+})();
 
-})(window.angular);
-
-$(document).ready(function (){
+function popScore(){
 
   // Animate the element's value from 0 to to current user's score:
     var $el = $("#playerScore");
@@ -42,4 +41,4 @@ $(document).ready(function (){
       return val;
     }
 
-});
+}
