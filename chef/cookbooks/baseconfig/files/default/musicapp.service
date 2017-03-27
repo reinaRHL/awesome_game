@@ -2,7 +2,7 @@
 Description=Music App
  
 [Service]
-ExecStart=/usr/bin/node /home/ubuntu/project/web-app/app.js
+ExecStart=/usr/bin/node /home/ubuntu/project/web-app/app/app.js
 Restart=always
 RestartSec=5
 User=root

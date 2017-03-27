@@ -51,7 +51,7 @@ package "sqlite"
  
 # Install package dependencies and run npm install
 execute "npm_install" do
-  cwd "/home/ubuntu/project/web-app"
+  cwd "/home/ubuntu/project/web-app/app"
   command "sudo npm install -g node-pre-gyp"
   command "npm install --no-bin-links"
 end
@@ -61,7 +61,7 @@ end
 ###Begin game app
 # Populate the DB
 execute "populate_db" do
-  cwd "/home/ubuntu/project/web-app"
+  cwd "/home/ubuntu/project/web-app/app"
   command "node populateDb.js"
 end
 # Add a service file for running the music app on startup
