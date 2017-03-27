@@ -124,7 +124,7 @@ app.get('/api/user', function(req, res){
   res.setHeader('Content-Type', 'text/json');
   res.send({
     username: 'hello',
-    score: 1,
+    score: 300,
     gamesWon: 1,
     gamesPlayed: 1,
     lastLoggedIn: null
