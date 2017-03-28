@@ -96,7 +96,6 @@ module.exports = function (server) {
 					io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 				});
 			});
-			
 		});
 	});
 };

@@ -29,7 +29,6 @@ angular.module('indexApp', [])
 
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
-    // Rightnow, it is sending fake username, will fix it to send real username later. 
     $scope.createGame = function() {
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
     };
