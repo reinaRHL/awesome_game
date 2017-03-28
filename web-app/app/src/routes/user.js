@@ -64,6 +64,9 @@ user.doLogin = function(req, res){
 							key: generateKey()
 						}).then(function (send_the_response) {
 							send_the_response.setUser(nextstep.id);
+							nextstep.update({
+								lastLoggedIn: send_the_response.createdAt
+							})
 							res.cookie('key', send_the_response.key);
 							res.setHeader("Content-Type", "application/json; charset=UTF-8");
 							res.status(200);
@@ -81,6 +84,31 @@ user.doLogin = function(req, res){
 			res.end();
 		}
 	});
+};
+
+user.doLogout = function (req,res) {
+	var sessionKey= req.body['key'];
+	models.Session.count({
+		where: {
+			key: sessionKey
+		}
+	}).then(function(found){
+		if (found === 1) { //session exists in DB.
+			console.log(req.body)
+			//find session and delete it
+			models.Session.findOne({
+				where: {
+					key: sessionKey
+				}
+			}).then(function (session) {
+				session.destroy()
+
+			});
+		}else { //session key not found
+			res.status(401);
+			res.end();
+		}
+	})
 };
 
 user.getLoginPage = function (req, res) {
