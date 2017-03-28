@@ -34,7 +34,29 @@ api.getUserFriends = function (req, res) {
 
 api.getAllGames = function (req, res) {
 	//should return all games that are on hold
-	res.send({
+	models.Game.findAll({
+		where: {
+			state: 'hold'
+		}
+	}).then(function (games){
+		console.log(games.length);
+		var gamesArray = [];
+		for (var i = 0; i < games.length; i++) {
+			var z = {
+				id: games[i].id,
+				title: games[i].title,
+				createdBy: games[i].createdBy,
+				createdAt: games[i].createdAt,
+
+				//TODO: update this for when users can join games -- should have list
+				// of users in the current game.
+				playersUsername: ['test']
+			};
+			gamesArray.push(z);
+		};
+		res.send(gamesArray);
+	});//
+	/*res.send({
 		games:[{
 			id: 1,
 			title: 'first game',
@@ -59,7 +81,7 @@ api.getAllGames = function (req, res) {
 			state: 'hold', //hold for when they've just been created?'
 			playersUsername: ['Ummy', 'HiMarry', 'Dom', 'Cafelire', 'More People']
 		}]
-	});
+	});*/
 };
 
 module.exports = api;
