@@ -1,4 +1,5 @@
 (function() {
+var socket = io.connect();
 angular.module('indexApp', [])
   .factory('webServices', ['$http', function($http){
     return {
@@ -25,6 +26,23 @@ angular.module('indexApp', [])
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
 	  });
+
+    // This function will be called when user clicks 'create' button inside modal.
+    // This function sends user input, title username and other player list.
+    $scope.createGame = function() {
+      socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
+    };
+
+    // When game is created, append it to the gamelist
+    socket.on('gameCreated', function(data){
+      $('#gameDisplay').append("<a class=\"list-group-item\"><span class=\"badge\">players: " 
+                                + data.numPlayers 
+                                + "</span>" 
+                                + data.title 
+                                + "<p class=\"text-primary\">Created By " 
+                                + data.createdBy 
+                                +  "</p></a>");
+    });
   }]);
 })();
 
