@@ -17,7 +17,7 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
-	root /home/ubuntu/project/web-app;
+	root /home/ubuntu/project/web-app/static;
 
 	index index.html;
 
@@ -28,5 +28,14 @@ server {
 		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
 	}
+	
+	location /api {
+        proxy_pass http://localhost:3000/api;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
 
 }

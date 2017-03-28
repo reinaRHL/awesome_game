@@ -54,9 +54,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "chef/cookbooks"
-    chef.add_recipe "baseconfig"
     chef.roles_path = "chef/roles"
-    chef.add_role  "webserver"
+    chef.add_recipe "baseconfig"
   end
 
 end

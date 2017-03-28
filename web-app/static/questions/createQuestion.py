@@ -1,4 +1,5 @@
 import json
+import html
 import os
 
 jsonDict = {}
@@ -21,14 +22,17 @@ with open('questions.json', 'w') as outfile:
 		jsonSubDict['category'] = question['category']
 		if question['difficulty'] == "easy":
 			jsonSubDict['difficulty'] = 0
-	 	elif question['difficulty'] == "medium":
+		elif question['difficulty'] == "medium":
 	 		jsonSubDict['difficulty'] = 1
-	 	else:
+		else:
 	 		jsonSubDict['difficulty'] = 2
 
-		jsonSubDict['question'] = question['question']
-		jsonSubDict['correct_answer'] = question['correct_answer']
+		jsonSubDict['question'] = html.unescape(question['question'])
+		jsonSubDict['correct_answer'] = html.unescape(question['correct_answer'])
 		jsonSubDict['incorrect_answers'] = question['incorrect_answers']
+
+		for answer in jsonSubDict['incorrect_answers']:
+			answer = html.unescape(answer)
 
 		jsonList.append(jsonSubDict)
 
@@ -39,21 +43,20 @@ with open('questions.json', 'w') as outfile:
 		jsonSubDict['category'] = question['category']
 		if counter % 3 == 0:
 			jsonSubDict['difficulty'] = 0
-	 	elif counter % 3 == 1:
+		elif counter % 3 == 1:
 	 		jsonSubDict['difficulty'] = 1
-	 	else:
+		else:
 	 		jsonSubDict['difficulty'] = 2
 
-		jsonSubDict['question'] = question['question']
-		jsonSubDict['correct_answer'] = question['answer']
+		jsonSubDict['question'] = html.unescape(question['question'])
+		jsonSubDict['correct_answer'] = html.unescape(question['answer'])
 		jsonSubDict['incorrect_answers'] = question['suggestions'][0:3]
+
+		for answer in jsonSubDict['incorrect_answers']:
+			answer = html.unescape(answer)
+
 		jsonList.append(jsonSubDict)
 		counter = counter + 1
 
-
 	jsonDict["questions"] = jsonList
-
 	json.dump(jsonDict, outfile, indent = 4)
-
-
-
