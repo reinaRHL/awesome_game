@@ -5,6 +5,8 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Awesome Game Profile</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> <!-- https://silviomoreto.github.io/bootstrap-select/examples/-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="css/bootswatch.css">
       <link rel="stylesheet" href="css/index.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,9 +19,39 @@
                <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
                <li><a href="#lobby" data-toggle="tab" aria-expanded="true">Lobby</a></li>
                <li><a href="#friendsList" data-toggle="tab" aria-expanded="true">Friends</a></li>
-               <li><a href="#profile" aria-expanded="true">Logout</a></li>
+               <li><a href="#profile" aria-expanded="true" class="navbar-right">Logout</a></li>
             </ul>
          </nav>
+         <div class="modal" id='createGameModal'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Create a Game</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" id="inputGame" type="text" placeholder="Game Title">
+                    <br>
+                    <label for="select" class="col-lg-2 control-label">Friends</label>
+                    <select multiple="" class="selectpicker form-control" data-max-options="5" data-live-search="true" data-style="btn-primary">
+                        <optgroup label="online">
+                        <option>Friend</option>
+                        <option>Other Friend</option>
+                        <option>Other Friend2</option>
+                        </optgroup>
+                        <optgroup label="offline">
+                        <option>Friend 3</option>
+                        <option>user123</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Create</button>
+                </div>
+                </div>
+            </div>
+        </div>
          <div class="tab-content">
             <div class="tab-pane fade active in panel panel-default" id="profile">
                <div class="panel-body">
@@ -105,7 +137,7 @@
                         <p class="text-primary">Created By {{game.createdBy}} </p>
                      </a>
                   </ul>
-                  <button class="btn btn-primary btn-lg">Create a Game</button>
+                  <button data-toggle="modal" data-target="#createGameModal" id='createGameButton'class="btn btn-primary btn-lg">Create a Game</button>
                </div>
                <!-- /.row -->
             </div>
@@ -136,6 +168,7 @@
       <script src="js/chat.js"></script>
       <script src="js/share.js"></script>
       <script src="/socket.io/socket.io.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
       <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </body>
