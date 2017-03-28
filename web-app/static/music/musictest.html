@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Awesome Game Profile</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> <!-- https://silviomoreto.github.io/bootstrap-select/examples/-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="../css/bootswatch.css">
+      <link rel="stylesheet" href="../css/index.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      
+
+<audio loop volume="0.1" id="bgMusic">
+  		<source src="BossaBossa.mp3" type="audio/mp3" >
+</audio>
+<audio volume="0.1" id="sfxdrum">
+  		<source src="../sfx/drumroll.wav" type="audio/wav" >
+</audio>
+<script>
+
+var sfx = document.getElementById("sfxdrum");
+var mus = document.getElementById("bgMusic");
+var DEFAULT_VOLUME =0.5;
+mus.play();
+function audioSignalResults()
+{
+	mus.volume=DEFAULT_VOLUME;
+	$("#bgMusic").animate({volume: 0.1}, 3000);
+	mus.currentTime = 0;
+	sfx.play();
+}
+
+function audioSignalNextRound()
+{
+$("#bgMusic").animate({volume: 0.01}, 500,  function() {
+	mus.currentTime = 0;
+	$("#bgMusic").animate({volume: DEFAULT_VOLUME}, 2000)
+    
+  });
+
+
+ //var mus = document.getElementById("bgMusic");
+ //mus.volume=0.5
+}
+</script>
+
+      
+   </head>
+   <body ng-app="indexApp" onload="audioSignalNextRound()">
+     <button onclick="audioSignalResults()">
+     <button onclick="audioSignalNextRound()"
+   </body>
+</html>
