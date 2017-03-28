@@ -29,14 +29,13 @@ app.get('/api/games', routes.api.getAllGames);
 app.post('/signup', routes.user.doSignup);
 app.post('/login', routes.user.doLogin);
 app.get('/login', routes.user.getLoginPage);
+app.delete('/logout', routes.user.doLogout);
 app.get('/', function (req,res) {
 	res.status(301);
 	res.setHeader('Location', '/login');
 	res.end();
 })
-app.get('/index', function (req, res) {
-	res.sendFile(path.resolve('../static/index.html'));
-});
+
 app.get('/home', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
 });
@@ -47,6 +46,12 @@ app.get('/js/login.js', function (req, res) {
 	res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
 	res.setHeader('Cache-Control', 'max-age=1800');
 	res.sendFile(path.resolve('../static/js/login.js'));
+});
+app.get('/js/logout.js', function (req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
+	res.setHeader('Cache-Control', 'max-age=1800');
+	res.sendFile(path.resolve('../static/js/logout.js'));
 });
 app.get('/js/chat.js', function (req, res) {
 	res.statusCode = 200;
