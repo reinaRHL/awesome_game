@@ -79,6 +79,8 @@ module.exports = function (server) {
 			});
 		});
 
+		// Gets called when user clicks 'create' button inside modal.
+		// To do: Need to update db as well
 		socket.on('createNewGame', function (data) { 
 			io.sockets.emit('gameCreated', {title: data.title, createdBy: data.user, numPlayers: data.friend.length + 1});
 		});
