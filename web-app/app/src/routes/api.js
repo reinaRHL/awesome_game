@@ -1,15 +1,32 @@
 var api = {};
+var models = require('../models');
+
 
 api.getUser = function (req, res) {
-	// dummy data for now
-	res.setHeader('Content-Type', 'text/json');
-	res.send({
-		username: 'hello',
-		score: 300,
-		gamesWon: 1,
-		gamesPlayed: 1,
-		lastLoggedIn: null
+
+	models.Session.findOne({ // find current users session
+		where: {
+			key: req.cookies.key
+		}
+	}).then(function(session_instance){
+		models.User.findOne({
+			where: {
+				id: session_instance.user_id
+			}
+		}).then(function (current_user){
+			// populate the data for response
+			console.log(current_user);
+			res.setHeader('Content-Type', 'text/json');
+			res.send({
+				username: current_user.username,
+				score: current_user.score,
+				gamesWon: current_user.gamesWon,
+				gamesPlayed: current_user.gamesPlayed,
+				lastLoggedIn: current_user.lastLoggedIn
+			});
+		});
 	});
+
 };
 
 api.getUserFriends = function (req, res) {
