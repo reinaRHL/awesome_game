@@ -26,6 +26,15 @@ angular.module('indexApp', [])
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
 	  });
+
+    $scope.createGame = function() {
+      socket.emit('createNewGame', {title: $('#inputGame').val(), user: 'userName', friend: $('#inputPlayers').val()});
+    };
+
+    socket.on('gameCreated', function(data){
+      $('#gameDisplay').append("<a class=\"list-group-item\"><span class=\"badge\">players: " + data.numPlayers + "</span>" + data.title + "<p class=\"text-primary\">Created By " + data.createdBy +  "</p></a>");
+    });
+
   }]);
 })();
 

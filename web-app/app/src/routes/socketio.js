@@ -78,5 +78,9 @@ module.exports = function (server) {
 				});
 			});
 		});
+
+		socket.on('createNewGame', function (data) { 
+			io.sockets.emit('gameCreated', {title: data.title, createdBy: data.user, numPlayers: data.friend.length + 1});
+		});
 	});
 };
