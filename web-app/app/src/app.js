@@ -313,11 +313,6 @@ app.get('/api/user', function(req, res){
 app.get('/api/user/friends', function(req, res){
 
 });
-app.get('*', function(req, res){ // default redirect for anything else
-  res.status(301);
-  res.setHeader('Location', '/login');
-  res.end();
-});
 app.get('/api/games', function(req, res){
   //should return all games that are on hold
     res.send({
@@ -348,3 +343,9 @@ app.get('/api/games', function(req, res){
   });
 
 });
+app.get('*', function(req, res){ // default redirect for anything else
+  res.status(301);
+  res.setHeader('Location', '/login');
+  res.end();
+});
+
