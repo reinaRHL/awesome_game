@@ -24,6 +24,7 @@ user.doSignup = function (req,res) {
 				gamesWon: 0,
 				gamesPlayed: 0,
 				lastLoggedIn: null,
+				score: 0,
 			}).then(function (new_user) {
 				//created new user
 				res.setHeader("Content-Type", "application/json; charset=UTF-8");
