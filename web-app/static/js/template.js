@@ -1,4 +1,5 @@
 (function() {
+var socket = io.connect();
 angular.module('indexApp', [])
   .factory('webServices', ['$http', function($http){
     return {
