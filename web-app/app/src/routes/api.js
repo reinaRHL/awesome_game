@@ -15,7 +15,6 @@ api.getUser = function (req, res) {
 			}
 		}).then(function (current_user){
 			// populate the data for response
-			console.log(current_user);
 			res.setHeader('Content-Type', 'text/json');
 			res.send({
 				username: current_user.username,

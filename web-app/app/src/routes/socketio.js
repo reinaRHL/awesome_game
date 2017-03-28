@@ -94,6 +94,9 @@ module.exports = function (server) {
 					}
 				}).then(function(user) {
 					io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+
+					// Store the newly created game in the DB
+					
 				});
 			});
 		});
