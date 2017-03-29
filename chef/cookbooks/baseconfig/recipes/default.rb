@@ -3,12 +3,19 @@
 cookbook_file "apt-sources.list" do
   path "/etc/apt/sources.list"
 end
+
 execute 'apt_update' do
   command 'apt-get update'
 end
 
 # Base configuration recipe in Chef.
 package "wget"
+
+#Required since bcrypt will fallback to source build in the vm and its nide script is too stupid
+package "bcrypt"
+
+# Install sqlite
+package "sqlite"
 
 package "ntp"
 cookbook_file "ntp.conf" do
@@ -46,24 +53,29 @@ end
 # Install node.js
 package "nodejs"
  
-# Install sqlite
-package "sqlite"
- 
+
+
+
+
+
+
 # Install package dependencies and run npm install
 execute "npm_install" do
   cwd "/home/ubuntu/project/web-app/app"
-  command "sudo npm install -g node-pre-gyp"
-  command "npm install --no-bin-links"
+  command "sudo npm install -g node-pre-gyp --no-bin-links"
+#   command "npm install sqlite3"
 end
 ###END NodeJS
 
 
 ###Begin game app
-# Populate the DB
-# execute "populate_db" do
-#   cwd "/home/ubuntu/project/web-app/app/src"
-#   command "node populateDb.js"
-# end
+
+#Populate the DB
+execute "populate_db" do
+  cwd "/home/ubuntu/project/web-app/app/"
+  command "node populateDb.js src/questions/questions.json"
+end
+
 # Add a service file for running the music app on startup
 cookbook_file "musicapp.service" do
     path "/etc/systemd/system/musicapp.service"
