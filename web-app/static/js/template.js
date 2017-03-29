@@ -24,7 +24,7 @@ angular.module('indexApp', [])
           popScore($scope.score);
 	  });
 	  webServices.getGames().then(function (resp){
-		  $scope.games = resp.data.games;
+		  $scope.games = resp.data;
 	  });
 
     // This function will be called when user clicks 'create' button inside modal.
@@ -35,12 +35,12 @@ angular.module('indexApp', [])
 
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
-      $('#gameDisplay').append("<a class=\"list-group-item\"><span class=\"badge\">players: " 
-                                + data.numPlayers 
-                                + "</span>" 
-                                + data.title 
-                                + "<p class=\"text-primary\">Created By " 
-                                + data.createdBy 
+      $('#gameDisplay').append("<a class=\"list-group-item\"><span class=\"badge\">players: "
+                                + data.numPlayers
+                                + "</span>"
+                                + data.title
+                                + "<p class=\"text-primary\">Created By "
+                                + data.createdBy
                                 +  "</p></a>");
     });
   }]);
