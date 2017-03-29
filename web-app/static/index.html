@@ -33,7 +33,7 @@
                     <input class="form-control" id="inputGame" type="text" placeholder="Game Title">
                     <br>
                     <label for="select" class="col-lg-2 control-label">Friends</label>
-                    <select multiple="" class="selectpicker form-control" id="inputPlayers" data-max-options="5" data-live-search="true" data-style="btn-primary">
+                    <select multiple="" class="selectpicker form-control" data-max-options="5" data-live-search="true" data-style="btn-primary">
                         <optgroup label="online">
                         <option>Friend</option>
                         <option>Other Friend</option>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" ng-click="createGame()">Create</button>
+                    <button type="button" class="btn btn-primary">Create</button>
                 </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                   </div>
                   <!-- /input-group -->
                   <hr>
-                  <ul class="list-group" id="gameDisplay">
+                  <ul class="list-group">
                      <a class="list-group-item" ng-repeat="game in games">
                         <span class="badge">players: {{game.playersUsername.length}}</span>
                         {{game.title}}
@@ -164,11 +164,11 @@
             </div>
          </div>
       </div>
-      <script src="/socket.io/socket.io.js"></script> 
       <script src="js/template.js"></script>
       <script src="js/chat.js"></script>
       <script src="js/share.js"></script>
       <script src="js/logout.js"></script>
+      <script src="/socket.io/socket.io.js"></script> 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
       <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

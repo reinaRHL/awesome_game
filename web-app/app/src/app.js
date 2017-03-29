@@ -36,13 +36,7 @@ app.get('/', function (req,res) {
 	res.end();
 })
 
-app.get('/profile', authentication.isAuthenticated, function (req, res) {
-	res.sendFile(path.resolve('../static/index.html'));
-});
-app.get('/lobby', authentication.isAuthenticated, function (req, res) {
-	res.sendFile(path.resolve('../static/index.html'));
-});
-app.get('/friends', authentication.isAuthenticated, function (req, res) {
+app.get('/home', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
 });
 
