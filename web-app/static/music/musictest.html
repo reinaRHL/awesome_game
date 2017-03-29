@@ -32,8 +32,21 @@
 var sfx = document.getElementById("sfxdrum");
 var ping = document.getElementById("sfxping");
 var mus = document.getElementById("bgMusic");
+var audio={};
 var DEFAULT_VOLUME =0.5;
-mus.play();
+initAudio();
+function initAudio()
+{
+
+	var sfxNames=["ping.wav"];
+	for(var i=0;i<sfxNames.length;i++)
+	{
+		var name = sfxNames[i];
+		var id = sfxNames[i];
+		audio[id] = new Audio("../sfx/"+name);
+	}
+}
+
 function audioSignalResults()
 {
 	mus.volume=DEFAULT_VOLUME;
@@ -47,9 +60,10 @@ function audioSignalNextRound()
 $("#bgMusic").animate({volume: 0.01}, 500,  function() {
 	mus.currentTime = 0;
 	ping.play();
+	mus.play();
 	$("#bgMusic").animate({volume: DEFAULT_VOLUME}, 500)
     
-  });
+});
   
 
 
@@ -61,7 +75,7 @@ $("#bgMusic").animate({volume: 0.01}, 500,  function() {
       
    </head>
    <body ng-app="indexApp" onload="audioSignalNextRound()">
-     <button onclick="audioSignalResults()">
-     <button onclick="audioSignalNextRound()"
+     <button onclick="audioSignalResults()"> Simulate results</button>
+     <button onclick="audioSignalNextRound()"> Simulate next round</button>
    </body>
 </html>
