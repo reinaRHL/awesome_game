@@ -44,15 +44,17 @@ function initAudio()
 		var name = sfxNames[i];
 		var id = sfxNames[i];
 		audio[id] = new Audio("../sfx/"+name);
+		audio[id].load();
 	}
 }
 
 function audioSignalResults()
 {
 	mus.volume=DEFAULT_VOLUME;
+	sfx.play();
 	$("#bgMusic").animate({volume: 0.1}, 3000);
 	mus.currentTime = 0;
-	sfx.play();
+
 }
 
 function audioSignalNextRound()
