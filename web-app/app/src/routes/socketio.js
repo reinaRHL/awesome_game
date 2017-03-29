@@ -93,7 +93,6 @@ module.exports = function (server) {
 						id: session.user_id
 					}
 				}).then(function(user) {
-					io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
 					// Store the newly created game in the DB
 					models.Game.create({
@@ -105,6 +104,13 @@ module.exports = function (server) {
 						progress: null
 					}).then(function(add_host_to_game){
 						add_host_to_game.addUser(user.id);
+						//emit only after successfully creating game
+						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+
+					}).catch(function(err){
+						//creating new game by same user with same title.
+						console.log("Game with these values in User_Game exists already.")
+						
 					}); // end Game Create
 				});
 			});
