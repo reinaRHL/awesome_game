@@ -15,13 +15,14 @@
       <link href='//fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
    </head>
    <body ng-app="indexApp">
-      <div class='container' ng-controller="indexCtrl">
-          <div id="inLobby" class="show well well-lg">
+      <div ng-controller="indexCtrl">
+          <!--use show and hidden classes to go between inLobby and inGame-->
+          <div id="inLobby" class="hidden well well-lg"> 
                 <h1 class="text-center">Game Name</h1>
                     <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
                     <div class="list-group">
-                    <a href="#" class="list-group-item text-center clearfix">
-                        <strong>CreatedUser<strong>
+                    <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
+                        CreatedUser
                         <span class="label label-info pull-left">Creator</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
@@ -42,7 +43,7 @@
                         </span>
                     </a>
                     <a href="#" class="list-group-item text-center clearfix">
-                        UserFred
+                        UserBob
                         <span class="label label-warning pull-left">Waiting</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm pull-right">Revoke Invite</button>
@@ -52,7 +53,27 @@
                 <button class="btn btn-primary">Start Game</button>
                 <button class="btn btn-default">Cancel Game</button>
           </div>
-          <div id="inGame" class="hidden">
+          <div id="inGame" class="show">
+              <h1 class="text-center">Game Name</h1>
+              <div class="row">
+                  <div class="col-sm-4 gameInfo well">
+                      <!--users-->
+					  <div class="text-center margin-bottom">
+						<h3>Score:</h3>
+						<span class="fa-stack fa-5x ">
+						<span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
+						<span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">245</span>
+						</span>
+					  </div>
+					  <hr>
+                      <h4>User 123 <span class="label label-success pull-right">300</span></h4>
+                      <h4>UserFred <span class="label label-default pull-right">200</span></h4>
+                      <h4>UserBob <span class="label label-default pull-right">50</span></h4>
+                  </div>
+                  <div id="divGameplay"class="col-sm-8">
+                      <h2>ROAD TRIP! When in Port Vila, Vanuatu be sure to check out their post office, which is unusual because it is _______.</h2>
+                  </div>
+              </div>
           </div>
       </div>
       
