@@ -34,6 +34,7 @@ var ping = document.getElementById("sfxping");
 var mus = document.getElementById("bgMusic");
 var audio={};
 var DEFAULT_VOLUME =0.5;
+var d = new Date();
 initAudio();
 function initAudio()
 {
@@ -41,6 +42,7 @@ mus.addEventListener("ended", function(){
      myAudio.currentTime = 0;
      console.log("music ended");
 });
+	mus.volume=DEFAULT_VOLUME;
 	var sfxNames=["ping.wav"];
 	for(var i=0;i<sfxNames.length;i++)
 	{
@@ -53,13 +55,13 @@ mus.addEventListener("ended", function(){
 
 function audioTest()
 {
-	console.log("Round start");
+	console.log("Round start "+d.getTime());
 	audioSignalNextRound();
 	window.setTimeout(audioResultsTest, 30*1000);
 }
 function audioResultsTest()
 {
-	console.log("bshow rsults");
+	console.log("show results"+d.getTime());
 	window.setTimeout(audioTest, 10*1000);
 	audioSignalResults();
 }
@@ -78,7 +80,9 @@ function audioSignalNextRound()
 {
 
 	ping.play();
+
 	mus.play();
+	
 	// $("#bgMusic").animate({volume: DEFAULT_VOLUME}, 500)
 
 // $("#bgMusic").animate({volume: 0.01}, 500,  function() {
