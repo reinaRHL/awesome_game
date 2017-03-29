@@ -78,5 +78,39 @@ module.exports = function (server) {
 				});
 			});
 		});
+
+		// Gets called when user clicks 'create' button inside modal.
+		// To do: Need to update db as well
+		socket.on('createNewGame', function (data) {
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			models.Session.findOne({
+				where: {
+					key: seshKey
+				}
+			}).then(function (session) {
+				models.User.findOne({
+					where: {
+						id: session.user_id
+					}
+				}).then(function(user) {
+					io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+
+					// Store the newly created game in the DB
+					models.Game.create({
+						title: data.title,
+						createdBy: user.username,
+						//createdAt auto generated
+						state: 'hold',
+						startedAt: null,
+						progress: null
+					}).then(function(add_host_to_game){
+						//this is returning correct user id, but not adding to DB correctly? (I think it is?)
+						//TODO: need to be able to join game to determine correctness
+						console.log("CURRENT USER HAS ID " + user.id);
+						add_host_to_game.addUser(user.id);
+					});//end Game Create
+				});
+			});
+		});
 	});
 };

@@ -20,6 +20,10 @@ module.exports = function(sequelize, DataType) {
 		lastLoggedIn: {
 			type: DataType.DATE,
 			field: 'last_logged_in'
+		},
+		score: {
+			type: DataType.INTEGER,
+			field: 'score'
 		}
 	}, {
 		classMethods: {
@@ -32,7 +36,7 @@ module.exports = function(sequelize, DataType) {
 					onDelete: 'NO ACTION',
 					foreignKey: 'game_id'
 				});
-			}	
+			}
 		}
 	});
 

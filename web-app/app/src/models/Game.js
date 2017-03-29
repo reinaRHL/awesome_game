@@ -5,6 +5,10 @@ module.exports = function(sequelize, DataType) {
 			field: 'title',
 			unique: true
 		},
+		createdBy: {
+			type: DataType.STRING,
+			field: 'created_by',
+		},
 		startedAt: {
 			type: DataType.DATE,
 			field: 'started_at'

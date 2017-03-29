@@ -24,6 +24,7 @@ user.doSignup = function (req,res) {
 				gamesWon: 0,
 				gamesPlayed: 0,
 				lastLoggedIn: null,
+				score: 0,
 			}).then(function (new_user) {
 				//created new user
 				res.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -70,7 +71,7 @@ user.doLogin = function(req, res){
 							res.cookie('key', send_the_response.key);
 							res.setHeader("Content-Type", "application/json; charset=UTF-8");
 							res.status(200);
-							res.send(JSON.stringify('/home')); //redirect
+							res.send(JSON.stringify('/profile')); //redirect
 							console.log("That user is in DB");
 						});
 					} else { //bcrypt fails
