@@ -26,11 +26,11 @@ api.getUser = function (req, res) {
 		});
 	});
 
-};
+}; //end getUser
 
 api.getUserFriends = function (req, res) {
 	// TODO
-};
+}; //end getUserFriends
 
 api.getAllGames = function (req, res) {
 	//should return all games that are on hold
@@ -49,39 +49,14 @@ api.getAllGames = function (req, res) {
 				createdAt: games[i].createdAt,
 
 				//TODO: update this for when users can join games -- should have list
-				// of users in the current game.
+				// of usernames in the current game.
 				playersUsername: ['test']
 			};
 			gamesArray.push(z);
 		};
 		res.send(gamesArray);
-	});//
-	/*res.send({
-		games:[{
-			id: 1,
-			title: 'first game',
-			createdBy: 'David',
-			createdAt: '2013-12-08T17:55:38.130Z', //iso string
-			state: 'hold', //hold for when they've just been created?'
-			playersUsername: ['David', 'MikeIsAwesome', 'Fabian99xx']
-		},
-		{
-			id: 2,
-			title: 'second game',
-			createdBy: 'Paul',
-			createdAt: '2013-12-08T17:55:38.130Z', //iso string
-			state: 'hold', //hold for when they've just been created?'
-			playersUsername: ['Paul', 'user123', 'fix34']
-		},
-		{
-			id: 3,
-			title: 'other game',
-			createdBy: 'Dom',
-			createdAt: '2013-12-08T17:55:38.130Z', //iso string
-			state: 'hold', //hold for when they've just been created?'
-			playersUsername: ['Ummy', 'HiMarry', 'Dom', 'Cafelire', 'More People']
-		}]
-	});*/
-};
+	});
+
+}; // end getAllGames
 
 module.exports = api;
