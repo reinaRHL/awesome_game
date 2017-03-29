@@ -104,11 +104,8 @@ module.exports = function (server) {
 						startedAt: null,
 						progress: null
 					}).then(function(add_host_to_game){
-						//this is returning correct user id, but not adding to DB correctly? (I think it is?)
-						//TODO: need to be able to join game to determine correctness
-						console.log("CURRENT USER HAS ID " + user.id);
 						add_host_to_game.addUser(user.id);
-					});//end Game Create
+					}); // end Game Create
 				});
 			});
 		});
