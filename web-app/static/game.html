@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Awesome Game Profile</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> <!-- https://silviomoreto.github.io/bootstrap-select/examples/-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/bootswatch.css">
+      <link rel="stylesheet" href="css/index.css">
+      <link rel="stylesheet" href="css/game.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+      <link href='//fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
+   </head>
+   <body ng-app="indexApp">
+      <div class='container' ng-controller="indexCtrl">
+          <div id="inLobby" class="show well well-lg">
+                <h1 class="text-center">Game Name</h1>
+                    <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
+                    <div class="list-group">
+                    <a href="#" class="list-group-item text-center clearfix">
+                        <strong>CreatedUser<strong>
+                        <span class="label label-info pull-left">Creator</span>
+                        <span class="pull-right">
+                        <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        User 123
+                        <span class="label label-success pull-left">Accepted</span>
+                        <span class="pull-right">
+                        <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        UserFred
+                        <span class="label label-warning pull-left">Waiting</span>
+                        <span class="pull-right">
+                        <button class="list-group-item-text btn-danger btn btn-sm pull-right">Revoke Invite</button>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        UserFred
+                        <span class="label label-warning pull-left">Waiting</span>
+                        <span class="pull-right">
+                        <button class="list-group-item-text btn-danger btn btn-sm pull-right">Revoke Invite</button>
+                        </span>
+                    </a>
+                    </div>
+                <button class="btn btn-primary">Start Game</button>
+                <button class="btn btn-default">Cancel Game</button>
+          </div>
+          <div id="inGame" class="hidden">
+          </div>
+      </div>
+      
+      <script src="js/template.js"></script>
+      <script src="js/chat.js"></script>
+      <script src="js/share.js"></script>
+      <script src="js/logout.js"></script>
+      <script src="/socket.io/socket.io.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+      <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </body>
+</html>
