@@ -24,6 +24,17 @@ angular.module('indexApp', [])
 	  });
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
+      $scope.getEndedtime = function (status) {
+        switch (status) {
+            case 'hold':
+                return 'in progress';
+                break;
+            default:
+                return 'ended'
+                break
+
+        }
+    };
 	  });
   }]);
 })();

@@ -89,23 +89,11 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr class="success">
-                           <td>January 6th 2017 9:13 am</td>
-                           <td>January 6th 2017 9:43 am</td>
-                           <td>5</td>
-                           <td>Won</td>
-                        </tr>
-                        <tr class="danger">
-                           <td>January 19th 2017 10:13 am</td>
-                           <td>January 19th 2017 1:43 pm</td>
-                           <td>4</td>
-                           <td>Lost</td>
-                        </tr>
-                        <tr class="danger">
-                           <td>March 19th 2017 11:03 am</td>
-                           <td>March 19th 2017 12:43 pm</td>
-                           <td>3</td>
-                           <td>Lost</td>
+                        <tr ng-class="{'sucess': game.state === 'win', 'danger': game.state === 'lose', 'warning': game.state === 'hold'}" ng-repeat="game in games">
+                           <td>{{game.createdAt}}</td>
+                           <td ng-switch="game.state"><span ng-switch-when="won">Initializing</span><span ng-switch-when="lost">Loading</span><span ng-switch-when="hold">In Progess</span></td>
+                           <td>{{game.playersUsername.length}}</td>
+                           <td>{{game.state}}</td>
                         </tr>
                      </tbody>
                   </table>
