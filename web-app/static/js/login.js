@@ -22,7 +22,7 @@ $("#password_show_checkbox").click(function () {
        url: '/login',
        statusCode: {
          401: function(){
-           s.innerHTML = "Credentials entered are incorrect."
+           s.innerHTML = "Credentials entered are incorrect.";
          }
        },
        data: $("#log_in").serialize(),
@@ -50,7 +50,7 @@ $("#password_show_checkbox").click(function () {
        url: '/signup',
        statusCode: {
          401: function(){
-           s.innerHTML = "Username is already taken."
+           s.innerHTML = "Username is already taken.";
          }
        },
        data: $("#sign_up").serialize(),
