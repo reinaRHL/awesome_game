@@ -11,11 +11,8 @@ end
 # Base configuration recipe in Chef.
 package "wget"
 
-#Required since bcrypt will fallback to source build in the vm and its nide script is too stupid
+# Required since bcrypt will fallback to source build in the vm and its nide script is too stupid
 package "bcrypt"
-
-# Install sqlite
-package "sqlite"
 
 package "ntp"
 cookbook_file "ntp.conf" do
@@ -43,7 +40,6 @@ mysql_service 'mysql' do
   action [:create, :start,:restart]
 end
 
-
 ###NodeJS
 # Add repository so apt-get can install latest Node from NodeSource
 execute "add_nodesource_repo" do
@@ -52,28 +48,23 @@ end
  
 # Install node.js
 package "nodejs"
- 
-
-
-
-
-
 
 # Install package dependencies and run npm install
 execute "npm_install" do
   cwd "/home/ubuntu/project/web-app/app"
-  command "sudo npm install -g node-pre-gyp --no-bin-links"
-#   command "npm install sqlite3"
+  command "sudo npm install -g node-pre-gyp"
+  command "npm install --no-bin-links"
 end
 ###END NodeJS
 
 
 ###Begin game app
 
-#Populate the DB
+# Populate the DB
 execute "populate_db" do
-  cwd "/home/ubuntu/project/web-app/app/"
-  command "node populateDb.js src/questions/questions.json"
+  cwd "/home/ubuntu/project/web-app/app"
+  command "mysql -uroot -phello < create.sql"
+  command "node populateDb.js -q src/questions/questions.json"
 end
 
 # Add a service file for running the music app on startup
