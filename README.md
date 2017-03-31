@@ -10,9 +10,9 @@ For the project checkpoint, the node application will run directly on the host m
 4. `npm start`
 
 
-##Production Mode
+## Production Mode
 
-###First run
+### First run
  1. `vagrant up --provision`
  2. Wait a good 10 minutes for it to complete, npm install seems to take a while because one of the package servers is slow.
  3. Site is accessible at `localhost:8888`
@@ -22,20 +22,20 @@ After provisioning, you can be spared the indignity of waiting again, just say:
 
 This will work at least until someone needs a new package installed
 
-###Updating
+### Updating
 
-####If you modified a web app item
+#### If you modified a web app item
 Nothing this should server automatically
 
-####If you add a node package
+#### If you add a node package
  1. `vagrant ssh`
  2. `cd project/web-app/app`
  3. `npm install`
 
-####If you modify a chef file
+#### If you modify a chef file
 `vagrant up --provision`
 
-####If you modify the vagrant definition
+#### If you modify the vagrant definition
 `vagrant destroy -f && vagrant up --provision`
 
 
