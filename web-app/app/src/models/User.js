@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataType) {
 				User.belongsToMany(models.Game, {
 					through: 'User_Game',
 					onDelete: 'NO ACTION',
-					foreignKey: 'game_id'
+					foreignKey: 'user_id'
 				});
 			}	
 		}

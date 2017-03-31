@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataType) {
 				Game.belongsToMany(models.User, {
 					through: 'User_Game',
 					onDelete: 'NO ACTION',
-					foreignKey: 'user_id'
+					foreignKey: 'game_id'
 				});
 			}
 		}
