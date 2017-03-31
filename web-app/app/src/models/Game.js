@@ -16,7 +16,11 @@ module.exports = function(sequelize, DataType) {
 		progress: {
 			type: DataType.INTEGER,
 			field: 'progress'
-		}
+		},
+		createdBy: {
+			type: DataType.STRING,
+			field: 'created_by',
+		},
 	}, {
 		classMethods: {
 			associate: function (models) {
