@@ -16,6 +16,7 @@ For the project checkpoint, the node application will run directly on the host m
  1. `vagrant up --provision`
  2. Wait a good 10 minutes for it to complete, npm install seems to take a while because one of the package servers is slow.
  3. Site is accessible at `localhost:8888`
+
 ### Subsequent runs
 After provisioning, you can be spared the indignity of waiting again, just say:
  1. `vagrant up`
