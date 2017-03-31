@@ -78,5 +78,42 @@ module.exports = function (server) {
 				});
 			});
 		});
+
+		// Gets called when user clicks 'create' button inside modal.
+		// To do: Need to update db as well
+		socket.on('createNewGame', function (data) {
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			models.Session.findOne({
+				where: {
+					key: seshKey
+				}
+			}).then(function (session) {
+				models.User.findOne({
+					where: {
+						id: session.user_id
+					}
+				}).then(function(user) {
+
+					// Store the newly created game in the DB
+					models.Game.create({
+						title: data.title,
+						createdBy: user.username,
+						//createdAt auto generated
+						state: 'hold',
+						startedAt: null,
+						progress: null
+					}).then(function(add_host_to_game){
+						add_host_to_game.addUser(user.id);
+						//emit only after successfully creating game
+						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+
+					}).catch(function(err){
+						//creating new game by same user with same title.
+						console.log("Game with these values in User_Game exists already.")
+						
+					}); // end Game Create
+				});
+			});
+		});
 	});
 };

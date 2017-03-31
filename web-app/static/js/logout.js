@@ -10,7 +10,7 @@ $(document).ready(function(){
        url: '/logout',
        statusCode: {
          401: function(){
-           alert("You are not authorized")
+          //  alert("You are not authorized")
          }
        },
        
