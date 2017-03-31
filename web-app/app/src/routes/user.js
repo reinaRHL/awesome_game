@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var models = require('../models');
 var path = require('path');
@@ -20,7 +20,7 @@ user.doSignup = function (req,res) {
 		} else { // doesn't; create user
 			models.User.create({
 				username: uname,
-				password: bcrypt.hashSync(pass, 10), //bcrypt hash password
+				password: bcrypt.hashSync(pass), //bcrypt hash password
 				gamesWon: 0,
 				gamesPlayed: 0,
 				lastLoggedIn: null,
