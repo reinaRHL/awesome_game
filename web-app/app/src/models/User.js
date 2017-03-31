@@ -36,6 +36,9 @@ module.exports = function(sequelize, DataType) {
 					onDelete: 'NO ACTION',
 					foreignKey: 'user_id'
 				});
+				User.belongsToMany(models.User, {as: 'friend',
+                    through: 'UserFriend'
+                });
 			}	
 		}
 	});
