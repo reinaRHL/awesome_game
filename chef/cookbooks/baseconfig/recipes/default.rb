@@ -1,4 +1,3 @@
-
 # Make sure the Apt package lists are up to date, so we're downloading versions that exist.
 cookbook_file "apt-sources.list" do
   path "/etc/apt/sources.list"
@@ -11,11 +10,7 @@ end
 # Base configuration recipe in Chef.
 package "wget"
 
-#Required since bcrypt will fallback to source build in the vm and its nide script is too stupid
 package "bcrypt"
-
-# Install sqlite
-package "sqlite"
 
 package "ntp"
 cookbook_file "ntp.conf" do
@@ -40,9 +35,14 @@ mysql_service 'mysql' do
   port '3306'
   version '5.7'
   initial_root_password 'hello'
-  action [:create, :start,:restart]
+  action [:create, :start, :restart]
 end
 
+# Populate the DB
+execute "create_db" do
+  cwd "/home/ubuntu/project/web-app/app"
+  command "mysql -uroot -phello -h127.0.0.1 < create.sql"
+end
 
 ###NodeJS
 # Add repository so apt-get can install latest Node from NodeSource
@@ -52,41 +52,34 @@ end
  
 # Install node.js
 package "nodejs"
- 
-
-
-
-
-
 
 # Install package dependencies and run npm install
 execute "npm_install" do
   cwd "/home/ubuntu/project/web-app/app"
-  command "sudo npm install -g node-pre-gyp --no-bin-links"
-#   command "npm install sqlite3"
+  command "npm install --no-bin-links"
 end
 ###END NodeJS
 
 
 ###Begin game app
 
-#Populate the DB
+# Populate the DB
 execute "populate_db" do
-  cwd "/home/ubuntu/project/web-app/app/"
-  command "node populateDb.js src/questions/questions.json"
+  cwd "/home/ubuntu/project/web-app/app"
+  command "node populateDb.js -q ./src/questions/questions.json"
 end
 
 # Add a service file for running the music app on startup
-cookbook_file "musicapp.service" do
-    path "/etc/systemd/system/musicapp.service"
+cookbook_file "gameapp.service" do
+    path "/etc/systemd/system/gameapp.service"
 end
  
 # Start the music app
-execute "start_musicapp" do
-    command "sudo systemctl start musicapp"
+execute "start_gameapp" do
+    command "sudo systemctl start gameapp"
 end
  
 # Start music app on VM startup
-execute "startup_musicapp" do
-    command "sudo systemctl enable musicapp"
+execute "startup_gameapp" do
+    command "sudo systemctl enable gameapp"
 end
