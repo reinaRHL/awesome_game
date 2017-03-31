@@ -16,14 +16,18 @@ module.exports = function(sequelize, DataType) {
 		progress: {
 			type: DataType.INTEGER,
 			field: 'progress'
-		}
+		},
+		createdBy: {
+			type: DataType.STRING,
+			field: 'created_by',
+		},
 	}, {
 		classMethods: {
 			associate: function (models) {
 				Game.belongsToMany(models.User, {
 					through: 'User_Game',
 					onDelete: 'NO ACTION',
-					foreignKey: 'user_id'
+					foreignKey: 'game_id'
 				});
 			}
 		}

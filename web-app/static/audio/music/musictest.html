@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Awesome Game Profile</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> <!-- https://silviomoreto.github.io/bootstrap-select/examples/-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../css/bootswatch.css">
+      <link rel="stylesheet" href="../../css/index.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      
+
+<audio loop volume="0.1" id="bgMusic">
+  		<source src="Comparsa.mp3" type="audio/mp3" >
+</audio>
+<audio volume="0.1" id="sfxdrum">
+  		<source src="../sfx/drumroll.wav" type="audio/wav" >
+</audio>
+
+<audio volume="0.1" id="sfxdrum">
+  		<source src="../sfx/drumroll.wav" type="audio/wav" >
+</audio>
+
+<audio volume="0.1" id="sfxping">
+  		<source src="../sfx/ping.wav" type="audio/wav" >
+</audio>
+
+<script>
+
+var sfx = document.getElementById("sfxdrum");
+var ping = document.getElementById("sfxping");
+var mus = document.getElementById("bgMusic");
+var audio={};
+var DEFAULT_VOLUME =0.5;
+var d = new Date();
+initAudio();
+function initAudio()
+{
+mus.addEventListener("ended", function(){
+     myAudio.currentTime = 0;
+     console.log("music ended");
+});
+	mus.volume=DEFAULT_VOLUME;
+	var sfxNames=["ping.wav"];
+	for(var i=0;i<sfxNames.length;i++)
+	{
+		var name = sfxNames[i];
+		var id = sfxNames[i];
+		audio[id] = new Audio("../sfx/"+name);
+		audio[id].load();
+	}
+}
+
+function audioTest()
+{
+	console.log("Round start "+d.getTime());
+	audioSignalNextRound();
+	window.setTimeout(audioResultsTest, 30*1000);
+}
+function audioResultsTest()
+{
+	console.log("show results"+d.getTime());
+	window.setTimeout(audioTest, 10*1000);
+	audioSignalResults();
+}
+
+function audioSignalResults()
+{
+	mus.volume=DEFAULT_VOLUME;
+	sfx.volume=0.5;
+	sfx.play();
+	//$("#bgMusic").animate({volume: 0.3}, 3000);
+	
+
+}
+
+function audioSignalNextRound()
+{
+
+	ping.play();
+
+	mus.play();
+	
+	// $("#bgMusic").animate({volume: DEFAULT_VOLUME}, 500)
+
+// $("#bgMusic").animate({volume: 0.01}, 500,  function() {
+// //	mus.currentTime = 0;
+// 
+//     
+// });
+  
+
+
+ //var mus = document.getElementById("bgMusic");
+ //mus.volume=0.5
+}
+</script>
+
+      
+   </head>
+   <body ng-app="indexApp" onload="audioTest()">
+     <button onclick="audioSignalResults()"> Simulate results</button>
+     <button onclick="audioSignalNextRound()"> Simulate next round</button>
+   </body>
+</html>

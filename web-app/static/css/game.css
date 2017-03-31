@@ -1,0 +1,13 @@
+body{
+    padding: 2em;
+}
+#countdown{
+    font-size: 22px;
+}
+.gameInfo
+{
+    padding: 1em;
+}
+.margin-bottom{
+    margin-bottom: 2em;
+}
