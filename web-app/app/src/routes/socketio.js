@@ -1,9 +1,10 @@
 var models = require('../models');
 
+
 module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
-
+	var users =[]
 	//io user Authentication
 	function getCookie(cookie, cname) {
 		var name = cname + "=";
@@ -22,7 +23,7 @@ module.exports = function (server) {
 
 	io.use(function(socket, next) {
 		var seshKey = getCookie(socket.request.headers.cookie, "key");
-
+		console.log("io")
 		models.Session.count({
 			where: {
 				key: seshKey
@@ -39,7 +40,14 @@ module.exports = function (server) {
 							id: session.user_id
 						}
 					}).then(function(user) {
-						io.sockets.emit('onlineUser', {name:user.username});
+						socket.username = user.username
+						if (!users.includes(socket.username)){
+							users.push(socket.username)
+						}
+						
+						console.log(users)
+						io.sockets.emit('getUsers',users)
+						
 					});
 				})
 				next();
@@ -55,6 +63,7 @@ module.exports = function (server) {
 		console.log("Connected: %s sockets connected", connections.length);
 
 		socket.on('disconnect', function (data) {
+			
 			connections.splice(connections.indexOf(socket),1);
 			console.log("Disconnected: %s sockets connected", connections.length);
 		});
@@ -78,6 +87,16 @@ module.exports = function (server) {
 				});
 			});
 		});
+
+		//refresh onlineusers when logged out
+		socket.on('logOutUser',function (data){
+			users.splice(users.indexOf(data),1 )
+			io.sockets.emit('getUsers',users)
+				
+
+		})
+
+		
 
 		// Gets called when user clicks 'create' button inside modal.
 		// To do: Need to update db as well

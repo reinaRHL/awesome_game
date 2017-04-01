@@ -52,7 +52,13 @@ $(document).ready(function(){
 	})
 
 // onlineusers
-	socket.on('onlineUser', function(data){
-		$("#friendsDropdown").append('<li><a href="#">'+data.name+'</a></li><li class="divider"></li>')
-	})
+	
+    socket.on('getUsers', function(data){
+        var html = '';
+        for (i =0;i <data.length; i++){
+            html += '<li><a href="#">'+data[i]+'</a></li><li class="divider"></li>'
+            console.log("here" + data)
+        }
+        $("#friendsDropdown").html(html)
+    })
 })

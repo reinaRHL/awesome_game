@@ -100,24 +100,32 @@ user.doLogin = function(req, res){
 };
 
 user.doLogout = function (req,res) {
-	var sessionKey= req.body['key'];
-	models.Session.count({
+	var name= req.body['name'];
+	console.log(name)
+	models.User.count({
 		where: {
-			key: sessionKey
+			username: name
 		}
 	}).then(function(found){
-		if (found === 1) { //session exists in DB.
-			console.log(req.body)
-			//find session and delete it
-			models.Session.findOne({
+		if (found === 1) {
+			models.User.findOne({
 				where: {
-					key: sessionKey
+					username: name
 				}
-			}).then(function (session) {
-				session.destroy()
+			}).then(function(user){
+				
+					console.log(req.body)
+					//find session and delete it
+					models.Session.findOne({
+						where: {
+							user_id: user.id
+						}
+					}).then(function (session) {
+						session.destroy()
 
-			});
-		}else { //session key not found
+					});
+				})
+		}else { //user not found
 			res.status(401);
 			res.end();
 		}
