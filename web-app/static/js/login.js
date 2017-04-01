@@ -39,11 +39,12 @@ $("#password_show_checkbox").click(function () {
    var s = document.getElementById('errorContent');
    e.preventDefault(); // Prevents the page from refreshing
 
-
-   if(password.value != password_confirm.value && username.value != ""){
+   if(password.value != password_confirm.value){
        //display error
-       s.innerHTML = "Passwords don't match."
+       s.innerHTML = "Passwords don't match.";
        //console.log("not same value");
+     }else if(username.value === ""){
+       s.innerHTML = "Username cannot be blank.";
      }else{
      $.ajax({
        type: "POST",
