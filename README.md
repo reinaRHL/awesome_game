@@ -39,7 +39,8 @@ Nothing this should server automatically
 #### If you modify the vagrant definition
 `vagrant destroy -f && vagrant up --provision`
 
-##Logs
+
+## Logs
 
 The output of node is logged automatically by systemd, to read the log invoke
 
