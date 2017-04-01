@@ -44,7 +44,12 @@ Nothing this should server automatically
 
 The output of node is logged automatically by systemd, to read the log invoke
 
+`vagrant ssh`
 `sudo journalctl -u gameapp`
+
+To get a live-feed of node's output when running, execute the log with the -f flag
+
+`sudo journalctl -u gameapp -f`
 
 
 ## File Structure
