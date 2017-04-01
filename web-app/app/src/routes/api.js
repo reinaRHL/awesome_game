@@ -29,7 +29,9 @@ api.getUser = function (req, res) {
 }; //end getUser
 
 
+
 // Returns a list of friend objects(containing id & username) of the current user.
+
 api.getUserFriends = function (req, res) {
 
 	models.Session.findOne({ // find current users session
