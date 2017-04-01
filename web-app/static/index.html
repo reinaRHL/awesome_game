@@ -52,6 +52,39 @@
                 </div>
             </div>
         </div>
+        <div class="modal" id="gameInfo">
+          <div class="modal-dialog">
+            <div class="modal-content"> 
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h1 class="text-center">Game Name</h1>
+                </div>
+                <div class="modal-body">
+                    <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
+                    <div class="list-group">
+                    <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
+                        CreatedUser
+                        <span class="label label-info pull-left">Creator</span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        User 123
+                        <span class="label label-success pull-left">Accepted</span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        UserFred
+                        <span class="label label-warning pull-left">Accepted</span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix">
+                        UserBob
+                        <span class="label label-warning pull-left">Accepted</span>
+                    </a>
+                    </div>
+                <button class="btn btn-success">Join Game</button>
+                <button class="btn btn-default">Cancel Game</button>
+                </div>
+          </div>
+          </div>
+        </div>
          <div class="tab-content">
             <div class="tab-pane fade active in panel panel-default" id="profile">
                <div class="panel-body">
@@ -105,7 +138,7 @@
                   <div class="input-group">
                      <input type="text" class="form-control" aria-label="...">
                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                        <button type="button" class="btn btn-default dropdown-toggle" ng-click="gameInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right">
                            <li><a href="#">By Created User</a></li>
                            <li><a href="#">Game Name</a></li>

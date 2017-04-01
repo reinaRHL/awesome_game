@@ -32,16 +32,19 @@ angular.module('indexApp', [])
     $scope.createGame = function() {
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
     };
-
+    $scope.gameInfo = function() {
+      $('#gameInfo').modal();
+      console.log('im clicked');
+    };
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
-      $('#gameDisplay').append("<a class=\"list-group-item\"><span class=\"badge\">players: "
+      $('#gameDisplay').append("<button ng-click='gameInfo()' class=\"list-group-item\"><span class=\"badge\">players: "
                                 + data.numPlayers
                                 + "</span>"
                                 + data.title
                                 + "<p class=\"text-primary\">Created By "
                                 + data.createdBy
-                                +  "</p></a>");
+                                +  "</p></button>");
     });
   }]);
 })();
