@@ -25,7 +25,7 @@ GameSession.prototype.broadcast =function(stringifyable)
 	//for each channel send stringifiable
 }
 
-GameSession.prototype.unicastUsername(username,stringifyable)
+GameSession.prototype.unicastUsername = function(username,stringifyable)
 {
 	
 }
