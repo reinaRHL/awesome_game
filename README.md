@@ -39,6 +39,12 @@ Nothing this should server automatically
 #### If you modify the vagrant definition
 `vagrant destroy -f && vagrant up --provision`
 
+##Logs
+
+The output of node is logged automatically by systemd, to read the log invoke
+
+`sudo journalctl -u gameapp`
+
 
 ## File Structure
 * Dynamic-Content: `web-app/app/`
