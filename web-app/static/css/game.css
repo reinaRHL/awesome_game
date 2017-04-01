@@ -11,3 +11,28 @@ body{
 .margin-bottom{
     margin-bottom: 2em;
 }
+/*iPhone6 and above*/
+@media screen and (max-width: 375px) {
+	body{
+		padding: 0.5em;
+	}
+	label{
+		font-size: 1em;
+	}
+	h1{
+		font-size: 1.5em;
+	}
+	h2{
+		font-size: 1.2em;
+	}
+	h3{
+		font-size: 1.3em;
+	}
+    h4{
+        font-size: 1em;
+    }
+    .gameInfo{
+        padding-top: 0.25em;
+        font-size: smaller !important;
+    }
+}
