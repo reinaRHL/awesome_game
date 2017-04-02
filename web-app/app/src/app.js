@@ -40,6 +40,10 @@ app.get('/lobby', authentication.isAuthenticated, function (req, res) {
 app.get('/friends', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
 });
+app.get('/games', authentication.isAuthenticated, function (req, res) {
+    res.sendFile(path.resolve('../static/game.html'));
+});
+
 // TODO: these will be handled by NGINX later...
 app.get('/js/login.js', function (req, res) {
 	res.statusCode = 200;

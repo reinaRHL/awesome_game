@@ -1,5 +1,10 @@
 (function() {
 var socket = io.connect();
+
+socket.on('redirect', function(dest){
+  console.log(dest);
+  window.location.href = dest;
+});
 angular.module('indexApp', [])
   .factory('webServices', ['$http', function($http){
     return {

@@ -44,10 +44,10 @@ module.exports = function (server) {
 						if (!users.includes(socket.username)){
 							users.push(socket.username)
 						}
-						
+
 						console.log(users)
 						io.sockets.emit('getUsers',users)
-						
+
 					});
 				})
 				next();
@@ -63,7 +63,7 @@ module.exports = function (server) {
 		console.log("Connected: %s sockets connected", connections.length);
 
 		socket.on('disconnect', function (data) {
-			
+
 			connections.splice(connections.indexOf(socket),1);
 			console.log("Disconnected: %s sockets connected", connections.length);
 		});
@@ -92,11 +92,11 @@ module.exports = function (server) {
 		socket.on('logOutUser',function (data){
 			users.splice(users.indexOf(data),1 )
 			io.sockets.emit('getUsers',users)
-				
+
 
 		})
 
-		
+
 
 		// Gets called when user clicks 'create' button inside modal.
 		// To do: Need to update db as well
@@ -126,10 +126,12 @@ module.exports = function (server) {
 						//emit only after successfully creating game
 						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
+						var destination = '/games';
+						io.sockets.emit('redirect', destination);
 					}).catch(function(err){
 						//creating new game by same user with same title.
 						console.log("Game with these values in User_Game exists already.")
-						
+
 					}); // end Game Create
 				});
 			});
