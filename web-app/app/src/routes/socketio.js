@@ -121,12 +121,14 @@ module.exports = function (server) {
 						// console.log(game_ins)
 						// console.log("game_ins")
 						//get the users in the game and emit game title and numofusers
-						game_ins.addUser(user.id)
-						game_ins.getUsers().then(function(users){
+						game_ins.addUser(user.id).then(function(user){
+							game_ins.getUsers().then(function(users){
 							io.sockets.emit('gameJoined', {title: data.game, numPlayers: users.length});
-
+							socket.broadcast.emit('gameJoined', {title: data.game, numPlayers: users.length});
 	
 						})
+						})
+						
 						
 						
 					})
