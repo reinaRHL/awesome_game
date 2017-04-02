@@ -134,5 +134,30 @@ module.exports = function (server) {
 				});
 			});
 		});
+// TO DO IS START A CONNECTION FOR A GAME:
+// ROUND INFO SHOULD BE SENT TO USERS
+// api.newRound = function (req, res){
+// 	//update round info
+// 	var gameQuestions = 
+// 	{
+// 		'roundNumber':1,
+//		'endTime': 1491092481792,
+// 		'question' :
+// 			{
+// 				"correct_answer": "Red Lion",
+// 				"difficulty": 1,
+// 				"incorrect_answers": [
+// 					"Royal Oak",
+// 					"White Hart",
+// 					"King&#039;s Head"
+// 				],
+// 				"question": "According to the BBPA, what is the most common pub name in the UK?",
+// 				"category": "General Knowledge"
+// 			}
+// 	}
+// }
+
+
+
 	});
 };

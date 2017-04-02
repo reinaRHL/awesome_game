@@ -37,6 +37,9 @@ app.get('/profile', authentication.isAuthenticated, function (req, res) {
 app.get('/lobby', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
 });
+app.get('/game', authentication.isAuthenticated, function (req, res) {
+	res.sendFile(path.resolve('../static/game.html'));
+});
 app.get('/friends', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
 });
