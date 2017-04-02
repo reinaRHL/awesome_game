@@ -22,9 +22,10 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 // Routes
-app.get('/api/user', routes.api.getUser);
-app.get('/api/user/friends', routes.api.getUserFriends);
-app.get('/api/games', routes.api.getAllGames);
+app.get('/api/user', authentication.isAuthenticated, routes.api.getUser);
+app.get('/api/user/friends', authentication.isAuthenticated, routes.api.getUserFriends);
+app.get('/api/user/history', authentication.isAuthenticated, routes.api.getUserGameHistory);
+app.get('/api/games', authentication.isAuthenticated, routes.api.getAllGames);
 app.post('/signup', routes.user.doSignup);
 app.post('/login', routes.user.doLogin);
 app.get('/login', routes.user.getLoginPage);
@@ -45,11 +46,6 @@ app.get('/game', authentication.isAuthenticated, function (req, res) {
 });
 app.get('/friends', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
-});
-app.get('*', function (req, res) {
-	res.status(301);
-	res.setHeader('Location', '/login');
-	res.end();
 });
 
 // Start server
