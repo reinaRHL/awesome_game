@@ -7,12 +7,6 @@ if (!argv.q || !fs.existsSync(argv.q)) {
 	process.exit(1);
 }
 
-// NOTE: this will be removed when MySQL is ready, using SQLite for now
-if (fs.existsSync('game.db')) {
-	console.log('Warning: Database is already populated.')
-	process.exit(0);
-}
-
 models.sequelize.sync({ force: true }).then(function () {
 	var parsed = require(argv.q);
 

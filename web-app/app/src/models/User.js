@@ -20,6 +20,10 @@ module.exports = function(sequelize, DataType) {
 		lastLoggedIn: {
 			type: DataType.DATE,
 			field: 'last_logged_in'
+		},
+		score: {
+			type: DataType.INTEGER,
+			field: 'score'
 		}
 	}, {
 		classMethods: {
@@ -30,8 +34,11 @@ module.exports = function(sequelize, DataType) {
 				User.belongsToMany(models.Game, {
 					through: 'User_Game',
 					onDelete: 'NO ACTION',
-					foreignKey: 'game_id'
+					foreignKey: 'user_id'
 				});
+				User.belongsToMany(models.User, {as: 'friend',
+                    through: 'UserFriend'
+                });
 			}	
 		}
 	});

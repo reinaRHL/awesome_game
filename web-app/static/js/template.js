@@ -1,4 +1,5 @@
 (function() {
+var socket = io.connect();
 angular.module('indexApp', [])
   .factory('webServices', ['$http', function($http){
     return {
@@ -23,19 +24,28 @@ angular.module('indexApp', [])
           popScore($scope.score);
 	  });
 	  webServices.getGames().then(function (resp){
-		  $scope.games = resp.data.games;
-      $scope.getEndedtime = function (status) {
-        switch (status) {
-            case 'hold':
-                return 'in progress';
-                break;
-            default:
-                return 'ended'
-                break
-
-        }
-    };
+		  $scope.games = resp.data;
 	  });
+
+    // This function will be called when user clicks 'create' button inside modal.
+    // This function sends user input, title username and other player list.
+    $scope.createGame = function() {
+      socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
+    };
+    $scope.gameInfo = function() {
+      $('#gameInfo').modal();
+      console.log('im clicked');
+    };
+    // When game is created, append it to the gamelist
+    socket.on('gameCreated', function(data){
+      $('#gameDisplay').append("<button ng-click='gameInfo()' class=\"list-group-item\"><span class=\"badge\">players: "
+                                + data.numPlayers
+                                + "</span>"
+                                + data.title
+                                + "<p class=\"text-primary\">Created By "
+                                + data.createdBy
+                                +  "</p></button>");
+    });
   }]);
 })();
 

@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var models = require('../models');
 var path = require('path');
@@ -20,10 +20,11 @@ user.doSignup = function (req,res) {
 		} else { // doesn't; create user
 			models.User.create({
 				username: uname,
-				password: bcrypt.hashSync(pass, 10), //bcrypt hash password
+				password: bcrypt.hashSync(pass), //bcrypt hash password
 				gamesWon: 0,
 				gamesPlayed: 0,
 				lastLoggedIn: null,
+				score: 0,
 			}).then(function (new_user) {
 				//created new user
 				res.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -51,15 +52,26 @@ user.doLogin = function(req, res){
 					username: uname
 				}
 			}).then(function (nextstep) {
+
 				bcrypt.compare(pass, nextstep.password, function (err, res2) {
 					if (res2) {
 						// correct credentials
+
 						var generateKey = function() {
 							var sha = crypto.createHash('sha256');
 							sha.update(Math.random().toString());
 							return sha.digest('hex');
 						};
-
+						//first, find all previous sessions associated with this user's id
+						// and delete them
+						models.Session.findAll().then(function(){
+							return models.Session.destroy({
+								where: {
+									user_id: nextstep.id
+								}
+							})
+						}).then(function (){
+						// now give them only a fresh key
 						models.Session.create({ //generate session key
 							key: generateKey()
 						}).then(function (send_the_response) {
@@ -70,9 +82,10 @@ user.doLogin = function(req, res){
 							res.cookie('key', send_the_response.key);
 							res.setHeader("Content-Type", "application/json; charset=UTF-8");
 							res.status(200);
-							res.send(JSON.stringify('/home')); //redirect
+							res.send(JSON.stringify('/profile')); //redirect
 							console.log("That user is in DB");
 						});
+					});
 					} else { //bcrypt fails
 						res.status(401);
 						res.end();
@@ -87,24 +100,32 @@ user.doLogin = function(req, res){
 };
 
 user.doLogout = function (req,res) {
-	var sessionKey= req.body['key'];
-	models.Session.count({
+	var name= req.body['name'];
+	console.log(name)
+	models.User.count({
 		where: {
-			key: sessionKey
+			username: name
 		}
 	}).then(function(found){
-		if (found === 1) { //session exists in DB.
-			console.log(req.body)
-			//find session and delete it
-			models.Session.findOne({
+		if (found === 1) {
+			models.User.findOne({
 				where: {
-					key: sessionKey
+					username: name
 				}
-			}).then(function (session) {
-				session.destroy()
+			}).then(function(user){
+				
+					console.log(req.body)
+					//find session and delete it
+					models.Session.findOne({
+						where: {
+							user_id: user.id
+						}
+					}).then(function (session) {
+						session.destroy()
 
-			});
-		}else { //session key not found
+					});
+				})
+		}else { //user not found
 			res.status(401);
 			res.end();
 		}

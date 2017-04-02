@@ -1,0 +1,3656 @@
+{
+    "questions": [
+        {
+            "correct_answer": "Red Lion",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Royal Oak",
+                "White Hart",
+                "King&#039;s Head"
+            ],
+            "question": "According to the BBPA, what is the most common pub name in the UK?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Saffron",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Cinnamon",
+                "Cardamom",
+                "Vanilla"
+            ],
+            "question": "What is the world's most expensive spice by weight?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Economics",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Philosophy",
+                "Politics",
+                "Physics"
+            ],
+            "question": "This field is sometimes known as \u201cThe Dismal Science.\u201d",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Hats",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Shoes",
+                "Belts",
+                "Shirts"
+            ],
+            "question": "What does a milliner make and sell?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Hearts",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Spades",
+                "Diamonds",
+                "Clubs"
+            ],
+            "question": "In a standard set of playing cards, which is the only king without a moustache?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Clyde",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Tay",
+                "Dee",
+                "Tweed"
+            ],
+            "question": "Which river flows through the Scottish city of Glasgow?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "July 2nd, 1776",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "May 4th, 1776",
+                "June 4th, 1776",
+                "July 4th, 1776"
+            ],
+            "question": "When was the Declaration of Independence approved by the Second Continental Congress?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Hairy",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Rude",
+                "Funny",
+                "Tall"
+            ],
+            "question": "What is the defining characteristic of someone who is described as hirsute?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Watches",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Cars",
+                "Computers",
+                "Sports equipment"
+            ],
+            "question": "Rolex is a company that specializes in what type of product?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Philosophy",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Psychology",
+                "Phrenology",
+                "Physical Therapy"
+            ],
+            "question": "A doctor with a PhD is a doctor of what?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Rusty Nail",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Screwdriver",
+                "Sex on the Beach",
+                "Manhattan"
+            ],
+            "question": "Scotch whisky and Drambuie make up which cocktail?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "S",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "O",
+                "A",
+                "C"
+            ],
+            "question": "In the Morse code, which letter is indicated by 3 dots? ",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Government",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Going",
+                "Ghost",
+                "Geronimo"
+            ],
+            "question": "What does the \"G\" mean in \"G-Man\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Hungarian",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Russian",
+                "Greek",
+                "Latvian"
+            ],
+            "question": "Which language is NOT Indo-European?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Wasabi ",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Mentsuyu",
+                "Karashi",
+                "Ponzu"
+            ],
+            "question": "Which essential condiment is also known as Japanese horseradish?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Yale University",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Princeton University",
+                "Harvard University",
+                "Columbia University"
+            ],
+            "question": "Which of the following Ivy League universities has its official motto in Hebrew as well as in Latin?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Me at the zoo",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "tribute",
+                "carrie rides a truck",
+                "Her new puppy from great grandpa vern."
+            ],
+            "question": "What is the name of the very first video uploaded to YouTube?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "$12.7 Billion",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "$95 Million",
+                "$956 Million",
+                "$2.7 Billion"
+            ],
+            "question": "In 2013 how much money was lost by Nigerian scams?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "15",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "20",
+                "10",
+                "25"
+            ],
+            "question": "After how many years would you celebrate your crystal anniversary?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Ducati",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Nissan",
+                "GMC",
+                "Fiat"
+            ],
+            "question": "Which of these companies does NOT manufacture automobiles?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Daniel Ek",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Sean Parker",
+                "Felix Miller",
+                "Michael Breidenbruecker"
+            ],
+            "question": "Who is a co-founder of music streaming service Spotify?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Beijing",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Kuala Lumpur",
+                "Singapore",
+                "Tokyo"
+            ],
+            "question": "What was the destination of the missing flight MH370?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "A falsehood",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Useless trivia",
+                "A tiny fact",
+                "A scientific figure"
+            ],
+            "question": "A factiod is what?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Kip",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Ruble",
+                "Konra",
+                "Dollar"
+            ],
+            "question": "What is the unit of currency in Laos?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Niagara Mohawk Building",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Taipei 101",
+                "One Detroit Center",
+                "Westendstrasse 1"
+            ],
+            "question": "Which of the following buildings is example of a structure primarily built in the Art Deco architectural style?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Gin",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Vodka",
+                "Rum",
+                "Tequila"
+            ],
+            "question": "What alcoholic drink is mainly made from juniper berries?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Bullfighting",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Fiestas",
+                "Flamenco",
+                "Mariachi"
+            ],
+            "question": "What did the Spanish autonomous community of Catalonia ban in 2010, that took effect in 2012?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Fiat",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Maserati",
+                "Alfa Romeo",
+                "Ferrari"
+            ],
+            "question": "Which Italian automobile manufacturer gained majority control of U.S. automobile manufacturer Chrysler in 2011?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Shiatsu",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Ukiyo",
+                "Majime",
+                "Ikigai"
+            ],
+            "question": "Which of these is the name of a Japanese system of alternative medicine, literally meaning \"finger pressure\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Tandoori",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Biryani",
+                "Pani puri",
+                "Tiki masala"
+            ],
+            "question": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "L\u00f6ffel",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Gabel",
+                "Messer",
+                "Essst&auml;bchen"
+            ],
+            "question": "What is the German word for \"spoon\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Daigaku",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Toshokan",
+                "Jimusho",
+                "Shokudou"
+            ],
+            "question": "What is the romanized Japanese word for \"university\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "F\u00f6nster",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "H&aring;l",
+                "Sk&auml;rm",
+                "Ruta"
+            ],
+            "question": "What is the Swedish word for \"window\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Pomodoro",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Aglio",
+                "Cipolla",
+                "Peperoncino"
+            ],
+            "question": "What is the Italian word for \"tomato\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Zima",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Leto",
+                "Vesna",
+                "Osen&#039;"
+            ],
+            "question": "What is the romanized Russian word for \"winter\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Big Mouth Billy Bass",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Big Billy Bass",
+                "Singing Fish",
+                "Sardeen"
+            ],
+            "question": "What is the name of the popular animatronic singing fish prop, singing such hits such as \"Don't Worry, Be Happy\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "India",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "United States of America",
+                "Soviet Union",
+                "Poland"
+            ],
+            "question": "What country saw a world record 315 million voters turn out for elections on May 20, 1991?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "1833",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "1933",
+                "1942",
+                "1796"
+            ],
+            "question": "The term \"scientist\" was coined in which year?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Chocolate",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Potatoes",
+                "Donuts",
+                "Cocaine"
+            ],
+            "question": "On average, Americans consume 100 pounds of what per second?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Five",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Twenty",
+                "Ten",
+                "One hundred"
+            ],
+            "question": "According to the United States' CDC, one in how many Americans die annually due to smoking?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Ole Kirk Christiansen",
+            "difficulty": 2,
+            "incorrect_answers": [
+                " Jens Niels Christiansen",
+                "Kirstine Christiansen",
+                " Gerhardt Kirk Christiansen"
+            ],
+            "question": "Who is the founder of \"The Lego Group\"?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "A mall with high vacancy rates or low consumer foot traffic",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "A mall with no stores",
+                "A mall that has been condemed",
+                "A mall after business hours"
+            ],
+            "question": "What is a dead mall?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Japan",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Russia",
+                "Germany",
+                "USA"
+            ],
+            "question": "Which country has the record for the worlds largest orgy?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Omega",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Mu",
+                "Epsilon",
+                "Kappa"
+            ],
+            "question": "What is the last letter of the Greek alphabet?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Ampersand",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Interrobang",
+                "Tilde",
+                "Pilcrow"
+            ],
+            "question": "What character was once considered to be the 27th letter of the alphabet?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "September 23rd, 1889",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "October 19th, 1891",
+                "March 4th, 1887",
+                "December 27th, 1894"
+            ],
+            "question": "When was Nintendo founded?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "David Childs",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Bjarke Ingels",
+                "Michael Arad",
+                "Fumihiko Maki"
+            ],
+            "question": "The new One World Trade Center in Manhattan, New York City was designed by which architect? ",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "London Liverpool Street",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Frankfurt (Main) Hauptbahnhof",
+                "Paris Gare du Nord",
+                "Brussels Midi"
+            ],
+            "question": "Amsterdam Centraal station is twinned with what station?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Dr. Pepper",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Coca-Cola",
+                "Sprite",
+                "Mountain Dew"
+            ],
+            "question": "Which of the following carbonated soft drinks were introduced first?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "Brad's Drink",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Pepsin Pop",
+                "Carolina Cola",
+                "Pepsin Syrup"
+            ],
+            "question": "What was the soft drink Pepsi originally introduced as?",
+            "category": "General Knowledge"
+        },
+        {
+            "correct_answer": "cat urine",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "cupcakes",
+                "grandma",
+                "burnt hair"
+            ],
+            "question": "In 2013, Dell issued a recall after customers complained their laptops smelled like _______.",
+            "category": "recall"
+        },
+        {
+            "correct_answer": "ugly",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "short",
+                "obese",
+                "headless"
+            ],
+            "question": "According to a University of Jena study, the people who have the most memorable faces are _______ people.",
+            "category": "faces"
+        },
+        {
+            "correct_answer": "Axe body spray",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "bees",
+                "a live tiger",
+                "poisonous snakes"
+            ],
+            "question": "In October of 2013, eight sixth-graders from a New York college prep school were hospitalized after someone released _______ in a classroom.",
+            "category": "sixth-graders"
+        },
+        {
+            "correct_answer": "underwater",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "made of pillows",
+                "welcoming and efficient",
+                "in a junkyard"
+            ],
+            "question": "ROAD TRIP! When in Port Vila, Vanuatu be sure to check out their post office, which is unusual because it is _______.",
+            "category": "office"
+        },
+        {
+            "correct_answer": "run over by a tractor",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "stabbed",
+                "handcuffed to a rocket",
+                "murdered"
+            ],
+            "question": "The Kila Raipur Sports Festival, held annually in Punjab, India, has many odd and dangerous events, including one where the participants lay on the ground and get _______.",
+            "category": "Punjab"
+        },
+        {
+            "correct_answer": "fingernails",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "flowers",
+                "daisies",
+                "moss"
+            ],
+            "question": "After an allergic reaction to steroids used to treat asthma, a 28-year-old woman started growing _______ on her head instead of hair.",
+            "category": "steroids"
+        },
+        {
+            "correct_answer": "ghost",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "teacher",
+                "serial killer",
+                "rabbit"
+            ],
+            "question": "In a 1999 interview with <i>US Weekly</i>, actress Lucy Liu revealed that she once had sex with a _______.",
+            "category": "Lucy"
+        },
+        {
+            "correct_answer": "count",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "neuter",
+                "race",
+                "club"
+            ],
+            "question": "The city of Olney, Illinois organizes an annual event in order to _______ squirrels.",
+            "category": "squirrels"
+        },
+        {
+            "correct_answer": "Hitler",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Elvis",
+                "Thomas Crapper",
+                "Pete Rose"
+            ],
+            "question": "ROAD TRIP! While in Florence, New Jersey be sure to check out the auto repair shop which, according to its owner, has an operational toilet once owned by _______.",
+            "category": "auto repair"
+        },
+        {
+            "correct_answer": "atheists",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "lesbians",
+                "racists",
+                "professors"
+            ],
+            "question": "A Kickstarter campaign met its $30,000 goal on April 7, 2012 for its shoes designed for _______.",
+            "category": "Kickstarter"
+        },
+        {
+            "correct_answer": "Rod Stewart",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Abe Lincoln",
+                "Cher",
+                "Gallagher"
+            ],
+            "question": "Kevin Spacey's older brother is a _______ impersonator.",
+            "category": "Kevin Spacey "
+        },
+        {
+            "correct_answer": "They",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Yakov",
+                "Branson",
+                "Man"
+            ],
+            "question": "Andrew Wilson, a man from Branson, Missouri, legally changed his name to simply _______.",
+            "category": "Branson"
+        },
+        {
+            "correct_answer": "beard",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "goat",
+                "sex",
+                "mistress"
+            ],
+            "question": "Under Peter the Great, noblemen had to pay 100 rubles a year for a _______ license.",
+            "category": "Peter"
+        },
+        {
+            "correct_answer": "railroad track",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "mine",
+                "rhino",
+                "frozen lake"
+            ],
+            "question": "In 2008, a couple was killed in South Africa while having sex on a _______.",
+            "category": "sex "
+        },
+        {
+            "correct_answer": "Ruin",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Juice",
+                "Medicine",
+                "Curse"
+            ],
+            "question": "In the 16th century, gin was referred to as the Mother's _______.",
+            "category": "gin"
+        },
+        {
+            "correct_answer": "pickle",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "rocking chair",
+                "pumpkin",
+                "cocaine"
+            ],
+            "question": "Amerigo Vespucci, the man for whom America was named, was a _______ dealer.",
+            "category": "America"
+        },
+        {
+            "correct_answer": "8",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "3",
+                "5",
+                "10"
+            ],
+            "question": "Walter Arnold received the world's first speeding ticket in 1896 for going _______ miles per hour.",
+            "category": "speeding ticket "
+        },
+        {
+            "correct_answer": "Barbie",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Poopy",
+                "Bamba",
+                "Kitty Cat"
+            ],
+            "question": "Edgar Valdez Villarreal, a notorious Mexican drug cartel leader, had the not-so-scary nickname \"La _______.\"",
+            "category": "drug cartel "
+        },
+        {
+            "correct_answer": "dead",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "drunk",
+                "sleeping",
+                "deaf"
+            ],
+            "question": "Frank Hayes is the first jockey to win a race while _______.",
+            "category": "jockey"
+        },
+        {
+            "correct_answer": "cats",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "snakes",
+                "bandits",
+                "raccoons"
+            ],
+            "question": "Tashirojima is an island off of Japan that is completely overrun by _______.",
+            "category": "Japan"
+        },
+        {
+            "correct_answer": "legs",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "noses",
+                "dragons",
+                "bananas"
+            ],
+            "question": "The Isle of Man flag depicts three _______ interlinked together.",
+            "category": "Isle of Man "
+        },
+        {
+            "correct_answer": "Nic Cage",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Moms",
+                "Bill Cosby",
+                "Step-Dads"
+            ],
+            "question": "Shiro Cosmetics sells an eye shadow called \"_______ Raking Leaves on a Brisk October Afternoon.\"",
+            "category": "Eye Shadow"
+        },
+        {
+            "correct_answer": "jousting",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "curling",
+                "bowling",
+                "billiards"
+            ],
+            "question": "Maryland's official state sport is _______.",
+            "category": "Maryland "
+        },
+        {
+            "correct_answer": "foot powder",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "corn chip",
+                "beer",
+                "tube of toothpaste"
+            ],
+            "question": "In 1967, a small town in Ecuador elected an inanimate object mayor. The elected mayor was a _______.",
+            "category": "Ecuador "
+        },
+        {
+            "correct_answer": "parking meters",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "surgeries",
+                "coffee",
+                "sandwiches"
+            ],
+            "question": "A group known as the \"Robin Hooders\" in Keene, New Hampshire pay for other people's _______.",
+            "category": "New Hampshire "
+        },
+        {
+            "correct_answer": "teddy bears",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "cookies",
+                "guns",
+                "Valentines cards"
+            ],
+            "question": "As a way to protest Belarus' police state, a Swedish group dropped hundreds of _______ from an airplane.",
+            "category": "Swedish"
+        },
+        {
+            "correct_answer": "lawn mower",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "tricycle",
+                "pig",
+                "golf cart"
+            ],
+            "question": "A man in western Pennsylvania got a DUI for having an open can of beer while riding a _______.",
+            "category": "DUI"
+        },
+        {
+            "correct_answer": "duck",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "king",
+                "gopher",
+                "homeless person"
+            ],
+            "question": "Anatidaephobia is the fear that somewhere in the world a _______ is watching you.",
+            "category": "Fear"
+        },
+        {
+            "correct_answer": "marijuana",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "tacos",
+                "books",
+                "comic books"
+            ],
+            "question": "For his voiceover work in <i>Texas Chainsaw Massacre</i>, John Larroquette was paid not with money, but with _______.",
+            "category": "John Larroquette "
+        },
+        {
+            "correct_answer": "Try",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Die",
+                "Panic",
+                "Write"
+            ],
+            "question": "Famed American poet Charles Bukowski's tombstone is engraved with the words \"Don't _______.\"",
+            "category": "Charles Bukowski "
+        },
+        {
+            "correct_answer": "TweetPee",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Crapp",
+                "Pee-Phone",
+                "Baby Buddy"
+            ],
+            "question": "Huggies Brazil developed a phone app that tells you when a baby's diaper is wet. It's called _______.",
+            "category": "Huggies"
+        },
+        {
+            "correct_answer": "vanilla",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "milk",
+                "salt",
+                "meat"
+            ],
+            "question": "A beaver's anal secretions can be used as a _______ substitute in some foods.",
+            "category": "Anal Secretions "
+        },
+        {
+            "correct_answer": "yawning",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "masturbating",
+                "sexting",
+                "scatting"
+            ],
+            "question": "A spectator in an Illinois courtroom was sentenced to six months in jail for _______ during a trial.",
+            "category": "Illinois "
+        },
+        {
+            "correct_answer": "Shout",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Defecate",
+                "Smoke",
+                "Laugh"
+            ],
+            "question": "The German Primate Center conducted a study called \"Why Female Monkeys _______ During Sex.\"",
+            "category": "Monkey"
+        },
+        {
+            "correct_answer": "fridge",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "car",
+                "afterlife",
+                "attic"
+            ],
+            "question": "According to a Logitech study, 49% of lost remote controls are found in the couch, while 4% are found in the _______.",
+            "category": "remote controls"
+        },
+        {
+            "correct_answer": "garlic",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "chopsticks",
+                "chopsticks",
+                "bamboo"
+            ],
+            "question": "In 2010, Customs officers on the Norway-Sweden border intercepted a truck trying to smuggle 28 tons of _______ from China.",
+            "category": "Smuggle "
+        },
+        {
+            "correct_answer": "Fart",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Breasts",
+                "Bed",
+                "Stare"
+            ],
+            "question": "The French have a pastry called \"Nun's _______.\"",
+            "category": "Nun"
+        },
+        {
+            "correct_answer": "shave",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "poop",
+                "read",
+                "sing"
+            ],
+            "question": "Alexander the Great made his men _______ before a battle.",
+            "category": "Alexander the Great "
+        },
+        {
+            "correct_answer": "shootout",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "lapdance",
+                "dance-off",
+                "marathon"
+            ],
+            "question": "Monroe Isadore, a 107-year-old man from Arkansas, died during a _______.",
+            "category": "107"
+        },
+        {
+            "correct_answer": "porn",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "snakes",
+                "vending machines",
+                "mayonnaise"
+            ],
+            "question": "At the Meitestu-Nagoya train station in Japan, there's an odd vending machine that sells _______.",
+            "category": "Vending Machine"
+        },
+        {
+            "correct_answer": "Hawaiian",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Funky",
+                "Home",
+                "To The Mall"
+            ],
+            "question": "A sequel to <i>Beetlejuice</i> titled <i>Beetlejuice Goes _______</i> was written but never made.",
+            "category": "Beetlejuice "
+        },
+        {
+            "correct_answer": "Lego man",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "dildo",
+                "Furby",
+                "pawn"
+            ],
+            "question": "An eight-foot-tall _______ washed up ashore a Florida beach in 2011.",
+            "category": "Florida"
+        },
+        {
+            "correct_answer": "llama",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "monkey",
+                "cannon",
+                "gun"
+            ],
+            "question": "Freddie Mercury backed out of a duet with Michael Jackson because Jackson brought a _______ to the recording studio.",
+            "category": "Mercury"
+        },
+        {
+            "correct_answer": "pumpkins",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "kegs",
+                "coffins",
+                "cars"
+            ],
+            "question": "People in Damariscotta, Maine hold an annual race where they use _______ as boats.",
+            "category": "boats"
+        },
+        {
+            "correct_answer": "couch",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "penis",
+                "monster truck",
+                "keg"
+            ],
+            "question": "An Indiana woman sued a church cemetery because they refused to install her late husband's tombstone shaped like a _______.",
+            "category": "tombstone"
+        },
+        {
+            "correct_answer": "the Loch Ness Monster",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Aquaman",
+                "rainbows",
+                "Big Foot"
+            ],
+            "question": "Jacobite Cruises purchased unusual insurance to protect it from damage caused by _______.",
+            "category": "Cruises "
+        },
+        {
+            "correct_answer": "Ocean",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Tree",
+                "Dynamite",
+                "Future"
+            ],
+            "question": "Forest Whitaker has three daughters (Sonnet, True and Autumn) and a son named _______.",
+            "category": "Forest"
+        },
+        {
+            "correct_answer": "cars",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "balloons",
+                "poop",
+                "plastic"
+            ],
+            "question": "ROAD TRIP! While in Alliance, Nebraska, you can visit the Stonehenge replica made out of _______.",
+            "category": "Stonehenge"
+        },
+        {
+            "correct_answer": "shotgun",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "lawnmower",
+                "torch",
+                "sword"
+            ],
+            "question": "A woman in Muncie, Indiana was hospitalized after trying to remove a callus on her foot with a _______.",
+            "category": "callus"
+        },
+        {
+            "correct_answer": "python",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "car",
+                "possum",
+                "beer"
+            ],
+            "question": "A Florida man choked to death on cockroaches he ate while trying to win a _______.",
+            "category": "cockroaches"
+        },
+        {
+            "correct_answer": "hammer",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "salami",
+                "diaper",
+                "bat"
+            ],
+            "question": "At the Sao Joao festival in Portugal, you hit people over the head with a _______.",
+            "category": "Portugal "
+        },
+        {
+            "correct_answer": "Jesus",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Gandalf",
+                "Sherlock Holmes",
+                "Wesley Snipes"
+            ],
+            "question": "In a 2012 poll conducted by <i>Vanity Fair</i> and <i>60 Minutes</i>, Denzel Washington was voted the public's first choice to play the character of _______.",
+            "category": "Denzel"
+        },
+        {
+            "correct_answer": "kidney stone",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "paintings",
+                "diary",
+                "sperm"
+            ],
+            "question": "William Shatner raised $25,000 for Habitat for Humanity by selling his _______.",
+            "category": "$25,000"
+        },
+        {
+            "correct_answer": "ToPikachu",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Boring Town",
+                "New Las Vegas",
+                "Crappton"
+            ],
+            "question": "For one day in 1998, Topeka, Kansas renamed itself _______.",
+            "category": "Topeka "
+        },
+        {
+            "correct_answer": "Pow",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Ka-blam",
+                "Shizzle",
+                "Huh"
+            ],
+            "question": "There was once a fourth member of Kellogg's Rice Krispies mascot gang. Originally it was Snap, Crackle, Pop and _______.",
+            "category": "Gang"
+        },
+        {
+            "correct_answer": "baby",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "dinosaur",
+                "teeth",
+                "dog"
+            ],
+            "question": "In 2006, the wax museum Madame Tussaud's in New York City introduced its first wax _______.",
+            "category": "wax"
+        },
+        {
+            "correct_answer": "the Eiffel Tower",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "the Statue of Liberty",
+                "Mona Lisa",
+                "Mount Rushmore"
+            ],
+            "question": "In 2007, a woman with a rare disorder that causes her to be sexually attracted to inanimate objects married _______.",
+            "category": "married "
+        },
+        {
+            "correct_answer": "cry",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "dance",
+                "misdirection",
+                "magic"
+            ],
+            "question": "On his own website, magician David Blaine once wrote, \"The most courageous act a man can do is _______.\"",
+            "category": "magician"
+        },
+        {
+            "correct_answer": "Grobanites",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Joshers",
+                "Grobaniacs",
+                "Groban Heads"
+            ],
+            "question": "The fans of musician Josh Groban are called _______.",
+            "category": "Josh"
+        },
+        {
+            "correct_answer": "Jell-o",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "mayonnaise",
+                "paintballs",
+                "pudding"
+            ],
+            "question": "The sound of E.T. walking was made by someone squishing _______.",
+            "category": "E.T."
+        },
+        {
+            "correct_answer": "Detroit",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Toledo",
+                "New Brunswick",
+                "Mexico"
+            ],
+            "question": "In 1980, Saddam Hussein was named an honorary citizen of _______.",
+            "category": "Saddam"
+        },
+        {
+            "correct_answer": "Hobo",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Farmer",
+                "Robot",
+                "Drunk"
+            ],
+            "question": "Britt, Iowa annually crowns a King and Queen _______.",
+            "category": "Iowa"
+        },
+        {
+            "correct_answer": "Batman",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Masturbation",
+                "Twerking",
+                "Steroids"
+            ],
+            "question": "The University of Victoria offers a physical education class called The Science of _______.",
+            "category": "physical "
+        },
+        {
+            "correct_answer": "baby",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "cadaver",
+                "shotgun",
+                "diseased cat"
+            ],
+            "question": "A 2013 Pakistani game show caused a controversy when their grand prize was a _______.",
+            "category": "prize"
+        },
+        {
+            "correct_answer": "funeral",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "briss",
+                "divorce",
+                "wedding"
+            ],
+            "question": "The Lehigh Valley IronPigs, a minor league baseball team, held a contest where the prize was a voucher for a _______.",
+            "category": "voucher"
+        },
+        {
+            "correct_answer": "oranges",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "sponges",
+                "rugs",
+                "pillows"
+            ],
+            "question": "Every year residents in Ivrea, Italy reenact a historical battle of their region, and instead of replica weapons, they use _______.",
+            "category": "weapons"
+        },
+        {
+            "correct_answer": "dog",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "dead man",
+                "squirrel",
+                "sandwich"
+            ],
+            "question": "The mayor of Rabbit Hash, KY is a _______.",
+            "category": "Hash"
+        },
+        {
+            "correct_answer": "yams",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "soup",
+                "mud",
+                "crackers"
+            ],
+            "question": "Nigeria's version of Cookie Monster can't stop eating _______.",
+            "category": "Nigeria"
+        },
+        {
+            "correct_answer": "Satan",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Fairbanks",
+                "Beatrix",
+                "Quincy"
+            ],
+            "question": "While president of the United States, John Adams had a dog named Juno and a dog named _______.",
+            "category": "Juno"
+        },
+        {
+            "correct_answer": "rock",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "stupid",
+                "hairy",
+                "good"
+            ],
+            "question": "Tara Reid once said, \"I make Jessica Simpson look like a _______ scientist.\"",
+            "category": "Tara"
+        },
+        {
+            "correct_answer": "cows",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "babies",
+                "Republicans",
+                "women only"
+            ],
+            "question": "Advanced Comfort Technology makes waterbeds for _______.",
+            "category": "Technology"
+        },
+        {
+            "correct_answer": "dolls",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "shoes",
+                "backpacks",
+                "scarecrows"
+            ],
+            "question": "Mexico's Isla de las Munecas is an attraction known for having hundreds of _______ hanging  in its trees.",
+            "category": "hanging"
+        },
+        {
+            "correct_answer": "babies",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "fire pits",
+                "old people",
+                "snakes"
+            ],
+            "question": "El Colacho is a Spanish festival where people dress up like the devil and jump over _______.",
+            "category": "devil"
+        },
+        {
+            "correct_answer": "egg rolls",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "DVDs",
+                "video games",
+                "tacos"
+            ],
+            "question": "In 2013, a U.S. Customs and Border Protection Officer was found guilty of granting citizenship in exchange for 200 _______.",
+            "category": "citizenship "
+        },
+        {
+            "correct_answer": "pipe bomb",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "sword",
+                "computer",
+                "baby"
+            ],
+            "question": "A man in L.A. was arrested at a police-sponsored gun buyback when, instead of a gun, he tried to sell the cops a _______.",
+            "category": "arrested"
+        },
+        {
+            "correct_answer": "Morning Glory",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Big Wood",
+                "Bonelick",
+                "Woodcock"
+            ],
+            "question": "Utah's Lehi City Council approved a request to change the name of _______ Road because it sounded sort of dirty.",
+            "category": "dirty"
+        },
+        {
+            "correct_answer": "snuggle",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "dance",
+                "slap kids",
+                "fight"
+            ],
+            "question": "It's weird work but Jackie Samuel charges $60 an hour to _______.",
+            "category": "hour"
+        },
+        {
+            "correct_answer": "I'm Jack Sparrow",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Viva la France",
+                "Eat my dust",
+                "Deez Nuts"
+            ],
+            "question": "A British woman was arrested for hijacking a British ferry and yelling, \"_______!\"",
+            "category": "yelling"
+        },
+        {
+            "correct_answer": "Canadians",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "veterans",
+                "business men",
+                "women"
+            ],
+            "question": "In 2013, the Rethink ad agency placed red beer fridges throughout Europe that could only be opened by _______.",
+            "category": "beer"
+        },
+        {
+            "correct_answer": "Satan",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Bald",
+                "Sexy",
+                "Arrogant"
+            ],
+            "question": "The movie <i>G.I. Jane</i> was translated to <i>_______ Female Soldier</i> in China.",
+            "category": "translated "
+        },
+        {
+            "correct_answer": "56000",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "70000",
+                "18",
+                "20000"
+            ],
+            "question": "According to Forbes, the average income for an \"ice cream taster\" is $_______ a year.",
+            "category": "income"
+        },
+        {
+            "correct_answer": "beard",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "cat",
+                "safety manual",
+                "fire hose"
+            ],
+            "question": "During a famous fire in 1567, a Norwegian man named Hans Steininger died after tripping over a _______.",
+            "category": "fire"
+        },
+        {
+            "correct_answer": "Kiss",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Crap",
+                "Max",
+                "Butts"
+            ],
+            "question": "The inventor of the laxative Ex-Lax has the unusual name Max _______.",
+            "category": "inventor"
+        },
+        {
+            "correct_answer": "Ppppppppppprice",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Xoyxy",
+                "Flaxquig",
+                "Wgpa"
+            ],
+            "question": "To make it extremely difficult for telemarketers to pronounce, Tim Price changed his name in 2012 to Tim _______.",
+            "category": "telemarketers"
+        },
+        {
+            "correct_answer": "Tooth Decay",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Evil",
+                "Bed Time",
+                "Stranger"
+            ],
+            "question": "In 1976, boxing legend Muhammad Ali released an educational children's album titled \"Ali and His Gang Vs. Mr. _______.\"",
+            "category": "Gang"
+        },
+        {
+            "correct_answer": "Cafe",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Hall",
+                "Party",
+                "Living Room"
+            ],
+            "question": "The area in the Pacific Ocean where great white sharks congregate every spring is called the White Shark _______.",
+            "category": "Pacific"
+        },
+        {
+            "correct_answer": "Puppy",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Pillow",
+                "Make-Out",
+                "Silent"
+            ],
+            "question": "As a way to relieve stress for its students, Dalhousie University in 2012 introduced a _______ Room.",
+            "category": "stress"
+        },
+        {
+            "correct_answer": "duct tape",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "togas",
+                "top hats",
+                "diapers"
+            ],
+            "question": "In 2013, two teens from Sequoyah High School near Atlanta, Georgia won $5,000 scholarships for wearing _______ to prom.",
+            "category": "prom"
+        },
+        {
+            "correct_answer": "Zolp",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Christ",
+                "Ham",
+                "Moses"
+            ],
+            "question": "Loyola University offers a scholarship to any Catholic students with the last name _______.",
+            "category": "last"
+        },
+        {
+            "correct_answer": "cars",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "scarecrows",
+                "super models",
+                "tissue boxes"
+            ],
+            "question": "Edward Smith from Yelm, Washington garnered media attention for his claim that he's had sex with over 1,000 _______.",
+            "category": "1,000"
+        },
+        {
+            "correct_answer": "toilet paper",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "duct tape",
+                "wax",
+                "curtains"
+            ],
+            "question": "Cheap Chic Weddings is an annual contest in which participants make wedding dresses out of _______.",
+            "category": "dresses"
+        },
+        {
+            "correct_answer": "horse",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "car",
+                "partner",
+                "hat"
+            ],
+            "question": "At 2:45 a.m. one day in June 2013, a man in Orlando, Florida was arrested for walking up to a police officer and punching his _______.",
+            "category": "police"
+        },
+        {
+            "correct_answer": "Place",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Way",
+                "City",
+                "People"
+            ],
+            "question": "Located near the town of Stanley, there's a small village in England called No _______.",
+            "category": "village"
+        },
+        {
+            "correct_answer": "circumcising",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "packing",
+                "marrying",
+                "virginity"
+            ],
+            "question": "Jim Begelow, Ph.D., wrote a book called <i>The Joy of Un_______!</i>.",
+            "category": "Joy"
+        },
+        {
+            "correct_answer": "God",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "birds",
+                "Santa",
+                "the Easter Bunny"
+            ],
+            "question": "In 2007, to make a point, Nebraska State Sen. Ernie Chambers filed a frivolous lawsuit against _______.",
+            "category": "Nebraska "
+        },
+        {
+            "correct_answer": "bird poop",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "caviar",
+                "crocodile tears",
+                "human excrement"
+            ],
+            "question": "For $180, the Shizuka New York skin care salon offers an unusual but traditional Japanese facial that is part rice bran and part _______.",
+            "category": "facial "
+        },
+        {
+            "correct_answer": "Thimbles",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Spoons",
+                "Edwins",
+                "Toes"
+            ],
+            "question": "Edwin E. Holmes, a man with very specific interests, wrote the 254-page book \"A History of _______.\"",
+            "category": "wrote"
+        },
+        {
+            "correct_answer": "Toothbrushes",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Thugs",
+                "Breaks",
+                "Problems"
+            ],
+            "question": "Barbara E. Mattick wrote the book, <i>A Guide to Bone _______ of the 19th and Early 20th Centuries.</i>",
+            "category": "Bone"
+        },
+        {
+            "correct_answer": "ears",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "hair",
+                "teeth",
+                "arms"
+            ],
+            "question": "Haribo sells a gummi in Germany that depicts a human butt with _______ growing out of it.",
+            "category": "gummi"
+        },
+        {
+            "correct_answer": "laughing",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "urinating",
+                "saying",
+                " \"Y-ello!\""
+            ],
+            "question": "Suffering from an extremely rare side effect after getting hip surgery in 2010, a Dutch man has alienated his family because he cannot stop _______.",
+            "category": "hip"
+        },
+        {
+            "correct_answer": "chess",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "kung fu",
+                "sleeping",
+                "wrestling"
+            ],
+            "question": "Leo Granit Kraft is a world champion in an unusual sport that combines boxing and _______.",
+            "category": "boxing"
+        },
+        {
+            "correct_answer": "Sticky",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Battle",
+                "Wacky",
+                "Crazy"
+            ],
+            "question": "Only about 14 games were ever made for the Gizmondo game system, including the game \"_______ Balls.\"",
+            "category": "Balls"
+        },
+        {
+            "correct_answer": "Touch",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Hand",
+                "Share",
+                "First"
+            ],
+            "question": "The Nintendo DS had a dictionary program with the unfortunate name \"_______ Dic.\"",
+            "category": "dictionary"
+        },
+        {
+            "correct_answer": "an ostrich",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Adam Levine",
+                "potatoes",
+                "Cee Lo"
+            ],
+            "question": "CELEBRITY TWEET!   3:20 PM - 9 Nov 12  @blakeshelton, the country singer and judge on <i>The Voice</i>, tweeted, \"Just fell down and gashed my hand open while running from _______... Don't ask.\"",
+            "category": "Blake"
+        },
+        {
+            "correct_answer": "Hooker's",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Lady",
+                "Baby",
+                "Kissy"
+            ],
+            "question": "The Chinese plant \"pyschotria elata\" is also known as \"_______ Lips.\"",
+            "category": "Lips"
+        },
+        {
+            "correct_answer": "Cucumber",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Cabbage",
+                "Spinich",
+                "Broccoli"
+            ],
+            "question": "During the summer of 2007, Pepsi sold a green-tinted cola in Japan called Pepsi Ice _______.",
+            "category": "Pepsi"
+        },
+        {
+            "correct_answer": "toothpicks",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "mouse traps",
+                "sugar cubes",
+                "thimbles"
+            ],
+            "question": "Over the course of 35 years, artist Scott Weaver has built a replica of the city of San Francisco using over 100,000 _______.",
+            "category": "San Francisco "
+        },
+        {
+            "correct_answer": "Whiskey",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Big",
+                "Hard",
+                "Old"
+            ],
+            "question": "ROAD TRIP! While in Washington state go see the unusually named _______ Dick Mountain.",
+            "category": "Mountain"
+        },
+        {
+            "correct_answer": "beer",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "200 ferrets",
+                "Playstation 2",
+                "pajamas"
+            ],
+            "question": "On October 24th, 2013 a man in Columbus, Georgia ran into his burning home in order to save his _______.",
+            "category": "burning "
+        },
+        {
+            "correct_answer": "strip club",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "casino",
+                "shooting range",
+                "cigar shop"
+            ],
+            "question": "A chemistry teacher in Indiana was fired in 2013 after he allegedly took several of his students on an unauthorized field trip to a _______.",
+            "category": "field trip"
+        },
+        {
+            "correct_answer": "stuffed animals",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "pets",
+                "hair",
+                "parents"
+            ],
+            "question": "Unagi Travel is an unusual Japanese travel agency that sends your _______ on vacations.",
+            "category": "vacations"
+        },
+        {
+            "correct_answer": "Artichokes",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Sticks",
+                "Snowmen",
+                "Parrots"
+            ],
+            "question": "Scottsdale Community College's sports teams are oddly named the Fighting _______.",
+            "category": "Fighting "
+        },
+        {
+            "correct_answer": "Mary Hart's voice",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "music boxes",
+                "the Seinfeld theme",
+                "bongos"
+            ],
+            "question": "A neurology professor at Albany Medical College documented in a 1991 medical journal that one of his patients had seizures when she heard _______.",
+            "category": "seizures "
+        },
+        {
+            "correct_answer": "cemetery",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "sewer",
+                "mall",
+                "silo"
+            ],
+            "question": "Since 2000, a couple in Queens, New York has been living rent-free in a _______ in exchange for taking care of it.",
+            "category": "Queens"
+        },
+        {
+            "correct_answer": "Captain Beany",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Bean Sauce",
+                "Mister Bean",
+                "Sir Beans"
+            ],
+            "question": "A man in Wales, UK, is so obsessed with baked beans that in 1991 he legally changed his name to _______.",
+            "category": "beans"
+        },
+        {
+            "correct_answer": "Yogurt",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Evil",
+                "Tabasco",
+                "Fire"
+            ],
+            "question": "In 1979, Clairol introduced and then almost immediately discontinued the oddly named \"Touch of _______\" shampoo.",
+            "category": "shampoo"
+        },
+        {
+            "correct_answer": "McNuggets",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "donuts",
+                "potato chips",
+                "Snickers"
+            ],
+            "question": "Because he found Chinese food to be odd, during the 2008 Beijing Olympics, sprinter Usain Bolt said that he ended up eating 1,000 _______.",
+            "category": "Bolt"
+        },
+        {
+            "correct_answer": "knitting",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "breathing",
+                "praying",
+                "cat grooming"
+            ],
+            "question": "In an effort to push \"slow TV,\" Norway had a 12-hour block of programming in 2013 dedicated to _______.",
+            "category": "Norway"
+        },
+        {
+            "correct_answer": "chainsaw",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "fire",
+                "tissue",
+                "poodle"
+            ],
+            "question": "With 88 catches, Canadian Aaron Gregg holds the Guinness World Record for _______ juggling.",
+            "category": "record"
+        },
+        {
+            "correct_answer": "Pub",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Tub",
+                "Van",
+                "Field"
+            ],
+            "question": "Sponsored by the Calvary Lutheran Church, people in Fort Worth Texas can now attend the unconventional Church-in-a-_______.",
+            "category": "Calvary "
+        },
+        {
+            "correct_answer": "lesbian",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "reverse cowgirl",
+                "hooker",
+                "kinky"
+            ],
+            "question": "Due to its unusual mating habits, the New Mexico whiptail is nicknamed the _______ lizard.",
+            "category": "mating"
+        },
+        {
+            "correct_answer": "Chicken",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Degree",
+                "Country Western Musician",
+                "Bear"
+            ],
+            "question": "Belmont University in Nashville has offered a class called \"Oh, Look, a _______.\"",
+            "category": "Oh"
+        },
+        {
+            "correct_answer": "marijuana",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Kobe beef",
+                "Foie gras",
+                "Xanex"
+            ],
+            "question": "Although very unconventional, farmer William von Schneidau feeds his pigs _______.",
+            "category": "pigs"
+        },
+        {
+            "correct_answer": "bagels",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "cars",
+                "books",
+                "cake"
+            ],
+            "question": "Ben and Jerry only started making ice cream because it was too expensive to make _______.",
+            "category": "ice cream"
+        },
+        {
+            "correct_answer": "Holocaust",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Shooting",
+                "Pig Party",
+                "Nap"
+            ],
+            "question": "In 1977, Simulations Publications, Inc. published a strangely named board game called After The _______.",
+            "category": "Board"
+        },
+        {
+            "correct_answer": "Hippies",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Snakes",
+                "Canadians",
+                "Old"
+            ],
+            "question": "In 2007, Golden Laurel Entertainment published a violent board game called Kill the _______.",
+            "category": "Kill"
+        },
+        {
+            "correct_answer": "bison",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "radios",
+                "monster trucks",
+                "baseball cards"
+            ],
+            "question": "Owning 55,000 of them, Ted Turner has the world's largest private collection of _______.",
+            "category": "55,000"
+        },
+        {
+            "correct_answer": "laser pointer",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "truck",
+                "tooth",
+                "electric toothbrush"
+            ],
+            "question": "The first item listed on eBay was a broken _______.",
+            "category": "eBay"
+        },
+        {
+            "correct_answer": "Black",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Snow",
+                "Amanda",
+                "Little"
+            ],
+            "question": "The Dutch version of Santa Claus has a helper named _______ Pete.",
+            "category": "Santa"
+        },
+        {
+            "correct_answer": "guard",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "wax",
+                "finder",
+                "comb"
+            ],
+            "question": "Patented in 1890, U.S. Patent US435748 is for a mustache _______.",
+            "category": "mustache "
+        },
+        {
+            "correct_answer": "eat",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "betray",
+                "taunt",
+                "wash"
+            ],
+            "question": "From the fine print for the original iPod Shuffle: \"Do not _______ iPod Shuffle.\"",
+            "category": "iPod"
+        },
+        {
+            "correct_answer": "sleeping",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "urinating",
+                "drunk",
+                "eating"
+            ],
+            "question": "Actual warning on Vidal Sassoon hair dryer: \"Do not use while _______.\"",
+            "category": "hair"
+        },
+        {
+            "correct_answer": "pregnant",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "sleeping",
+                "hungry",
+                "aroused"
+            ],
+            "question": "From warning label on Extenze male enhancement supplement: \"Do not use if _______.\"",
+            "category": "supplement"
+        },
+        {
+            "correct_answer": "cowboy hat",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "bird",
+                "butt",
+                "bow"
+            ],
+            "question": "ROAD TRIP! When visiting Paris, Texas check out their replica of the Eiffel Tower with a giant red _______ on top.",
+            "category": "Paris"
+        },
+        {
+            "correct_answer": "Ruby",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Dixie",
+                "Mountain",
+                "Howdy"
+            ],
+            "question": "Scooby-Doo's sister, _______-Doo, is Scrappy-Doo's mother.",
+            "category": "Doo"
+        },
+        {
+            "correct_answer": "cathedral",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "toad",
+                "baby",
+                "royal"
+            ],
+            "question": "In 2012, a 26-year-old man from London went on a mission to lick every _______ in the United Kingdom.",
+            "category": "lick "
+        },
+        {
+            "correct_answer": "Amish",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Catholic",
+                "feminist",
+                "asthmatic"
+            ],
+            "question": "<i>Chosen,</i> <i>Shunned</i> and <i>Reckoning</i> are all books in an unusual series about _______ vampires.",
+            "category": "reckoning"
+        },
+        {
+            "correct_answer": "middle finger",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "man mooning",
+                "devil",
+                "thumbs down"
+            ],
+            "question": "In 2013, a wealthy Michigan man bought the house next to his ex-wife and erected a giant bronze statue of a _______.",
+            "category": "erected"
+        },
+        {
+            "correct_answer": "burnt",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "half-eaten",
+                "touched by famous people",
+                "vomited"
+            ],
+            "question": "There's a novelty museum in Arlington, Massachusetts that only collects food that has been _______.",
+            "category": "food"
+        },
+        {
+            "correct_answer": "bouncer",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "taxi driver",
+                "hair dresser",
+                "juggler"
+            ],
+            "question": "As a young student in Buenos Aires, Pope Francis worked as a _______.",
+            "category": "Buenos Aires"
+        },
+        {
+            "correct_answer": "Ouija board",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "leprechaun",
+                "football player",
+                "dog"
+            ],
+            "question": "In 2012, a teenager from Weslaco, Texas claimed the reason he stabbed his friend was because a _______ made him do it.",
+            "category": "stabbed "
+        },
+        {
+            "correct_answer": "woman's leg",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "cigar",
+                "penguin",
+                "corn stalk"
+            ],
+            "question": "ROAD TRIP! While visiting Roselawn, Indiana, check out the giant sundial made to resemble a _______.",
+            "category": "sundial "
+        },
+        {
+            "correct_answer": "Ironing",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Napping",
+                "Tax Preperation",
+                "Raking"
+            ],
+            "question": "Phil Shaw is the founder of the bizarre sport called Extreme _______.",
+            "category": "founder"
+        },
+        {
+            "correct_answer": "dandelion",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "potato",
+                "mushroom",
+                "feather"
+            ],
+            "question": "On November 25, 2013, a 16-month-old Chinese girl underwent surgery to remove the unusual growth of a _______ in her ear canal.",
+            "category": "ear"
+        },
+        {
+            "correct_answer": "bowler",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "actor",
+                "Tweeter",
+                "daddy"
+            ],
+            "question": "CELEBRITY TWEET!    9:43 PM - 1 Oct 13   @MikeTyson tweeted, \"I'm a bad _______.\"",
+            "category": "bad"
+        },
+        {
+            "correct_answer": "cameras",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "backwards",
+                "less crazy",
+                "invisible"
+            ],
+            "question": "CELEBRITY TWEET!    2:44 PM - 10 May 11   @THEGaryBusey tweeted, \"I wish my ears were _______.\"",
+            "category": "ears"
+        },
+        {
+            "correct_answer": "Girl Scout cookies",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "condoms",
+                "jam",
+                "\"Die Hard\" DVDs"
+            ],
+            "question": "In 2002, Bruce Willis sent 12,000 boxes of _______ to U.S. soldiers in Afghanistan.",
+            "category": "Afghanistan"
+        },
+        {
+            "correct_answer": "Merry Christmas",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "First",
+                "You up?",
+                "On my way"
+            ],
+            "question": "The first text message ever sent was by Neil Papworth in 1992. He texted, \"_______.\"",
+            "category": "text message"
+        },
+        {
+            "correct_answer": "dentist",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "fireworks extravaganza",
+                "documentary about prison",
+                "therapist"
+            ],
+            "question": "In 2013, a 51-year-old Swedish inmate broke out of prison a day before his scheduled release so he could go see a _______.",
+            "category": "release "
+        },
+        {
+            "correct_answer": "bad hair day",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "drowning",
+                "penis and butt",
+                "shaved my mustache"
+            ],
+            "question": "~~8-0 is the obscure emoticon that stands for _______.",
+            "category": "8"
+        },
+        {
+            "correct_answer": "dead whale",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "federal statue",
+                "bouncy castle",
+                "cow"
+            ],
+            "question": "On November 12, 1970, George Thornton, a highway engineer in Oregon, had the unusual job of blowing up a _______.",
+            "category": "blowing "
+        },
+        {
+            "correct_answer": "buttered popcorn",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "gasoline",
+                "wild berries",
+                "cotton candy"
+            ],
+            "question": "According to the nonfiction book <i>The Man-Eating Tigers of Sundarbans</i>, tiger urine \"smells sort of like _______.\"",
+            "category": "urine"
+        },
+        {
+            "correct_answer": "glitter",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "sweat",
+                "vomit",
+                "makeup"
+            ],
+            "question": "CELEBRITY TWEET!   1:07 AM - 2 Aug 13   @taylorswift13 Tweeted \"Thank you for tonight, Des Moines. I found endless amounts of _______ on my arms from hugging lots of you tonight.\"",
+            "category": "hugging"
+        },
+        {
+            "correct_answer": "plaster",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "wood",
+                "human teeth",
+                "glass"
+            ],
+            "question": "Because of a metal shortage during the war, the Oscar statuettes given out during World War II were made out of _______.",
+            "category": "Oscar"
+        },
+        {
+            "correct_answer": "hugging",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "high-fiving",
+                "sweating on",
+                "cradling"
+            ],
+            "question": "CELEBRITY TWEET!  2:49 PM - 15 Nov 13   Richard Simmons' Twitter handle @TheWeightSaint Tweeted: \"At the airport _______ everyone.\"",
+            "category": "Simmons"
+        },
+        {
+            "correct_answer": "beer",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "beef",
+                "prostitution",
+                "hat"
+            ],
+            "question": "In 2000, Australia had its largest ever online petition, which called for an end to rising _______ prices.",
+            "category": "petition "
+        },
+        {
+            "correct_answer": "piano",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "safe",
+                "Jimmy Hoffa",
+                "wrecking ball"
+            ],
+            "question": "When Paul Nelson and Andrew Hunter climbed Britain's highest mountain in 2006, they made an unusual discovery hidden behind a pile of stones. It was a _______.",
+            "category": "pile "
+        },
+        {
+            "correct_answer": "relative",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "criminal",
+                "sex offender",
+                "minor"
+            ],
+            "question": "The App of Icelanders is a phone app that warns you if the person you're romantically interested in is a _______.",
+            "category": "warns "
+        },
+        {
+            "correct_answer": "The Electric Chair",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Church",
+                "Prom Alone",
+                "Harvard"
+            ],
+            "question": "In school, Sylvester Stallone was voted by his teachers as Most Likely to Go To _______.",
+            "category": "Stallone"
+        },
+        {
+            "correct_answer": "No Name",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Orphan",
+                "Depressing",
+                "Filthy"
+            ],
+            "question": "In 1965, Hasbro made a sad-looking, crying doll dressed in tattered rags called Little Miss _______.",
+            "category": "crying "
+        },
+        {
+            "correct_answer": "dentist",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "dancer",
+                "pick pocket",
+                "criminal"
+            ],
+            "question": "The electric chair was invented by a professional _______ named Alfred Southwick.",
+            "category": "Alfred"
+        },
+        {
+            "correct_answer": "Vaseline",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Tide",
+                "spackle",
+                "Elmer's glue"
+            ],
+            "question": "Although gross, chemist Sir Robert Cheseborough claimed he ate a spoonful of his invention, _______, every day.",
+            "category": "spoonful "
+        },
+        {
+            "correct_answer": "applesauce",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "soup",
+                "the ice cream of the future",
+                "mashed potatoes"
+            ],
+            "question": "The first thing eaten in outer space was _______.",
+            "category": "space "
+        },
+        {
+            "correct_answer": "International",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Kinda",
+                "San Fran",
+                "Flamboyant"
+            ],
+            "question": "The color of the Golden Gate Bridge is officially called _______ Orange.",
+            "category": "Orange "
+        },
+        {
+            "correct_answer": "art gallery",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "igloo",
+                "ambulance",
+                "elevator"
+            ],
+            "question": "According to the International Code of Disease, the code Y92250 is the code for \"when a patient is injured in an _______.\"",
+            "category": "injured "
+        },
+        {
+            "correct_answer": "hair dryer",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "space heater",
+                "laptop",
+                "turkey inside it"
+            ],
+            "question": "Marcella Hazan is the culinary guru who pioneered the unusual technique of cooking duck with a _______.",
+            "category": "duck "
+        },
+        {
+            "correct_answer": "turn blue",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "glow",
+                "turn to feathers",
+                "shrink"
+            ],
+            "question": "The rare condition known as \"argyria\" causes people's skin to _______.",
+            "category": "skin"
+        },
+        {
+            "correct_answer": "Chemical Engineering",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Leisure Studies",
+                "Communications",
+                "18th century poetry"
+            ],
+            "question": "Prop comic Gallagher, known for smashing watermelons with a sledgehammer, earned a college degree in the field of _______.",
+            "category": "Gallagher "
+        },
+        {
+            "correct_answer": "heroin",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "sex",
+                "crying",
+                "asparagus"
+            ],
+            "question": "For a story he was reporting on in 1955, Dan Rather tried _______ for the first time.",
+            "category": "Rather"
+        },
+        {
+            "correct_answer": "cow urine",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "cat brains",
+                "heroin",
+                "human sweat"
+            ],
+            "question": "In India you can buy a cola named Gau Jal that includes the bizarre ingredient _______.",
+            "category": "India"
+        },
+        {
+            "correct_answer": "Pretzels",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Turnips",
+                "Shopping Carts",
+                "Cinder Blocks"
+            ],
+            "question": "The sports teams at Freeport High School in Illinois are oddly named after an inanimate object. The teams are called the Freeport _______.",
+            "category": "Illinois "
+        },
+        {
+            "correct_answer": "boogers",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "pizza bagels",
+                "stuff out of the trash",
+                "glue"
+            ],
+            "question": "In a study done by author Stefan Gates, 44% of adults admitted to eating _______.",
+            "category": "44%"
+        },
+        {
+            "correct_answer": "bergy bits",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "petite churls",
+                "sandy toes",
+                "lil icebergs"
+            ],
+            "question": "According to the National Oceanic and Atmospheric Association, small icebergs are officially called \"growlers.\" Medium icebergs go by the strange, two-word name \"_______.\"",
+            "category": "growlers"
+        },
+        {
+            "correct_answer": "potatoes",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "hammers",
+                "cowboy hats",
+                "ties"
+            ],
+            "question": "On January 13, 2014, U.S. Secretary of State John Kerry presented to Russian Foreign Minister Sergei Lavrov the odd gift of two very large _______.",
+            "category": "gift"
+        },
+        {
+            "correct_answer": "Tickler",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Wiper",
+                "Snacker",
+                "Pooper"
+            ],
+            "question": "During the mid to late-nineties, the town of Glastonbury was on a manhunt for the odd house intruder known as \"The _______.\"",
+            "category": "Glastonbury "
+        },
+        {
+            "correct_answer": "twins",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "teenagers",
+                "former models",
+                "soccer moms"
+            ],
+            "question": "There is a riot police unit in the Russian town of Rostov-na-Donu that is composed entirely of _______.",
+            "category": "riot "
+        },
+        {
+            "correct_answer": "dental floss",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "a paper clip",
+                "lasagna",
+                "scissors"
+            ],
+            "question": "In 2000, a mafia boss in an Italian prison escaped his cell using only _______.",
+            "category": "Italian prison"
+        },
+        {
+            "correct_answer": "Swastika",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Redskin",
+                "Murder",
+                "Apartheid"
+            ],
+            "question": "Located within the municipal boundaries of Kirkland Lake, Ontario, there lies the controversially named village of _______.",
+            "category": "village"
+        },
+        {
+            "correct_answer": "homeless person",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "reporter",
+                "baby",
+                "stripper"
+            ],
+            "question": "Peter Gloystein, a German politician, resigned in 2005 after pouring wine on a _______.",
+            "category": "wine"
+        },
+        {
+            "correct_answer": "monkeys",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "old ladies",
+                "dancers",
+                "parrots"
+            ],
+            "question": "In 2003, Morocco made the highly unusual offer to send 2,000 _______ to assist the United States' war effort in Iraq.",
+            "category": "Morocco "
+        },
+        {
+            "correct_answer": "coat hanger",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "peanut",
+                "barf bag",
+                "SkyMall magazine"
+            ],
+            "question": "During an airline flight in 1995, Dr. Angus Wallace and Dr. Tom Wong performed a successful chest drain on a passenger using a rubber tube, brandy, and a _______.",
+            "category": "drain"
+        },
+        {
+            "correct_answer": "safe deposit box",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "bookstore",
+                "Planet Hollywood",
+                "pizza restaurant"
+            ],
+            "question": "Oddly enough, Albert Einstein's eyeballs can be found in a _______ in New York City.",
+            "category": "Einstein "
+        },
+        {
+            "correct_answer": "hairy",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "no",
+                "bumpy",
+                "gigantic"
+            ],
+            "question": "Dasypygal is an adjective meaning \"having _______ buttocks.\"",
+            "category": "buttocks"
+        },
+        {
+            "correct_answer": "hipsters",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "nerds",
+                "congressmen",
+                "journalists"
+            ],
+            "question": "In a 2013 poll conducted by Public Policy Polling, 27% of voters thought _______ should be subjected to a special tax for being so annoying.",
+            "category": "annoying "
+        },
+        {
+            "correct_answer": "Cursing",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Rotten Fish",
+                "Dry Humping",
+                "Nudity"
+            ],
+            "question": "ROAD TRIP! When in Nepal, visit the villages Parsawa and Laxmipur, where you can enjoy the slightly off-putting 10 day _______ Festival.",
+            "category": "Nepal"
+        },
+        {
+            "correct_answer": "ferret",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "hot stone",
+                "fart",
+                "bird"
+            ],
+            "question": "Reg Mellor is the reigning champion of a sport that just involves keeping a _______ in your pants.",
+            "category": "pants"
+        },
+        {
+            "correct_answer": "Two Lovers",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Priest and the Nun",
+                "Pius Lover",
+                "Heaving Bosom"
+            ],
+            "question": "Before he became pope, Pope Pius II wrote an erotic novel titled <i>The Tale of the _______.</i>",
+            "category": "Pope Pius II"
+        },
+        {
+            "correct_answer": "Spanko",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Freedom",
+                "Bad Little Baby",
+                "Long Live the Buttocks!"
+            ],
+            "question": "In the late 17th century, London was victimized by a man named Whipping Tom, who would randomly spank people and scream \"_______!\"",
+            "category": "spank"
+        },
+        {
+            "correct_answer": "jazz musician",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Mussolini impersonator",
+                "fascist hand model",
+                "ventriloquist"
+            ],
+            "question": "Romano Mussolini, son of the fascist dictator Benito Mussolini, did not follow in his father's footsteps. Instead, he made his living as a _______.",
+            "category": "Mussolini"
+        },
+        {
+            "correct_answer": "lifetime supply of chocolate",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "car",
+                "boat",
+                "million dollars"
+            ],
+            "question": "The inventor of the chocolate chip cookie traded her recipe to Nestl\u00e9 in exchange for a _______.",
+            "category": "chocolate chip"
+        },
+        {
+            "correct_answer": "beekeeping",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "wooden toys",
+                "naked ladies",
+                "boy scout life"
+            ],
+            "question": "The first reporting on the Wright Brothers' flights appeared not in a newspaper or on radio, but in a small journal dedicated to the topic of _______.",
+            "category": "flight"
+        },
+        {
+            "correct_answer": "eggs",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "umbrellas",
+                "beards",
+                "bananas"
+            ],
+            "question": "Famed film director Alfred Hitchcock - the \"Master of Suspense\" - claimed, \"I'm frightened of _______, worse than frightened, they revolt me.\"",
+            "category": "Hitchcock "
+        },
+        {
+            "correct_answer": "canoe",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "wheelbarrow",
+                "dog house",
+                "ditch"
+            ],
+            "question": "A 2013 survey conducted by Playtex revealed that 8% of Canadians have had sex in a _______.",
+            "category": "Playtex"
+        },
+        {
+            "correct_answer": "carrots",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "yarn",
+                "bear penis",
+                "dynamite"
+            ],
+            "question": "The fishing company E21 makes a very peculiar fishing rod that is composed of 70% _______.",
+            "category": "fishing "
+        },
+        {
+            "correct_answer": "names",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "backrubs",
+                "constructive criticism",
+                "money"
+            ],
+            "question": "A study published in the journal <i>Anthrozoo</i> reported that cows produce 5% more milk when they are given _______.",
+            "category": "5% more milk"
+        },
+        {
+            "correct_answer": "human hair",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "frog skin",
+                "sand",
+                "feces"
+            ],
+            "question": "A science student in Nepal has created an innovative solar panel that is far cheaper to make than a traditional solar panel, because it's made with _______.",
+            "category": "solar "
+        },
+        {
+            "correct_answer": "Hobo",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Death",
+                "Regret",
+                "Absolute Silence"
+            ],
+            "question": "Since 1912, South Dakota State University's homecoming week has culminated in a celebration oddly named _______ Day.",
+            "category": "homecoming"
+        },
+        {
+            "correct_answer": "glow in the dark",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "laugh",
+                "spell words",
+                "juggle"
+            ],
+            "question": "Ruppy the beagle is a very unusual dog because he can _______.",
+            "category": "beagle "
+        },
+        {
+            "correct_answer": "horse",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "mother",
+                "car",
+                "dog"
+            ],
+            "question": "The Snickers candy bar was named after its creator's _______.",
+            "category": "Snickers"
+        },
+        {
+            "correct_answer": "vodka",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "kangaroo blood",
+                "toilet water",
+                "anti-antifreeze"
+            ],
+            "question": "After consuming antifreeze, a Maltese terrier in Australia had his life saved when vets then gave him _______ to drink.",
+            "category": "antifreeze"
+        },
+        {
+            "correct_answer": "the shower",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "plastic bottles",
+                "Argentina",
+                "their mouths"
+            ],
+            "question": "A Brazillian environmental group launched a campaign in 2009 to save the rainforest by urging people to pee in _______.",
+            "category": "rainforest"
+        },
+        {
+            "correct_answer": "La-Z-Boy chair",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "scooter",
+                "Red Flyer wagon",
+                "carousel horse"
+            ],
+            "question": "A man in Proctor, Minnesota was arrested for driving a motorized _______ while drunk.",
+            "category": "Minnesota"
+        },
+        {
+            "correct_answer": "young boy urine",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "sweat",
+                "poison",
+                "goat saliva"
+            ],
+            "question": "ROADTRIP! When on a spring break trip to Dongyang, China, be sure to try their eggs cooked in _______.",
+            "category": "eggs"
+        },
+        {
+            "correct_answer": "a reef",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "statues",
+                "football turf",
+                "confetti"
+            ],
+            "question": "George Frankel is the CEO of a Georgia-based company that will turn your dead relative's ashes into _______.",
+            "category": "ashes"
+        },
+        {
+            "correct_answer": "sit when they pee",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "wash their hands",
+                "flush twice",
+                "propose to their date"
+            ],
+            "question": "The staff at the Edible Canada restaurant posted a sign in their bathroom that instructed men to _______.",
+            "category": "instructed"
+        },
+        {
+            "correct_answer": "tree branch",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "carrot",
+                "fetus",
+                "penis"
+            ],
+            "question": "In 2009, a Russian man shocked the medical world when it was discovered he had a 5 centimeter long _______ growing in his lung.",
+            "category": "lung"
+        },
+        {
+            "correct_answer": "cockroaches",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "hot tubs",
+                "the wind",
+                "blenders"
+            ],
+            "question": "The Backyard Brains company sells a device that lets you control _______ with your mobile phone.",
+            "category": "control"
+        },
+        {
+            "correct_answer": "count each grain",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "undress",
+                "pray to God",
+                "repent his sins"
+            ],
+            "question": "According to a Chinese myth, if a vampire comes across a sack of rice, he must _______.",
+            "category": "vampire "
+        },
+        {
+            "correct_answer": "Darth Vader",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Dick Cheney",
+                "Marilyn Monroe",
+                "Captain Hook"
+            ],
+            "question": "On the northwest tower of the Washington National Cathedral, there hangs a gargoyle made to resemble _______.",
+            "category": "gargoyle "
+        },
+        {
+            "correct_answer": "unicorns",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "gnomes",
+                "The Loch Ness Monster",
+                "professors"
+            ],
+            "question": "Lake Superior State University offers a bizarre license. The license entitles you to hunt _______.",
+            "category": "hunt"
+        },
+        {
+            "correct_answer": "coconuts",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "seashells",
+                "lava",
+                "pineapples"
+            ],
+            "question": "ROAD TRIP! When on the Hawaiian island of Molokai, be sure to visit the Hoolehua post office where you're able to mail _______ without using a package.",
+            "category": "mail"
+        },
+        {
+            "correct_answer": "his poop",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "his hair",
+                "cookie dough",
+                "goats"
+            ],
+            "question": "A man from Enniskillen, Northern Ireland was sentenced to three months in prison for a fire he started while trying to turn _______ into gold.",
+            "category": "prison"
+        },
+        {
+            "correct_answer": "Mormons",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "racists",
+                "chefs",
+                "teachers"
+            ],
+            "question": "A study conducted at Tufts University by psychology grad student Nicholas Rule found that people have the ability to point out _______ in a crowd.",
+            "category": "crowd"
+        },
+        {
+            "correct_answer": "washing machine",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "salad spinner",
+                "Playboy channel",
+                "Zippo lighter"
+            ],
+            "question": "Cambridge University economist Ha-Joon Chang holds an unpopular opinion. He insists that the _______ changed the world more than the Internet.",
+            "category": "economist "
+        },
+        {
+            "correct_answer": "power saw",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "shotgun",
+                "lock of Gene Wilder's hair",
+                "curling iron"
+            ],
+            "question": "When <i>Charlie and the Chocolate Factory</i> author Roald Dahl died, he was buried with snooker cues, burgundy, chocolate, pencils, and a _______.",
+            "category": "Dahl"
+        },
+        {
+            "correct_answer": "mannequin in a wheelchair",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "dead dog",
+                "phone app",
+                "ghost"
+            ],
+            "question": "A man in Watertown, New York, claims to have been happily married for over 25 years to his wife Teagan, who strangely is a _______.",
+            "category": "happily"
+        },
+        {
+            "correct_answer": "Hippies",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Birds",
+                "sexting",
+                "Leaves"
+            ],
+            "question": "Calum Wright, while a student at UC Berkeley, started an organization named \"Students Against _______ in Trees.\"",
+            "category": "trees"
+        },
+        {
+            "correct_answer": "wizard's hat",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "speedo",
+                "name tag",
+                "snake around their shoulders"
+            ],
+            "question": "New Mexico state senator Duncan Scott successfully got a bill passed in the New Mexico senate requiring psychiatrists testifying in court to wear a _______.",
+            "category": "psychiatrists"
+        },
+        {
+            "correct_answer": "dodgeball game",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "human chess match",
+                "beauty competition",
+                "Quidditch match"
+            ],
+            "question": "UC Irvine brought 6,084 students together in 2012 to break the world record for largest _______ ever.",
+            "category": "6,084"
+        },
+        {
+            "correct_answer": "elves",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "dinosaurs",
+                "trolls",
+                "whales"
+            ],
+            "question": "Highway construction in Iceland was delayed in 2013 after advocates claimed the project would destroy the natural land where _______ live and thrive.",
+            "category": "construction"
+        },
+        {
+            "correct_answer": "maggots",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "herpes",
+                "diabetes",
+                "cavities"
+            ],
+            "question": "A Rhode Island middle school discovered that some students were crushing Smarties candy and then snorting the dust. So they sent an email to parents, warning that a side effect of this activity could be _______ in their kids' noses.",
+            "category": "middle school"
+        },
+        {
+            "correct_answer": "Unnecessary",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "B.S.",
+                "Upside Down",
+                "Loser"
+            ],
+            "question": "ROAD TRIP! When in the North Shore Mountains near Vancouver, British Columbia, be sure to climb the unusually named peak called _______ Mountain.",
+            "category": "Peak "
+        },
+        {
+            "correct_answer": "listen to music",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "eat",
+                "see an ice cream truck",
+                "cry"
+            ],
+            "question": "According to a University of Barcelona study, surprisingly, 5% of people have absolutely no emotional response when they _______.",
+            "category": "Barcelona"
+        },
+        {
+            "correct_answer": "rabbits",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Jesus",
+                "identical octuplets",
+                "aliens"
+            ],
+            "question": "In 1726, a British woman named Mary Toft convinced doctors that she had given birth to _______.",
+            "category": "birth "
+        },
+        {
+            "correct_answer": "type",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "read Braille",
+                "lift weights",
+                "set a table"
+            ],
+            "question": "Mohammed Khurshid Hussain is in the <i>Guinness Book of World Records</i> because he is able to _______ very quickly with his nose.",
+            "category": "nose"
+        },
+        {
+            "correct_answer": "meat",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "donkey",
+                "ego",
+                "weakling"
+            ],
+            "question": "<i>Patton</i> actor George C. Scott refused to accept the Oscar he won in 1971, claiming the Academy Awards is a \"two hour _______ parade.\"",
+            "category": "Patton"
+        },
+        {
+            "correct_answer": "Prada",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "sand",
+                "Build-A-Bear",
+                "tumbleweed"
+            ],
+            "question": "ROAD TRIP! When in Marfa, Texas check out the unusual art piece shaped like a _______ store built right in the middle of the desert.",
+            "category": "desert"
+        },
+        {
+            "correct_answer": "hamster wheel",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "igloo",
+                "pillow fort",
+                "Lego spaceship"
+            ],
+            "question": "Ward Shelley and Alex Schweder's art piece \"In Orbit,\" which was on display at a gallery in New York, featured two men living in a giant _______ for 10 days.",
+            "category": "orbit"
+        },
+        {
+            "correct_answer": "working",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "vodka",
+                "medicine",
+                "complaining"
+            ],
+            "question": "CELEBRITY TWEET! 4:32 PM - 22 May 2012 @lindsaylohan Tweeted: \"_______ is the best medicine.\"",
+            "category": "Lohan "
+        },
+        {
+            "correct_answer": "baby shower",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "humblebrag",
+                "power ballad",
+                "compliment"
+            ],
+            "question": "CELEBRITY TWEET! 12:44 AM - 10 Dec 2013 @SimonCowell Tweeted: \"Still not sure what a _______ is.\"",
+            "category": "Cowell "
+        },
+        {
+            "correct_answer": "fireman",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "police officer",
+                "George Washington",
+                "Harry Connick"
+            ],
+            "question": "ROAD TRIP! When in Lafayette, Louisiana, be sure to check out their somewhat erotic statue of a shirtless _______.",
+            "category": "shirtless "
+        },
+        {
+            "correct_answer": "dancing",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "doing impressions",
+                "hiccuping",
+                "stripping"
+            ],
+            "question": "In 1518, hundreds of people in Strasbourg became afflicted with a bizarre condition that rendered them unable to stop _______.",
+            "category": "France"
+        },
+        {
+            "correct_answer": "shape shifter",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "tired lizard",
+                "excited hamster",
+                "sad clown"
+            ],
+            "question": "Johnny Depp was made an honorary member of the Comanche Nation and given a descriptive Comanche name. His Comanche name, Mah-Woo-Meh, means _______.",
+            "category": "Johnny Depp"
+        },
+        {
+            "correct_answer": "large dog",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "couple kids in an overcoat",
+                "bunch of glued together gerbils",
+                "long-haired horse"
+            ],
+            "question": "In 2013 a zoo in China attempted to pass off a _______ as an African lion.",
+            "category": "lion"
+        },
+        {
+            "correct_answer": "heavy metal music",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "fingernail clipping",
+                "saying \"bro\"",
+                "eating toilet paper"
+            ],
+            "question": "A Swedish man who works as a dishwasher receives disability benefits due to his unusual addiction to _______.",
+            "category": "Swedish "
+        },
+        {
+            "correct_answer": "Dating",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Painting",
+                "Genetic Engineering",
+                "Wedding Dresses"
+            ],
+            "question": "Blair Tolman wrote a self-help book called <i>_______ for Under a Dollar: 301 Ideas</i>.",
+            "category": "self-help"
+        },
+        {
+            "correct_answer": "corn flake",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "grain of rice",
+                "snowflake",
+                "paperclip"
+            ],
+            "question": "Bill Bennett made news in 2004 when he was able to sell just a single, ordinary _______ on eBay.",
+            "category": "single"
+        },
+        {
+            "correct_answer": "kitchen sink",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "pig's head",
+                "white flag",
+                "cactus"
+            ],
+            "question": "In 2004, the CEO of Blockbuster mailed Reed Hastings, the CEO of Netflix, an odd package. He sent him a _______.",
+            "category": "Netflix"
+        },
+        {
+            "correct_answer": "play the accordion",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "juggle",
+                "launch a missle",
+                "computer program"
+            ],
+            "question": "During the 1990s, teachers in North Korea were, oddly enough, required to know how to _______.",
+            "category": "teachers"
+        },
+        {
+            "correct_answer": "geese",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "scarecrows",
+                "canaries",
+                "robots"
+            ],
+            "question": "Instead of having guard dogs, police in rural parts of China's Xinjiang Province use _______.",
+            "category": "rural parts"
+        },
+        {
+            "correct_answer": "witches",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "teenagers",
+                "dog trainers",
+                "priests"
+            ],
+            "question": "In 2013, the Romanian government, facing financial hardships, started taxing a group of people they had never taxed before. They started taxing _______.",
+            "category": "Romanian "
+        },
+        {
+            "correct_answer": "smiling",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "naked",
+                "invisible",
+                "dead"
+            ],
+            "question": "In 2013, researchers at the University of Tokyo developed the incendiary reflection, a mirror that makes it look like you're _______.",
+            "category": "mirror"
+        },
+        {
+            "correct_answer": "Book",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Brain",
+                "Boob Job",
+                "Stove"
+            ],
+            "question": "Pam Anderson wrote a book of recipes with the title <i>How to Cook Without a _______</i>.",
+            "category": "recipes"
+        },
+        {
+            "correct_answer": "woman's lap",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "uterus",
+                "dead pet",
+                "crying baby"
+            ],
+            "question": "In 2004, the Trane Corporation sold pillows in Japan that were designed to combat loneliness. They were shaped like a _______.",
+            "category": "loneliness"
+        },
+        {
+            "correct_answer": "naked",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "bald",
+                "elderly",
+                "business"
+            ],
+            "question": "Budget hotel chain Travelodge reported that between 2006 and 2007 about 95% of sleepwalkers found in their hotels were _______ men.",
+            "category": "sleepwalkers"
+        },
+        {
+            "correct_answer": "forklift",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "sledgehammer",
+                "human skull",
+                "katana"
+            ],
+            "question": "A man in Milford, Iowa, got fired from his job after he used a _______ to dislodge his Twix bar from the office vending machine.",
+            "category": "Twix"
+        },
+        {
+            "correct_answer": "Your Butt",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "your mom's basement",
+                "Boogie Out",
+                "an itchy sweater"
+            ],
+            "question": "Actor Eddie Murphy released a dance song in 1982 titled \"Boogie in _______.\"",
+            "category": "Eddie Murphy"
+        },
+        {
+            "correct_answer": "fire ants",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "thumbtacks",
+                "rotten eggs",
+                "breast milk"
+            ],
+            "question": "ROAD TRIP! When in Laza, Spain, be sure to check out the annual festival where participants pelt each other with muddy rags full of _______.",
+            "category": "rags"
+        },
+        {
+            "correct_answer": "cardboard",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "leopard skin",
+                "sporks",
+                "deer antlers"
+            ],
+            "question": "ROAD TRIP! When visiting Christchurch, New Zealand, check out the $6 million cathedral made out of _______.",
+            "category": "cathedral"
+        },
+        {
+            "correct_answer": "bear",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "polka band",
+                "suitcase",
+                "wizard"
+            ],
+            "question": "The mountain logo on a package of Toblerone chocolate contains a hidden image of a _______.",
+            "category": "Toblerone "
+        },
+        {
+            "correct_answer": "Invaders",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Shooters",
+                "Free",
+                "Spies"
+            ],
+            "question": "Coca-Cola once commissioned a video game from Atari called <i>Pepsi _______</i>.",
+            "category": "Coca-Cola "
+        },
+        {
+            "correct_answer": "bounce house",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "bagged lunch",
+                "garage door",
+                "vacuum"
+            ],
+            "question": "According to a 2010 study, one child in the U.S. was injured every 46 minutes by a _______.",
+            "category": "injured"
+        },
+        {
+            "correct_answer": "funeral home",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "strip club",
+                "truck stop",
+                "opium den"
+            ],
+            "question": "Ahlgrim Acres is a nine hole miniature golf course oddly located in an Illinois _______.",
+            "category": "miniature"
+        },
+        {
+            "correct_answer": "toilet flushing",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "man in drag",
+                "car radio",
+                "murder"
+            ],
+            "question": "<i>Psycho</i> was the first American movie to show a _______.",
+            "category": "Psycho "
+        },
+        {
+            "correct_answer": "Love",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Power",
+                "Handshake",
+                "Muscles"
+            ],
+            "question": "One of Kim Jong Il's many titles was \"Invicible and Ever-Triumphant General and Highest Incarnation of the Revolutionary Comradely _______\".",
+            "category": "Invicible "
+        },
+        {
+            "correct_answer": "wood chipper",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "bear cage",
+                "cobra pit",
+                "shooting range"
+            ],
+            "question": "Miraculously, a man in Longview, Washington survived a harrowing event in 2014 when he was stuck in a _______ for ten seconds.",
+            "category": "stuck "
+        },
+        {
+            "correct_answer": "Trace Adkins impersonator",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "bathroom attendant",
+                "ventriloquist dummy",
+                "Secret Service agent"
+            ],
+            "question": "Country singer Trace Adkins went into rehab after fighting a _______ while on a Jamaican cruise.",
+            "category": "rehab"
+        },
+        {
+            "correct_answer": "mother-in-law",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "bus driver",
+                "hat",
+                "children"
+            ],
+            "question": "Pentheraphobia is the constant fear of your _______.",
+            "category": "fear"
+        },
+        {
+            "correct_answer": "janitors",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "international bankers",
+                "lawyers",
+                "cooks"
+            ],
+            "question": "<i>The New York Times</i> was forced to issue a correction after they incorrectly identified the Nintendo characters Mario and Luigi as _______ instead of plumbers.",
+            "category": "Mario and Luigi "
+        },
+        {
+            "correct_answer": "an animatronic groundhog",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "a puppet",
+                "a guy in a groundhog costume",
+                "a carrot"
+            ],
+            "question": "PETA has asked officials in Punxsutawney, Pennsylvania to replace Punxsutawney Phil, the Groundhog Day groundhog, with _______.",
+            "category": "Punxsutawney Phil"
+        },
+        {
+            "correct_answer": "Tardar Sauce",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Muffin",
+                "Darth Meow",
+                "Gramps"
+            ],
+            "question": "The real name of the Internet's famous Grumpy Cat is _______.",
+            "category": "Grumpy"
+        },
+        {
+            "correct_answer": "chestnuts",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "IOUs",
+                "kisses",
+                "high fives"
+            ],
+            "question": "In autumn 2013, a company that owns parking lots in England temporarily allowed drivers to pay for parking not with money, but with _______.",
+            "category": "parking"
+        },
+        {
+            "correct_answer": "shin",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "drunk",
+                "sheep",
+                "cheese"
+            ],
+            "question": "Gloucestershire, England is home to the Cotswold Olimpicks, the highlight of which is the traditional _______-kicking competition.",
+            "category": "Kicking "
+        },
+        {
+            "correct_answer": "ninjas",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "knights",
+                "mimes",
+                "detectives"
+            ],
+            "question": "Moviegoers who use their cell phones at the Prince Charles Cinema in London are escorted out by people dressed as _______.",
+            "category": "Cell phones"
+        },
+        {
+            "correct_answer": "Mungo",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Elizabeth",
+                "Appleseed",
+                "Funky"
+            ],
+            "question": "Hugh Grant's full name is Hugh John _______ Grant.",
+            "category": "John"
+        },
+        {
+            "correct_answer": "Vomiting",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Chronic",
+                "Corpse",
+                "3000"
+            ],
+            "question": "Used in medical studies, a robot at the UK's Health and Safety Laboratory goes by the name _______ Larry.",
+            "category": "Safety"
+        },
+        {
+            "correct_answer": "himself",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Freddy Krueger",
+                "Dracula",
+                "Aquaman"
+            ],
+            "question": "In 1988, George H. W. Bush celebrated Halloween by dressing up as _______.",
+            "category": "Halloween"
+        },
+        {
+            "correct_answer": "duck calls",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "twerking",
+                "trampolines",
+                "Monopoly"
+            ],
+            "question": "The unusual Chick and Sophie Major memorial scholarships are awarded to high school students who are good at _______.",
+            "category": "memorial"
+        },
+        {
+            "correct_answer": "cat",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "sword",
+                "colostomy bag",
+                "shotgun"
+            ],
+            "question": "A man in Florida was arrested for calling 911 to complain that he wasn't allowed to bring his _______ into a strip club.",
+            "category": "strip"
+        },
+        {
+            "correct_answer": "Physics",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "Spanish",
+                "Life",
+                "Dancing"
+            ],
+            "question": "Chad Orzel wrote the book <i>How to Teach _______ to Your Dog</i>.",
+            "category": "Chad"
+        },
+        {
+            "correct_answer": "Graves",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Friends",
+                "Toilet Paper",
+                "Plastic"
+            ],
+            "question": "The 1995 Diagram Prize for Oddest Book Title of the Year went to the book <i>Reusing Old _______</i>.",
+            "category": "Prize"
+        },
+        {
+            "correct_answer": "outer space",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Africa",
+                "Indiana",
+                "casinos"
+            ],
+            "question": "When soccer player Stefan Schwarz signed with Sunderland in 1999, the team made sure that his contract specifically prohibited him from traveling to _______.",
+            "category": "Schwarz"
+        },
+        {
+            "correct_answer": "cowboy boots",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "shorts",
+                "a Green Bay Packers jersey",
+                "sunglasses"
+            ],
+            "question": "Evergreen Cemetery includes an odd statue of Jesus wearing _______.",
+            "category": "Cemetery"
+        },
+        {
+            "correct_answer": "Sweater",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Hair",
+                "Home!",
+                "House"
+            ],
+            "question": "Benjamin Moore paint color 787 has the strange name Grandma's _______.",
+            "category": "787"
+        },
+        {
+            "correct_answer": "driveway",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "kidneys",
+                "mailbox",
+                "husband's ashes"
+            ],
+            "question": "A Florida woman returned home one day in 2012 to discover that, strangely, her _______ had been stolen while neighbors just watched it happen.",
+            "category": "stolen"
+        },
+        {
+            "correct_answer": "Donkey Kong",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "hacky sack",
+                "photo-taking",
+                "sculpting"
+            ],
+            "question": "On December 3, 2009, and March 30, 2010, rapper Eminem Tweeted a photo proving he was surprisingly really good at _______.",
+            "category": "Eminem "
+        },
+        {
+            "correct_answer": "Poochinski",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "Dog Cop",
+                "Pig Dog",
+                "Ruff Work"
+            ],
+            "question": "In 1990, before \"Everybody Loves Raymond,\" actor Peter Boyle starred in a failed TV pilot called _______ about a cop who turns into a talking bulldog.",
+            "category": "bulldog"
+        },
+        {
+            "correct_answer": "Stubby",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "Bow Wow",
+                "Eisenhower",
+                "Slippers"
+            ],
+            "question": "The first and only dog to be given rank in the United States Armed Forces was named Sergeant _______.",
+            "category": "Sergeant "
+        },
+        {
+            "correct_answer": "a parrot",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "a corpse",
+                "4 years old",
+                "a granny"
+            ],
+            "question": "The lead singer of the heavy metal band Hatebeak is _______.",
+            "category": "heavy metal"
+        },
+        {
+            "correct_answer": "Impotent",
+            "difficulty": 0,
+            "incorrect_answers": [
+                "ugly",
+                "wee one",
+                "stupid"
+            ],
+            "question": "King Henry IV of Castile had the embarrassing nickname \"Henry the _______.\"",
+            "category": "embarrassing"
+        },
+        {
+            "correct_answer": "in a bookstore",
+            "difficulty": 1,
+            "incorrect_answers": [
+                "screaming",
+                "making love",
+                "undressing"
+            ],
+            "question": "You are experiencing the Mariko Aoki phenomenon when you have the urge to poop while _______.",
+            "category": "phenomenon "
+        },
+        {
+            "correct_answer": "poetry",
+            "difficulty": 2,
+            "incorrect_answers": [
+                "clowns",
+                "garage sales",
+                "jazz"
+            ],
+            "question": "Metrophilia is sexual arousal caused by _______.",
+            "category": "arousal "
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+	"music":{
+	"bosa":{"path":"music/BosaBosa.wav"}
+	}
+	
+	"sfx":{
+	"ping":{"path":"sfx/ping.wav"},
+	"drum":{"path":"sfx/drum.wav"}
+	}
+}

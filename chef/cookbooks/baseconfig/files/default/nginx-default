@@ -19,23 +19,25 @@ server {
 
 	root /home/ubuntu/project/web-app/static;
 
-	index index.html;
+	index default.html;
 
 	server_name _;
 
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+		try_files $uri $uri/ @nodeapp;
+		sendfile       off;
+		error_page 403 = @nodeapp;
 	}
 	
-	location /api {
-        proxy_pass http://localhost:3000/api;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
+	location @nodeapp {
+		proxy_pass http://127.0.0.1:3000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
 
 }

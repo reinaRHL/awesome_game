@@ -63,7 +63,6 @@ label{
 	margin-bottom: 0.5em;
 }    
 
-
 /*iPhone5*/
 @media screen and (min-width: 320px) {
     .nav.nav-tabs{
@@ -80,6 +79,10 @@ label{
 	}
 	h3{
 		font-size: 1.5em;
+	}
+	.modal{
+		padding: 0.5em;
+		font-size: smaller !important;
 	}
 }
 
