@@ -1,13 +1,26 @@
 (function(){
     //begin game
-    var game = new Game();
-    angular.module('inGameApp', [])
-    .controller('inGameCtrl' , ['$scope',function($scope) {
+angular.module('indexApp', [])
+  .factory('webServices', ['$http', function($http){
+    return {
+      getUser : function(){
+        return $http.get( "/api/user").success(function( resp ) {
+			return resp;
+		});
+      },
+      getGame : function(){
+        //   return $http.get("/api/game/current") need current user's game'
+      }
+    }
+  }])
+  .controller('indexCtrl' , ['webServices', '$scope',function(webServices, $scope, $timeout) {
+	  webServices.getUser().then(function(user){
+          $scope.userPlayer = new Player(user.data.username, true);
+          $scope.game = new Game();
+	  });
+}]);
 
-    // This function will be called when user clicks 'create' button inside modal.
-    // This function sends user input, title username and other player list.
-  }]);
-});
+
 class Game {
     constructor(){
         this.round = 1;
@@ -37,7 +50,7 @@ class Game {
     }
     
 }
-
+}); //end of self-contained function
 
 
 /// Sombody's template
