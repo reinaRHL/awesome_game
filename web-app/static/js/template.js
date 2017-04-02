@@ -36,9 +36,11 @@ angular.module('indexApp', [])
 
 	  });
 	  webServices.getGames().then(function (resp){
-		  $scope.games = resp.data;
+		  $scope.games = resp.data.games;
+      
+      console.log("db")
       // ARRAY OF GAMES IN LOBBY/DB ON HOLD
-      //console.log(resp.data);
+      console.log(resp.data.games);
 	  });
 
 

@@ -88,6 +88,11 @@ api.getUserFriends = function (req, res) {
 
 api.getAllGames = function (req, res) {
 	//should return all games that are on hold
+	var counter = 0
+    var nofg = 0
+    models.Game.count().then(function(c) {
+        nofg = c
+    })
 	models.Game.findAll({
 		where: {
 			state: 'hold'
@@ -95,21 +100,31 @@ api.getAllGames = function (req, res) {
 	}).then(function (games){
 		console.log(games.length);
 		var gamesArray = [];
-		for (var i = 0; i < games.length; i++) {
-			var z = {
-				id: games[i].id,
-				title: games[i].title,
-				createdBy: games[i].createdBy,
-				createdAt: games[i].createdAt,
+		games.forEach(function(game) {
+            var game_ins = models.Game.build({
+                id: game.id,
+                
+            })
+            var array = [] // put user ids in array
+            game_ins.getUsers().then(function(users) {
 
-				//TODO: update this for when users can join games -- should have list
-				// of usernames in the current game.
-				playersUsername: ['test']
-			};
-			gamesArray.push(z);
-		};
-		res.send(gamesArray);
-	});
+                users.forEach(function(user) {
+                    array.push(user.username)
+                })
+                game.dataValues.users = array
+
+
+
+                counter++ // respond the game array when every game is processed
+                if (counter === nofg) {
+                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
+                  	console.log(saved)
+                    res.end(saved);
+                }
+
+            })
+        })
+    })
 
 }; // end getAllGames
 

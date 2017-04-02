@@ -125,7 +125,7 @@
                         <tr ng-class="{'sucess': game.state === 'win', 'danger': game.state === 'lose', 'warning': game.state === 'hold'}" ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
                            <td ng-switch="game.state"><span ng-switch-when="won">Initializing</span><span ng-switch-when="lost">Loading</span><span ng-switch-when="hold">In Progess</span></td>
-                           <td>{{game.playersUsername.length}}</td>
+                           <td>{{game.users.length}}</td>
                            <td>{{game.state}}</td>
                         </tr>
                      </tbody>
@@ -153,7 +153,7 @@
                   <hr>
                   <ul class="list-group" id="gameDisplay">
                      <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in games">
-                        <span class="badge">players: {{game.playersUsername.length}}</span>
+                        <span class="badge">players: {{game.users.length}}</span>
                         <span class="gameTitle">{{game.title}}</span>
                         <p class="text-primary">Created By {{game.createdBy}} </p>
                      </a>
