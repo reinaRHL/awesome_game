@@ -123,10 +123,9 @@ module.exports = function (server) {
 						//get the users in the game and emit game title and numofusers
 						game_ins.addUser(user.id)
 						game_ins.getUsers().then(function(users){
-							io.sockets.emit('gameJoined', {title: data.title, numPlayers: users.length});
+							io.sockets.emit('gameJoined', {title: data.game, numPlayers: users.length});
 
-							var destination = '/games';
-							io.sockets.emit('redirect', destination);
+	
 						})
 						
 						
@@ -165,8 +164,9 @@ module.exports = function (server) {
 						//emit only after successfully creating game
 						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
-						var destination = '/games';
-						io.sockets.emit('redirect', destination);
+						// var destination = '/games';
+						// io.sockets.emit('redirect', destination);
+						//shouldn't use socket for redirection because socket redirects every logged in user to the page regardless of whether they joined
 					}).catch(function(err){
 						//creating new game by same user with same title.
 						console.log("Game with these values in User_Game exists already.")

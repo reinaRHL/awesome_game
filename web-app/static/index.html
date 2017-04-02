@@ -154,7 +154,7 @@
                   <ul class="list-group" id="gameDisplay">
                      <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in games">
                         <span class="badge">players: {{game.playersUsername.length}}</span>
-                        {{game.title}}
+                        <span class="gameTitle">{{game.title}}</span>
                         <p class="text-primary">Created By {{game.createdBy}} </p>
                      </a>
                   </ul>

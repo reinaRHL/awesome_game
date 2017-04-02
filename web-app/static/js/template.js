@@ -70,6 +70,13 @@ angular.module('indexApp', [])
       $('#gameInfo').modal('hide');
 
     }
+    socket.on('gameJoined', function(data){
+    
+      $('.gameTitle').filter(function(){
+          return $(this).text() == data.title;
+        }).prev().html("players: "+ data.numPlayers) 
+
+    });
 
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
