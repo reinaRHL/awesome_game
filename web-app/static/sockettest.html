@@ -71,9 +71,16 @@ angular.module('myApp.myCtrl', []).
   
   ///Client event handlers
   
+  $scope.joinGame = function()
+  {
+  	//Tell the server we would like a status update now.
+  	socket.emit("sync");
+  	$scope.doWait();
+  }
+  
   $scope.submitAnswer = function()
   {
-  	//Tell the erver our selection
+  	//Tell the server our fibb
   	socket.emit("submitAnswer",$scope.inputText);
   	$scope.doWait();
   	
@@ -81,7 +88,7 @@ angular.module('myApp.myCtrl', []).
   
   $scope.pick = function(idx)
   {
-  	//Tell the erver our selection
+  	//Tell the server our selection
   	socket.emit("pickAnswer",idx);
   	
   	$scope.doWait();
@@ -153,7 +160,7 @@ angular.module('myApp.myCtrl', []).
 	</ul>
 	</div>
 	
-	<div ng-show="!waiting && roundType=='resluts'">
+	<div ng-show="!waiting && roundType=='results'">
 	<!--todo-->
 	</div>
 	
