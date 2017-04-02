@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 app.get('/api/user', routes.api.getUser);
 app.get('/api/user/friends', routes.api.getUserFriends);
 app.get('/api/games', routes.api.getAllGames);
+app.get('/api/lobbyGame/:id', routes.api.getLobbyGame);
 app.post('/signup', routes.user.doSignup);
 app.post('/login', routes.user.doLogin);
 app.get('/login', routes.user.getLoginPage);

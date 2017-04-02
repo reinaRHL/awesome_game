@@ -64,7 +64,7 @@ api.getUserFriends = function (req, res) {
 					friendIds.push(friendId);
 
 					if (friendIds.length === friends.length){
-						
+
 						for (var i = 0; i < friendIds.length; i++) {
 							models.User.findOne({where: {id: friendIds[i]}})
 							.then(function(user){
@@ -77,7 +77,7 @@ api.getUserFriends = function (req, res) {
 									res.send(friendsArray);
 								}
 							});
-						} 
+						}
 					}
 				}
 			});
@@ -112,5 +112,19 @@ api.getAllGames = function (req, res) {
 	});
 
 }; // end getAllGames
+
+api.getLobbyGame = function (req, res){
+	models.Game.findOne({
+		where: {
+			id: req.params['id']
+		}
+	}).then(function (game_instance){
+		var game = [];
+		var z = {title: game_instance.title,
+		createdBy: game_instance.createdBy};
+		game.push(z);
+		res.send(game);
+	});
+}
 
 module.exports = api;

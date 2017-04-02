@@ -54,16 +54,16 @@
         </div>
         <div class="modal" id="gameInfo">
           <div class="modal-dialog">
-            <div class="modal-content"> 
+            <div class="modal-content">
             <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h1 class="text-center">Game Name</h1>
+                    <h1 class="text-center">{{lobbyTitle}}</h1>
                 </div>
                 <div class="modal-body">
                     <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
                     <div class="list-group">
                     <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
-                        CreatedUser
+                        {{host}}
                         <span class="label label-info pull-left">Creator</span>
                     </a>
                     <a href="#" class="list-group-item text-center clearfix">
@@ -79,8 +79,8 @@
                         <span class="label label-warning pull-left">Accepted</span>
                     </a>
                     </div>
-                <button class="btn btn-success">Join Game</button>
-                <button class="btn btn-default">Cancel Game</button>
+                <button ng-click='joinGame()' class="btn btn-success">Join Game</button>
+                <button ng-click='closeGame()' class="btn btn-default">Cancel Game</button>
                 </div>
           </div>
           </div>
@@ -152,7 +152,7 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group" id="gameDisplay">
-                     <a class="list-group-item" ng-repeat="game in games">
+                     <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in games">
                         <span class="badge">players: {{game.playersUsername.length}}</span>
                         {{game.title}}
                         <p class="text-primary">Created By {{game.createdBy}} </p>
@@ -168,29 +168,29 @@
                     <div class="btn-group btn-block">
                         <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends Online <span class="caret"></span></button>
                         <ul class="dropdown-menu" id="friendsDropdown">
-                            
-                        </ul>  
+
+                        </ul>
                     </div>
-                    <div class="panel-body msg_container_base" id="chatDisplay">    
-                    </div>     
+                    <div class="panel-body msg_container_base" id="chatDisplay">
+                    </div>
                     <div class="input-group" id = "chatBox">
                         <input id="btn-input" type="text" class="form-control  chat_input" placeholder="Write your message here...">
                         <span class="input-group-btn">
                         <button class="btn btn-primary " id="btn-chat">Send</button>
                         </span>
-                    </div> 
+                    </div>
                 </div>
                </div>
                <!-- /.row -->
             </div>
          </div>
       </div>
-      <script src="/socket.io/socket.io.js"></script> 
+      <script src="/socket.io/socket.io.js"></script>
       <script src="js/template.js"></script>
       <script src="js/chat.js"></script>
       <script src="js/share.js"></script>
       <script src="js/logout.js"></script>
-      
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
       <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
