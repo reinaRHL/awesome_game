@@ -62,21 +62,18 @@ api.getAllGames = function (req, res) {
 			state: 'hold'
 		}
 	}).then(function (games){
-		console.log(games.length);
-		var gamesArray = [];
-		for (var i = 0; i < games.length; i++) {
-			var z = {
-				id: games[i].id,
-				title: games[i].title,
-				createdBy: games[i].createdBy,
-				createdAt: games[i].createdAt,
+		var gameArray = games.map(function (game) {
+			return {
+				id: game.id,
+				title: game.title,
+				createdBy: game.createdBy,
+				createdAt: game.createdAt,
 
 				//TODO: update this for when users can join games -- should have list
 				// of usernames in the current game.
 				playersUsername: ['test']
 			};
-			gamesArray.push(z);
-		};
+		});
 		res.send(gamesArray);
 	});
 };
