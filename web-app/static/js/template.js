@@ -48,6 +48,7 @@ angular.module('indexApp', [])
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
+      document.location.href="/games";
     };
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
@@ -66,6 +67,7 @@ angular.module('indexApp', [])
     $scope.joinGame = function (){
       //TODO: need logic here => add user to game, redirect...
       socket.emit('joinGame', {game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1]});
+      document.location.href="/games";
       console.log('join the game');
       console.log(this)
     }
