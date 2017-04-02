@@ -3,7 +3,8 @@ var socket = io.connect();
 
 socket.on('redirect', function(dest){
   console.log(dest);
-  //window.location.href = dest;
+  // after a host creates a game they will be 'forced/pushed' into their newly created game
+  window.location.href = dest;
 });
 angular.module('indexApp', [])
   .factory('webServices', ['$http', function($http){
