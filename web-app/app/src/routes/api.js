@@ -133,12 +133,31 @@ api.getLobbyGame = function (req, res){
 		where: {
 			id: req.params['id']
 		}
-	}).then(function (game_instance){
-		var game = [];
-		var z = {title: game_instance.title,
-		createdBy: game_instance.createdBy};
-		game.push(z);
-		res.send(game);
+	}).then(function (game){
+		
+		var game_ins = models.Game.build({
+                id: game.id,
+                
+            })
+            var userArray = [] // put user ids in array
+            game_ins.getUsers().then(function(users) {
+
+                users.forEach(function(user) {
+                	//put players other than creator in array
+                	if(user.username != game.createdBy){
+                		userArray.push(user.username)
+                	}
+                    
+                })
+                game.dataValues.users = userArray
+                
+				console.log(JSON.stringify(game) + "game")
+				res.send(JSON.stringify(game));
+
+
+
+            })
+		
 	});
 }
 

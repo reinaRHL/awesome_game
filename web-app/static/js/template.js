@@ -55,8 +55,10 @@ angular.module('indexApp', [])
       webServices.getLobbyGame(game_id).then(function(resp){
 // need a few more fields to template the # of users in the
 // game, but this is the gist of it
-        $scope.host = resp.data[0].createdBy;
-        $scope.lobbyTitle = resp.data[0].title;
+        console.log(resp.data)
+        $scope.host = resp.data.createdBy;
+        $scope.lobbyTitle = resp.data.title;
+        $scope.users = resp.data.users
       })
 
     };
