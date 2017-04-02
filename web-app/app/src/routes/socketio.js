@@ -96,6 +96,45 @@ module.exports = function (server) {
 
 		})
 
+		socket.on('joinGame', function (data) {
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			models.Session.findOne({
+				where: {
+					key: seshKey
+				}
+			}).then(function (session) {
+				models.User.findOne({
+					where: {
+						id: session.user_id
+					}
+				}).then(function(user) {
+					models.Game.findOne({
+						where: {
+							title: data.game
+						}
+					}).then(function(game){
+						var game_ins = models.Game.build({
+								id: game.id,
+                                title: data.game,
+
+                            })
+						// console.log(game_ins)
+						// console.log("game_ins")
+						//get the users in the game and emit game title and numofusers
+						game_ins.addUser(user.id)
+						game_ins.getUsers().then(function(users){
+							io.sockets.emit('gameJoined', {title: data.title, numPlayers: users.length});
+
+							var destination = '/games';
+							io.sockets.emit('redirect', destination);
+						})
+						
+						
+					})
+				});
+			});
+		});
+
 
 
 		// Gets called when user clicks 'create' button inside modal.

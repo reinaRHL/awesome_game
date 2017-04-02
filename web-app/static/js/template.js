@@ -61,13 +61,16 @@ angular.module('indexApp', [])
 
     $scope.joinGame = function (){
       //TODO: need logic here => add user to game, redirect...
+      socket.emit('joinGame', {game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1]});
       console.log('join the game');
+      console.log(this)
     }
 
     $scope.closeGame = function(){
       $('#gameInfo').modal('hide');
 
     }
+
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
       $('#gameDisplay').append("<button class=\"list-group-item\"><span class=\"badge\">players: "
