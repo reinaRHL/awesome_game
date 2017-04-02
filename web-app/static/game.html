@@ -53,7 +53,7 @@
                 <button class="btn btn-primary">Start Game</button>
                 <button class="btn btn-default">Cancel Game</button>
           </div>
-          <div id="inGame" class="show">
+          <div ng-app="inGameApp" ng-controller="inGameCtrl" id="inGame" class="show">
               <h1 class="text-center">Game Name</h1>
               <div class="row">
                   <div class="col-sm-12 gameInfo well">
@@ -77,9 +77,9 @@
           </div>
       </div>
       
-      <script src="js/template.js"></script>
-      <script src="js/chat.js"></script>
-      <script src="js/share.js"></script>
+      <script src="js/moment.js"></script>
+      <script src="js/playerObj.js"></script>
+      <script src="js/gameCtrl.js"></script>
       <script src="js/logout.js"></script>
       <script src="/socket.io/socket.io.js"></script> 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>

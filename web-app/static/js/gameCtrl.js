@@ -1,18 +1,39 @@
 (function(){
     //begin game
     var game = new Game();
+    angular.module('inGameApp', [])
+    .controller('inGameCtrl' , ['$scope',function($scope) {
+
+    // This function will be called when user clicks 'create' button inside modal.
+    // This function sends user input, title username and other player list.
+  }]);
 });
 class Game {
     constructor(){
         this.round = 1;
-        this.roundEnds;
-        this.id;
+        this.roundEnds = moment().add(1, 'minute'); //time when the round will be over
+        this.id = 1;
         this.players = [];
-        this.questions = [];
     }
     newRound(){
         //update ui begin a new round
-
+	var gameQuestions = 
+	{
+		'roundNumber':1,
+		'endTime': 1491092481792,
+		'question' :
+			{
+				"correct_answer": "Red Lion",
+				"difficulty": 1,
+				"incorrect_answers": [
+					"Royal Oak",
+					"White Hart",
+					"King&#039;s Head"
+				],
+				"question": "According to the BBPA, what is the most common pub name in the UK?",
+				"category": "General Knowledge"
+			}
+	}
     }
     
 }
