@@ -130,4 +130,18 @@ api.getLobbyGame = function (req, res){
 	});
 }
 
+api.getUserGameHistory = function (req, res) {
+	req.user.getGames().then(function (games) {
+		var gameArray = games.map(function (game) {
+			return {
+				id: game.id,
+				title: game.title,
+				createdBy: game.createdBy,
+				createdAt: game.createdAt
+			};
+		});
+		res.send(gameArray);
+	});
+};
+
 module.exports = api;
