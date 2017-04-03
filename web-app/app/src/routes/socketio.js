@@ -44,10 +44,10 @@ module.exports = function (server) {
 						if (!users.includes(socket.username)){
 							users.push(socket.username)
 						}
-						
+
 						console.log(users)
 						io.sockets.emit('getUsers',users)
-						
+
 					});
 				})
 				next();
@@ -63,7 +63,7 @@ module.exports = function (server) {
 		console.log("Connected: %s sockets connected", connections.length);
 
 		socket.on('disconnect', function (data) {
-			
+
 			connections.splice(connections.indexOf(socket),1);
 			console.log("Disconnected: %s sockets connected", connections.length);
 		});
@@ -92,11 +92,51 @@ module.exports = function (server) {
 		socket.on('logOutUser',function (data){
 			users.splice(users.indexOf(data),1 )
 			io.sockets.emit('getUsers',users)
-				
+
 
 		})
 
-		
+		socket.on('joinGame', function (data) {
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			models.Session.findOne({
+				where: {
+					key: seshKey
+				}
+			}).then(function (session) {
+				models.User.findOne({
+					where: {
+						id: session.user_id
+					}
+				}).then(function(user) {
+					models.Game.findOne({
+						where: {
+							title: data.game
+						}
+					}).then(function(game){
+						var game_ins = models.Game.build({
+								id: game.id,
+                                title: data.game,
+
+                            })
+						// console.log(game_ins)
+						// console.log("game_ins")
+						//get the users in the game and emit game title and numofusers
+						game_ins.addUser(user.id).then(function(user){
+							game_ins.getUsers().then(function(users){
+							io.sockets.emit('gameJoined', {title: data.game, numPlayers: users.length});
+							socket.broadcast.emit('gameJoined', {title: data.game, numPlayers: users.length});
+	
+						})
+						})
+						
+						
+						
+					})
+				});
+			});
+		});
+
+
 
 		// Gets called when user clicks 'create' button inside modal.
 		// To do: Need to update db as well
@@ -121,15 +161,18 @@ module.exports = function (server) {
 						state: 'hold',
 						startedAt: null,
 						progress: null
-					}).then(function(add_host_to_game){
-						add_host_to_game.addUser(user.id);
+					}).then(function(game){
+						game.addUser(user.id);
 						//emit only after successfully creating game
-						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+						io.sockets.emit('gameCreated', {gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
+						// var destination = '/games';
+						// io.sockets.emit('redirect', destination);
+						//shouldn't use socket for redirection because socket redirects every logged in user to the page regardless of whether they joined
 					}).catch(function(err){
 						//creating new game by same user with same title.
 						console.log("Game with these values in User_Game exists already.")
-						
+
 					}); // end Game Create
 				});
 			});

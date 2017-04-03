@@ -57,39 +57,77 @@ api.getUserFriends = function (req, res) {
 
 api.getAllGames = function (req, res) {
 	//should return all games that are on hold
+	var counter = 0
+    var nofg = 0
+    models.Game.count().then(function(c) {
+        nofg = c
+    })
 	models.Game.findAll({
 		where: {
 			state: 'hold'
 		}
 	}).then(function (games){
-		var gameArray = games.map(function (game) {
-			return {
-				id: game.id,
-				title: game.title,
-				createdBy: game.createdBy,
-				createdAt: game.createdAt,
+		console.log(games.length);
+		var gamesArray = [];
+		games.forEach(function(game) {
+            var game_ins = models.Game.build({
+                id: game.id,
+                
+            })
+            var array = [] // put user ids in array
+            game_ins.getUsers().then(function(users) {
 
-				//TODO: update this for when users can join games -- should have list
-				// of usernames in the current game.
-				playersUsername: ['test']
-			};
-		});
-		res.send(gamesArray);
-	});
-};
+                users.forEach(function(user) {
+                    array.push(user.username)
+                })
+                game.dataValues.users = array
 
-api.getUserGameHistory = function (req, res) {
-	req.user.getGames().then(function (games) {
-		var gameArray = games.map(function (game) {
-			return {
-				id: game.id,
-				title: game.title,
-				createdBy: game.createdBy,
-				createdAt: game.createdAt
-			};
-		});
-		res.send(gameArray);
+
+
+                counter++ // respond the game array when every game is processed
+                if (counter === nofg) {
+                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
+                  	console.log(saved)
+                    res.end(saved);
+                }
+
+            })
+        })
+    })
+
+}; // end getAllGames
+
+api.getLobbyGame = function (req, res){
+	models.Game.findOne({
+		where: {
+			id: req.params['id']
+		}
+	}).then(function (game){
+		
+		var game_ins = models.Game.build({
+                id: game.id,
+                
+            })
+            var userArray = [] // put user ids in array
+            game_ins.getUsers().then(function(users) {
+
+                users.forEach(function(user) {
+                	//put players other than creator in array
+                	if(user.username != game.createdBy){
+                		userArray.push(user.username)
+                	}
+                    
+                })
+                game.dataValues.users = userArray
+                
+				console.log(JSON.stringify(game) + "game")
+				res.send(JSON.stringify(game));
+
+
+
+            })
+		
 	});
-};
+}
 
 module.exports = api;
