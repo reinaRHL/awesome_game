@@ -161,10 +161,10 @@ module.exports = function (server) {
 						state: 'hold',
 						startedAt: null,
 						progress: null
-					}).then(function(add_host_to_game){
-						add_host_to_game.addUser(user.id);
+					}).then(function(game){
+						game.addUser(user.id);
 						//emit only after successfully creating game
-						io.sockets.emit('gameCreated', {title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+						io.sockets.emit('gameCreated', {gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
 						// var destination = '/games';
 						// io.sockets.emit('redirect', destination);

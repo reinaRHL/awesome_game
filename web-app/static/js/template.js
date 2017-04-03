@@ -1,13 +1,12 @@
 (function() {
-var socket = io.connect();
 
-socket.on('redirect', function(dest){
-  console.log(dest);
-  // after a host creates a game they will be 'forced/pushed' into their newly created game
-  window.location.href = dest;
-});
-angular.module('indexApp', [])
-  .factory('webServices', ['$http', function($http){
+var app = angular.module('indexApp', [])
+
+
+
+  var socket = io.connect();
+
+app.factory('webServices', ['$http', function($http){
     return {
       getUser : function(){
         return $http.get( "/api/user").success(function( resp ) {
@@ -26,7 +25,8 @@ angular.module('indexApp', [])
     }
     }
   }])
-  .controller('indexCtrl' , ['webServices', '$scope', function(webServices, $scope) {
+  .controller('indexCtrl' , ['webServices', '$scope','$compile', function(webServices, $scope,$compile) {
+    var $compile;
 	  webServices.getUser().then(function(user){
           $scope.username = user.data.username;
           $scope.score = user.data.score;
@@ -86,22 +86,14 @@ angular.module('indexApp', [])
 
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
-      $('#gameDisplay').append("<button class=\"list-group-item\"><span class=\"badge\">players: "
+      var button = $compile("<a id='test' class=\"list-group-item\" ng-click='gameInfo("+data.gameId+")'><span class=\"badge\">players: "
                                 + data.numPlayers
-                                + "</span>"
+                                + "</span><span class='gameTitle'>"
                                 + data.title
-                                + "<p class=\"text-primary\">Created By "
+                                + "</span><p class=\"text-primary\">Created By "
                                 + data.createdBy
-                                +  "</p></button>");
-
-      /*var button = $compile("<button ng-click='gameInfo()' class=\"list-group-item\"><span class=\"badge\">players: "
-                                + data.numPlayers
-                                + "</span>"
-                                + data.title
-                                + "<p class=\"text-primary\">Created By "
-                                + data.createdBy
-                                +  "</p></button>")($scope);
-      $('#gameDisplay').append(button);*/
+                                +  "</p></a>")($scope);
+      $('#gameDisplay').append(button);
     });
   }]);
 })();
