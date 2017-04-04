@@ -170,6 +170,7 @@ module.exports = function (server) {
 				}
 			}).then(function (game) {
 				game.update({
+								state: 'in_progress'
 								progress: 1,
 								startedAt: Date.now()
 							})
