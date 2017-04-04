@@ -1,10 +1,24 @@
 (function() {
 
 var app = angular.module('indexApp', [])
+var socket = io.connect();
+
+function getCookie(cookie, cname) {
+    var name = cname + "=";
+    var ca = cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
 
-
-  var socket = io.connect();
 
 app.factory('webServices', ['$http', function($http){
     return {
@@ -67,6 +81,11 @@ app.factory('webServices', ['$http', function($http){
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
       document.location.href="/games";
     };
+
+    $scope.cancelGame = function() {
+      socket.emit('cancelNewGame', {title: $("#inLobby > h1").text()});
+      
+    };
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
       //console.log(game_id);
@@ -93,13 +112,31 @@ app.factory('webServices', ['$http', function($http){
       $('#gameInfo').modal('hide');
 
     }
+
+    
+    socket.on('backToLobby', function(data){
+      console.log(data)
+      console.log(getCookie(document.cookie, "key"))
+    if (getCookie(document.cookie, "key") == data) {
+      document.location.href="/lobby"
+    }
+
+    });
     socket.on('gameJoined', function(data){
     
       $('.gameTitle').filter(function(){
           return $(this).text() == data.title;
         }).prev().html("players: "+ data.numPlayers) 
+      //show users names in game in real time
+      $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span>'
+        +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>')
 
     });
+    socket.on('removeGame', function(data){
+      $('.gameTitle').filter(function(){
+          return $(this).text() == data;
+        }).parent().remove()
+    })
 
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){

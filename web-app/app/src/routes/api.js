@@ -70,13 +70,9 @@ api.getAllGames = function (req, res) {
 		console.log(games.length);
 		var gamesArray = [];
 		games.forEach(function(game) {
-            var game_ins = models.Game.build({
-                id: game.id,
-                
-            })
             var array = [] // put user ids in array
-            game_ins.getUsers().then(function(users) {
-
+            game.getUsers().then(function(users) {
+            	console.log("users" + users)
                 users.forEach(function(user) {
                     array.push(user.username)
                 })
@@ -104,12 +100,8 @@ api.getLobbyGame = function (req, res){
 		}
 	}).then(function (game){
 		
-		var game_ins = models.Game.build({
-                id: game.id,
-                
-            })
             var userArray = [] // put user ids in array
-            game_ins.getUsers().then(function(users) {
+            game.getUsers().then(function(users) {
 
                 users.forEach(function(user) {
                 	//put players other than creator in array
@@ -152,10 +144,6 @@ api.getCurrentGame = function(req, res){
 		games.sort(function(a,b){
 			return b.User_Game.updatedAt - a.User_Game.updatedAt;
 		});
-		
-		console.log(games[0].id + "game id")
-		console.log(req.user)
-
 
 		res.send(games[0]);
 	})

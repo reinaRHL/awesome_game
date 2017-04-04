@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataType) {
 			associate: function (models) {
 				Game.belongsToMany(models.User, {
 					through: 'User_Game',
-					onDelete: 'NO ACTION',
+					onDelete: 'CASCADE',
 					foreignKey: 'game_id'
 				});
 			}

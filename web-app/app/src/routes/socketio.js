@@ -5,6 +5,7 @@ module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
 	var users =[]
+
 	//io user Authentication
 	function getCookie(cookie, cname) {
 		var name = cname + "=";
@@ -40,12 +41,14 @@ module.exports = function (server) {
 							id: session.user_id
 						}
 					}).then(function(user) {
+						
+
 						socket.username = user.username
 						if (!users.includes(socket.username)){
 							users.push(socket.username)
 						}
 
-						console.log(users)
+					
 						io.sockets.emit('getUsers',users)
 
 					});
@@ -59,6 +62,7 @@ module.exports = function (server) {
 	});
 
 	io.on('connection', function (socket) {
+		socket.id = Math.floor(Math.random() * 1000);
 		connections.push(socket);
 		console.log("Connected: %s sockets connected", connections.length);
 
@@ -97,6 +101,7 @@ module.exports = function (server) {
 		})
 
 		socket.on('joinGame', function (data) {
+
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
 			models.Session.findOne({
 				where: {
@@ -121,16 +126,42 @@ module.exports = function (server) {
 						// console.log(game_ins)
 						// console.log("game_ins")
 						//get the users in the game and emit game title and numofusers
-						game_ins.addUser(user.id, {updatedAt: Date.now()}).then(function(user){
+						game_ins.addUser(user.id, {updatedAt: Date.now()}).then(function(user_ins){
 							game_ins.getUsers().then(function(users){
-							io.sockets.emit('gameJoined', {title: data.game, numPlayers: users.length});
-							socket.broadcast.emit('gameJoined', {title: data.game, numPlayers: users.length});
+								io.sockets.emit('gameJoined', {user: user.username, title: data.game, numPlayers: users.length});
 							})
 						})						
 					})
 				});
 			});
 		});
+
+		socket.on('cancelNewGame', function (data) {
+			var counter = 0
+			models.Game.findOne({
+				where: {
+					title: data.title
+				}
+			}).then(function (game) {
+				game.getUsers().then(function(users){
+					users.forEach(function(user){
+						user.getSessions().then(function(session){//only redirect users in the game based on session
+							io.sockets.emit('backToLobby', session[0].dataValues.key);
+							counter++
+							if(counter == users.length){//when all users are read, delete the game from db
+								game.destroy()
+								io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+							}
+						})
+					})
+					
+				})
+				
+				
+
+			})
+
+		})
 
 
 
