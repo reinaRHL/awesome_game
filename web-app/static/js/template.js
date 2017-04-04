@@ -86,6 +86,11 @@ app.factory('webServices', ['$http', function($http){
       socket.emit('cancelNewGame', {title: $("#inLobby > h1").text()});
       
     };
+
+    $scope.startGame = function() {
+      socket.emit('cancelNewGame', {title: $("#inLobby > h1").text()});
+      
+    };
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
       //console.log(game_id);
@@ -130,7 +135,7 @@ app.factory('webServices', ['$http', function($http){
       //show users names in game in real time
       $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span>'
         +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>')
-
+      $('#startGameUsers').append('<h4 ng-repeat="user in users"><span>'+data.user+'</span><span class="label label-default pull-right">200</span></h4>')
     });
     socket.on('removeGame', function(data){
       $('.gameTitle').filter(function(){
