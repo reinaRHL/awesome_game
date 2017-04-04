@@ -18,16 +18,14 @@ function getCookie(cookie, cname) {
     return "";
   }
 
-
-
 app.factory('webServices', ['$http', function($http){
     return {
       getUser : function(){
         return $http.get( "/api/user").success(function( resp ) {
-			return resp;
-		});
+			   return resp;
+		    });
       },
-	  getGames : function(){
+	   getGames : function(){
 		  return $http.get("/api/games").success(function (resp){
 			  return resp;
 		  })
@@ -53,14 +51,10 @@ app.factory('webServices', ['$http', function($http){
           $scope.gamesPlayed = user.data.gamesPlayed;
           $scope.gamesWon = user.data.gamesWon;
           popScore($scope.score);
-
 	  });
+
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
-      
-      console.log("db")
-      // ARRAY OF GAMES IN LOBBY/DB ON HOLD
-      console.log(resp.data.games);
 	  });
 
     webServices.getThisGame().then(function(current_game){
@@ -84,16 +78,14 @@ app.factory('webServices', ['$http', function($http){
 
     $scope.cancelGame = function() {
       socket.emit('cancelNewGame', {title: $("#inLobby > h1").text()});
-      
     };
 
     $scope.startGame = function() {
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
-      
     };
+
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
-      //console.log(game_id);
       webServices.getLobbyGame(game_id).then(function(resp){
 // need a few more fields to template the # of users in the
 // game, but this is the gist of it
@@ -103,16 +95,16 @@ app.factory('webServices', ['$http', function($http){
         $scope.users = resp.data.users;
         $scope.state = resp.data.state;
 
-        console.log($scope.username);
+        // Show join/cancel button to everyone if game is not started.
+        // Show join/cancel button to creator only if game is started.
         if (resp.data.createdBy == $scope.username || resp.data.state == 'hold') {
-          $('#joinBtn').show();
-          $('#cancelBtn').show();
+          $('#joinBtn').prop("disabled", false);
+          $('#cancelBtn').prop("disabled", false);
         } else{
-            $('#joinBtn').hide();
-            $('#cancelBtn').hide();
+            $('#joinBtn').prop("disabled", true);
+            $('#cancelBtn').prop("disabled", true);
         }
       });
-
     };
 
     $scope.joinGame = function (){
