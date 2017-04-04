@@ -146,26 +146,21 @@ api.getUserGameHistory = function (req, res) {
 
 // Returns current game (= returns the most recent game that the current user joined)
 api.getCurrentGame = function(req, res){
-	models.Session.findOne({ // find current users session
-		where: {
-			key: req.cookies.key
-		}
-	}).then(function(session_instance){
-		models.User.findOne({
-			where: {
-				id: session_instance.user_id
-			}
-		})
-		.then(function (current_user){
-			current_user.getGames()
-			.then(function(games){
-				games.sort(function(a,b){
-					return b.User_Game.updatedAt - a.User_Game.updatedAt;
-				});
-				res.send(games[0]);
-			})
+	
+	req.user.getGames()
+	.then(function(games){
+		games.sort(function(a,b){
+			return b.User_Game.updatedAt - a.User_Game.updatedAt;
 		});
-	});
+		
+		console.log(games[0].id + "game id")
+		console.log(req.user)
+
+
+		res.send(games[0]);
+	})
+	
+	
 };
 
 module.exports = api;

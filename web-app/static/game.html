@@ -17,36 +17,22 @@
    <body ng-app="indexApp">
       <div ng-controller="indexCtrl">
           <!--use show and hidden classes to go between inLobby and inGame-->
-          <div id="inLobby" class="hidden well well-lg"> 
+          <div id="inLobby" class="well well-lg"> 
                 <h1 class="text-center">{{currentgame_title}}</h1>
                     <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
                     <div class="list-group">
                     <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
-                        CreatedUser
+                        <span>{{host}}</span>
                         <span class="label label-info pull-left">Creator</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
                         </span>
                     </a>
-                    <a href="#" class="list-group-item text-center clearfix">
-                        User 123
+                    <a href="#" class="list-group-item text-center clearfix" ng-repeat="user in users">
+                        <span>{{user}}</span>
                         <span class="label label-success pull-left">Accepted</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
-                        </span>
-                    </a>
-                    <a href="#" class="list-group-item text-center clearfix">
-                        UserFred
-                        <span class="label label-warning pull-left">Waiting</span>
-                        <span class="pull-right">
-                        <button class="list-group-item-text btn-danger btn btn-sm pull-right">Revoke Invite</button>
-                        </span>
-                    </a>
-                    <a href="#" class="list-group-item text-center clearfix">
-                        UserBob
-                        <span class="label label-warning pull-left">Waiting</span>
-                        <span class="pull-right">
-                        <button class="list-group-item-text btn-danger btn btn-sm pull-right">Revoke Invite</button>
                         </span>
                     </a>
                     </div>

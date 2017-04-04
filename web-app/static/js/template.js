@@ -51,7 +51,14 @@ app.factory('webServices', ['$http', function($http){
 
     webServices.getThisGame().then(function(current_game){
         $scope.currentgame_title = current_game.data.title;
-        $scope.currentgame_gameid = current_game.data.id;
+        webServices.getLobbyGame(current_game.data.id).then(function(resp){
+// need a few more fields to template the # of users in the
+// game, but this is the gist of it
+          console.log(resp.data )
+          $scope.host = resp.data.createdBy;
+          $scope.lobbyTitle = resp.data.title;
+          $scope.users = resp.data.users
+        })
     });
 
     // This function will be called when user clicks 'create' button inside modal.
