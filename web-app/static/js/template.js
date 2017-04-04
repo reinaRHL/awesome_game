@@ -88,7 +88,7 @@ app.factory('webServices', ['$http', function($http){
     };
 
     $scope.startGame = function() {
-      socket.emit('cancelNewGame', {title: $("#inLobby > h1").text()});
+      socket.emit('startGame', {title: $("#inLobby > h1").text()});
       
     };
     $scope.gameInfo = function(game_id) {

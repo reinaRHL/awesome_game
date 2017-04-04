@@ -1,4 +1,5 @@
 var models = require('../models');
+var Sequelize = require('sequelize');
 
 
 module.exports = function (server) {
@@ -156,8 +157,44 @@ module.exports = function (server) {
 					})
 					
 				})
-				
-				
+
+			})
+
+		})
+
+		socket.on('startGame', function (data) {
+			var counter = 0
+			models.Game.findOne({
+				where: {
+					title: data.title
+				}
+			}).then(function (game) {
+				game.update({
+								progress: 1,
+								startedAt: Date.now()
+							})
+
+				models.Question.find({
+				  order: [
+				    Sequelize.fn( 'RAND' ),
+				  ]
+				}).then(function(question){//todo: send questions to client
+					console.log(question.text)
+				});
+
+				// game.getUsers().then(function(users){
+				// 	users.forEach(function(user){
+				// 		user.getSessions().then(function(session){//only redirect users in the game based on session
+				// 			io.sockets.emit('backToLobby', session[0].dataValues.key);
+				// 			counter++
+				// 			if(counter == users.length){//when all users are read, delete the game from db
+				// 				game.destroy()
+				// 				io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+				// 			}
+				// 		})
+				// 	})
+					
+				// })
 
 			})
 
