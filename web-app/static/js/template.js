@@ -22,6 +22,12 @@ app.factory('webServices', ['$http', function($http){
       return $http.get('/api/lobbyGame/'+id+'').success(function (resp){
         return resp;
       })
+    },
+
+    getThisGame : function(){
+      return $http.get("/api/game/current").success(function (resp){
+        return resp;
+      })
     }
     }
   }])
@@ -43,6 +49,10 @@ app.factory('webServices', ['$http', function($http){
       console.log(resp.data.games);
 	  });
 
+    webServices.getThisGame().then(function(current_game){
+        $scope.currentgame_title = current_game.data.title;
+        $scope.currentgame_gameid = current_game.data.id;
+    });
 
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
