@@ -144,4 +144,9 @@ api.getUserGameHistory = function (req, res) {
 	});
 };
 
+// Returns current game (= returns the most recent game that the current user joined)
+api.getCurrentGame = function(req, res){
+
+};
+
 module.exports = api;
