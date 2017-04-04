@@ -72,8 +72,8 @@
                         <span class="label label-success pull-left">Accepted</span>
                     </a>
                     </div>
-                <button ng-click='joinGame()' class="btn btn-success">Join Game</button>
-                <button ng-click='closeGame()' class="btn btn-default">Cancel Game</button>
+                <button id="joinBtn" ng-click='joinGame()' class="btn btn-success">Join Game</button>
+                <button id="cancelBtn" ng-click='closeGame()' class="btn btn-default">Cancel Game</button>
                 </div>
           </div>
           </div>
@@ -117,9 +117,10 @@
                      <tbody>
                         <tr ng-class="{'sucess': game.state === 'win', 'danger': game.state === 'lose', 'warning': game.state === 'hold'}" ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
-                           <td ng-switch="game.state"><span ng-switch-when="won">Initializing</span><span ng-switch-when="lost">Loading</span><span ng-switch-when="hold">In Progess</span></td>
+                           <td></td>
                            <td>{{game.users.length}}</td>
-                           <td>{{game.state}}</td>
+                           <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
+                           
                         </tr>
                      </tbody>
                   </table>

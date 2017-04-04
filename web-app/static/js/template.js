@@ -71,7 +71,7 @@ app.factory('webServices', ['$http', function($http){
           console.log(resp.data )
           $scope.host = resp.data.createdBy;
           $scope.lobbyTitle = resp.data.title;
-          $scope.users = resp.data.users
+          $scope.users = resp.data.users;
         })
     });
 
@@ -97,11 +97,21 @@ app.factory('webServices', ['$http', function($http){
       webServices.getLobbyGame(game_id).then(function(resp){
 // need a few more fields to template the # of users in the
 // game, but this is the gist of it
-        console.log(resp.data)
+        
         $scope.host = resp.data.createdBy;
         $scope.lobbyTitle = resp.data.title;
-        $scope.users = resp.data.users
-      })
+        $scope.users = resp.data.users;
+        $scope.state = resp.data.state;
+
+        console.log($scope.username);
+        if (resp.data.createdBy == $scope.username || resp.data.state == 'hold') {
+          $('#joinBtn').show();
+          $('#cancelBtn').show();
+        } else{
+            $('#joinBtn').hide();
+            $('#cancelBtn').hide();
+        }
+      });
 
     };
 
