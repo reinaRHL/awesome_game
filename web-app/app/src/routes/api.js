@@ -62,11 +62,8 @@ api.getAllGames = function (req, res) {
     models.Game.count().then(function(c) {
         nofg = c
     })
-	models.Game.findAll({
-		where: {
-			state: 'hold'
-		}
-	}).then(function (games){
+	models.Game.findAll()
+	.then(function (games){
 		console.log(games.length);
 		var gamesArray = [];
 		games.forEach(function(game) {
