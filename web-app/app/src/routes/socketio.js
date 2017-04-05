@@ -4,10 +4,12 @@ var Sequelize = require('sequelize');
 
 module.exports = function (server) {
 	const MILLIS_PER_ROUND =15000;
+	const ROUND_COUNT=15;
 	var io = require('socket.io')(server);
 	
 	//A dictionary of active connections indexed by session key
 	var connections ={};
+	var sessionKeys ={};
 	
 	//A dicitonary of games indexed by gameID
 	var games ={};
@@ -41,6 +43,7 @@ module.exports = function (server) {
 		console.log('a user connected'+ getSocketSessionKey(socket));
 		
 		connections[skey]=socket;
+		sessionKeys[socket]=sKey;
 
 		io.on('disconnect', function(socket)
 		{
@@ -91,7 +94,7 @@ module.exports = function (server) {
 			}
 
 			var answer = data.answer;
-			submitAnswer(gameId,userId,answer);
+			submitAnswer(gameId,userId,sessionKey,answer);
 			socket.emit("wait");
 		});
 
@@ -113,7 +116,7 @@ module.exports = function (server) {
 			}
 
 			answerIndex=data.index;
-			voteAnswer(gameId,userId,answerIndex);
+			voteAnswer(gameId,userId,sessionKey,answerIndex);
 			socket.emit("wait");
 		});
 
@@ -133,24 +136,115 @@ module.exports = function (server) {
 		
 		var roundNumber=0;
 		var ofRounds=15;
+		initializeGame(gameId);
 		
 		//TODO
 		//getGameMembers.then=>getSessionForGame.then=>
 		
 		//socketList = connections.map(sessionkeys)
+
+		//TODO prepare all game data in advance=>then
 		doSubmissionRound(gameId,socketList);
 		
 	}
 
+	function initializeGame(gameId)
+	{
+		games[gameId]={}
+		games[gameId]["submissionRoundTriggered"]=false;
+		games[gameId]["voteRoundTriggered"]=false;
+		games[gameId]["resultRoundTriggered"]=false;
+
+		games[gameId]["roundNumber"]=0;
+		games[gameId]["ofRounds"]=ROUND_COUNT;
+		games[gameId]["votes"]={};
+		games[gameId]["answers"]=[];
+	}
+
+	function sessionHasAnswered (answerArray,skey)
+	{
+		for(var i=0; i<answerArray.length;i++)
+		{
+			if( answerArray[i]["sessionKey"] == skey)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function sessionHasVoted (voteDict,skey)
+	{
+		return skey in voteDict;
+	}
+
+	//PRE: Authentication and round type checked
+	function submitAnswer(gameId,userId,sessionKey,answerText)
+	{
+		var gameState = games[gameID];
+		if  ( sessionHasAnswered(gameState["answers"],sessionKey) )
+		{
+			return false;
+		}
+
+		var answer= {}
+		answer["userId"]=userId;
+		answer["sessionKey"]=sessionKey;
+		answer["answer"]=answerText;
+		gameState["answers"].push(answer);
+		return true;
+	}
+
+	//PRE: Authentication and round type checked
+	function voteAnswer(gameId,userId,sessionKey,answerIndex)
+	{
+		var gameState = games[gameID];
+		if  ( sessionHasVoted(gameState["votes"],sessionKey) )
+		{
+			return false;
+		}
+		gameState["votes"][sessionKey]=answerIndex;
+		return true;
+	}
+
 	function  doSubmissionRound(gameId,socketList)
 	{
-		for (s in socketList)
-		{
+		var gameState = games[gameID];
 
-			var data={};
-			s.emit("advanceRound","input");
+		games[gameId]["answers"]=[];
+
+		if (gameState["submissionRoundTriggered"])
+		{
+			//A timer popped but the vote round was already trigered by another condition
+			gameState["submissionRoundTriggered"] = false;
+			return;
 		}
-		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
+
+		models.Question.find({
+		order: [
+			Sequelize.fn( 'RAND' ),
+		]
+		}).then(function(result)
+		{
+			Question.getAnswers().then(function(result)
+			{
+			var data={};
+
+			result.foreach(e)
+			{
+				//TODO find real answer and set it in the game state
+				//TODO select a fake answer to put in data
+			}
+
+			data["roundType"]="input";
+			for (s in socketList)
+			{
+				s.emit("advanceRound",data);
+			}
+			setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
+			});
+		});
+		
 	}
 	
 	function  doVoteRound(gameId,socketList)
@@ -163,18 +257,31 @@ module.exports = function (server) {
 			gameState["voteRoundTriggered"] = false;
 			return;
 		}
+		var data={
+				roundType:"vote",
+			};
+			var fake = gameState["fakeAnswers"];
+			var real = gameState["realAnswer"];
+
 		for (s in socketList)
 		{
-			var data={
-				roundType:"result",
-			};
-			s.emit("advanceRound","vote");
+			s.emit("advanceRound",data);
 		}
 		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
 	}
 
 	function  doResultRound(gameId,socketList)
 	{
+		var gameState = games[gameID];
+		if (gameState["resultRoundTriggered"])
+		{
+			//A timer popped but the vote round was already trigered by another condition
+			gameState["resultRoundTriggered"] = false;
+			return;
+		}
+
+		for
+
 		for (s in socketList)
 		{
 			var data={
