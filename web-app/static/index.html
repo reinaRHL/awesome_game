@@ -115,12 +115,13 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr ng-class="{'sucess': game.state === 'in_progress', 'danger': game.state === 'done', 'warning': game.state === 'hold'}" ng-repeat="game in games">
+                        <!-- Use below incase you want to make table with different row color depending on the state-->
+                        <!-- <tr ng-class="{'info': game.state === 'done', 'success': game.state === 'in_progress', 'warning': game.state === 'hold'}"  -->
+                        <tr ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
                            <td></td>
                            <td>{{game.users.length}}</td>
                            <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
-                           
                         </tr>
                      </tbody>
                   </table>
