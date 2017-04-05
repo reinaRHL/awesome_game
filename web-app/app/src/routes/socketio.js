@@ -76,6 +76,7 @@ module.exports = function (server) {
 
 		});
 		
+		//Intercept when a user submits a lie
 		socket.on('submitAnswer', function(data)
 		{
 			var gameId=data.gameId;
@@ -98,6 +99,7 @@ module.exports = function (server) {
 			socket.emit("wait");
 		});
 
+		//Intercept when a user picks one of the answers displayed
 		socket.on('pickAnswer', function(data)
 		{
 			gameId=data.gameId;
@@ -140,7 +142,7 @@ module.exports = function (server) {
 		
 		//TODO
 		//getGameMembers.then=>getSessionForGame.then=>
-		
+
 		//socketList = connections.map(sessionkeys)
 
 		//TODO prepare all game data in advance=>then
@@ -319,6 +321,7 @@ module.exports = function (server) {
 
 		//MAP session keys to Username
 		//MAP total score and delta score from sessio nkey to usetrname
+		//in promise completion add below
 
 		var mappedDeltaScore={};
 		var mappedScore={};
