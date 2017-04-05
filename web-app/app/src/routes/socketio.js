@@ -146,6 +146,8 @@ module.exports = function (server) {
 	{
 		for (s in socketList)
 		{
+
+			var data={};
 			s.emit("advanceRound","input");
 		}
 		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
@@ -153,8 +155,19 @@ module.exports = function (server) {
 	
 	function  doVoteRound(gameId,socketList)
 	{
+		var gameState = games[gameID];
+
+		if (gameState["voteRoundTriggered"])
+		{
+			//A timer popped but the vote round was already trigered by another condition
+			gameState["voteRoundTriggered"] = false;
+			return;
+		}
 		for (s in socketList)
 		{
+			var data={
+				roundType:"result",
+			};
 			s.emit("advanceRound","vote");
 		}
 		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
@@ -164,7 +177,12 @@ module.exports = function (server) {
 	{
 		for (s in socketList)
 		{
-			s.emit("advanceRound","vote");
+			var data={
+				roundType:"result",
+				
+			};
+
+			s.emit("advanceRound","result");
 		}
 		setTimeout(doSubmissionRound, MILLIS_PER_ROUND,gameId,socketList);
 	}
