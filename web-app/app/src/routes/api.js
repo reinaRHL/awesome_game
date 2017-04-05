@@ -58,65 +58,81 @@ api.getUserFriends = function (req, res) {
 api.getAllGames = function (req, res) {
 	//should return all games that are on hold
 	var counter = 0
-    var nofg = 0
-    models.Game.count().then(function(c) {
-        nofg = c
+    
+    models.Game.count().then(function(nofg) {//show games if games are more than 0 to prevent 504
+    	if (nofg > 0){
+    		models.Game.findAll()
+			.then(function (games){
+				console.log(games.length);
+				var gamesArray = [];
+				games.forEach(function(game) {
+		            var array = [] // put user ids in array
+		            game.getUsers().then(function(users) {
+		            	console.log("users" + users)
+		                users.forEach(function(user) {
+		                    array.push(user.username)
+		                })
+		                game.dataValues.users = array
+
+
+
+		                counter++ // respond the game array when every game is processed
+		                if (counter === nofg) {
+		                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
+		                  	console.log(saved)
+		                    res.end(saved);
+		                }
+
+		            })
+		        })
+		    })
+    	} else{
+    		res.end()
+    	}
+        
     })
-	models.Game.findAll()
-	.then(function (games){
-		console.log(games.length);
-		var gamesArray = [];
-		games.forEach(function(game) {
-            var array = [] // put user ids in array
-            game.getUsers().then(function(users) {
-            	console.log("users" + users)
-                users.forEach(function(user) {
-                    array.push(user.username)
-                })
-                game.dataValues.users = array
-
-
-
-                counter++ // respond the game array when every game is processed
-                if (counter === nofg) {
-                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
-                  	console.log(saved)
-                    res.end(saved);
-                }
-
-            })
-        })
-    })
+	
 
 }; // end getAllGames
 
 api.getLobbyGame = function (req, res){
-	models.Game.findOne({
-		where: {
-			id: req.params['id']
-		}
-	}).then(function (game){
+	models.Game.count(//get lobby game if it exits to prevent 504
+		{
+			where: {
+				id: req.params['id']
+			}
+		}).then(function(nofg) {
+			if (nofg > 0){
+				models.Game.findOne({
+					where: {
+						id: req.params['id']
+					}
+				}).then(function (game){
+					
+			            var userArray = [] // put user ids in array
+			            game.getUsers().then(function(users) {
+
+			                users.forEach(function(user) {
+			                	//put players other than creator in array
+			                	if(user.username != game.createdBy){
+			                		userArray.push(user.username)
+			                	}
+			                    
+			                })
+			                game.dataValues.users = userArray
+			                
+							console.log(JSON.stringify(game) + "game")
+							res.send(JSON.stringify(game));
+
+			            })
+					
+				});
+			} else{
+				res.end()
+			}
 		
-            var userArray = [] // put user ids in array
-            game.getUsers().then(function(users) {
-
-                users.forEach(function(user) {
-                	//put players other than creator in array
-                	if(user.username != game.createdBy){
-                		userArray.push(user.username)
-                	}
-                    
-                })
-                game.dataValues.users = userArray
-                
-				console.log(JSON.stringify(game) + "game")
-				res.send(JSON.stringify(game));
-
-
-
-            })
-		
-	});
+	})
+	
 }
 
 api.getUserGameHistory = function (req, res) {
