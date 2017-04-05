@@ -138,15 +138,29 @@ app.factory('webServices', ['$http', function($http){
           return $(this).text() == data.title;
         }).prev().html("players: "+ data.numPlayers) 
       //show users names in game in real time
-      $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span>'
+      $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span id= "userInGame">'
         +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>')
-      $('#startGameUsers').append('<h4 ng-repeat="user in users"><span>'+data.user+'</span><span class="label label-default pull-right">200</span></h4>')
+      $('#startGameUsers').append('<h4 ng-repeat="user in users"><span id="userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>')
     });
     socket.on('removeGame', function(data){
       $('.gameTitle').filter(function(){
           return $(this).text() == data;
         }).parent().remove()
     })
+
+    socket.on('exitGame', function(data){
+      $('#userInGame').filter(function(){
+          return $(this).text() == data.username;
+        }).parent().remove()
+      $('#userInStartGame').filter(function(){
+          return $(this).text() == data.username;
+        }).parent().remove()
+    });
+
+    socket.on('returnLobby', function(){
+      console.log("in lobby");
+      document.location.href="/lobby";
+    });
 
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){

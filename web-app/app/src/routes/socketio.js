@@ -137,29 +137,96 @@ module.exports = function (server) {
 			});
 		});
 
-		socket.on('cancelNewGame', function (data) {
-			var counter = 0
+		socket.on('cancelNewGame', function(data){
+			var counter = 0;
+			var current_userid;
+			var current_username;
+			var usersInThisGame = [];
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			models.Session.findOne({
+				where: {
+					key: seshKey
+				}
+			}).then(function (session) {
+				models.User.findOne({
+					where: {
+						id: session.user_id
+					}
+				}).then(function(user) {
+					current_username = user.username;
+					current_userid = user.id;
+				});
+			
 			models.Game.findOne({
 				where: {
 					title: data.title
 				}
-			}).then(function (game) {
-				game.getUsers().then(function(users){
-					users.forEach(function(user){//only redirect users in the game 
-						io.sockets.emit('backToLobby', user.dataValues.username);
-						counter++
-						if(counter == users.length){//when all users are read, delete the game from db
-							game.destroy()
-							io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-						}
+			}).then(function(game){
+
+				if (current_username == game.createdBy){
+					game.getUsers().then(function(users){
+						users.forEach(function(user){
+							
+								io.sockets.emit('backToLobby', user.dataValues.username);
+								counter++;
+								if(counter == users.length){
+									game.destroy();
+									io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+								}
+						});
+
+					});
+				} else{
+					game.getUsers().then(function(users){
+						users.forEach(function(user){
+							usersInThisGame.push(user.id);
+							
+							if(usersInThisGame.length == users.length){
+								if (usersInThisGame.indexOf(current_userid) != -1){
+									usersInThisGame.splice(usersInThisGame.indexOf(current_userid), 1);
+									game.setUsers(usersInThisGame).then(function(){
+										game.getUsers().then(function(result){
+										io.sockets.emit('exitGame', { username: current_username} );
+										socket.emit('returnLobby');
+										});
+									});
+									
+								}
+								
+							}
+						})
+					});
+
+				}
+
+			});
+			});
+		});
+
+
+		// socket.on('cancelNewGame', function (data) {
+		// 	var counter = 0
+		// 	models.Game.findOne({
+		// 		where: {
+		// 			title: data.title
+		// 		}
+		// 	}).then(function (game) {
+		// 		game.getUsers().then(function(users){
+		// 			users.forEach(function(user){//only redirect users in the game 
+		// 				io.sockets.emit('backToLobby', user.dataValues.username);
+		// 				counter++
+		// 				if(counter == users.length){//when all users are read, delete the game from db
+		// 					game.destroy()
+		// 					io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+		// 				}
 						
-					})
+		// 			})
 					
-				})
+		// 		})
 
-			})
+		// 	})
 
-		})
+		// })
 
 		socket.on('startGame', function (data) {
 			var counter = 0
