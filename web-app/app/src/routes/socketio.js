@@ -159,6 +159,9 @@ module.exports = function (server) {
 		games[gameId]["ofRounds"]=ROUND_COUNT;
 		games[gameId]["votes"]={};
 		games[gameId]["answers"]=[];
+
+		games[gameId]["totalScore"]={};
+
 	}
 
 
@@ -286,16 +289,49 @@ module.exports = function (server) {
 			return;
 		}
 
-		for
+		//count votes on index
+		var acc ={};
+		for ( v in gameState["votes"] )
+		{
+			var idx = gameState["votes"][v];
+			
+			if(idx in acc)
+			{
+				acc[idx] +=1;
+			}
+			else
+			{
+				acc[idx]=1;
+			}
+		}
+
+		var al = gameState["answers"];
+
+		var deltaScore ={};
+
+		for(var i =0;i<al.length;i++)
+		{
+			var ans = al[i];
+			deltaScore[ans["sessionKey"]]=acc[i];
+		}
+
+		updateTotalScore(deltaScore);
+
+		//MAP session keys to Username
+		//MAP total score and delta score from sessio nkey to usetrname
+
+		var mappedDeltaScore={};
+		var mappedScore={};
 
 		for (s in socketList)
 		{
 			var data={
 				roundType:"result",
-				
+				deltaScore:mappedDeltaScore,
+				totalScore:mappedScore
 			};
 
-			s.emit("advanceRound","result");
+			s.emit("advanceRound",data);
 		}
 		setTimeout(doSubmissionRound, MILLIS_PER_ROUND,gameId,socketList);
 	}
