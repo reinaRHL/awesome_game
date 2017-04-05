@@ -18,6 +18,8 @@ function getCookie(cookie, cname) {
     return "";
   }
 
+
+
 app.factory('webServices', ['$http', function($http){
     return {
       getUser : function(){
@@ -46,6 +48,7 @@ app.factory('webServices', ['$http', function($http){
   .controller('indexCtrl' , ['webServices', '$scope','$compile', function(webServices, $scope,$compile) {
     var $compile;
 	  webServices.getUser().then(function(user){
+          document.user=user.data.username;
           $scope.username = user.data.username;
           $scope.score = user.data.score;
           $scope.gamesPlayed = user.data.gamesPlayed;
@@ -122,9 +125,9 @@ app.factory('webServices', ['$http', function($http){
 
     
     socket.on('backToLobby', function(data){
-      console.log(data)
-      console.log(getCookie(document.cookie, "key"))
-    if (getCookie(document.cookie, "key") == data) {
+      console.log(document.user)
+      
+    if (document.user == data) {
       document.location.href="/lobby"
     }
 

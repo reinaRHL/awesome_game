@@ -115,7 +115,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr ng-class="{'sucess': game.state === 'win', 'danger': game.state === 'lose', 'warning': game.state === 'hold'}" ng-repeat="game in games">
+                        <tr ng-class="{'sucess': game.state === 'in_progress', 'danger': game.state === 'done', 'warning': game.state === 'hold'}" ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
                            <td></td>
                            <td>{{game.users.length}}</td>

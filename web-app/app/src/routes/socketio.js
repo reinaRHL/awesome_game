@@ -145,15 +145,14 @@ module.exports = function (server) {
 				}
 			}).then(function (game) {
 				game.getUsers().then(function(users){
-					users.forEach(function(user){
-						user.getSessions().then(function(session){//only redirect users in the game based on session
-							io.sockets.emit('backToLobby', session[0].dataValues.key);
-							counter++
-							if(counter == users.length){//when all users are read, delete the game from db
-								game.destroy()
-								io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-							}
-						})
+					users.forEach(function(user){//only redirect users in the game 
+						io.sockets.emit('backToLobby', user.dataValues.username);
+						counter++
+						if(counter == users.length){//when all users are read, delete the game from db
+							game.destroy()
+							io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+						}
+						
 					})
 					
 				})
@@ -170,10 +169,10 @@ module.exports = function (server) {
 				}
 			}).then(function (game) {
 				game.update({
-								state: 'in_progress',
-								progress: 1,
-								startedAt: Date.now()
-							})
+					state: 'in_progress',
+					progress: 1,
+					startedAt: Date.now()
+				})
 
 				models.Question.find({
 				  order: [
