@@ -96,15 +96,6 @@ app.factory('webServices', ['$http', function($http){
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
     };
 
-    $scope.showQuestion = function(question_id){
-       webServices.getThisQuestion(12).then(function (resp){
-        $scope.question = resp.data.text;
-        $scope.difficulty = resp.data.difficulty;
-        $scope.correctAnswer = resp.data.correctAnswer;
-        $scope.falseAnswer = resp.data.falseAnswer;
-    });
-    };
-
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
       webServices.getLobbyGame(game_id).then(function(resp){
