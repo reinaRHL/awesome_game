@@ -47,6 +47,8 @@ module.exports = function (server) {
 			console.log('a user connected'+userId +" "+skey);
 		});
 
+		
+		//Client event handlers
 		socket.on('startGame', function(data)
 		{
 			if(!userIsInGame(userId,gameId))
@@ -90,7 +92,7 @@ module.exports = function (server) {
 
 			var answer = data.answer;
 			submitAnswer(gameId,userId,answer);
-
+			socket.emit("wait");
 		});
 
 		socket.on('pickAnswer', function(data)
@@ -112,13 +114,13 @@ module.exports = function (server) {
 
 			answerIndex=data.index;
 			voteAnswer(gameId,userId,answerIndex);
-			socket.emit("ok");
+			socket.emit("wait");
 		});
 
 		socket.on('sync', function(data)
 		{
 			var gameId = data.gameId;
-			//voluntarily update game state
+			//TODO voluntarily update game state
 		});
 
 	});
