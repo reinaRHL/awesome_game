@@ -161,6 +161,8 @@ module.exports = function (server) {
 		games[gameId]["answers"]=[];
 	}
 
+
+	//Functions to check against duplication
 	function sessionHasAnswered (answerArray,skey)
 	{
 		for(var i=0; i<answerArray.length;i++)
@@ -177,6 +179,9 @@ module.exports = function (server) {
 	{
 		return skey in voteDict;
 	}
+
+	
+	//Functions that handle user actions after they've been authenticated
 
 	//PRE: Authentication and round type checked
 	function submitAnswer(gameId,userId,sessionKey,answerText)
@@ -207,6 +212,7 @@ module.exports = function (server) {
 		return true;
 	}
 
+//Functions dtat do main game loop
 	function  doSubmissionRound(gameId,socketList)
 	{
 		var gameState = games[gameID];
