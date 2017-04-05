@@ -3,6 +3,7 @@
 var app = angular.module('indexApp', [])
 var socket = io.connect();
 
+
 function getCookie(cookie, cname) {
     var name = cname + "=";
     var ca = cookie.split(';');
@@ -38,6 +39,12 @@ app.factory('webServices', ['$http', function($http){
       })
     },
 
+    getThisQuestion : function(id){
+      return $http.get('/api/questions/'+id).success(function (resp){
+        return resp;
+      })
+    },
+
     getThisGame : function(){
       return $http.get("/api/game/current").success(function (resp){
         return resp;
@@ -59,6 +66,8 @@ app.factory('webServices', ['$http', function($http){
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
 	  });
+
+   
 
     webServices.getThisGame().then(function(current_game){
         $scope.currentgame_title = current_game.data.title;
@@ -85,6 +94,15 @@ app.factory('webServices', ['$http', function($http){
 
     $scope.startGame = function() {
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
+    };
+
+    $scope.showQuestion = function(question_id){
+       webServices.getThisQuestion(12).then(function (resp){
+        $scope.question = resp.data.text;
+        $scope.difficulty = resp.data.difficulty;
+        $scope.correctAnswer = resp.data.correctAnswer;
+        $scope.falseAnswer = resp.data.falseAnswer;
+    });
     };
 
     $scope.gameInfo = function(game_id) {
@@ -131,6 +149,23 @@ app.factory('webServices', ['$http', function($http){
       document.location.href="/lobby"
     }
 
+    });
+    
+    webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
+        $scope.question = resp.data.text;
+        $scope.difficulty = resp.data.difficulty;
+        $scope.correctAnswer = resp.data.correctAnswer;
+        $scope.falseAnswer = resp.data.falseAnswer;
+    });
+
+    socket.on('sendQuestions', function(data){
+      if (document.user == data.user) {
+        $("#question").text(data.question.question.question) 
+      
+        localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+
+      }
+      
     });
     socket.on('gameJoined', function(data){
     

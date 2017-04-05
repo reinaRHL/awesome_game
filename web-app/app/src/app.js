@@ -26,6 +26,7 @@ app.get('/api/user', authentication.isAuthenticated, routes.api.getUser);
 app.get('/api/user/friends', authentication.isAuthenticated, routes.api.getUserFriends);
 app.get('/api/user/history', authentication.isAuthenticated, routes.api.getUserGameHistory);
 app.get('/api/lobbyGame/:id',authentication.isAuthenticated, routes.api.getLobbyGame);
+app.get('/api/questions/:id',authentication.isAuthenticated, routes.api.getThisQuestion);
 app.get('/api/games', authentication.isAuthenticated, routes.api.getAllGames);
 app.get('/api/game/current', authentication.isAuthenticated, routes.api.getCurrentGame);
 app.post('/signup', routes.user.doSignup);

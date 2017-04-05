@@ -135,6 +135,52 @@ api.getLobbyGame = function (req, res){
 	
 }
 
+api.getThisQuestion = function (req, res){ //get question and its answers by id
+	models.Question.count(
+		{
+			where: {
+				id: req.params['id']
+			}
+		}).then(function(nofq) {
+			if (nofq > 0){
+				models.Question.findOne({
+					where: {
+						id: req.params['id']
+					}
+				}).then(function (question){
+					
+			            var questionArray =  
+							{
+								difficulty: question.difficulty,
+								text: question.text,
+								correctAnswer: null,
+								falseAnswer: []
+							};
+			            question.getAnswers().then(function(answers) {
+
+			                answers.forEach(function(answer) {
+			                	
+			                	if(answer.isCorrect){
+			                		questionArray.correctAnswer = answer.text
+			                	}else{
+			                		questionArray.falseAnswer.push(answer.text)
+			                	}
+			                    
+			                })
+			  
+							res.send(questionArray);
+
+			            })
+					
+				});
+			} else{
+				res.end()
+			}
+		
+	})
+	
+}
+
 api.getUserGameHistory = function (req, res) {
 	req.user.getGames().then(function (games) {
 		var gameArray = games.map(function (game) {

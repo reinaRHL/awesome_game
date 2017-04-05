@@ -227,7 +227,10 @@ module.exports = function (server) {
 		// })
 
 		socket.on('startGame', function (data) {
-			var counter = 0
+			//update round info
+			var gameQuestions = {}
+			gameQuestions.question={}
+			gameQuestions.question.incorrect_answers=[]
 			models.Game.findOne({
 				where: {
 					title: data.title
@@ -238,28 +241,35 @@ module.exports = function (server) {
 					progress: 1,
 					startedAt: Date.now()
 				})
+				gameQuestions.round = 1
+				gameQuestions.endTime = null
+				game.getUsers().then(function(users){
+					users.forEach(function(user){//only send questions to users in the game 
+						models.Question.find({
+						  order: [
+						    Sequelize.fn( 'RAND' ),
+						  ]
+						}).then(function(question){//todo: send questions to client
+							gameQuestions.question.difficulty = question.difficulty
+							gameQuestions.question.id = question.id
+							gameQuestions.question.question = question.text
+							question.getAnswers().then(function(answers){
+								answers.forEach(function(answer){
+									if (answer.isCorrect){
+										gameQuestions.question.correct_answer = answer.text
+									} else {
+										gameQuestions.question.incorrect_answers.push(answer.text)
+									}
+								})
+								io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
+							})
+						});
 
-				models.Question.find({
-				  order: [
-				    Sequelize.fn( 'RAND' ),
-				  ]
-				}).then(function(question){//todo: send questions to client
-					console.log(question.text)
-				});
-
-				// game.getUsers().then(function(users){
-				// 	users.forEach(function(user){
-				// 		user.getSessions().then(function(session){//only redirect users in the game based on session
-				// 			io.sockets.emit('backToLobby', session[0].dataValues.key);
-				// 			counter++
-				// 			if(counter == users.length){//when all users are read, delete the game from db
-				// 				game.destroy()
-				// 				io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-				// 			}
-				// 		})
-				// 	})
+						
+						
+					})
 					
-				// })
+				})
 
 			})
 
