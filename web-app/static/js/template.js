@@ -107,14 +107,12 @@ app.factory('webServices', ['$http', function($http){
         $scope.users = resp.data.users;
         $scope.state = resp.data.state;
 
-        // Show join/cancel button to everyone if game is not started.
-        // Show join/cancel button to creator only if game is started.
+        // Show join button to everyone if game is not started.
+        // Show join button to creator only if game is started.
         if (resp.data.createdBy == $scope.username || resp.data.state == 'hold') {
           $('#joinBtn').prop("disabled", false);
-          $('#cancelBtn').prop("disabled", false);
         } else{
-            $('#joinBtn').prop("disabled", true);
-            $('#cancelBtn').prop("disabled", true);
+          $('#joinBtn').prop("disabled", true);
         }
       });
     };
@@ -136,10 +134,10 @@ app.factory('webServices', ['$http', function($http){
     socket.on('backToLobby', function(data){
       console.log(document.user)
       
-    if (document.user == data) {
-      document.location.href="/lobby"
-    }
-
+      if (document.user == data.username) {
+        alert("Game \"" + data.title + "\" is deleted!");
+        document.location.href="/lobby"
+      }
     });
     
     webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
@@ -152,12 +150,10 @@ app.factory('webServices', ['$http', function($http){
     socket.on('sendQuestions', function(data){
       if (document.user == data.user) {
         $("#question").text(data.question.question.question) 
-      
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
-
       }
-      
     });
+    
     socket.on('gameJoined', function(data){
     
       $('.gameTitle').filter(function(){
@@ -168,11 +164,12 @@ app.factory('webServices', ['$http', function($http){
         +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>')
       $('#startGameUsers').append('<h4 ng-repeat="user in users"><span id="userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>')
     });
+    
     socket.on('removeGame', function(data){
       $('.gameTitle').filter(function(){
           return $(this).text() == data;
-        }).parent().remove()
-    })
+        }).parent().remove();
+    });
 
     // When someone exits the game, update the user list (UI)
     socket.on('exitGame', function(data){

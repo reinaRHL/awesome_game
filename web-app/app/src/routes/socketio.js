@@ -166,7 +166,7 @@ module.exports = function (server) {
 				if (current_username == game.createdBy){
 					game.getUsers().then(function(users){
 						users.forEach(function(user){	
-							io.sockets.emit('backToLobby', user.dataValues.username);
+							io.sockets.emit('backToLobby', {username:user.dataValues.username, title:game.title});
 							counter++;
 							if(counter == users.length){
 								game.destroy();
