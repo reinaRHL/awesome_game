@@ -165,18 +165,16 @@ module.exports = function (server) {
 
 				if (current_username == game.createdBy){
 					game.getUsers().then(function(users){
-						users.forEach(function(user){
-							
-								io.sockets.emit('backToLobby', user.dataValues.username);
-								counter++;
-								if(counter == users.length){
-									game.destroy();
-									io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-								}
+						users.forEach(function(user){	
+							io.sockets.emit('backToLobby', user.dataValues.username);
+							counter++;
+							if(counter == users.length){
+								game.destroy();
+								io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
+							}
 						});
-
 					});
-				} else{
+				} else {
 					game.getUsers().then(function(users){
 						users.forEach(function(user){
 							usersInThisGame.push(user.id);
@@ -186,19 +184,19 @@ module.exports = function (server) {
 									usersInThisGame.splice(usersInThisGame.indexOf(current_userid), 1);
 									game.setUsers(usersInThisGame).then(function(){
 										game.getUsers().then(function(result){
+
+										// update user list inside game
 										io.sockets.emit('exitGame', { username: current_username} );
+
+										// return this user to lobby
 										socket.emit('returnLobby');
 										});
-									});
-									
+									});	
 								}
-								
 							}
 						})
 					});
-
 				}
-
 			});
 			});
 		});

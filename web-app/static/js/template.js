@@ -148,6 +148,7 @@ app.factory('webServices', ['$http', function($http){
         }).parent().remove()
     })
 
+    // When someone exits the game, update the user list (UI)
     socket.on('exitGame', function(data){
       $('#userInGame').filter(function(){
           return $(this).text() == data.username;
@@ -157,8 +158,8 @@ app.factory('webServices', ['$http', function($http){
         }).parent().remove()
     });
 
+    // When someone exits the game, redirect this user to the lobby
     socket.on('returnLobby', function(){
-      console.log("in lobby");
       document.location.href="/lobby";
     });
 
