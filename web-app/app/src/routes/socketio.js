@@ -3,12 +3,17 @@ var Sequelize = require('sequelize');
 
 
 module.exports = function (server) {
+	const MILLIS_PER_ROUND =15000;
 	var io = require('socket.io')(server);
-	var connections = [];
-	var users =[]
+	
+	//A dictionary of active connections indexed by session key
+	var connections ={};
+	
+	//A dicitonary of games indexed by gameID
+	var games ={};
 
 	//io user Authentication
-	function getCookie(cookie, cname) {
+	function extractCookie(cookie, cname) {
 		var name = cname + "=";
 		var ca = cookie.split(';');
 		for (var i = 0; i < ca.length; i++) {
@@ -23,323 +28,151 @@ module.exports = function (server) {
 		return "";
 	}
 
-	io.use(function(socket, next) {
-		var seshKey = getCookie(socket.request.headers.cookie, "key");
-		console.log("io")
-		models.Session.count({
-			where: {
-				key: seshKey
+	function getSocketSessionKey(socket)
+	{
+		return extractCookie(socket.client.request.headers.cookie,"session");
+	}
+
+	//Begin socket session
+	io.on('connection', function(socket)
+	{
+		var skey = getSocketSessionKey(socket);
+		var userId = userIdFromSessionKey(skey);
+		console.log('a user connected'+ getSocketSessionKey(socket));
+		
+		connections[skey]=socket;
+
+		io.on('disconnect', function(socket)
+		{
+			console.log('a user connected'+userId +" "+skey);
+		});
+
+		socket.on('startGame', function(data)
+		{
+			if(!userIsInGame(userId,gameId))
+			{
+				socket.emit('error',"You are not in this game");
+				return;
 			}
-		}).then(function(session) {
-			if (session === 1) {
-				models.Session.findOne({
-					where: {
-						key: seshKey
-					}
-				}).then(function(session) {
-					models.User.findOne({
-						where: {
-							id: session.user_id
-						}
-					}).then(function(user) {
-						
-
-						socket.username = user.username
-						if (!users.includes(socket.username)){
-							users.push(socket.username)
-						}
-
-					
-						io.sockets.emit('getUsers',users)
-
-					});
-				})
-				next();
-			} else {
-				// IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM LOGIN
-				next(new Error('Authentication error'));
+			if( ! startGame(data,gameId) )
+			{
+				var state = getGameState(gameId);
+				if(state == "running")
+				{
+					socket.emit('error',"Game Already running");
+				}
+				else if(state == "running")
+				{
+					socket.emit('error',"Game Already over");
+				}
+				
 			}
+			startGame(gameId);
+
 		});
-	});
-
-	io.on('connection', function (socket) {
-		socket.id = Math.floor(Math.random() * 1000);
-		connections.push(socket);
-		console.log("Connected: %s sockets connected", connections.length);
-
-		socket.on('disconnect', function (data) {
-
-			connections.splice(connections.indexOf(socket),1);
-			console.log("Disconnected: %s sockets connected", connections.length);
-		});
-
-		// send message in Chatroom
-		// need to fix this to pass the real username
-		socket.on('sendMessage', function (data) {
-		console.log(socket.request.headers.cookie + "cookie is")
-		var seshKey = getCookie(socket.request.headers.cookie, "key");
-			models.Session.findOne({
-				where: {
-					key: seshKey
-				}
-			}).then(function (session) {
-				models.User.findOne({
-					where: {
-						id: session.user_id
-					}
-				}).then(function(user) {
-					io.sockets.emit('newMessage', {msg:data, name:user.username});
-				});
-			});
-		});
-
-		//refresh onlineusers when logged out
-		socket.on('logOutUser',function (data){
-			users.splice(users.indexOf(data),1 )
-			io.sockets.emit('getUsers',users)
-
-
-		})
-
-		socket.on('joinGame', function (data) {
-
-			var seshKey = getCookie(socket.request.headers.cookie, "key");
-			models.Session.findOne({
-				where: {
-					key: seshKey
-				}
-			}).then(function (session) {
-				models.User.findOne({
-					where: {
-						id: session.user_id
-					}
-				}).then(function(user) {
-					models.Game.findOne({
-						where: {
-							title: data.game
-						}
-					}).then(function(game){
-						var game_ins = models.Game.build({
-								id: game.id,
-                                title: data.game,
-
-                            })
-						// console.log(game_ins)
-						// console.log("game_ins")
-						//get the users in the game and emit game title and numofusers
-						game_ins.addUser(user.id, {updatedAt: Date.now()}).then(function(user_ins){
-							game_ins.getUsers().then(function(users){
-								io.sockets.emit('gameJoined', {user: user.username, title: data.game, numPlayers: users.length});
-							})
-						})						
-					})
-				});
-			});
-		});
-
-		socket.on('cancelNewGame', function(data){
-			var counter = 0;
-			var current_userid;
-			var current_username;
-			var usersInThisGame = [];
-			var seshKey = getCookie(socket.request.headers.cookie, "key");
-			models.Session.findOne({
-				where: {
-					key: seshKey
-				}
-			}).then(function (session) {
-				models.User.findOne({
-					where: {
-						id: session.user_id
-					}
-				}).then(function(user) {
-					current_username = user.username;
-					current_userid = user.id;
-				});
+		
+		socket.on('submitAnswer', function(data)
+		{
+			var gameId=data.gameId;
 			
-			models.Game.findOne({
-				where: {
-					title: data.title
-				}
-			}).then(function(game){
+			//Check permissions
+			if(!userIsInGame(userId,gameId))
+			{
+				socket.emit('error',"You are not in this game");
+				return;
+			}
+			
+			if(!gameIsSubmissionRound(gameId))
+			{
+				socket.emit('error',"Prof Oak's advice: That's not the time to use that");
+				return;
+			}
 
-				if (current_username == game.createdBy){
-					game.getUsers().then(function(users){
-						users.forEach(function(user){	
-							io.sockets.emit('backToLobby', user.dataValues.username);
-							counter++;
-							if(counter == users.length){
-								game.destroy();
-								io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-							}
-						});
-					});
-				} else {
-					game.getUsers().then(function(users){
-						users.forEach(function(user){
-							usersInThisGame.push(user.id);
-							
-							if(usersInThisGame.length == users.length){
-								if (usersInThisGame.indexOf(current_userid) != -1){
-									usersInThisGame.splice(usersInThisGame.indexOf(current_userid), 1);
-									game.setUsers(usersInThisGame).then(function(){
-										game.getUsers().then(function(result){
+			var answer = data.answer;
+			submitAnswer(gameId,userId,answer);
 
-										// update user list inside game
-										io.sockets.emit('exitGame', { username: current_username} );
-
-										// return this user to lobby
-										socket.emit('returnLobby');
-										});
-									});	
-								}
-							}
-						})
-					});
-				}
-			});
-			});
 		});
 
+		socket.on('pickAnswer', function(data)
+		{
+			gameId=data.gameId;
+			
+			//Check permissions
+			if(!userIsInGame(userId,gameId))
+			{
+				socket.emit('error',"You are not in this game");
+				return;
+			}
 
-		// socket.on('cancelNewGame', function (data) {
-		// 	var counter = 0
-		// 	models.Game.findOne({
-		// 		where: {
-		// 			title: data.title
-		// 		}
-		// 	}).then(function (game) {
-		// 		game.getUsers().then(function(users){
-		// 			users.forEach(function(user){//only redirect users in the game 
-		// 				io.sockets.emit('backToLobby', user.dataValues.username);
-		// 				counter++
-		// 				if(counter == users.length){//when all users are read, delete the game from db
-		// 					game.destroy()
-		// 					io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-		// 				}
-						
-		// 			})
-					
-		// 		})
+			if(!gameIsVotingRound(gameId))
+			{
+				socket.emit('error',"Prof Oak's advice: That's not the time to use that");
+				return;
+			}
 
-		// 	})
-
-		// })
-
-		socket.on('startGame', function (data) {
-			//update round info
-			var gameQuestions = {}
-			gameQuestions.question={}
-			gameQuestions.question.incorrect_answers=[]
-			models.Game.findOne({
-				where: {
-					title: data.title
-				}
-			}).then(function (game) {
-				game.update({
-					state: 'in_progress',
-					progress: 1,
-					startedAt: Date.now()
-				})
-				gameQuestions.round = 1
-				gameQuestions.endTime = null
-				game.getUsers().then(function(users){
-					users.forEach(function(user){//only send questions to users in the game 
-						models.Question.find({
-						  order: [
-						    Sequelize.fn( 'RAND' ),
-						  ]
-						}).then(function(question){//todo: send questions to client
-							gameQuestions.question.difficulty = question.difficulty
-							gameQuestions.question.id = question.id
-							gameQuestions.question.question = question.text
-							question.getAnswers().then(function(answers){
-								answers.forEach(function(answer){
-									if (answer.isCorrect){
-										gameQuestions.question.correct_answer = answer.text
-									} else {
-										gameQuestions.question.incorrect_answers.push(answer.text)
-									}
-								})
-								io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
-							})
-						});
-
-						
-						
-					})
-					
-				})
-
-			})
-
-		})
-
-
-
-		// Gets called when user clicks 'create' button inside modal.
-		// To do: Need to update db as well
-		socket.on('createNewGame', function (data) {
-			var seshKey = getCookie(socket.request.headers.cookie, "key");
-			models.Session.findOne({
-				where: {
-					key: seshKey
-				}
-			}).then(function (session) {
-				models.User.findOne({
-					where: {
-						id: session.user_id
-					}
-				}).then(function(user) {
-
-					// Store the newly created game in the DB
-					models.Game.create({
-						title: data.title,
-						createdBy: user.username,
-						//createdAt auto generated
-						state: 'hold',
-						startedAt: null,
-						progress: null
-					}).then(function(game){
-						game.addUser(user.id);
-						//emit only after successfully creating game
-						io.sockets.emit('gameCreated', {gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
-
-						// var destination = '/games';
-						// io.sockets.emit('redirect', destination);
-						//shouldn't use socket for redirection because socket redirects every logged in user to the page regardless of whether they joined
-					}).catch(function(err){
-						//creating new game by same user with same title.
-						console.log("Game with these values in User_Game exists already.")
-
-					}); // end Game Create
-				});
-			});
+			answerIndex=data.index;
+			voteAnswer(gameId,userId,answerIndex);
+			socket.emit("ok");
 		});
-// TO DO IS START A CONNECTION FOR A GAME:
-// ROUND INFO SHOULD BE SENT TO USERS
-// api.newRound = function (req, res){
-// 	//update round info
-// 	var gameQuestions = 
-// 	{
-// 		'roundNumber':1,
-//		'endTime': 1491092481792,
-// 		'question' :
-// 			{
-// 				"correct_answer": "Red Lion",
-// 				"difficulty": 1,
-// 				"incorrect_answers": [
-// 					"Royal Oak",
-// 					"White Hart",
-// 					"King&#039;s Head"
-// 				],
-// 				"question": "According to the BBPA, what is the most common pub name in the UK?",
-// 				"category": "General Knowledge"
-// 			}
-// 	}
-// }
 
-
+		socket.on('sync', function(data)
+		{
+			var gameId = data.gameId;
+			//voluntarily update game state
+		});
 
 	});
+
+
+
+	function startGame(gameId)
+	{
+		//TODO update db
+		
+		var roundNumber=0;
+		var ofRounds=15;
+		
+		//TODO
+		//getGameMembers.then=>getSessionForGame.then=>
+		
+		//socketList = connections.map(sessionkeys)
+		doSubmissionRound(gameId,socketList);
+		
+	}
+
+	function  doSubmissionRound(gameId,socketList)
+	{
+		for (s in socketList)
+		{
+			s.emit("advanceRound","input");
+		}
+		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
+	}
+	
+	function  doVoteRound(gameId,socketList)
+	{
+		for (s in socketList)
+		{
+			s.emit("advanceRound","vote");
+		}
+		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
+	}
+
+	function  doResultRound(gameId,socketList)
+	{
+		for (s in socketList)
+		{
+			s.emit("advanceRound","vote");
+		}
+		setTimeout(doSubmissionRound, MILLIS_PER_ROUND,gameId,socketList);
+	}
+
+	
+
+	
+
+
+	
+
+	
 };
