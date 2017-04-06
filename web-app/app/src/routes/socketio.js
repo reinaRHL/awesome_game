@@ -62,7 +62,6 @@ module.exports = function (server) {
 			}
 		});
 	});
-
 	io.on('connection', function (socket) {
 		socket.id = Math.floor(Math.random() * 1000);
 		connections.push(socket);
@@ -282,7 +281,10 @@ module.exports = function (server) {
 		socket.on('startGame', function (data) {
 			sendQuestion(1, data);
 		});
-
+		socket.on('sendAnswer', function(data){
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			console.log(data);
+		});
 
 
 		// Gets called when user clicks 'create' button inside modal.

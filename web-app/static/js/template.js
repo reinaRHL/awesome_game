@@ -1,7 +1,6 @@
 var app = angular.module('indexApp', [])
 var socket = io.connect();
 
-
 function getCookie(cookie, cname) {
     var name = cname + "=";
     var ca = cookie.split(';');
@@ -93,7 +92,17 @@ app.factory('webServices', ['$http', function($http){
     $scope.startGame = function() {
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
     };
-
+    $scope.sendAnswer = function() {
+      answer = $("#inputAnswer").val();
+      if(roundQuestion.question.correct_answer === answer){
+          console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+      }
+      else{
+          socket.emit('sendAnswer',answer);
+          $("#inputAnswer").attr('disabled', 'disabled');
+          $("#inputAnswerButton").addClass("disabled");
+      }
+    }
     $scope.gameInfo = function(game_id) {
       $('#gameInfo').modal();
       webServices.getLobbyGame(game_id).then(function(resp){
@@ -150,6 +159,9 @@ app.factory('webServices', ['$http', function($http){
         $("#question").text(data.question.question.question);
         timerUpdate(data.question.endTime);
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+        roundQuestion = data.question;
+        $("#inputAnswer").removeAttr("disabled");
+        $("#inputAnswerButton").removeClass("disabled");
       }
     });
     

@@ -1,3 +1,4 @@
+var roundQuestion;
 (function(){
     //begin game
     var game = new Game();
@@ -24,6 +25,16 @@ function timerUpdate(endTime) {
             requestAnimationFrame(timer);
         }
     })();
+}
+
+function submitAnswer(){
+    answer = $("#inputAnswer").val();
+    if(roundQuestion.question.correct_answer === answer){
+        console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+    }
+    else{
+        sockets.emit('sendAnswer',answer);
+    }
 
 }
 $(document).ready(function() {
