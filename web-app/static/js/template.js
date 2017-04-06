@@ -147,7 +147,8 @@ app.factory('webServices', ['$http', function($http){
 
     socket.on('sendQuestions', function(data){
       if (document.user == data.user) {
-        $("#question").text(data.question.question.question) 
+        $("#question").text(data.question.question.question);
+        timerUpdate(data.question.endTime);
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
       }
     });

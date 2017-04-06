@@ -16,7 +16,15 @@ class Game {
     }
     
 }
+function timerUpdate(endTime) {
+    var now = moment();
+    var end = moment(endTime);
+    (function timer(){
+        $("#countdown").text(countdown(end).toString());
+        requestAnimationFrame(timer);
+    })();
 
+}
 $(document).ready(function() {
     // This will fire when document is ready:
     $(window).resize(function() {
@@ -32,3 +40,4 @@ $(document).ready(function() {
         }
     }).resize(); // This will simulate a resize to trigger the initial run.
 });
+

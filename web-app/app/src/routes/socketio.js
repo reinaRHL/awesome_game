@@ -1,6 +1,7 @@
 var models = require('../models');
 var Sequelize = require('sequelize');
-
+var moment = require('moment');
+moment().format();
 
 module.exports = function (server) {
 	var io = require('socket.io')(server);
@@ -241,8 +242,8 @@ module.exports = function (server) {
 					progress: 1,
 					startedAt: Date.now()
 				})
-				gameQuestions.round = 1
-				gameQuestions.endTime = null
+				gameQuestions.round = 1;
+				gameQuestions.endTime = moment().add(1, 'minutes').toString();
 				game.getUsers().then(function(users){
 					users.forEach(function(user){//only send questions to users in the game 
 						models.Question.find({
