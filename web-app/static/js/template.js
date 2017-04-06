@@ -19,6 +19,12 @@ function getCookie(cookie, cname) {
     return "";
   }
 
+  function random(array) { //randomize answers
+      return array.sort(function() {
+        return .5 - Math.random();
+      });
+    }
+
 
 
 app.factory('webServices', ['$http', function($http){
@@ -86,6 +92,10 @@ app.factory('webServices', ['$http', function($http){
         $scope.difficulty = resp.data.difficulty;
         $scope.correctAnswer = resp.data.correctAnswer;
         $scope.falseAnswer = resp.data.falseAnswer;
+        var answerArray = resp.data.falseAnswer
+        answerArray.push(resp.data.correctAnswer)
+        $scope.allAnswers = random(answerArray)
+        console.log($scope.allAnswers)
     });
 
 
@@ -138,6 +148,7 @@ app.factory('webServices', ['$http', function($http){
 
     }
 
+
     socket.on('timer', function (data) {  
         $('#countdown').html(data.countdown);
     });
@@ -155,8 +166,14 @@ app.factory('webServices', ['$http', function($http){
 
     socket.on('sendQuestions', function(data){
       if (document.user == data.user) {
-        $("#question").text(data.question.question.question);
-        // timerUpdate(data.question.endTime);
+        var html = ''
+        var answerArray = data.question.question.incorrect_answers
+        answerArray.push(data.question.question.correct_answer)
+        $("#question").text(data.question.question.question);//show question in real time
+        random(answerArray).forEach(function(element){
+          html+='<h4>'+element+'</h4>'
+        })
+        $("#answers").html(html)//show answers in real time
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
       }
     });

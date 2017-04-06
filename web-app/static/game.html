@@ -62,6 +62,9 @@
                   </div>
                   <div id="divGameplay"class="col-sm-12">
                       <h2 id="question">{{question}}</h2>
+                      <div id="answers">
+                        <h4  ng-repeat="answer in allAnswers">{{answer}}</h4>
+                      </div>
                   </div>
                   <div id="inputAnswerDiv" class="input-group">
                     <input id="inputAnswer"type="text" class="form-control" maxlength="50" placeholder="Enter Answer">

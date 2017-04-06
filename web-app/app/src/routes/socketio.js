@@ -276,7 +276,7 @@ module.exports = function (server) {
 											gameQuestions.question.incorrect_answers.push(answer.text)
 										}
 									})
-									if(round <=10){
+									if(round <=10){ // send questions if round is less than 10
 										io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
 
 									} else{
