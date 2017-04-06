@@ -159,10 +159,15 @@ app.factory('webServices', ['$http', function($http){
       $('.gameTitle').filter(function(){
           return $(this).text() == data.title;
         }).prev().html("players: "+ data.numPlayers) 
+
       //show users names in game in real time
-      $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span id= "userInGame">'
-        +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>')
-      $('#startGameUsers').append('<h4 ng-repeat="user in users"><span id="userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>')
+      // If statement will prevent the host appearing on the accepted user list.
+      if (($scope.host != data.user)) {
+        $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span class= "userInGame">'
+        +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>');
+        
+        $('#startGameUsers').append('<h4 ng-repeat="user in users"><span class= "userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>');
+      }
     });
     
     socket.on('removeGame', function(data){
@@ -173,10 +178,10 @@ app.factory('webServices', ['$http', function($http){
 
     // When someone exits the game, update the user list (UI)
     socket.on('exitGame', function(data){
-      $('#userInGame').filter(function(){
+      $('.userInGame').filter(function(){
           return $(this).text() == data.username;
         }).parent().remove()
-      $('#userInStartGame').filter(function(){
+      $('.userInStartGame').filter(function(){
           return $(this).text() == data.username;
         }).parent().remove()
     });
