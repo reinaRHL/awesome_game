@@ -253,6 +253,7 @@ module.exports = function (server) {
 			gameState["submissionRoundTriggered"] = false;
 			return;
 		}
+		gameState["submissionRoundTriggered"]=true;
 
 		models.Question.find({
 		order: [
@@ -291,6 +292,7 @@ module.exports = function (server) {
 			gameState["voteRoundTriggered"] = false;
 			return;
 		}
+		gameState["voteRoundTriggered"] = true;
 			var fake = gameState["fakeAnswers"];
 			var real = gameState["realAnswer"];
 
@@ -338,6 +340,7 @@ module.exports = function (server) {
 			gameState["resultRoundTriggered"] = false;
 			return;
 		}
+		gameState["resultRoundTriggered"] = true;
 
 		//count votes on index
 		var acc ={};
@@ -367,7 +370,7 @@ module.exports = function (server) {
 
 		updateTotalScore(deltaScore);
 
-		//MAP session keys to Username
+		//MAP session keys to Username here because we can't cache them
 		//MAP total score and delta score from sessio nkey to usetrname
 		//in promise completion add below
 
