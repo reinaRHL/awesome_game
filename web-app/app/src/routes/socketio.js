@@ -15,6 +15,8 @@ module.exports = function (server) {
 	var games ={};
 
 	//io user Authentication
+	
+	///UTILITIES
 	function extractCookie(cookie, cname) {
 		var name = cname + "=";
 		var ca = cookie.split(';');
@@ -29,6 +31,27 @@ module.exports = function (server) {
 		}
 		return "";
 	}
+	
+	//http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+}
+
 
 	function getSocketSessionKey(socket)
 	{
@@ -268,17 +291,42 @@ module.exports = function (server) {
 			gameState["voteRoundTriggered"] = false;
 			return;
 		}
-		var data={
-				roundType:"vote",
-			};
 			var fake = gameState["fakeAnswers"];
 			var real = gameState["realAnswer"];
 
+			//pick one fak answer
+			fake = fake[Math.floor(Math.random()*fake.length)];
+
+			//clone user answers
+			var ans=gameState["answers"];
+			//add fake answer and real answer
+			ans.push(fake);
+			real.push(real);
+
+			//Overwrite answers since it's important everyone gets them in the same order
+			gameState["answers"] = shuffle(ans);
+
+			//NOTE
+			//Same answer as real or fake or other player not handled
+			//TODO filter answer by player, but start by making MVP
+
+			//remove identifying information from return values
+			var clientArr = gameState["answers"].map(function (e)
+			{
+				return gameState["answers"]["answer"]
+			});
+
+			var data=
+			{
+				roundType:"vote",
+				answers:clientArr
+			};
+			
 		for (s in socketList)
 		{
 			s.emit("advanceRound",data);
 		}
-		setTimeout(doVoteRound, MILLIS_PER_ROUND,gameId,socketList);
+		setTimeout(doResultRound, MILLIS_PER_ROUND,gameId,socketList);
 	}
 
 	function  doResultRound(gameId,socketList)
@@ -326,25 +374,23 @@ module.exports = function (server) {
 		var mappedDeltaScore={};
 		var mappedScore={};
 
+		var gameIsOver = gameState["roundNumber"]+1 > gameState["ofRounds"]);
+		
+		gameState["roundNumber"] +=1;
+
 		for (s in socketList)
 		{
 			var data={
 				roundType:"result",
 				deltaScore:mappedDeltaScore,
-				totalScore:mappedScore
+				totalScore:mappedScore,
+				gameOver:gameIsOver
 			};
 
 			s.emit("advanceRound",data);
 		}
 		setTimeout(doSubmissionRound, MILLIS_PER_ROUND,gameId,socketList);
 	}
-
-	
-
-	
-
-
-	
 
 	
 };
