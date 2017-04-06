@@ -41,7 +41,7 @@ end
 # Populate the DB
 execute "create_db" do
   cwd "/home/ubuntu/project/web-app/app"
-  command "mysql -uroot -phello -h127.0.0.1 < create.sql"
+  command "echo 'DROP DATABASE IF EXISTS gameDB;CREATE DATABASE gameDB;' | mysql -uroot -phello -h127.0.0.1 "
 end
 
 ###NodeJS
