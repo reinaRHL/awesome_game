@@ -16,3 +16,19 @@ class Game {
     }
     
 }
+
+$(document).ready(function() {
+    // This will fire when document is ready:
+    $(window).resize(function() {
+        // This will fire each time the window is resized:
+        if($(window).width() < 400) {
+            // if larger or equal
+            $('#inputAnswerButton').addClass("btn-sm");
+            $('#inputAnswer').addClass("input-sm");
+        } else {
+            // if smaller
+            $('#inputAnswerButton').removeClass("btn-sm");
+            $('#inputAnswer').removeClass("input-sm");
+        }
+    }).resize(); // This will simulate a resize to trigger the initial run.
+});

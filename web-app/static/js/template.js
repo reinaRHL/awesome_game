@@ -1,5 +1,3 @@
-(function() {
-
 var app = angular.module('indexApp', [])
 var socket = io.connect();
 
@@ -203,7 +201,6 @@ app.factory('webServices', ['$http', function($http){
       $('#gameDisplay').append(button);
     });
   }]);
-})();
 
 
 var popScore = function(initScore){
