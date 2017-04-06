@@ -1,3 +1,5 @@
+(function() { //self-invoking function, do not delete
+
 var app = angular.module('indexApp', [])
 var socket = io.connect();
 
@@ -79,6 +81,14 @@ app.factory('webServices', ['$http', function($http){
         })
     });
 
+    webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
+        $scope.question = resp.data.text;
+        $scope.difficulty = resp.data.difficulty;
+        $scope.correctAnswer = resp.data.correctAnswer;
+        $scope.falseAnswer = resp.data.falseAnswer;
+    });
+
+
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
@@ -128,6 +138,10 @@ app.factory('webServices', ['$http', function($http){
 
     }
 
+    socket.on('timer', function (data) {  
+        $('#countdown').html(data.countdown);
+    });
+
     
     socket.on('backToLobby', function(data){
       console.log(document.user)
@@ -138,17 +152,11 @@ app.factory('webServices', ['$http', function($http){
       }
     });
     
-    webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
-        $scope.question = resp.data.text;
-        $scope.difficulty = resp.data.difficulty;
-        $scope.correctAnswer = resp.data.correctAnswer;
-        $scope.falseAnswer = resp.data.falseAnswer;
-    });
 
     socket.on('sendQuestions', function(data){
       if (document.user == data.user) {
         $("#question").text(data.question.question.question);
-        timerUpdate(data.question.endTime);
+        // timerUpdate(data.question.endTime);
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
       }
     });
@@ -202,6 +210,7 @@ app.factory('webServices', ['$http', function($http){
       $('#gameDisplay').append(button);
     });
   }]);
+})();
 
 
 var popScore = function(initScore){
