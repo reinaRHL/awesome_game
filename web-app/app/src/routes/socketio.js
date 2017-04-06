@@ -74,6 +74,12 @@ module.exports = function (server) {
 		return extractCookie(socket.client.request.headers.cookie,"session");
 	}
 
+	function userIsInGame(userId,gameId)
+	{
+		//TODO actually check this for security
+		return true;
+	}
+
 	//Begin socket session
 	io.on('connection', function(socket)
 	{
@@ -162,7 +168,7 @@ module.exports = function (server) {
 		//Intercept when a user picks one of the answers displayed
 		socket.on('pickAnswer', function(data)
 		{
-			gameId=data.gameId;
+			var gameId=data.gameId;
 			
 			//Check permissions
 			if(!userIsInGame(userId,gameId))
