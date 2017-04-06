@@ -162,6 +162,15 @@ app.factory('webServices', ['$http', function($http){
         document.location.href="/lobby"
       }
     });
+
+    socket.on('endGame', function(data){
+      
+      if (document.user == data.username) {
+        $("#question").text("")
+        $("#answers").html("")
+        
+      }
+    });
     
 
     socket.on('sendQuestions', function(data){
@@ -169,6 +178,7 @@ app.factory('webServices', ['$http', function($http){
         var html = ''
         var answerArray = data.question.question.incorrect_answers
         answerArray.push(data.question.question.correct_answer)
+        console.log("here")
         $("#question").text(data.question.question.question);//show question in real time
         random(answerArray).forEach(function(element){
           html+='<h4>'+element+'</h4>'

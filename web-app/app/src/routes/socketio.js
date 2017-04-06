@@ -241,7 +241,9 @@ module.exports = function (server) {
 				}
 				
 			}, 1000);
-			setInterval(function() { // refresh question every 20 secs
+
+			setInterval(function () { // refresh question every 20 secs
+				
 				round++;
 				var gameQuestions = {}
 				gameQuestions.question={}
@@ -294,7 +296,7 @@ module.exports = function (server) {
 					})
 
 				})
-			}, 20000);
+			}, 20000); 
 			
 			
 
