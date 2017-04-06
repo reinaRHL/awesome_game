@@ -240,7 +240,7 @@ module.exports = function (server) {
 		return true;
 	}
 
-//Functions dtat do main game loop
+//Functions that do main game loop
 	function  doSubmissionRound(gameId,socketList)
 	{
 		var gameState = games[gameID];
@@ -310,7 +310,7 @@ module.exports = function (server) {
 
 			//NOTE
 			//Same answer as real or fake or other player not handled
-			//TODO filter answer by player, but start by making MVP
+			//TODO filter answer by player, but start by making minimum viable product
 
 			//remove identifying information from return values
 			var clientArr = gameState["answers"].map(function (e)
@@ -374,6 +374,7 @@ module.exports = function (server) {
 		//MAP total score and delta score from sessio nkey to usetrname
 		//in promise completion add below
 
+		//.then(function{
 		var mappedDeltaScore={};
 		var mappedScore={};
 
@@ -393,6 +394,9 @@ module.exports = function (server) {
 			s.emit("advanceRound",data);
 		}
 		setTimeout(doSubmissionRound, MILLIS_PER_ROUND,gameId,socketList);
+
+		//}); //END PROMISE
+
 	}
 
 	
