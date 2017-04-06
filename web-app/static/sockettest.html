@@ -12,6 +12,11 @@
 // in the top-level module of the app
 var socket = io();
 
+function getGameId()
+{
+  return 1;
+}
+
 angular.module('myApp', [
   'btford.socket-io',
   'myApp.myCtrl'
@@ -22,15 +27,23 @@ factory('mySocket', function (socketFactory) {
   return mySocket;
 });
 
+angular.module('myApp.MyCtrl', []).
+  controller('MyCtrl', function ($scope) {
+    $scope.$on('socket:error', function (ev, data) {
+
+    });
+  });
 // in one of your controllers
 angular.module('myApp.myCtrl', []).
-  controller('myCtrl', ['mySocket',function ($scope,socket) {
+  controller('myCtrl',function ($scope) {
   
   var mySocket=null;
   $scope.answers=[];
   $scope.roundType="";
   $scope.waiting=false;
   $scope.inputText="";
+
+ 
   
   //Socket event handlers
   
@@ -39,6 +52,7 @@ angular.module('myApp.myCtrl', []).
   	//Show prompt from data
   	
   }
+
   
   $scope.serverNotifyPromptInput= function(data)
   {
@@ -68,13 +82,18 @@ angular.module('myApp.myCtrl', []).
   	$scope.waiting=true;
   }
   
+  $scope.startGame= function()
+  {
+    console.log("did start game");
+    socket.emit("startGame",getGameId());
+  }
   
   ///Client event handlers
   
   $scope.joinGame = function()
   {
   	//Tell the server we would like a status update now.
-  	socket.emit("sync");
+  	socket.emit("joinGame",getGameId());
   	$scope.doWait();
   }
   
@@ -98,7 +117,7 @@ angular.module('myApp.myCtrl', []).
   
   
   
-    $scope.on('socket:advanceRound', function (ev, data) {
+    $scope.$on('socket:advanceRound', function (ev, data) {
 		
 		$scope.waiting=false;
 		$scope.roundType=data.roundType;
@@ -120,18 +139,21 @@ angular.module('myApp.myCtrl', []).
 		
     });
     
-    $scope.on('socket:syncTimer', function (ev, data) 
+    $scope.$on('socket:syncTimer', function (ev, data) 
     {
 		$scope.setTimer( parseInt(data.time) )
     });
     
-    $scope.on('socket:chatMessage', function (ev, data) 
+    $scope.$on('socket:chatMessage', function (ev, data) 
     {
 		var from=data.from;
 		var message=data.message;
     });
     
-  }]);
+
+     $scope.joinGame();
+
+  });
 </script>
 
 </head>
@@ -139,7 +161,7 @@ angular.module('myApp.myCtrl', []).
 <body>
 <h1> Socket Test </h1>
 
-<div ng-app="myApp" ng-controller="myCtrl">
+<div ng-app="myApp" ng-controller="myCtrl" >
 
 <div>
 <h2>{{gameName}}</h2>
@@ -149,6 +171,7 @@ angular.module('myApp.myCtrl', []).
 	<div>
 	<p>{{prompt}}</p>
 	</div>
+  <button ng-click="startGame()">Start</button>
 
 	<div ng-show="!waiting && roundType=='input'">
 	<input type="text" ng-model="inputText"></input> <button ng-click="submitAnswer">submit<button>

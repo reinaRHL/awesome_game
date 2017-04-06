@@ -5,6 +5,7 @@ var Sequelize = require('sequelize');
 module.exports = function (server) {
 	const MILLIS_PER_ROUND =15000;
 	const ROUND_COUNT=15;
+	const MAX_PLAYERS =6;
 	var io = require('socket.io')(server);
 	
 	//A dictionary of active connections indexed by session key
@@ -13,6 +14,21 @@ module.exports = function (server) {
 	
 	//A dicitonary of games indexed by gameID
 	var games ={};
+
+	loadGames();
+
+	function loadGames()
+	{
+		models.Game.findAll().then(function(rs)
+		{
+			for(x in rs)
+			{
+				games[x.id]=x;
+			}
+
+		});
+	}
+
 
 	//io user Authentication
 	
@@ -61,16 +77,16 @@ module.exports = function (server) {
 	//Begin socket session
 	io.on('connection', function(socket)
 	{
-		var skey = getSocketSessionKey(socket);
-		var userId = userIdFromSessionKey(skey);
+		var sKey = getSocketSessionKey(socket);
+		//var userId = userIdFromSessionKey(skey);
 		console.log('a user connected'+ getSocketSessionKey(socket));
 		
-		connections[skey]=socket;
+		connections[sKey]=socket;
 		sessionKeys[socket]=sKey;
 
 		io.on('disconnect', function(socket)
 		{
-			console.log('a user connected'+userId +" "+skey);
+			console.log('a user connected'+sKey);
 		});
 
 		
@@ -96,6 +112,27 @@ module.exports = function (server) {
 				
 			}
 			startGame(gameId);
+
+		});
+
+		socket.on('joinGame', function(data)
+		{
+			var gameID = data["gameId"];
+			var sessionKey= data["sessionKey"];
+
+			if(gameFull(gameID))
+			{
+				socket.emit('error',"Unable to join, game full");
+			}
+			else if (gameID in games)
+			{
+				socket.emit("wait");
+				games[gameID]["playerCount"]++;
+			}
+			else
+			{
+				socket.emit('error',"No Game with that ID");
+			}
 
 		});
 		
@@ -153,6 +190,11 @@ module.exports = function (server) {
 
 	});
 
+	function gameFull(gameId)
+	{
+		return games[gameId]["playerCount"] + 1 > MAX_PLAYERS
+	}
+
 
 
 	function startGame(gameId)
@@ -176,6 +218,8 @@ module.exports = function (server) {
 	function initializeGame(gameId)
 	{
 		games[gameId]={}
+		games[gameId]["playerCount"]=0;
+
 		games[gameId]["submissionRoundTriggered"]=false;
 		games[gameId]["voteRoundTriggered"]=false;
 		games[gameId]["resultRoundTriggered"]=false;
@@ -207,7 +251,7 @@ module.exports = function (server) {
 	{
 		return skey in voteDict;
 	}
-
+	//////////
 	
 	//Functions that handle user actions after they've been authenticated
 
@@ -240,7 +284,7 @@ module.exports = function (server) {
 		return true;
 	}
 
-//Functions that do main game loop
+	//Functions that do main game loop
 	function  doSubmissionRound(gameId,socketList)
 	{
 		var gameState = games[gameID];
@@ -255,7 +299,7 @@ module.exports = function (server) {
 		}
 		gameState["submissionRoundTriggered"]=true;
 
-		models.Question.find({
+		models.Question.findOne({
 		order: [
 			Sequelize.fn( 'RAND' ),
 		]
@@ -378,7 +422,7 @@ module.exports = function (server) {
 		var mappedDeltaScore={};
 		var mappedScore={};
 
-		var gameIsOver = gameState["roundNumber"]+1 > gameState["ofRounds"]);
+		var gameIsOver = gameState["roundNumber"]+1 > gameState["ofRounds"];
 		
 		gameState["roundNumber"] +=1;
 
