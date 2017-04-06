@@ -2,7 +2,7 @@ var models = require('../models');
 var Sequelize = require('sequelize');
 var moment = require('moment');
 moment().format();
-
+var schedule = require('node-schedule');
 module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
@@ -226,8 +226,8 @@ module.exports = function (server) {
 		// 	})
 
 		// })
-
-		socket.on('startGame', function (data) {
+		var endTime;
+		function sendQuestion(round, data){
 			//update round info
 			var gameQuestions = {}
 			gameQuestions.question={}
@@ -242,8 +242,9 @@ module.exports = function (server) {
 					progress: 1,
 					startedAt: Date.now()
 				})
-				gameQuestions.round = 1;
-				gameQuestions.endTime = moment().add(1, 'minutes').toString();
+				gameQuestions.round = round;
+				endTime = moment().add(1, 'minutes');
+				gameQuestions.endTime = endTime.toString();
 				game.getUsers().then(function(users){
 					users.forEach(function(user){//only send questions to users in the game 
 						models.Question.find({
@@ -263,6 +264,10 @@ module.exports = function (server) {
 									}
 								})
 								io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
+								//console.log("END TIME " + endTime.toString());
+								var j = schedule.scheduleJob(endTime.toDate(), function(){
+  									io.sockets.emit('endRound', { user:user.dataValues.username , question: gameQuestions});
+								});
 							})
 						});
 
@@ -273,8 +278,10 @@ module.exports = function (server) {
 				})
 
 			})
-
-		})
+		}
+		socket.on('startGame', function (data) {
+			sendQuestion(1, data);
+		});
 
 
 

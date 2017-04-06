@@ -17,11 +17,12 @@ class Game {
     
 }
 function timerUpdate(endTime) {
-    var now = moment();
     var end = moment(endTime);
     (function timer(){
         $("#countdown").text(countdown(end).toString());
-        requestAnimationFrame(timer);
+        if( moment().isBefore(end)){
+            requestAnimationFrame(timer);
+        }
     })();
 
 }

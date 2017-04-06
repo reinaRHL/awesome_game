@@ -189,7 +189,9 @@ app.factory('webServices', ['$http', function($http){
     socket.on('returnLobby', function(){
       document.location.href="/lobby";
     });
-
+    socket.on('endRound', function(){
+      console.log("Round End");
+    });
     // When game is created, append it to the gamelist
     socket.on('gameCreated', function(data){
       var button = $compile("<a id='test' class=\"list-group-item\" ng-click='gameInfo("+data.gameId+")'><span class=\"badge\">players: "
