@@ -225,7 +225,29 @@ module.exports = function (server) {
 		// 	})
 
 		// })
+		var GAMES =[
+			{
+				id: 1,
+				currentRound: 1,
+				users: [{
+					sk: 'aaga',
+					username: 'name'
+				},
+				{
+					sk: 'ajglahi21h3k',
+					username: 'user'
+				}
+				]
+			}
+		];
+		var peopleAnswers = [{
+			user: 'name',
+			sk: 1,
+			answer: 'answer'
+		}];
 		var endTime;
+		var GAMES;
+
 		function sendQuestion(round, data){
 			//update round info
 			var gameQuestions = {}
