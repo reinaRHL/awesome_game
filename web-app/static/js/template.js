@@ -157,6 +157,27 @@ app.factory('webServices', ['$http', function($http){
 
     }
 
+    $("#answers").on('click',".realtimeAnswer",function() {//handle realtime answers
+      var clickedAnswer = $( this ).text() 
+      webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
+        $scope.question = resp.data.text;
+        $scope.difficulty = resp.data.difficulty;
+        $scope.correctAnswer = resp.data.correctAnswer;
+        $scope.falseAnswer = resp.data.falseAnswer;
+        var answerArray = resp.data.falseAnswer
+        answerArray.push(resp.data.correctAnswer)
+        $scope.allAnswers = random(answerArray)
+        console.log($scope.allAnswers)
+        alert( $scope.correctAnswer );
+        if(clickedAnswer == $scope.correctAnswer) {//if get the correct answer update their score
+          console.log($scope.score)
+          $scope.score++
+          socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
+        }
+    });
+      
+    });
+
 
     socket.on('timer', function (data) {  
         $('#countdown').html(data.countdown);
@@ -202,7 +223,7 @@ app.factory('webServices', ['$http', function($http){
         console.log("here")
         $("#question").text(data.question.question.question);//show question in real time
         random(answerArray).forEach(function(element){
-          html+=('<h4 ng-click="keepScore(element)">'+element+'</h4>')
+          html+=('<h4 class="realtimeAnswer" >'+element+'</h4>')
         })
         $("#answers").html($compile(html)($scope))//show answers in real time
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
@@ -282,3 +303,5 @@ var popScore = function(initScore){
       return val;
     }
 };
+
+
