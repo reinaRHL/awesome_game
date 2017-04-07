@@ -9,6 +9,8 @@ module.exports = function (server) {
 	var users = [] //NOT SURE WHAT THIS IS USED FOR SINCE USERS VARIABLE IS USED QUITE A BIT IN SEQUELIZE
 	var GAMES = []; //holds all games that are in progress
 	var USERS = []; //holds all users that are connected to game and their session info
+	var JOBS = []; //scheduled jobs, timeout events that should occur
+				   // using this plugin for jobs https://www.npmjs.com/package/node-schedule
 	//io user Authentication
 	function getCookie(cookie, cname) {
 		var name = cname + "=";
@@ -257,9 +259,10 @@ module.exports = function (server) {
 							})
 							io.sockets.emit('sendQuestions', { user: user.dataValues.username, question: gameQuestions });
 							var j = schedule.scheduleJob(endTime.toDate(), function(){
-								//executes job scheduled for when the timer goes off on the user's end
-								endRoundVoting(1,2);
+								//executes job scheduled for end time; ie when the timer goes off
+								endRoundVoting(game.id);
 							});
+							JOBS.push[j];
 						})
 					});
 
@@ -269,9 +272,18 @@ module.exports = function (server) {
 
 			})
 		}
-		function endRoundVoting(game, info){
-			console.log(game + " " + info);
-			io.sockets.emit('endRound', "stuff");
+		function endRoundVoting(game_id){
+			console.log(game_id);
+			var toSend;
+			for (var i=0; i < GAMES.length; i++) {
+				var serverGame = GAMES[i];
+				if (serverGame.id == game_id) {
+					var round = parseInt(serverGame.round);
+					// TO DO: set up questions so that everyone sees the same questions
+					toSend = serverGame.gameQuestions[round-1].answers;//get the submitted answers for that round
+				}
+			}
+			io.sockets.emit('endRound', toSend);
 		}
 		function endRoundScoring(){
 

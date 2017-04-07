@@ -86,11 +86,14 @@ app.factory('webServices', ['$http', function ($http) {
 		};
 
 		$scope.cancelGame = function () {
+			//socket.emit('cancelNewGame', { title: 'playGame' });
 			socket.emit('cancelNewGame', { title: $("#inLobby > h1").text() });
 		};
 
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
+			$("#inLobby").removeClass('show').addClass('hidden');
+			$("#inGame").removeClass('hidden').addClass('show');
 		};
 		$scope.sendAnswer = function () {
 			var toSend = {};
@@ -204,8 +207,11 @@ app.factory('webServices', ['$http', function ($http) {
 		socket.on('returnLobby', function () {
 			document.location.href = "/lobby";
 		});
-		socket.on('endRound', function () {
-			console.log("Round End");
+		// Commence voting of choices
+		socket.on('endRound', function (data) {
+			$("#questionStateDiv").removeClass('show').addClass('hidden');
+			$("#votingStateDiv").removeClass('hidden').addClass('show');
+			console.log("Round End " + JSON.stringify(data));
 		});
 		// When game is created, append it to the gamelist
 		socket.on('gameCreated', function (data) {

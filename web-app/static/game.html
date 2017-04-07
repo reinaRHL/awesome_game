@@ -38,7 +38,7 @@
                 <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
                 <button class="btn btn-default" ng-click="cancelGame()">Cancel Game</button>
           </div>
-          <div id="inGame" class="show">
+          <div id="inGame" class="hidden">
               <h1 class="text-center">{{currentgame_title}}</h1>
               <h3 id="countdown" class='text-center label-default'></h3>
                   <div class="col-sm-12 gameInfo well">
@@ -67,7 +67,7 @@
                     </span>
                   </div>
               </div>
-              <div class="row show" id="votingStateDiv">
+              <div class="row hidden" id="votingStateDiv">
                   <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
                   <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
                 <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
