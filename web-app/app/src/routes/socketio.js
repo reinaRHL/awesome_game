@@ -271,40 +271,39 @@ module.exports = function (server) {
 							
 							games[game.title]["users"].push(user.dataValues.username)//store users in memory 
 
-							models.Question.find({
-							  order: [
-							    Sequelize.fn( 'RAND' ),
-							  ]
-							}).then(function(question){//todo: send questions to client
-
-								question.getAnswers().then(function(answers){
-									gameQuestions.question.difficulty = question.difficulty
-									gameQuestions.question.id = question.id
-									gameQuestions.question.question = question.text
-									gameQuestions.question.incorrect_answers=[]
-									answers.forEach(function(answer){
-										if (answer.isCorrect){
-											gameQuestions.question.correct_answer = answer.text
-										} else {
-											gameQuestions.question.incorrect_answers.push(answer.text)
-										}
-									})
-									counter++// if there is more than one users, to prevent asynchronous callback hell disaster, implement a counter
-									// send questions when game begins
-									console.log("1111111111111111111111111")
-									console.log(answers.length)
-									if (counter == users.length){//this ensures the same question only gets sent once to all selected users
-										console.log("im here how many")
-										io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
-
-									}
-
-								})
-							});
-
-							
-							
 						})
+						models.Question.find({
+						  order: [
+						    Sequelize.fn( 'RAND' ),
+						  ]
+						}).then(function(question){//todo: send questions to client
+
+							question.getAnswers().then(function(answers){
+								gameQuestions.question.difficulty = question.difficulty
+								gameQuestions.question.id = question.id
+								gameQuestions.question.question = question.text
+								gameQuestions.question.incorrect_answers=[]
+								answers.forEach(function(answer){
+									if (answer.isCorrect){
+										gameQuestions.question.correct_answer = answer.text
+									} else {
+										gameQuestions.question.incorrect_answers.push(answer.text)
+									}
+								})
+								
+								// send questions when game begins
+								console.log("1111111111111111111111111")
+								console.log(answers.length)
+								console.log("im here how many")
+								io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
+
+							
+							})
+						});
+
+							
+							
+						
 						
 					})
 
@@ -329,47 +328,37 @@ module.exports = function (server) {
 					console.log("111111111111111111111111111111111111111111")
 					gameQuestions.round = round
 					gameQuestions.endTime = endTime
-					game.getUsers().then(function(users){
-						users.forEach(function(user){//only send questions to users in the game 
-							models.Question.find({
-							  order: [
-							    Sequelize.fn( 'RAND' ),
-							  ]
-							}).then(function(question){//todo: send questions to client
+					models.Question.find({
+					  order: [
+					    Sequelize.fn( 'RAND' ),
+					  ]
+					}).then(function(question){//todo: send questions to client
 
-								question.getAnswers().then(function(answers){
-									gameQuestions.question.difficulty = question.difficulty
-									gameQuestions.question.id = question.id
-									gameQuestions.question.question = question.text
-									gameQuestions.question.incorrect_answers=[]
-									answers.forEach(function(answer){
-										if (answer.isCorrect){
-											gameQuestions.question.correct_answer = answer.text
-										} else {
-											gameQuestions.question.incorrect_answers.push(answer.text)
-										}
-									})
-									counter++
-									if(round <=10){ // send questions if round is less than 10
-										if (counter == users.length){
-										console.log("im here how many")
-										io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
-
-									}
-
-									} else{
-										io.sockets.emit('endGame', { });
-
-									}
-
-								})
-							});
-
-							
-							
-						})
+						question.getAnswers().then(function(answers){
+							gameQuestions.question.difficulty = question.difficulty
+							gameQuestions.question.id = question.id
+							gameQuestions.question.question = question.text
+							gameQuestions.question.incorrect_answers=[]
+							answers.forEach(function(answer){
+								if (answer.isCorrect){
+									gameQuestions.question.correct_answer = answer.text
+								} else {
+									gameQuestions.question.incorrect_answers.push(answer.text)
+								}
+							})
 						
-					})
+							if(round <=10){ // send questions if round is less than 10
+								console.log("im here how many")
+								io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
+
+							} else{
+								io.sockets.emit('endGame', { });
+
+							}
+
+						})
+					});
+
 
 				})
 			}, 20000); 
