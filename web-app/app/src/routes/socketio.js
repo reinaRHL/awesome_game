@@ -6,8 +6,9 @@ var schedule = require('node-schedule');
 module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
-	var users =[]
-
+	var users =[] //NOT SURE WHAT THIS IS USED FOR SINCE USERS VARIABLE IS USED QUITE A BIT IN SEQUELIZE
+	var GAMES = []; //holds all games that are in progress
+	var USERS = []; //holds all users that are connected to game and their session info
 	//io user Authentication
 	function getCookie(cookie, cname) {
 		var name = cname + "=";
@@ -104,6 +105,13 @@ module.exports = function (server) {
 		socket.on('joinGame', function (data) {
 
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			var currentGame;
+			var global_users = {};
+			for(serverGame in GAMES){
+				if(serverGame.title == data.title){
+					currentGame == serverGame; //this is the game we are dealing with
+				}
+			}
 			models.Session.findOne({
 				where: {
 					key: seshKey
@@ -127,8 +135,14 @@ module.exports = function (server) {
 						// console.log(game_ins)
 						// console.log("game_ins")
 						//get the users in the game and emit game title and numofusers
+						global_users.id = user.id;
+						global_users.username = user.username;
+						global_users.seshKey = seshKey;
+						global_users.game = currentGame.id;
+						USERS.push(global_users);
 						game_ins.addUser(user.id, {updatedAt: Date.now()}).then(function(user_ins){
 							game_ins.getUsers().then(function(users){
+								
 								io.sockets.emit('gameJoined', {user: user.username, title: data.game, numPlayers: users.length});
 							})
 						})						
@@ -225,44 +239,35 @@ module.exports = function (server) {
 		// 	})
 
 		// })
-		var GAMES =[
-			{
-				id: 1,
-				currentRound: 1,
-				users: [{
-					sk: 'aaga',
-					username: 'name'
-				},
-				{
-					sk: 'ajglahi21h3k',
-					username: 'user'
-				}
-				]
-			}
-		];
-		var peopleAnswers = [{
-			user: 'name',
-			sk: 1,
-			answer: 'answer'
-		}];
+		// var GAMES =[
+		// 	{
+		// 		name: '',
+		// 		currentRound: 1,
+		// 		users: [{
+		// 			sk: 'aaga',
+		// 			username: 'name'
+		// 		},
+		// 		{
+		// 			sk: 'ajglahi21h3k',
+		// 			username: 'user'
+		// 		}
+		// 		]
+		// 	}
+		// ];
+		// var peopleAnswers = [{
+		// 	user: 'name',
+		// 	sk: 1,
+		// 	answer: 'answer',
+		// 	game: id
+		// }];
 		var endTime;
-		var GAMES;
 
-		function sendQuestion(round, data){
+		function sendQuestion(round, data, game){
 			//update round info
 			var gameQuestions = {}
 			gameQuestions.question={}
 			gameQuestions.question.incorrect_answers=[]
-			models.Game.findOne({
-				where: {
-					title: data.title
-				}
-			}).then(function (game) {
-				game.update({
-					state: 'in_progress',
-					progress: 1,
-					startedAt: Date.now()
-				})
+
 				gameQuestions.round = round;
 				endTime = moment().add(1, 'minutes');
 				gameQuestions.endTime = endTime.toString();
@@ -297,11 +302,31 @@ module.exports = function (server) {
 					})
 					
 				})
-
-			})
 		}
 		socket.on('startGame', function (data) {
-			sendQuestion(1, data);
+			var global_game = {name: data.title, round: 1};
+			var global_users =[];
+			models.Game.findOne({
+				where: {
+					title: data.title //what happends when the game has the same titles??
+				}
+			}).then(function (game) {
+				game.update({
+					state: 'in_progress',
+					progress: 1,
+					startedAt: Date.now()
+				});
+				game.getUsers().then(function(users){
+					users.forEach(function(user){
+						var tmpUser = {id: user.id, username: user.id}
+						global_users.push(user);
+					});
+					global_game.users = global_users;
+					sendQuestion(1, data, game);
+					console.log("--------- GAMES --------" + JSON.stringify(GAMES));
+					console.log("--------- USERS --------" + JSON.stringify(USERS));
+				});
+			});
 		});
 		socket.on('sendAnswer', function(data){
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
@@ -313,6 +338,8 @@ module.exports = function (server) {
 		// To do: Need to update db as well
 		socket.on('createNewGame', function (data) {
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			var global_game = {};
+			var global_users = {};
 			models.Session.findOne({
 				where: {
 					key: seshKey
@@ -335,6 +362,17 @@ module.exports = function (server) {
 					}).then(function(game){
 						game.addUser(user.id);
 						//emit only after successfully creating game
+						global_game.id = game.id;
+						global_game.title = game.title;
+						global_game.round = 0;
+						GAMES.push(global_game);
+						global_users.id = user.id;
+						global_users.username = user.username;
+						global_users.seshKey = seshKey;
+						global_users.game = game.id;
+						USERS.push(global_users);
+						console.log("--------- GAMES --------" + JSON.stringify(GAMES));
+						console.log("--------- USERS --------" + JSON.stringify(USERS));
 						io.sockets.emit('gameCreated', {gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
 
 						// var destination = '/games';
