@@ -7,6 +7,9 @@ module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
 	var users =[]
+	//A dicitonary of games indexed by gameID
+    var games ={};
+
 
 
 	//io user Authentication
@@ -230,24 +233,24 @@ module.exports = function (server) {
 
 		socket.on('startGame', function (data) {
 			//update round info
+			var endTime = new Date();
+				endTime.setSeconds(endTime.getSeconds() + 200);
+				endTime = endTime.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")
 			var countdown = 200;  
-			var round = 0;
+			var round = 1;
+			var counter = 0
 			setInterval(function() {// add timer
 				countdown--;
-				if(countdown>0){ // countdown greater than 0, start game
+				if(countdown>=0){ // countdown greater than 0, start game
 					io.sockets.emit('timer', { countdown: countdown }); 
 				} else{
 					io.sockets.emit("endGame",{}) // else end game
 				}
 				
 			}, 1000);
-
-			setInterval(function () { // refresh question every 20 secs
-				
-				round++;
-				var gameQuestions = {}
+			var gameQuestions = {} 
 				gameQuestions.question={}
-				gameQuestions.question.incorrect_answers=[]
+				
 				models.Game.findOne({
 					where: {
 						title: data.title
@@ -258,19 +261,27 @@ module.exports = function (server) {
 						progress: round,
 						startedAt: Date.now()
 					})
+					games[game.title]={} // initialize game.id info to be empty set
+					games[game.title]["users"] = []
 					gameQuestions.round = round
-					gameQuestions.endTime = null
+					gameQuestions.endTime = endTime
 					game.getUsers().then(function(users){
+						 
 						users.forEach(function(user){//only send questions to users in the game 
+							
+							games[game.title]["users"].push(user.dataValues.username)//store users in memory 
+
 							models.Question.find({
 							  order: [
 							    Sequelize.fn( 'RAND' ),
 							  ]
 							}).then(function(question){//todo: send questions to client
-								gameQuestions.question.difficulty = question.difficulty
-								gameQuestions.question.id = question.id
-								gameQuestions.question.question = question.text
+
 								question.getAnswers().then(function(answers){
+									gameQuestions.question.difficulty = question.difficulty
+									gameQuestions.question.id = question.id
+									gameQuestions.question.question = question.text
+									gameQuestions.question.incorrect_answers=[]
 									answers.forEach(function(answer){
 										if (answer.isCorrect){
 											gameQuestions.question.correct_answer = answer.text
@@ -278,8 +289,73 @@ module.exports = function (server) {
 											gameQuestions.question.incorrect_answers.push(answer.text)
 										}
 									})
+									counter++// if there is more than one users, to prevent asynchronous callback hell disaster, implement a counter
+									// send questions when game begins
+									console.log("1111111111111111111111111")
+									console.log(answers.length)
+									if (counter == users.length){//this ensures the same question only gets sent once to all selected users
+										console.log("im here how many")
+										io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
+
+									}
+
+								})
+							});
+
+							
+							
+						})
+						
+					})
+
+				})
+
+			setInterval(function () { // refresh question every 20 secs
+				
+				round++;
+				var counter = 0
+				var gameQuestions = {}
+				gameQuestions.question={}
+				
+				models.Game.findOne({
+					where: {
+						title: data.title
+					}
+				}).then(function (game) {
+					game.update({
+						progress: round,
+					})
+					console.log(games[game.title]["users"])
+					console.log("111111111111111111111111111111111111111111")
+					gameQuestions.round = round
+					gameQuestions.endTime = endTime
+					game.getUsers().then(function(users){
+						users.forEach(function(user){//only send questions to users in the game 
+							models.Question.find({
+							  order: [
+							    Sequelize.fn( 'RAND' ),
+							  ]
+							}).then(function(question){//todo: send questions to client
+
+								question.getAnswers().then(function(answers){
+									gameQuestions.question.difficulty = question.difficulty
+									gameQuestions.question.id = question.id
+									gameQuestions.question.question = question.text
+									gameQuestions.question.incorrect_answers=[]
+									answers.forEach(function(answer){
+										if (answer.isCorrect){
+											gameQuestions.question.correct_answer = answer.text
+										} else {
+											gameQuestions.question.incorrect_answers.push(answer.text)
+										}
+									})
+									counter++
 									if(round <=10){ // send questions if round is less than 10
-										io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
+										if (counter == users.length){
+										console.log("im here how many")
+										io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
+
+									}
 
 									} else{
 										io.sockets.emit('endGame', { });
@@ -299,6 +375,10 @@ module.exports = function (server) {
 			}, 20000); 
 			
 			
+
+		})
+
+		socket.on('updateScore', function (data) {
 
 		})
 

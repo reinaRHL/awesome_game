@@ -97,7 +97,7 @@ app.factory('webServices', ['$http', function($http){
         $scope.allAnswers = random(answerArray)
         console.log($scope.allAnswers)
     });
-
+    $scope.score = 0
 
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
@@ -112,6 +112,15 @@ app.factory('webServices', ['$http', function($http){
 
     $scope.startGame = function() {
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
+    };
+
+    $scope.keepScore = function(answer) {
+
+      if(answer == $scope.correctAnswer) {
+        console.log($scope.score)
+        $scope.score++
+        socket.emit('updateScore', {name: document.user, title: $("#inLobby > h1").text(), score: $scope.score})
+      }
     };
 
     $scope.gameInfo = function(game_id) {
@@ -174,7 +183,7 @@ app.factory('webServices', ['$http', function($http){
     
 
     socket.on('sendQuestions', function(data){
-      if (document.user == data.user) {
+      if (data.users.includes(document.user)) {
         var html = ''
         var answerArray = data.question.question.incorrect_answers
         answerArray.push(data.question.question.correct_answer)
