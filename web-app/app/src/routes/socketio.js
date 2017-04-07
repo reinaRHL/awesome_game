@@ -206,31 +206,6 @@ module.exports = function (server) {
 			});
 		});
 
-
-		// socket.on('cancelNewGame', function (data) {
-		// 	var counter = 0
-		// 	models.Game.findOne({
-		// 		where: {
-		// 			title: data.title
-		// 		}
-		// 	}).then(function (game) {
-		// 		game.getUsers().then(function(users){
-		// 			users.forEach(function(user){//only redirect users in the game 
-		// 				io.sockets.emit('backToLobby', user.dataValues.username);
-		// 				counter++
-		// 				if(counter == users.length){//when all users are read, delete the game from db
-		// 					game.destroy()
-		// 					io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-		// 				}
-						
-		// 			})
-					
-		// 		})
-
-		// 	})
-
-		// })
-
 		socket.on('startGame', function (data) {
 			//update round info
 			var endTime = new Date();
@@ -248,6 +223,7 @@ module.exports = function (server) {
 				}
 				
 			}, 1000);
+			//first round the start button is hit, send this question and update db
 			var gameQuestions = {} 
 				gameQuestions.question={}
 				
@@ -292,19 +268,12 @@ module.exports = function (server) {
 								})
 								
 								// send questions when game begins
-								console.log("1111111111111111111111111")
-								console.log(answers.length)
-								console.log("im here how many")
 								io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
 
 							
 							})
 						});
 
-							
-							
-						
-						
 					})
 
 				})
@@ -324,8 +293,7 @@ module.exports = function (server) {
 					game.update({
 						progress: round,
 					})
-					console.log(games[game.title]["users"])
-					console.log("111111111111111111111111111111111111111111")
+				
 					gameQuestions.round = round
 					gameQuestions.endTime = endTime
 					models.Question.find({
@@ -348,7 +316,7 @@ module.exports = function (server) {
 							})
 						
 							if(round <=10){ // send questions if round is less than 10
-								console.log("im here how many")
+								
 								io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
 
 							} else{
@@ -368,7 +336,8 @@ module.exports = function (server) {
 		})
 
 		socket.on('updateScore', function (data) {
-
+			var users = games[data.game]["users"]//find users in game
+			io.sockets.emit('showScore', { users:users, user:data.name , score:data.score });//send the score of selected user to all users in game
 		})
 
 

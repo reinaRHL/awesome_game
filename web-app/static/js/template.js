@@ -115,11 +115,11 @@ app.factory('webServices', ['$http', function($http){
     };
 
     $scope.keepScore = function(answer) {
-
-      if(answer == $scope.correctAnswer) {
+      console.log(answer)
+      if(answer == $scope.correctAnswer) {//if get the correct answer update their score
         console.log($scope.score)
         $scope.score++
-        socket.emit('updateScore', {name: document.user, title: $("#inLobby > h1").text(), score: $scope.score})
+        socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
       }
     };
 
@@ -162,6 +162,18 @@ app.factory('webServices', ['$http', function($http){
         $('#countdown').html(data.countdown);
     });
 
+    socket.on('showScore', function(data){
+      
+      if (data.users.includes(document.user)) {
+        if(data.user == document.user){// if user is the client update the main score
+          $("#playerScore").html(data.score)
+        }
+        $('.scoreList>span.ng-binding').filter(function(){//update socreboard accordingly
+          return $(this).text() == data.user;
+        }).next().html(data.score)
+      }
+    });
+
     
     socket.on('backToLobby', function(data){
       console.log(document.user)
@@ -190,9 +202,9 @@ app.factory('webServices', ['$http', function($http){
         console.log("here")
         $("#question").text(data.question.question.question);//show question in real time
         random(answerArray).forEach(function(element){
-          html+='<h4>'+element+'</h4>'
+          html+=('<h4 ng-click="keepScore(element)">'+element+'</h4>')
         })
-        $("#answers").html(html)//show answers in real time
+        $("#answers").html($compile(html)($scope))//show answers in real time
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
       }
     });
@@ -209,7 +221,7 @@ app.factory('webServices', ['$http', function($http){
         $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span class= "userInGame">'
         +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>');
         
-        $('#startGameUsers').append('<h4 ng-repeat="user in users"><span class= "userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>');
+        $('#startGameUsers').append('<h4 ng-repeat="user in users" class="scoreList"><span class= "userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>');
       }
     });
     
