@@ -6,7 +6,7 @@ var schedule = require('node-schedule');
 module.exports = function (server) {
 	var io = require('socket.io')(server);
 	var connections = [];
-	var users =[] //NOT SURE WHAT THIS IS USED FOR SINCE USERS VARIABLE IS USED QUITE A BIT IN SEQUELIZE
+	var users = [] //NOT SURE WHAT THIS IS USED FOR SINCE USERS VARIABLE IS USED QUITE A BIT IN SEQUELIZE
 	var GAMES = []; //holds all games that are in progress
 	var USERS = []; //holds all users that are connected to game and their session info
 	//io user Authentication
@@ -25,34 +25,34 @@ module.exports = function (server) {
 		return "";
 	}
 
-	io.use(function(socket, next) {
+	io.use(function (socket, next) {
 		var seshKey = getCookie(socket.request.headers.cookie, "key");
 		console.log("io")
 		models.Session.count({
 			where: {
 				key: seshKey
 			}
-		}).then(function(session) {
+		}).then(function (session) {
 			if (session === 1) {
 				models.Session.findOne({
 					where: {
 						key: seshKey
 					}
-				}).then(function(session) {
+				}).then(function (session) {
 					models.User.findOne({
 						where: {
 							id: session.user_id
 						}
-					}).then(function(user) {
-						
+					}).then(function (user) {
+
 
 						socket.username = user.username
-						if (!users.includes(socket.username)){
+						if (!users.includes(socket.username)) {
 							users.push(socket.username)
 						}
 
-					
-						io.sockets.emit('getUsers',users)
+
+						io.sockets.emit('getUsers', users)
 
 					});
 				})
@@ -64,21 +64,22 @@ module.exports = function (server) {
 		});
 	});
 	io.on('connection', function (socket) {
-		socket.id = Math.floor(Math.random() * 1000);
+		//socket.id = Math.floor(Math.random() * 1000);
+		socket.id = getCookie(socket.request.headers.cookie, "key");
 		connections.push(socket);
 		console.log("Connected: %s sockets connected", connections.length);
 
 		socket.on('disconnect', function (data) {
 
-			connections.splice(connections.indexOf(socket),1);
+			connections.splice(connections.indexOf(socket), 1);
 			console.log("Disconnected: %s sockets connected", connections.length);
 		});
 
 		// send message in Chatroom
 		// need to fix this to pass the real username
 		socket.on('sendMessage', function (data) {
-		console.log(socket.request.headers.cookie + "cookie is")
-		var seshKey = getCookie(socket.request.headers.cookie, "key");
+			console.log(socket.request.headers.cookie + "cookie is")
+			var seshKey = getCookie(socket.request.headers.cookie, "key");
 			models.Session.findOne({
 				where: {
 					key: seshKey
@@ -88,16 +89,16 @@ module.exports = function (server) {
 					where: {
 						id: session.user_id
 					}
-				}).then(function(user) {
-					io.sockets.emit('newMessage', {msg:data, name:user.username});
+				}).then(function (user) {
+					io.sockets.emit('newMessage', { msg: data, name: user.username });
 				});
 			});
 		});
 
 		//refresh onlineusers when logged out
-		socket.on('logOutUser',function (data){
-			users.splice(users.indexOf(data),1 )
-			io.sockets.emit('getUsers',users)
+		socket.on('logOutUser', function (data) {
+			users.splice(users.indexOf(data), 1)
+			io.sockets.emit('getUsers', users)
 
 
 		})
@@ -107,8 +108,8 @@ module.exports = function (server) {
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
 			var currentGame;
 			var global_users = {};
-			for(serverGame in GAMES){
-				if(serverGame.title == data.title){
+			for (serverGame in GAMES) {
+				if (serverGame.title == data.title) {
 					currentGame == serverGame; //this is the game we are dealing with
 				}
 			}
@@ -121,17 +122,17 @@ module.exports = function (server) {
 					where: {
 						id: session.user_id
 					}
-				}).then(function(user) {
+				}).then(function (user) {
 					models.Game.findOne({
 						where: {
 							title: data.game
 						}
-					}).then(function(game){
+					}).then(function (game) {
 						var game_ins = models.Game.build({
-								id: game.id,
-                                title: data.game,
+							id: game.id,
+							title: data.game,
 
-                            })
+						})
 						// console.log(game_ins)
 						// console.log("game_ins")
 						//get the users in the game and emit game title and numofusers
@@ -139,19 +140,20 @@ module.exports = function (server) {
 						global_users.username = user.username;
 						global_users.seshKey = seshKey;
 						global_users.game = currentGame.id;
+						global_users.score = 0;
 						USERS.push(global_users);
-						game_ins.addUser(user.id, {updatedAt: Date.now()}).then(function(user_ins){
-							game_ins.getUsers().then(function(users){
-								
-								io.sockets.emit('gameJoined', {user: user.username, title: data.game, numPlayers: users.length});
+						game_ins.addUser(user.id, { updatedAt: Date.now() }).then(function (user_ins) {
+							game_ins.getUsers().then(function (users) {
+
+								io.sockets.emit('gameJoined', { user: user.username, title: data.game, numPlayers: users.length });
 							})
-						})						
+						})
 					})
 				});
 			});
 		});
 
-		socket.on('cancelNewGame', function(data){
+		socket.on('cancelNewGame', function (data) {
 			var counter = 0;
 			var current_userid;
 			var current_username;
@@ -166,146 +168,115 @@ module.exports = function (server) {
 					where: {
 						id: session.user_id
 					}
-				}).then(function(user) {
+				}).then(function (user) {
 					current_username = user.username;
 					current_userid = user.id;
 				});
-			
-			models.Game.findOne({
-				where: {
-					title: data.title
-				}
-			}).then(function(game){
 
-				if (current_username == game.createdBy){
-					game.getUsers().then(function(users){
-						users.forEach(function(user){	
-							io.sockets.emit('backToLobby', {username:user.dataValues.username, title:game.title});
-							counter++;
-							if(counter == users.length){
-								game.destroy();
-								io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-							}
-						});
-					});
-				} else {
-					game.getUsers().then(function(users){
-						users.forEach(function(user){
-							usersInThisGame.push(user.id);
-							
-							if(usersInThisGame.length == users.length){
-								if (usersInThisGame.indexOf(current_userid) != -1){
-									usersInThisGame.splice(usersInThisGame.indexOf(current_userid), 1);
-									game.setUsers(usersInThisGame).then(function(){
-										game.getUsers().then(function(result){
+				models.Game.findOne({
+					where: {
+						title: data.title
+					}
+				}).then(function (game) {
 
-										// update user list inside game
-										io.sockets.emit('exitGame', { username: current_username} );
-
-										// return this user to lobby
-										socket.emit('returnLobby');
-										});
-									});	
+					if (current_username == game.createdBy) {
+						game.getUsers().then(function (users) {
+							users.forEach(function (user) {
+								io.sockets.emit('backToLobby', { username: user.dataValues.username, title: game.title });
+								counter++;
+								if (counter == users.length) {
+									game.destroy();
+									io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
 								}
-							}
-						})
-					});
-				}
-			});
-			});
-		});
+							});
+						});
+					} else {
+						game.getUsers().then(function (users) {
+							users.forEach(function (user) {
+								usersInThisGame.push(user.id);
 
+								if (usersInThisGame.length == users.length) {
+									if (usersInThisGame.indexOf(current_userid) != -1) {
+										usersInThisGame.splice(usersInThisGame.indexOf(current_userid), 1);
+										game.setUsers(usersInThisGame).then(function () {
+											game.getUsers().then(function (result) {
 
-		// socket.on('cancelNewGame', function (data) {
-		// 	var counter = 0
-		// 	models.Game.findOne({
-		// 		where: {
-		// 			title: data.title
-		// 		}
-		// 	}).then(function (game) {
-		// 		game.getUsers().then(function(users){
-		// 			users.forEach(function(user){//only redirect users in the game 
-		// 				io.sockets.emit('backToLobby', user.dataValues.username);
-		// 				counter++
-		// 				if(counter == users.length){//when all users are read, delete the game from db
-		// 					game.destroy()
-		// 					io.sockets.emit('removeGame', game.title);//users not in game see it removed in real time
-		// 				}
-						
-		// 			})
-					
-		// 		})
+												// update user list inside game
+												io.sockets.emit('exitGame', { username: current_username });
 
-		// 	})
-
-		// })
-		// var GAMES =[
-		// 	{
-		// 		name: '',
-		// 		currentRound: 1,
-		// 		users: [{
-		// 			sk: 'aaga',
-		// 			username: 'name'
-		// 		},
-		// 		{
-		// 			sk: 'ajglahi21h3k',
-		// 			username: 'user'
-		// 		}
-		// 		]
-		// 	}
-		// ];
-		// var peopleAnswers = [{
-		// 	user: 'name',
-		// 	sk: 1,
-		// 	answer: 'answer',
-		// 	game: id
-		// }];
-		var endTime;
-
-		function sendQuestion(round, data, game){
-			//update round info
-			var gameQuestions = {}
-			gameQuestions.question={}
-			gameQuestions.question.incorrect_answers=[]
-
-				gameQuestions.round = round;
-				endTime = moment().add(1, 'minutes');
-				gameQuestions.endTime = endTime.toString();
-				game.getUsers().then(function(users){
-					users.forEach(function(user){//only send questions to users in the game 
-						models.Question.find({
-						  order: [
-						    Sequelize.fn( 'RAND' ),
-						  ]
-						}).then(function(question){//todo: send questions to client
-							gameQuestions.question.difficulty = question.difficulty
-							gameQuestions.question.id = question.id
-							gameQuestions.question.question = question.text
-							question.getAnswers().then(function(answers){
-								answers.forEach(function(answer){
-									if (answer.isCorrect){
-										gameQuestions.question.correct_answer = answer.text
-									} else {
-										gameQuestions.question.incorrect_answers.push(answer.text)
+												// return this user to lobby
+												socket.emit('returnLobby');
+											});
+										});
 									}
-								})
-								io.sockets.emit('sendQuestions', { user:user.dataValues.username , question: gameQuestions});
-								//console.log("END TIME " + endTime.toString());
-								var j = schedule.scheduleJob(endTime.toDate(), function(){
-  									io.sockets.emit('endRound', { user:user.dataValues.username , question: gameQuestions});
-								});
+								}
 							})
 						});
+					}
+				});
+			});
+		});
+		var endTime;
 
-						
-						
-					})
-					
+		function sendQuestion(round, data, game) {
+			//update round info
+			var gameQuestions = {};
+			gameQuestions.question = {};
+			gameQuestions.question.incorrect_answers = [];
+			var roundInfo = {};
+			gameQuestions.round = round;
+			endTime = moment().add(1, 'minutes');
+			gameQuestions.endTime = endTime.toString();
+			game.getUsers().then(function (users) {
+				users.forEach(function (user) {//only send questions to users in the game 
+					models.Question.find({
+						order: [
+							Sequelize.fn('RAND'),
+						]
+					}).then(function (question) {//todo: send questions to client
+						for (var i=0; i < GAMES.length; i++) {
+							var serverGame = GAMES[i];
+							if (serverGame.id == game.id) {
+								var roundQuestion = {};
+								roundQuestion.id = question.id;
+								roundQuestion.answers = [];
+								serverGame.gameQuestions.push(roundQuestion);
+								GAMES[i] = serverGame;
+							}
+						}
+						gameQuestions.question.difficulty = question.difficulty
+						gameQuestions.question.id = question.id
+						gameQuestions.question.question = question.text
+						question.getAnswers().then(function (answers) {
+							answers.forEach(function (answer) {
+								if (answer.isCorrect) {
+									gameQuestions.question.correct_answer = answer.text
+								} else {
+									gameQuestions.question.incorrect_answers.push(answer.text)
+								}
+							})
+							io.sockets.emit('sendQuestions', { user: user.dataValues.username, question: gameQuestions });
+							var j = schedule.scheduleJob(endTime.toDate(), function(){
+								//executes job scheduled for when the timer goes off on the user's end
+								endRoundVoting(1,2);
+							});
+						})
+					});
+
+
+
 				})
+
+			})
+		}
+		function endRoundVoting(game, info){
+			console.log(game + " " + info);
+			io.sockets.emit('endRound', "stuff");
+		}
+		function endRoundScoring(){
+
 		}
 		socket.on('startGame', function (data) {
-			var global_game = {name: data.title, round: 1};
-			var global_users =[];
 			models.Game.findOne({
 				where: {
 					title: data.title //what happends when the game has the same titles??
@@ -316,20 +287,54 @@ module.exports = function (server) {
 					progress: 1,
 					startedAt: Date.now()
 				});
-				game.getUsers().then(function(users){
-					users.forEach(function(user){
-						var tmpUser = {id: user.id, username: user.id}
-						global_users.push(user);
+				game.getUsers().then(function (users) {
+					users.forEach(function (user) {
 					});
-					global_game.users = global_users;
 					sendQuestion(1, data, game);
+					for (var i=0; i < GAMES.length; i++) {
+						var serverGame = GAMES[i];
+						if (serverGame.id == game.id) {
+							GAMES[i].round = 1;
+						}
+					}
 					console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 					console.log("--------- USERS --------" + JSON.stringify(USERS));
 				});
 			});
 		});
-		socket.on('sendAnswer', function(data){
+		socket.on('sendAnswer', function (data) {
+			//user sends answer to question
+			console.log("--- RECEIVED ANSWER ---")
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
+			var curUser;
+			for (var i =0; i < USERS.length; i++) {
+				var user = USERS[i];
+				if (user.seshKey === seshKey) {
+					curUser = user;
+				}
+			}
+			for (var i=0; i < GAMES.length; i++) {
+				//confusing as hell, input the users answer into the game object
+				var serverGame = GAMES[i];
+				console.log("---- GAME ----" + JSON.stringify(serverGame));
+				if (serverGame.id == curUser.game) {
+					for (var m = 0; m < serverGame.gameQuestions.length; m++) {
+						question = serverGame.gameQuestions[m];
+						console.log("---- QUESTION ----" + JSON.stringify(question));
+						if (question.id == data.questionID) {
+							var userAnswer = {};
+							userAnswer.userSesh = seshKey;
+							userAnswer.userId = curUser.id;
+							userAnswer.username = curUser.username;
+							userAnswer.answer = data.answer;
+							question.answers.push(userAnswer);
+							GAMES[i].gameQuestions[m] = question;
+						}
+					}
+				}
+			}
+			console.log("--------- GAMES --------" + JSON.stringify(GAMES));
+			console.log("--------- USERS --------" + JSON.stringify(USERS));
 			console.log(data);
 		});
 
@@ -349,7 +354,7 @@ module.exports = function (server) {
 					where: {
 						id: session.user_id
 					}
-				}).then(function(user) {
+				}).then(function (user) {
 
 					// Store the newly created game in the DB
 					models.Game.create({
@@ -359,12 +364,13 @@ module.exports = function (server) {
 						state: 'hold',
 						startedAt: null,
 						progress: null
-					}).then(function(game){
+					}).then(function (game) {
 						game.addUser(user.id);
 						//emit only after successfully creating game
 						global_game.id = game.id;
 						global_game.title = game.title;
 						global_game.round = 0;
+						global_game.gameQuestions = [];
 						GAMES.push(global_game);
 						global_users.id = user.id;
 						global_users.username = user.username;
@@ -373,12 +379,12 @@ module.exports = function (server) {
 						USERS.push(global_users);
 						console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 						console.log("--------- USERS --------" + JSON.stringify(USERS));
-						io.sockets.emit('gameCreated', {gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1});
+						io.sockets.emit('gameCreated', { gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1 });
 
 						// var destination = '/games';
 						// io.sockets.emit('redirect', destination);
 						//shouldn't use socket for redirection because socket redirects every logged in user to the page regardless of whether they joined
-					}).catch(function(err){
+					}).catch(function (err) {
 						//creating new game by same user with same title.
 						console.log("Game with these values in User_Game exists already.")
 
@@ -386,30 +392,5 @@ module.exports = function (server) {
 				});
 			});
 		});
-// TO DO IS START A CONNECTION FOR A GAME:
-// ROUND INFO SHOULD BE SENT TO USERS
-// api.newRound = function (req, res){
-// 	//update round info
-// 	var gameQuestions = 
-// 	{
-// 		'roundNumber':1,
-//		'endTime': 1491092481792,
-// 		'question' :
-// 			{
-// 				"correct_answer": "Red Lion",
-// 				"difficulty": 1,
-// 				"incorrect_answers": [
-// 					"Royal Oak",
-// 					"White Hart",
-// 					"King&#039;s Head"
-// 				],
-// 				"question": "According to the BBPA, what is the most common pub name in the UK?",
-// 				"category": "General Knowledge"
-// 			}
-// 	}
-// }
-
-
-
 	});
 };

@@ -27,16 +27,19 @@ function timerUpdate(endTime) {
     })();
 }
 
-function submitAnswer(){
-    answer = $("#inputAnswer").val();
-    if(roundQuestion.question.correct_answer === answer){
-        console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
-    }
-    else{
-        sockets.emit('sendAnswer',answer);
-    }
+// function submitAnswer(){
+//     var toSend = {};
+//     toSend.questionID = roundQuestion.question.id;
+//     answer = $("#inputAnswer").val();
+//     if(roundQuestion.question.correct_answer === answer){
+//         console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+//     }
+//     else{
+//         toSend.answer = answer;
+//         sockets.emit('sendAnswer',toSend);
+//     }
 
-}
+// }
 $(document).ready(function() {
     // This will fire when document is ready:
     $(window).resize(function() {
