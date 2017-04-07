@@ -44,12 +44,12 @@ Nothing this should server automatically
 
 The output of node is logged automatically by systemd, to read the log invoke
 
-`vagrant ssh`
-`sudo journalctl -u gameapp`
+1. `vagrant ssh`
+2. `sudo journalctl -u gameapp`
 
 To get a live-feed of node's output when running, execute the log with the -f flag
 
-`sudo journalctl -u gameapp -f`
+3. `sudo journalctl -u gameapp -f`
 
 
 ## File Structure
@@ -57,3 +57,8 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 * Static-Content: `web-app/static/`
 * Provisioning: `chef/`
 * VagrantFile: VM definition
+
+## Resources
+
+The Questions JSON File was generated via `https://opentdb.com/api_config.php` and was edited
+and stored in the database to suit our particular needs.
