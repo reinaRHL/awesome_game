@@ -97,8 +97,9 @@ app.factory('webServices', ['$http', function($http){
         $scope.allAnswers = random(answerArray)
         console.log($scope.allAnswers)
     });
-    $scope.score = 0
-
+    
+    (function() { $scope.score = localStorage.getItem("currentScore")//initialize score to what is store in memory on refresh
+      })();
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
@@ -119,6 +120,7 @@ app.factory('webServices', ['$http', function($http){
       if(answer == $scope.correctAnswer) {//if get the correct answer update their score
         console.log($scope.score)
         $scope.score++
+        localStorage.setItem("currentScore",$scope.score)  // record score in local memory
         socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
       }
     };
@@ -160,18 +162,19 @@ app.factory('webServices', ['$http', function($http){
     $("#answers").on('click',".realtimeAnswer",function() {//handle realtime answers
       var clickedAnswer = $( this ).text() 
       webServices.getThisQuestion(localStorage.getItem("currentQuestion")).then(function (resp){//question stay on page on refresh
-        $scope.question = resp.data.text;
-        $scope.difficulty = resp.data.difficulty;
-        $scope.correctAnswer = resp.data.correctAnswer;
-        $scope.falseAnswer = resp.data.falseAnswer;
+        $scope.realtimequestion = resp.data.text;
+        $scope.realtimedifficulty = resp.data.difficulty;
+        $scope.realtimecorrectAnswer = resp.data.correctAnswer;
+        $scope.realtimefalseAnswer = resp.data.falseAnswer;
         var answerArray = resp.data.falseAnswer
         answerArray.push(resp.data.correctAnswer)
-        $scope.allAnswers = random(answerArray)
-        console.log($scope.allAnswers)
-        alert( $scope.correctAnswer );
-        if(clickedAnswer == $scope.correctAnswer) {//if get the correct answer update their score
+        $scope.realtimeallAnswers = random(answerArray)
+        console.log($scope.realtimeallAnswers)
+        alert( $scope.realtimecorrectAnswer );
+        if(clickedAnswer == $scope.realtimecorrectAnswer) {//if get the correct answer update their score
           console.log($scope.score)
           $scope.score++
+          localStorage.setItem("currentScore",$scope.score)  // record score in local memory
           socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
         }
     });
