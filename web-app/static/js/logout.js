@@ -1,5 +1,5 @@
 // logout js
-var socket = io.connect();
+//var socket = io.connect();
 $(document).ready(function(){
 
 
@@ -19,7 +19,8 @@ $(document).ready(function(){
            window.location.href = data
        }
      });
-     socket.emit('logOutUser', $("#profile > div.panel-body > h1").text().split('  ')[1])
+     socket.close();
+     //socket.emit('logOutUser', $("#profile > div.panel-body > h1").text().split('  ')[1])
  });
 
  
