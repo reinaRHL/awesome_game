@@ -97,9 +97,9 @@ app.factory('webServices', ['$http', function($http){
         $scope.allAnswers = random(answerArray)
         console.log($scope.allAnswers)
     });
+
     
-    (function() { $scope.score = localStorage.getItem("currentScore")//initialize score to what is store in memory on refresh
-      })();
+     
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
@@ -170,7 +170,6 @@ app.factory('webServices', ['$http', function($http){
         answerArray.push(resp.data.correctAnswer)
         $scope.realtimeallAnswers = random(answerArray)
         console.log($scope.realtimeallAnswers)
-        alert( $scope.realtimecorrectAnswer );
         if(clickedAnswer == $scope.realtimecorrectAnswer) {//if get the correct answer update their score
           console.log($scope.score)
           $scope.score++
