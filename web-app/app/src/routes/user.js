@@ -150,9 +150,11 @@ user.addFriend = function (req, res){
 				username: dstUser
 			}
 		}).then(function (other_user){
-			logged_in_user.addFriend(other_user);
+			//force friend request
+			// not sure if the through: is updating the status field properly.
+			logged_in_user.addFriend(other_user, { through: { status: 1 }});
 			res.end();
-		})
+		});
 	});
 
 };

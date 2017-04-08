@@ -25,6 +25,12 @@ app.factory('webServices', ['$http', function ($http) {
 				return resp;
 			});
 		},
+		getUserFriends: function(){
+			return $http.get("/api/user/friends").success(function (resp) {
+				return resp;
+			});
+		},
+
 		getGames: function () {
 			return $http.get("/api/games").success(function (resp) {
 				return resp;
@@ -64,7 +70,16 @@ app.factory('webServices', ['$http', function ($http) {
 		webServices.getGames().then(function (resp) {
 			$scope.games = resp.data.games;
 		});
-
+		
+		webServices.getUserFriends().then(function (resp) {
+			// returns the friends added by this particular/logged in user
+			//console.log(resp.data);
+			var html = '';
+        	for (i =0;i <resp.data.length; i++){
+            	html += '<option>'+resp.data[i].name+'</option>'
+        	}
+        	$("#friendsOnline").html(html)
+		});
 
 
 		webServices.getThisGame().then(function (current_game) {
