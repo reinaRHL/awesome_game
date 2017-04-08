@@ -239,6 +239,7 @@ module.exports = function (server) {
 					})
 					games[game.title]={} // initialize game.id info to be empty set
 					games[game.title]["users"] = []
+					
 					gameQuestions.round = round
 					gameQuestions.endTime = endTime
 					game.getUsers().then(function(users){

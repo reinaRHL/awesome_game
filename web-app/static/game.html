@@ -39,7 +39,7 @@
                 <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
                 <button class="btn btn-default" ng-click="cancelGame()">Cancel Game</button>
           </div>
-          <div id="inGame" class="show">
+          <div id="inGame" class="hide">
               <h1 class="text-center">{{currentgame_title}}</h1>
 
               
@@ -67,12 +67,7 @@
                         <h4  ng-click="keepScore(answer)" ng-repeat="answer in allAnswers">{{answer}}</h4>
                       </div>
                   </div>
-                  <div id="inputAnswerDiv" class="input-group">
-                    <input id="inputAnswer"type="text" class="form-control" maxlength="50" placeholder="Enter Answer">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" id="inputAnswerButton" type="button">Submit Answer</button>
-                    </span>
-                  </div>
+                  
               </div>
           </div>
       </div>

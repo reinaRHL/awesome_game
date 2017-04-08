@@ -2,6 +2,8 @@
 
 var app = angular.module('indexApp', [])
 var socket = io.connect();
+var games = {}
+
 
 
 function getCookie(cookie, cname) {
@@ -77,6 +79,8 @@ app.factory('webServices', ['$http', function($http){
 
     webServices.getThisGame().then(function(current_game){
         $scope.currentgame_title = current_game.data.title;
+        games[$scope.currentgame_title]={}
+        
         webServices.getLobbyGame(current_game.data.id).then(function(resp){
 // need a few more fields to template the # of users in the
 // game, but this is the gist of it
@@ -119,6 +123,8 @@ app.factory('webServices', ['$http', function($http){
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
+      localStorage.setItem("currentScore",0)
+    
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
       document.location.href="/games";
     };
@@ -128,19 +134,29 @@ app.factory('webServices', ['$http', function($http){
     };
 
     $scope.startGame = function() {
-      $scope.currentScore = 0
+      $("#inGame").removeClass("hide")
+      $("#inGame").addClass("show")
+      $("#inLobby").removeClass("show")
+      $("#inLobby").addClass("hide")
+       
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
     };
 
     $scope.keepScore = function(answer) {
       console.log(answer)
-      if(answer == $scope.correctAnswer) {//if get the correct answer update their score
+      if(answer == $scope.correctAnswer && games[$("#inLobby > h1").text()][$("#roundNumber").html().substring(7)] == false) {//if get the correct answer update their score
         console.log($scope.score)
         $scope.score++
         $scope.currentScore++
         localStorage.setItem("currentScore",$scope.currentScore)  // record score in local memory
         socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score, currentScore:$scope.currentScore})
+        alert("Correct Answer")
+      }else if(answer != $scope.correctAnswer){
+        alert("Wrong Answer")
+      }else{
+        alert("You only have one shot")
       }
+      games[$("#inLobby > h1").text()][$("#roundNumber").html().substring(7)] = true
     };
 
     $scope.gameInfo = function(game_id) {
@@ -188,13 +204,19 @@ app.factory('webServices', ['$http', function($http){
         answerArray.push(resp.data.correctAnswer)
         $scope.realtimeallAnswers = random(answerArray)
         console.log($scope.realtimeallAnswers)
-        if(clickedAnswer == $scope.realtimecorrectAnswer) {//if get the correct answer update their score
+        if(clickedAnswer == $scope.realtimecorrectAnswer && games[$scope.currentgame_title][$("#roundNumber").html().substring(7)] == false) {//if get the correct answer update their score
           console.log($scope.score)
           $scope.score++
           $scope.currentScore++
           localStorage.setItem("currentScore",$scope.currentScore)  // record score in local memory
           socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score, currentScore:$scope.currentScore})
+          alert("Correct Answer")
+        } else if(clickedAnswer != $scope.realtimecorrectAnswer){
+          alert("Wrong Answer")
+        } else{
+          alert("You only have one shot")
         }
+        games[$("#inLobby > h1").text()][$("#roundNumber").html().substring(7)] = true//this round already voted 
     });
       
     });
@@ -229,7 +251,9 @@ app.factory('webServices', ['$http', function($http){
     });
 
     socket.on('endGame', function(data){
-      
+      data.users.forEach(function(user){
+        localStorage.setItem(user, 0);//when game ends set local storage scores to 0
+      })
       if (data.users.includes(document.user)) {
         $("#countdown").text("Game Over")
         setTimeout(function() { document.location.href="/lobby" }, 3000);
@@ -253,6 +277,8 @@ app.factory('webServices', ['$http', function($http){
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
         console.log(data.question.round)
         $("#roundNumber").text("Round: "+data.question.round)
+        
+        games[$scope.currentgame_title][data.question.round] = false// this round inilialize to have not voted
       }
     });
     
