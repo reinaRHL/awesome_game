@@ -136,4 +136,8 @@ user.getLoginPage = function (req, res) {
 	res.sendFile(path.resolve('../static/login.html'));
 };
 
+user.addFriend = function (req, res){
+	res.end();
+};
+
 module.exports = user;

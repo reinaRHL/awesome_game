@@ -34,6 +34,7 @@ app.get('/api/games', authentication.isAuthenticated, routes.api.getAllGames);
 app.get('/api/game/current', authentication.isAuthenticated, routes.api.getCurrentGame);
 app.post('/signup', routes.user.doSignup);
 app.post('/login', routes.user.doLogin);
+app.post('/addfriend', routes.user.addFriend);
 app.get('/login', authentication.authenticatedToProfile, routes.user.getLoginPage);
 app.delete('/logout', routes.user.doLogout);
 app.get('/', function (req,res) {

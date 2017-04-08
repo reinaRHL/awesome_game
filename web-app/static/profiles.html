@@ -18,7 +18,7 @@
          <nav>
             <ul class="nav nav-tabs">
                <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">{{username}}</a></li>
-               <li ><a id="log_out" href="/login" aria-expanded="true" class="navbar-right">Sign me up for Awesome Game!</a></li>
+               <li ><a id="log_out" href="/login" aria-expanded="true" class="navbar-right">Home</a></li>
             </ul>
          </nav>
          
@@ -70,6 +70,7 @@
                         <h3 class=""> {{gamesWon}} </h3>
                      </div>
                   </div>
+                  <div><button id="btn_addfriend" class="btn btn-success" ng-click="addFriend()">Add Friend</button></div>
                </div>
                <br>
                <div class="panel-footer profile-gameHistory">
