@@ -105,10 +105,20 @@ app.factory('webServices', ['$http', function ($http) {
 			toSend.questionID = localStorage.getItem('currentQuestion');
 			answer = $("#inputAnswer").val();
 			if (localStorage.getItem('currentQuestionsAnswer')=== answer) {
-				//console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+				// grab whatever current users score is in memory
 				var tempScore = parseInt($('#playerScore').text());
+				// correct answer gives 50 points
 				tempScore = tempScore + 50;
-				$('#playerScore').text(tempScore);
+				//create animation -> previous score incremented to new score after points
+				popScoreInGame(tempScore);
+				// send stuff
+				toSend.answer = answer;
+				socket.emit('sendAnswer', toSend);
+				$("#inputAnswer").attr('disabled', 'disabled');
+				//hide the button instead of disabling, because you can still click it
+				// and if your answer is right, the user can spam it and generate infinite
+				// amount of points.
+				$("#inputAnswerButton").hide();
 			}
 			else {
 				toSend.answer = answer;
@@ -255,6 +265,28 @@ var popScore = function (initScore) {
 	console.log($el.text());
 	var score = parseInt(initScore);
 	$({ someValue: 0 }).animate({ someValue: score }, { // from 0 to users score
+		duration: 2000, // 2 sec
+		easing: 'swing', // smooth transitioning
+		step: function () { // called on every step
+			// update the element's text with rounded-up value:
+			$el.text(commaSeparateNumber(Math.round(this.someValue)));
+		}
+	});
+
+	function commaSeparateNumber(val) {
+		while (/(\d+)(\d{3})/.test(val.toString())) {
+			val = val.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+		}
+		return val;
+	}
+};
+
+var popScoreInGame = function (NewScore) {
+	// Animate the element's value from 0 to to current user's score:
+	var $el = $("#playerScore");
+	console.log($el.text());
+	var score = parseInt(NewScore);
+	$({ someValue: $el.text() }).animate({ someValue: score }, { // from 0 to users score
 		duration: 2000, // 2 sec
 		easing: 'swing', // smooth transitioning
 		step: function () { // called on every step
