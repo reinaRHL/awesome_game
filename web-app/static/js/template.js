@@ -123,7 +123,8 @@ app.factory('webServices', ['$http', function($http){
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
-      localStorage.setItem("currentScore",0)
+      localStorage.setItem("currentScore",0)//current score is set to 0 when start
+      localStorage.setItem("inGame", 0)//show and hide properly
     
       socket.emit('createNewGame', {title: $('#inputGame').val(), friend: $('#inputPlayers').val()});
       document.location.href="/games";
@@ -138,6 +139,7 @@ app.factory('webServices', ['$http', function($http){
       $("#inGame").addClass("show")
       $("#inLobby").removeClass("show")
       $("#inLobby").addClass("hide")
+
        
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
     };
@@ -182,6 +184,8 @@ app.factory('webServices', ['$http', function($http){
 
     $scope.joinGame = function (){
       //TODO: need logic here => add user to game, redirect...
+      localStorage.setItem("inGame", 0)//show and hide properly
+      localStorage.setItem("currentScore",0)//current score is set to 0 when start
       socket.emit('joinGame', {game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1]});
       document.location.href="/games";
       console.log('join the game');
@@ -261,9 +265,30 @@ app.factory('webServices', ['$http', function($http){
         
       }
     });
-    
+
+    if(localStorage.getItem("inGame") == 1){
+      $("#inGame").removeClass("hide")
+      $("#inGame").addClass("show")
+      $("#inLobby").removeClass("show")
+      $("#inLobby").addClass("hide")
+    } else{
+      $("#inGame").removeClass("show")
+      $("#inGame").addClass("hide")
+      $("#inLobby").removeClass("hide")
+      $("#inLobby").addClass("show")
+    }
+
 
     socket.on('sendQuestions', function(data){
+      data.users.forEach(function(user){
+        localStorage.setItem(user, 0);//when game starts set local storage scores to 0
+      })
+      $("#inGame").removeClass("hide")
+      $("#inGame").addClass("show")
+      $("#inLobby").removeClass("show")
+      $("#inLobby").addClass("hide")
+      localStorage.setItem("inGame", 1)
+     
       if (data.users.includes(document.user)) {
         var html = ''
         var answerArray = data.question.question.incorrect_answers
@@ -294,7 +319,7 @@ app.factory('webServices', ['$http', function($http){
         $('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span class= "userInGame">'
         +data.user+'</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>');
         
-        $('#startGameUsers').append('<h4 ng-repeat="user in users" class="scoreList"><span class= "userInStartGame">'+data.user+'</span><span class="label label-default pull-right">200</span></h4>');
+        $('#startGameUsers').append('<h4 ng-repeat="user in users" class="scoreList"><span class= "userInStartGame">'+data.user+'</span><span class="label label-default pull-right"></span></h4>');
       }
     });
     
