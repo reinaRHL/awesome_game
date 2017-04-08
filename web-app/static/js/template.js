@@ -72,7 +72,7 @@ app.factory('webServices', ['$http', function ($http) {
 			webServices.getLobbyGame(current_game.data.id).then(function (resp) {
 				// need a few more fields to template the # of users in the
 				// game, but this is the gist of it
-				console.log(resp.data)
+				//console.log(resp.data)
 				$scope.host = resp.data.createdBy;
 				$scope.lobbyTitle = resp.data.title;
 				$scope.users = resp.data.users;
@@ -182,7 +182,8 @@ app.factory('webServices', ['$http', function ($http) {
 
 		socket.on('sendQuestions', function (data) {
 			if (document.user == data.user) {
-				console.log(data);
+				//debugging: shows questions and answers
+				//console.log(data);
 				$("#question").text(data.question.question.question);
 				timerUpdate(data.question.endTime);
 				localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
@@ -302,3 +303,9 @@ var popScoreInGame = function (NewScore) {
 		return val;
 	}
 };
+
+$('#friendsDropdown').click(function(e){
+	//redirect to user profile upon clicking on their
+	//name in the online users box.
+document.location.href = '/user/'+e.target.innerHTML;
+});

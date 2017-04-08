@@ -56,8 +56,8 @@ $(document).ready(function(){
     socket.on('getUsers', function(data){
         var html = '';
         for (i =0;i <data.length; i++){
-            html += '<li><a href="#">'+data[i]+'</a></li><li class="divider"></li>'
-            console.log("here" + data)
+            html += '<li><a>'+data[i]+'</a></li><li class="divider"></li>'
+            //console.log("here" + data)
         }
         $("#friendsDropdown").html(html)
     })

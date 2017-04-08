@@ -70,6 +70,10 @@ app.get('/user/:username', function(req, res){
 	
 });
 
+app.get('*', function(req, res){
+	res.redirect('/login');
+});
+
 // Start server
 var server = app.listen(PORT, function () {
 	console.log('web-app started on port ' + PORT);
