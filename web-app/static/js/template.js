@@ -169,6 +169,8 @@ app.factory('webServices', ['$http', function ($http) {
 				$("#inputAnswer").removeAttr("disabled");
 				$("#inputAnswerButton").removeClass("disabled");
 			}
+			$("#inLobby").removeClass('show').addClass('hidden');
+			$("#inGame").removeClass('hidden').addClass('show');
 		});
 
 		socket.on('gameJoined', function (data) {

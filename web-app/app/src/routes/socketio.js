@@ -141,11 +141,12 @@ module.exports = function (server) {
 						global_users.game = game.id;
 						global_users.score = 0;
 						USERS.push(global_users);
+						var socketRoom = "GAME".concat(game.id);
+						socket.join(socketRoom);
 						console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 						console.log("--------- USERS --------" + JSON.stringify(USERS));
 						game_ins.addUser(user.id, { updatedAt: Date.now() }).then(function (user_ins) {
 							game_ins.getUsers().then(function (users) {
-
 								io.sockets.emit('gameJoined', { user: user.username, title: data.game, numPlayers: users.length });
 							})
 						})
@@ -205,7 +206,8 @@ module.exports = function (server) {
 
 												// update user list inside game
 												io.sockets.emit('exitGame', { username: current_username });
-
+												var socketRoom = "GAME".concat(game.id); // remove user from game
+												socket.leave(socketRoom);
 												// return this user to lobby
 												socket.emit('returnLobby');
 											});
@@ -219,7 +221,7 @@ module.exports = function (server) {
 			});
 		});
 		var endTime;
-		function sendQuestion(round, data, game){
+		function sendQuestion(round, data, game, socket){
 			var gameQuestions = {};
 			gameQuestions.question = {};
 			gameQuestions.question.incorrect_answers = [];
@@ -257,7 +259,24 @@ module.exports = function (server) {
 									break;
 								}
 							}
-							io.sockets.emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+							for(var i = 0; i < USERS.length; i ++){
+								if(USERS[i].game == game.id){
+									console.log(" ---- SENDING QUESTION TO USER ----- " + JSON.stringify(USERS[i]));
+									var socketRoom = "GAME".concat(game.id);
+									console.log(socketRoom);
+									console.log(JSON.stringify(socket.rooms));
+									console.log(JSON.stringify(socket.id));
+									io.sockets.emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+									// TO DO: SOCKETS NEED TO SENT INDIVIDUALLY NOT TO EVERYONE CONNECTED!!!
+									// io.to(socketRoom).emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+									// socket.broadcast.to(USERS[i].seshKey).emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+									// io.to(USERS[i].seshKey).emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+									// if (io.sockets.connected[USERS[i].seshKey]) {
+									// 	io.sockets.connected[USERS[i].seshKey].emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+									// }
+								}
+							}
+							//io.sockets.emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
 							var j = schedule.scheduleJob(endTime.toDate(), function(){
 								//executes job scheduled for end time; ie when the timer goes off
 								endRoundVoting(game.id);
@@ -358,7 +377,7 @@ module.exports = function (server) {
 							GAMES[i].round = 1;
 						}
 					}
-					sendQuestion(1, data, game);
+					sendQuestion(1, data, game, socket);
 					console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 					console.log("--------- USERS --------" + JSON.stringify(USERS));
 				});
@@ -439,11 +458,13 @@ module.exports = function (server) {
 						global_users.username = user.username;
 						global_users.seshKey = seshKey;
 						global_users.game = game.id;
+						global_users.score = 0;
 						USERS.push(global_users);
 						console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 						console.log("--------- USERS --------" + JSON.stringify(USERS));
 						io.sockets.emit('gameCreated', { gameId: game.id, title: data.title, createdBy: user.username, numPlayers: data.friend.length + 1 });
-
+						var socketRoom = "GAME".concat(game.id);
+						socket.join(socketRoom);
 						// var destination = '/games';
 						// io.sockets.emit('redirect', destination);
 						//shouldn't use socket for redirection because socket redirects every logged in user to the page regardless of whether they joined
