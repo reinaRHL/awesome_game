@@ -154,6 +154,7 @@ module.exports = function (server) {
 			});
 		});
 
+		// TO DO: DELETE GAME FROM LIST OF GAMES
 		socket.on('cancelNewGame', function (data) {
 			var counter = 0;
 			var current_userid;
@@ -218,8 +219,57 @@ module.exports = function (server) {
 			});
 		});
 		var endTime;
+		function sendQuestion(round, data, game){
+			var gameQuestions = {};
+			gameQuestions.question = {};
+			gameQuestions.question.incorrect_answers = [];
+			var roundInfo = {};
+			gameQuestions.round = round;
+			endTime = moment().add(1, 'minutes');
+			gameQuestions.endTime = endTime.toString();
+			// for (var i = 0; i < USERS.length; i++){
+			// 	if(USERS[i].game == game.id){
+					models.Question.find({
+						order: [
+							Sequelize.fn('RAND'),
+						]
+					}).then(function (question) {
+						gameQuestions.question.difficulty = question.difficulty
+						gameQuestions.question.id = question.id
+						gameQuestions.question.question = question.text
+						question.getAnswers().then(function (answers) {
+							answers.forEach(function (answer) {
+								if (answer.isCorrect) {
+									gameQuestions.question.correct_answer = answer.text
+								} else {
+									gameQuestions.question.incorrect_answers.push(answer.text)
+								}
+							});
+							for (var i=0; i < GAMES.length; i++) {
+								var serverGame = GAMES[i];
+								if (serverGame.id == game.id) {
+									var roundQuestion = {};
+									roundQuestion.id = question.id;
+									roundQuestion.answers = [];
+									serverGame.gameQuestions.push(roundQuestion);
+									console.log("----- INSERTING QUESTION i: ----- " + i);
+									GAMES[i] = serverGame;
+									break;
+								}
+							}
+							io.sockets.emit('sendQuestions', { user: USERS[i].username, question: gameQuestions });
+							var j = schedule.scheduleJob(endTime.toDate(), function(){
+								//executes job scheduled for end time; ie when the timer goes off
+								endRoundVoting(game.id);
+							});
+							JOBS.push[j];
+						});
+					});
+				//}
+			//}
+		}
 
-		function sendQuestion(round, data, game) {
+		function sendQuestionOLD(round, data, game) {
 			//update round info
 			var gameQuestions = {};
 			gameQuestions.question = {};
@@ -243,6 +293,7 @@ module.exports = function (server) {
 								roundQuestion.answers = [];
 								serverGame.gameQuestions.push(roundQuestion);
 								GAMES[i] = serverGame;
+								break;
 							}
 						}
 						gameQuestions.question.difficulty = question.difficulty
@@ -270,7 +321,7 @@ module.exports = function (server) {
 				})
 
 			})
-		}
+		};
 		function endRoundVoting(game_id){
 			console.log(game_id);
 			var toSend;
@@ -278,7 +329,7 @@ module.exports = function (server) {
 				var serverGame = GAMES[i];
 				if (serverGame.id == game_id) {
 					var round = parseInt(serverGame.round);
-					// TO DO: set up questions so that everyone sees the same questions
+					// TO DO: set up answers so that everyone sees the same answers
 					toSend = serverGame.gameQuestions[round-1].answers;//get the submitted answers for that round
 				}
 			}
@@ -288,6 +339,8 @@ module.exports = function (server) {
 
 		}
 		socket.on('startGame', function (data) {
+			console.log("---- START GAME ------");
+			console.log(JSON.stringify(data));
 			models.Game.findOne({
 				where: {
 					title: data.title //what happends when the game has the same titles??
@@ -299,15 +352,13 @@ module.exports = function (server) {
 					startedAt: Date.now()
 				});
 				game.getUsers().then(function (users) {
-					users.forEach(function (user) {
-					});
-					sendQuestion(1, data, game);
 					for (var i=0; i < GAMES.length; i++) {
 						var serverGame = GAMES[i];
 						if (serverGame.id == game.id) {
 							GAMES[i].round = 1;
 						}
 					}
+					sendQuestion(1, data, game);
 					console.log("--------- GAMES --------" + JSON.stringify(GAMES));
 					console.log("--------- USERS --------" + JSON.stringify(USERS));
 				});
@@ -316,6 +367,7 @@ module.exports = function (server) {
 		socket.on('sendAnswer', function (data) {
 			//user sends answer to question
 			console.log("--- RECEIVED ANSWER ---")
+			console.log('DATA: ' + JSON.stringify(data));
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
 			var curUser;
 			for (var i =0; i < USERS.length; i++) {
