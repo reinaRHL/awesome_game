@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Profile</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> <!-- https://silviomoreto.github.io/bootstrap-select/examples/-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/bootswatch.css">
+      <link rel="stylesheet" href="/css/index.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+      
+   </head>
+   <body ng-app="indexApp">
+      <div ng-controller="indexCtrl">
+         <nav>
+            <ul class="nav nav-tabs">
+               <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">{{username}}</a></li>
+               <li ><a id="log_out" href="/login" aria-expanded="true" class="navbar-right">Sign me up for Awesome Game!</a></li>
+            </ul>
+         </nav>
+         
+        <div class="modal" id="gameInfo">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h1 class="text-center">{{lobbyTitle}}</h1>
+                </div>
+                <div class="modal-body"  >
+                    <div class="list-group">
+                    <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
+                        {{host}}
+                        <span class="label label-info pull-left">Creator</span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix" ng-repeat="user in users">
+                        <span>{{user}}</span>
+                        <span class="label label-success pull-left">Accepted</span>
+                    </a>
+                    </div>
+                <button id="joinBtn" ng-click='joinGame()' class="btn btn-success">Join Game</button>
+                <button id="cancelBtn" ng-click='closeGame()' class="btn btn-default">Close Game</button>
+                </div>
+          </div>
+          </div>
+        </div>
+         <div class="tab-content">
+            <div class="tab-pane fade active in panel panel-default" id="profile">
+               <div class="panel-body">
+                <h1><em>{{username}}  </em></h1>
+                <h3>{{lastSeen}}</h3>
+                  <div clas="row">
+                     <div class="col-md-4 col-xs-12">
+                        <h3>Games Played:</h3>
+                        <span class="fa fa-gamepad fa-5x " aria-hidden="true"></span>
+                        <h3 class=""> {{gamesPlayed}} </h3>
+                     </div>
+                     <div class="col-md-4 col-xs-12">
+                        <h3>Overall Score:</h3>
+                        <span class="fa-stack fa-5x ">
+                        <span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
+                        <span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
+                        </span>
+                     </div>
+                     <div class="col-md-4 col-xs-12">
+                        <h3>Games Won:</h3>
+                        <span class="fa fa-trophy fa-4x " aria-hidden="true"></span>
+                        <h3 class=""> {{gamesWon}} </h3>
+                     </div>
+                  </div>
+               </div>
+               <br>
+               <div class="panel-footer profile-gameHistory">
+                  <table class="table table-striped table-hover ">
+                     <h3>Game History</h3>
+                     <thead>
+                        <tr>
+                           <th>Game Started</th>
+                           <th>Game Ended</th>
+                           <th>Number of Players</th>
+                           <th>Status</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <!-- Use below incase you want to make table with different row color depending on the state-->
+                        <tr ng-class="{'info': game.state === 'done', 'success': game.state === 'in_progress', 'warning': game.state === 'hold'}" 
+                        <tr ng-repeat="game in games">
+                           <td>{{game.createdAt}}</td>
+                           <td></td>
+                           <td>{{game.users.length}}</td>
+                           <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+           
+
+         </div>
+      </div>
+
+      <script src="/js/profiles_js.js"></script>
+      
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+      <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </body>
+</html>
