@@ -51,6 +51,7 @@ app.factory('webServices', ['$http', function ($http) {
 }])
 	.controller('indexCtrl', ['webServices', '$scope', '$compile', function (webServices, $scope, $compile) {
 		var $compile;
+		$scope.current_question = [];
 		webServices.getUser().then(function (user) {
 			document.user = user.data.username;
 			$scope.username = user.data.username;
@@ -211,6 +212,13 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 		// Commence voting of choices
 		socket.on('endRound', function (data) {
+			$scope.current_question = [];
+			for(var i = 0; i<data.length; i++){
+				if($scope.username != data[i].username){
+					$scope.current_question.push(data[i]);
+				}
+			}
+			$scope.$apply();
 			$("#questionStateDiv").removeClass('show').addClass('hidden');
 			$("#votingStateDiv").removeClass('hidden').addClass('show');
 			console.log("Round End " + JSON.stringify(data));

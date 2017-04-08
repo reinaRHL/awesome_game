@@ -67,13 +67,13 @@
                     </span>
                   </div>
               </div>
-              <div class="row hidden" id="votingStateDiv">
+              <div class="row hidden" id="votingStateDiv" ng-repeat="answers in current_question">
+                  <button class="btn btn-primary btn-sm btn-block">{{answers.answer}}</button>
+                  <!--<button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
+                    <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
                   <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
+                    <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
+                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>-->
               </div>
           </div>
       </div>

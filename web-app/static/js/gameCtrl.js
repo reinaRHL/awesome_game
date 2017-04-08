@@ -48,10 +48,16 @@ $(document).ready(function() {
             // if larger or equal
             $('#inputAnswerButton').addClass("btn-sm");
             $('#inputAnswer').addClass("input-sm");
+            $('#votingStateDiv button').each(function(){
+                $(this).addClass("input-sm");
+            });
         } else {
             // if smaller
             $('#inputAnswerButton').removeClass("btn-sm");
             $('#inputAnswer').removeClass("input-sm");
+            $('#votingStateDiv button').each(function(){
+                $(this).removeClass("input-sm");
+            });
         }
     }).resize(); // This will simulate a resize to trigger the initial run.
 });
