@@ -214,12 +214,12 @@ module.exports = function (server) {
 			var countdown = 200;  
 			var round = 1;
 			var counter = 0
-			setInterval(function() {// add timer
+			var countdownId = setInterval(function() {// add timer
 				countdown--;
 				if(countdown>=0){ // countdown greater than 0, start game
 					io.sockets.emit('timer', { countdown: countdown }); 
 				} else{
-					io.sockets.emit("endGame",{}) // else end game
+					clearInterval(countdownId);
 				}
 				
 			}, 1000);
@@ -278,7 +278,7 @@ module.exports = function (server) {
 
 				})
 
-			setInterval(function () { // refresh question every 20 secs
+			var sendQuestionsId = setInterval(function () { // refresh question every 20 secs
 				
 				round++;
 				var counter = 0
@@ -320,8 +320,8 @@ module.exports = function (server) {
 								io.sockets.emit('sendQuestions', { users:games[game.title]["users"] , question: gameQuestions});
 
 							} else{
-								io.sockets.emit('endGame', { });
-
+								io.sockets.emit('endGame', {users:games[game.title]["users"] });
+								clearInterval(sendQuestionsId); // break out interval
 							}
 
 						})
@@ -336,9 +336,38 @@ module.exports = function (server) {
 		})
 
 		socket.on('updateScore', function (data) {
+			console.log(data.currentScore)
 			var users = games[data.game]["users"]//find users in game
-			io.sockets.emit('showScore', { users:users, user:data.name , score:data.score });//send the score of selected user to all users in game
+			models.User.findOne({
+					where: {
+						username: data.name
+					}
+				}).then(function (user){
+					
+			        	user.update({
+						score: data.score,
+					})
+						io.sockets.emit('showScore', { users:users, user:data.name , score:user.score , currentScore: data.currentScore});//send the score of selected user to all users in game
+
+					
+				});
 		})
+
+		socket.on('gameEnded', function (data) {
+			models.Game.findOne({
+					where: {
+						title: data.title
+					}
+				}).then(function (game){
+					
+			        	game.update({
+						state: "done",
+					})
+
+					
+				});
+		})
+
 
 
 

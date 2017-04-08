@@ -81,9 +81,25 @@ app.factory('webServices', ['$http', function($http){
 // need a few more fields to template the # of users in the
 // game, but this is the gist of it
           console.log(resp.data )
-          $scope.host = resp.data.createdBy;
+          $scope.host = {}
+          $scope.host.name = resp.data.createdBy;
+          if(resp.data.createdBy ==document.user){//if host is current user update score
+            $scope.host.score = localStorage.getItem("currentScore")
+          }
+
           $scope.lobbyTitle = resp.data.title;
-          $scope.users = resp.data.users;
+          $scope.users = {}
+          resp.data.users.forEach(function(user){
+            $scope.users[user]={}
+            $scope.users[user]['name'] = user
+            if(user == document.user){//if their name match
+              $scope.users[user]['score'] = localStorage.getItem("currentScore")
+            } else {
+              $scope.users[user]['score'] = localStorage.getItem(user) // get locally stored score
+            }
+            
+          });
+          console.log($scope.users )
         })
     });
 
@@ -95,11 +111,11 @@ app.factory('webServices', ['$http', function($http){
         var answerArray = resp.data.falseAnswer
         answerArray.push(resp.data.correctAnswer)
         $scope.allAnswers = random(answerArray)
-        console.log($scope.allAnswers)
+        console.log(resp)
     });
-
-    
      
+    $scope.currentScore = localStorage.getItem("currentScore")
+
     // This function will be called when user clicks 'create' button inside modal.
     // This function sends user input, title username and other player list.
     $scope.createGame = function() {
@@ -112,6 +128,7 @@ app.factory('webServices', ['$http', function($http){
     };
 
     $scope.startGame = function() {
+      $scope.currentScore = 0
       socket.emit('startGame', {title: $("#inLobby > h1").text()});
     };
 
@@ -120,8 +137,9 @@ app.factory('webServices', ['$http', function($http){
       if(answer == $scope.correctAnswer) {//if get the correct answer update their score
         console.log($scope.score)
         $scope.score++
-        localStorage.setItem("currentScore",$scope.score)  // record score in local memory
-        socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
+        $scope.currentScore++
+        localStorage.setItem("currentScore",$scope.currentScore)  // record score in local memory
+        socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score, currentScore:$scope.currentScore})
       }
     };
 
@@ -173,8 +191,9 @@ app.factory('webServices', ['$http', function($http){
         if(clickedAnswer == $scope.realtimecorrectAnswer) {//if get the correct answer update their score
           console.log($scope.score)
           $scope.score++
-          localStorage.setItem("currentScore",$scope.score)  // record score in local memory
-          socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score})
+          $scope.currentScore++
+          localStorage.setItem("currentScore",$scope.currentScore)  // record score in local memory
+          socket.emit('updateScore', {name: document.user, game: $("#inLobby > h1").text(), score: $scope.score, currentScore:$scope.currentScore})
         }
     });
       
@@ -186,6 +205,7 @@ app.factory('webServices', ['$http', function($http){
     });
 
     socket.on('showScore', function(data){
+      console.log(data.currentScore)
       
       if (data.users.includes(document.user)) {
         if(data.user == document.user){// if user is the client update the main score
@@ -193,8 +213,9 @@ app.factory('webServices', ['$http', function($http){
         }
         $('.scoreList>span.ng-binding').filter(function(){//update socreboard accordingly
           return $(this).text() == data.user;
-        }).next().html(data.score)
+        }).next().html(data.currentScore)
       }
+      localStorage.setItem(data.user,data.currentScore)//map user and score in memory
     });
 
     
@@ -209,9 +230,10 @@ app.factory('webServices', ['$http', function($http){
 
     socket.on('endGame', function(data){
       
-      if (document.user == data.username) {
-        $("#question").text("")
-        $("#answers").html("")
+      if (data.users.includes(document.user)) {
+        $("#countdown").text("Game Over")
+        setTimeout(function() { document.location.href="/lobby" }, 3000);
+        socket.emit('gameEnded', {title: $("#inLobby > h1").text()});
         
       }
     });
@@ -229,6 +251,8 @@ app.factory('webServices', ['$http', function($http){
         })
         $("#answers").html($compile(html)($scope))//show answers in real time
         localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+        console.log(data.question.round)
+        $("#roundNumber").text("Round: "+data.question.round)
       }
     });
     

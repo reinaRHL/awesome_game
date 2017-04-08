@@ -22,14 +22,14 @@
                     <div class="list-group" id="inGameUser">
                       
                     <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
-                        <span>{{host}}</span>
+                        <span>{{host.name}}</span>
                         <span class="label label-info pull-left">Creator</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
                         </span>
                     </a>
                     <a href="#" class="list-group-item text-center clearfix" ng-repeat="user in users">
-                        <span class="userInGame">{{user}}</span>
+                        <span class="userInGame">{{user.name}}</span>
                         <span class="label label-success pull-left">Accepted</span>
                         <span class="pull-right">
                         <button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button>
@@ -47,17 +47,18 @@
                   <div class="col-sm-12 gameInfo well">
                       <!--users-->
 					  <div class="text-center margin-bottom">
+            <h3 id="roundNumber" class='text-center'></h3>
             <h3 id="countdown" class='text-center label-default'></h3>
 						<h3>Score:</h3>
 						<span class="fa-stack fa-5x ">
 						<span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
-						<span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
+						<span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{Score}}</span>
 						</span>
 					  </div>
 					  <hr>
                     <div id="startGameUsers">
-                      <h4 class="scoreList"><span>{{host}}</span><span class="label label-success pull-right">300</span></h4>
-                      <h4 ng-repeat="user in users" class="scoreList"><span class="userInStartGame">{{user}}</span><span class="label label-default pull-right">200</span></h4>
+                      <h4 class="scoreList"><span>{{host.name}}</span><span class="label label-success pull-right">{{host.score}}</span></h4>
+                      <h4 ng-repeat="user in users" class="scoreList"><span class="userInStartGame">{{user.name}}</span><span class="label label-default pull-right">{{user.score}}</span></h4>
                     </div>
                   </div>
                   <div id="divGameplay"class="col-sm-12">
