@@ -66,7 +66,7 @@ end
 # Populate the DB
 execute "populate_db" do
   cwd "/home/ubuntu/project/web-app/app"
-  command "node populateDb.js -q ./src/questions/questions.json"
+  command "node populateDb.js -q ./src/questions/questions1_raw.json"
 end
 
 # Add a service file for running the music app on startup

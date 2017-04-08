@@ -20,17 +20,16 @@ api.getDBUser = function(req, res){
 			username: req.params['username']
 		}
 	}).then(function(user){
-		console.log(user);
 		res.setHeader('Content-Type', 'text/json');
 		res.send({
-		username: current_user.username,
-		score: current_user.score,
-		gamesWon: current_user.gamesWon,
-		gamesPlayed: current_user.gamesPlayed,
-		lastLoggedIn: current_user.lastLoggedIn
+		username: user.username,
+		score: user.score,
+		gamesWon: user.gamesWon,
+		gamesPlayed: user.gamesPlayed,
+		lastLoggedIn: user.lastLoggedIn
 		});
 	});
-}
+};
 
 // Returns a list of friend objects(containing id & username) of the current user.
 api.getUserFriends = function (req, res) {

@@ -25,7 +25,7 @@ app.use("/user", express.static(path.join(__dirname, 'static'))); //serving for 
 
 // Routes
 app.get('/api/user', authentication.isAuthenticated, routes.api.getUser);
-app.get('/api/user/:username', routes.api.getDBUser);
+app.get('/getuser/:username', routes.api.getDBUser);
 app.get('/api/user/friends', authentication.isAuthenticated, routes.api.getUserFriends);
 app.get('/api/user/history', authentication.isAuthenticated, routes.api.getUserGameHistory);
 app.get('/api/lobbyGame/:id',authentication.isAuthenticated, routes.api.getLobbyGame);
