@@ -16,6 +16,12 @@ app.factory('webServices', ['$http', function ($http) {
 				return resp;
 			});
 		},
+        getUserFriends: function(){
+			return $http.get("/api/user/friends").success(function (resp) {
+				return resp;
+			});
+        },
+
         getGames: function () {
 			return $http.get("/api/games").success(function (resp) {
 				return resp;
@@ -47,7 +53,21 @@ app.factory('webServices', ['$http', function ($http) {
                 if(current_user.data.username === window.location.pathname.split("/").pop()){
                     $('#btn_addfriend').hide();
                 }
+
+                webServices.getUserFriends().then(function (resp) {
+			    // if the logged in user has already addded this person
+                // then don't show them the button to perform another add
+                for(z=0; z < resp.data.length ;z++){
+            
+                    if(window.location.pathname.split("/").pop() === resp.data[z].name){
+                        $('#btn_addfriend').hide();
+                    }
+                }
+			
+		        });
             });
+
+            
         /*
         // this won't actually show relevant user game history as of now,
         // it's written as global game history
@@ -55,7 +75,6 @@ app.factory('webServices', ['$http', function ($http) {
 			$scope.games = resp.data.games;
 		});*/
         $scope.addFriend = function(){
-            console.log('add');
             webServices.getLoggedInUser().then(function (current_user){
                 if(current_user.data.username === undefined){
                     //the user is looking at profiles but isn't logged in
@@ -72,7 +91,8 @@ app.factory('webServices', ['$http', function ($http) {
                     url: '/addfriend',
                     data: toSend,
                     success: function(data){
-                        console.log('added friend to user');
+                        $('#btn_addfriend').hide();
+
                     }
                 });
                 }
