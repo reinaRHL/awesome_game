@@ -347,16 +347,24 @@ module.exports = function (server) {
 			})
 		};
 		function endRoundVoting(game_id){
+			//server sends back answers that users have entered, along with the correct answer
 			console.log(game_id);
 			var toSend;
+			var round;
 			for (var i=0; i < GAMES.length; i++) {
 				var serverGame = GAMES[i];
 				if (serverGame.id == game_id) {
-					var round = parseInt(serverGame.round);
+					round = parseInt(serverGame.round);
 					// TO DO: set up answers so that everyone sees the same answers
 					toSend = serverGame.gameQuestions[round-1].answers;//get the submitted answers for that round
 				}
 			}
+			var correct_answer = {}; //send the correct answer
+			correct_answer.userSesh = null;
+			correct_answer.userId = 0;
+			correct_answer.username = 'correct';
+			correct_answer.answer = serverGame.gameQuestions[round-1].systemAnswers.correct_answer;
+			toSend.push(correct_answer);
 			io.sockets.emit('endRound', toSend);
 		}
 		function endRoundScoring(){

@@ -67,8 +67,8 @@
                     </span>
                   </div>
               </div>
-              <div class="row hidden" id="votingStateDiv" ng-repeat="answers in current_question">
-                  <button class="btn btn-primary btn-sm btn-block">{{answers.answer}}</button>
+              <div class="row hidden" id="votingStateDiv">
+                  <button ng-repeat="answers in current_question" class="btn btn-primary btn-sm btn-block">{{answers.answer}}</button>
                   <!--<button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
                     <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
                   <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
