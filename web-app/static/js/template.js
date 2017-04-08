@@ -105,7 +105,10 @@ app.factory('webServices', ['$http', function ($http) {
 			toSend.questionID = localStorage.getItem('currentQuestion');
 			answer = $("#inputAnswer").val();
 			if (localStorage.getItem('currentQuestionsAnswer')=== answer) {
-				console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+				//console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
+				var tempScore = parseInt($('#playerScore').text());
+				tempScore = tempScore + 50;
+				$('#playerScore').text(tempScore);
 			}
 			else {
 				toSend.answer = answer;
@@ -173,7 +176,7 @@ app.factory('webServices', ['$http', function ($http) {
 				$("#question").text(data.question.question.question);
 				timerUpdate(data.question.endTime);
 				localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
-				localStorage.setItem("currentQuestionsAnswer", data.question.correct_answer);
+				localStorage.setItem("currentQuestionsAnswer", data.question.question.correct_answer);
 				roundQuestion = data.question;
 				
 				$("#inputAnswer").removeAttr("disabled");
