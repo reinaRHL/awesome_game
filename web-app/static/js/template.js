@@ -93,6 +93,10 @@ app.factory('webServices', ['$http', function ($http) {
 
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
+			// debugging: this shows the question/answer  before the current one
+			console.log(localStorage.getItem('currentQuestionsAnswer'));
+			console.log($scope.correctAnswer);
+			//
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
 		};
@@ -100,7 +104,7 @@ app.factory('webServices', ['$http', function ($http) {
 			var toSend = {};
 			toSend.questionID = localStorage.getItem('currentQuestion');
 			answer = $("#inputAnswer").val();
-			if (roundQuestion.question.correct_answer === answer) {
+			if (localStorage.getItem('currentQuestionsAnswer')=== answer) {
 				console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
 			}
 			else {
@@ -133,6 +137,7 @@ app.factory('webServices', ['$http', function ($http) {
 
 		$scope.joinGame = function () {
 			//TODO: need logic here => add user to game, redirect...
+			
 			socket.emit('joinGame', { game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1] });
 			document.location.href = "/games";
 			console.log('join the game');
@@ -159,14 +164,18 @@ app.factory('webServices', ['$http', function ($http) {
 			$scope.difficulty = resp.data.difficulty;
 			$scope.correctAnswer = resp.data.correctAnswer;
 			$scope.falseAnswer = resp.data.falseAnswer;
+			
 		});
 
 		socket.on('sendQuestions', function (data) {
 			if (document.user == data.user) {
+				console.log(data);
 				$("#question").text(data.question.question.question);
 				timerUpdate(data.question.endTime);
 				localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+				localStorage.setItem("currentQuestionsAnswer", data.question.correct_answer);
 				roundQuestion = data.question;
+				
 				$("#inputAnswer").removeAttr("disabled");
 				$("#inputAnswerButton").removeClass("disabled");
 			}
@@ -175,7 +184,7 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 
 		socket.on('gameJoined', function (data) {
-
+			
 			$('.gameTitle').filter(function () {
 				return $(this).text() == data.title;
 			}).prev().html("players: " + data.numPlayers)

@@ -112,6 +112,7 @@ module.exports = function (server) {
 			console.log(JSON.stringify(data));
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
 			var global_users = {};
+			
 			models.Session.findOne({
 				where: {
 					key: seshKey
