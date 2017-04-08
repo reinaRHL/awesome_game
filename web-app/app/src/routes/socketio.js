@@ -251,8 +251,13 @@ module.exports = function (server) {
 								var serverGame = GAMES[i];
 								if (serverGame.id == game.id) {
 									var roundQuestion = {};
+									//add information on what questions were used for the round
 									roundQuestion.id = question.id;
-									roundQuestion.answers = [];
+									roundQuestion.answers = []; //answers are user emited, since it's a new round it should be blank
+									var systemAnswers = {};
+									systemAnswers.correct_answer = gameQuestions.question.correct_answer;
+									systemAnswers.incorrect_answers = gameQuestions.question.incorrect_answers;
+									roundQuestion.systemAnswers = systemAnswers;
 									serverGame.gameQuestions.push(roundQuestion);
 									console.log("----- INSERTING QUESTION i: ----- " + i);
 									GAMES[i] = serverGame;
@@ -308,7 +313,7 @@ module.exports = function (server) {
 							var serverGame = GAMES[i];
 							if (serverGame.id == game.id) {
 								var roundQuestion = {};
-								roundQuestion.id = question.id;
+								id = question.id;
 								roundQuestion.answers = [];
 								serverGame.gameQuestions.push(roundQuestion);
 								GAMES[i] = serverGame;
