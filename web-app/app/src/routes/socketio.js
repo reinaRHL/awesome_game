@@ -106,15 +106,12 @@ module.exports = function (server) {
 		})
 
 		socket.on('joinGame', function (data) {
-
+			console.log("------ JOIN GAME -------");						
+			console.log("--------- GAMES --------" + JSON.stringify(GAMES));
+			console.log("--------- USERS --------" + JSON.stringify(USERS));
+			console.log(JSON.stringify(data));
 			var seshKey = getCookie(socket.request.headers.cookie, "key");
-			var currentGame;
 			var global_users = {};
-			for (serverGame in GAMES) {
-				if (serverGame.title == data.title) {
-					currentGame == serverGame; //this is the game we are dealing with
-				}
-			}
 			models.Session.findOne({
 				where: {
 					key: seshKey
@@ -130,7 +127,7 @@ module.exports = function (server) {
 							title: data.game
 						}
 					}).then(function (game) {
-						var game_ins = models.Game.build({
+						var game_ins = models.Game.build({ ///omg is he creating one every time??
 							id: game.id,
 							title: data.game,
 
@@ -141,9 +138,11 @@ module.exports = function (server) {
 						global_users.id = user.id;
 						global_users.username = user.username;
 						global_users.seshKey = seshKey;
-						global_users.game = currentGame.id;
+						global_users.game = game.id;
 						global_users.score = 0;
 						USERS.push(global_users);
+						console.log("--------- GAMES --------" + JSON.stringify(GAMES));
+						console.log("--------- USERS --------" + JSON.stringify(USERS));
 						game_ins.addUser(user.id, { updatedAt: Date.now() }).then(function (user_ins) {
 							game_ins.getUsers().then(function (users) {
 
