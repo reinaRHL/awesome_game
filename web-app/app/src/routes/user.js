@@ -137,7 +137,24 @@ user.getLoginPage = function (req, res) {
 };
 
 user.addFriend = function (req, res){
-	res.end();
+	var srcUser = req.body.srcUser;
+	var dstUser = req.body.destUser;
+
+	models.User.findOne({
+		where: {
+			username: srcUser
+		}
+	}).then(function (logged_in_user){
+		models.User.findOne({
+			where: {
+				username: dstUser
+			}
+		}).then(function (other_user){
+			logged_in_user.addFriend(other_user);
+			res.end();
+		})
+	});
+
 };
 
 module.exports = user;
