@@ -20,9 +20,12 @@ app.use(bodyParser.urlencoded({   // to support URL-encoded bodies
 }));
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use("/user", express.static(path.join(__dirname, 'static'))); //serving for /user paths
+
 
 // Routes
 app.get('/api/user', authentication.isAuthenticated, routes.api.getUser);
+app.get('/api/user/:username', routes.api.getDBUser);
 app.get('/api/user/friends', authentication.isAuthenticated, routes.api.getUserFriends);
 app.get('/api/user/history', authentication.isAuthenticated, routes.api.getUserGameHistory);
 app.get('/api/lobbyGame/:id',authentication.isAuthenticated, routes.api.getLobbyGame);
@@ -49,6 +52,22 @@ app.get('/games', authentication.isAuthenticated, function (req, res) {
 });
 app.get('/friends', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
+});
+
+app.get('/user/:username', function(req, res){
+
+	models.User.count({
+		where: {
+			username: req.params['username']
+		}
+	}).then(function (exists){
+		if(exists){
+			res.sendFile(path.resolve("../static/profiles.html"));
+		}else{
+			res.redirect('/login');
+		}
+	});
+	
 });
 
 // Start server

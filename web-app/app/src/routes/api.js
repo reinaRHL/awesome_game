@@ -14,6 +14,24 @@ api.getUser = function (req, res) {
 	});
 };
 
+api.getDBUser = function(req, res){
+	models.User.findOne({
+		where:{
+			username: req.params['username']
+		}
+	}).then(function(user){
+		console.log(user);
+		res.setHeader('Content-Type', 'text/json');
+		res.send({
+		username: current_user.username,
+		score: current_user.score,
+		gamesWon: current_user.gamesWon,
+		gamesPlayed: current_user.gamesPlayed,
+		lastLoggedIn: current_user.lastLoggedIn
+		});
+	});
+}
+
 // Returns a list of friend objects(containing id & username) of the current user.
 api.getUserFriends = function (req, res) {
 	current_user = req.user;
