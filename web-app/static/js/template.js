@@ -94,8 +94,8 @@ app.factory('webServices', ['$http', function ($http) {
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
 			// debugging: this shows the question/answer  before the current one
-			console.log(localStorage.getItem('currentQuestionsAnswer'));
-			console.log($scope.correctAnswer);
+			//console.log(localStorage.getItem('currentQuestionsAnswer'));
+			//console.log($scope.correctAnswer);
 			//
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
@@ -262,7 +262,7 @@ app.factory('webServices', ['$http', function ($http) {
 var popScore = function (initScore) {
 	// Animate the element's value from 0 to to current user's score:
 	var $el = $("#playerScore");
-	console.log($el.text());
+	//console.log($el.text());
 	var score = parseInt(initScore);
 	$({ someValue: 0 }).animate({ someValue: score }, { // from 0 to users score
 		duration: 2000, // 2 sec
@@ -284,7 +284,7 @@ var popScore = function (initScore) {
 var popScoreInGame = function (NewScore) {
 	// Animate the element's value from 0 to to current user's score:
 	var $el = $("#playerScore");
-	console.log($el.text());
+	//console.log($el.text());
 	var score = parseInt(NewScore);
 	$({ someValue: $el.text() }).animate({ someValue: score }, { // from 0 to users score
 		duration: 2000, // 2 sec
