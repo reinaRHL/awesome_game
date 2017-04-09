@@ -224,11 +224,12 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 		// Commence voting of choices
 		socket.on('endRound', function (data) {
-			var endRound = data.endRound
+			var endTime = data.endTime;
+			timerUpdate(endTime);
 			$scope.current_question = [];
-			for(var i = 0; i<data.length; i++){
-				if($scope.userId != data[i].userId){
-					$scope.current_question.push(data[i]);
+			for(var i = 0; i<data.answers.length; i++){
+				if($scope.userId != data.answers[i].userId){
+					$scope.current_question.push(data.answers[i]);
 				}
 			}
 			$scope.$apply();
