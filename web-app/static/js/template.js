@@ -163,14 +163,12 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 
 		socket.on('sendQuestions', function (data) {
-			if (document.user == data.user) {
-				$("#question").text(data.question.question.question);
-				timerUpdate(data.question.endTime);
-				localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
-				roundQuestion = data.question;
-				$("#inputAnswer").removeAttr("disabled");
-				$("#inputAnswerButton").removeClass("disabled");
-			}
+			$("#question").text(data.question.question.question);
+			timerUpdate(data.question.endTime);
+			localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+			roundQuestion = data.question;
+			$("#inputAnswer").removeAttr("disabled");
+			$("#inputAnswerButton").removeClass("disabled");
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
 		});
