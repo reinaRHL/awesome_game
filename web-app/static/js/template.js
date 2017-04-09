@@ -25,6 +25,12 @@ app.factory('webServices', ['$http', function ($http) {
 				return resp;
 			});
 		},
+		getUserFriends: function(){
+			return $http.get("/api/user/friends").success(function (resp) {
+				return resp;
+			});
+		},
+
 		getGames: function () {
 			return $http.get("/api/games").success(function (resp) {
 				return resp;
@@ -65,7 +71,16 @@ app.factory('webServices', ['$http', function ($http) {
 		webServices.getGames().then(function (resp) {
 			$scope.games = resp.data.games;
 		});
-
+		
+		webServices.getUserFriends().then(function (resp) {
+			// returns the friends added by this particular/logged in user
+			//console.log(resp.data);
+			var html = '';
+        	for (i =0;i <resp.data.length; i++){
+            	html += '<option>'+resp.data[i].name+'</option>'
+        	}
+        	$("#friendsOnline").html(html)
+		});
 
 
 		webServices.getThisGame().then(function (current_game) {
@@ -73,7 +88,7 @@ app.factory('webServices', ['$http', function ($http) {
 			webServices.getLobbyGame(current_game.data.id).then(function (resp) {
 				// need a few more fields to template the # of users in the
 				// game, but this is the gist of it
-				console.log(resp.data)
+				//console.log(resp.data)
 				$scope.host = resp.data.createdBy;
 				$scope.lobbyTitle = resp.data.title;
 				$scope.users = resp.data.users;
@@ -107,6 +122,10 @@ app.factory('webServices', ['$http', function ($http) {
 		}
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
+			// debugging: this shows the question/answer  before the current one
+			//console.log(localStorage.getItem('currentQuestionsAnswer'));
+			//console.log($scope.correctAnswer);
+			//
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
 		};
@@ -156,6 +175,7 @@ app.factory('webServices', ['$http', function ($http) {
 
 		$scope.joinGame = function () {
 			//TODO: need logic here => add user to game, redirect...
+			
 			socket.emit('joinGame', { game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1] });
 			document.location.href = "/games";
 			console.log('join the game');
@@ -182,6 +202,7 @@ app.factory('webServices', ['$http', function ($http) {
 			$scope.difficulty = resp.data.difficulty;
 			$scope.correctAnswer = resp.data.correctAnswer;
 			$scope.falseAnswer = resp.data.falseAnswer;
+			
 		});
 
 		socket.on('sendQuestions', function (data) {
@@ -201,7 +222,7 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 
 		socket.on('gameJoined', function (data) {
-			console.log('we joined fam');
+			
 			$('.gameTitle').filter(function () {
 				return $(this).text() == data.title;
 			}).prev().html("players: " + data.numPlayers)
@@ -271,7 +292,7 @@ app.factory('webServices', ['$http', function ($http) {
 var popScore = function (initScore) {
 	// Animate the element's value from 0 to to current user's score:
 	var $el = $("#playerScore");
-	console.log($el.text());
+	//console.log($el.text());
 	var score = parseInt(initScore);
 	$({ someValue: 0 }).animate({ someValue: score }, { // from 0 to users score
 		duration: 2000, // 2 sec
@@ -289,3 +310,31 @@ var popScore = function (initScore) {
 		return val;
 	}
 };
+
+var popScoreInGame = function (NewScore) {
+	// Animate the element's value from 0 to to current user's score:
+	var $el = $("#playerScore");
+	//console.log($el.text());
+	var score = parseInt(NewScore);
+	$({ someValue: $el.text() }).animate({ someValue: score }, { // from 0 to users score
+		duration: 2000, // 2 sec
+		easing: 'swing', // smooth transitioning
+		step: function () { // called on every step
+			// update the element's text with rounded-up value:
+			$el.text(commaSeparateNumber(Math.round(this.someValue)));
+		}
+	});
+
+	function commaSeparateNumber(val) {
+		while (/(\d+)(\d{3})/.test(val.toString())) {
+			val = val.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+		}
+		return val;
+	}
+};
+
+$('#friendsDropdown').click(function(e){
+	//redirect to user profile upon clicking on their
+	//name in the online users box.
+document.location.href = '/user/'+e.target.innerHTML;
+});
