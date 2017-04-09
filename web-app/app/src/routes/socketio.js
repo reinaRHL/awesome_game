@@ -193,8 +193,10 @@ module.exports = function (server) {
 					return round.question.id === question.id;
 				});
 				
-				if (roundIndex === -1)
+				if (roundIndex === -1) {
+					console.log('----- FOUND QUESTION -----');
 					return question;
+				}
 				return findRandomQuestion(game);
 			});
 		}
@@ -206,8 +208,6 @@ module.exports = function (server) {
 					question: null,
 					answers: []
 				};
-
-				gameMap[game.id].rounds.push(round);
 
 				var endTime = moment().add(1, 'minutes');
 				var gameQuestion = {
@@ -230,6 +230,7 @@ module.exports = function (server) {
 					});
 
 					round.question = gameQuestion;
+					gameMap[game.id].rounds.push(round);
 					var roomId = "GAME".concat(game.id);
 					io.in(roomId).emit('sendQuestions', { question: gameQuestion });
 
@@ -244,14 +245,17 @@ module.exports = function (server) {
 			console.log('----- END ROUND VOTING -----');
 			var rounds = gameMap[game_id].rounds;
 			var round = rounds[rounds.length - 1];
-			var answers = [{ userId: 0, answer: round.queston.question.correct_answer }];
+			console.log(round);
+			var answers = [{ userId: 0, answer: round.question.question.correct_answer }];
 
 			for (var i = 0; i < (5 - Object.keys(round.answers).length); i++) {
-				answers.push({ userId: 0, answer: round.queston.question.incorrect_answers[i] });
+				answers.push({ userId: 0, answer: round.question.question.incorrect_answers[i] });
 			}
-			round.answers.forEach(answers.push);
+			round.answers.forEach(function (answer) {
+				answers.push(answer);
+			});
 
-			var roomId = "GAME".concat(game.id);
+			var roomId = "GAME".concat(game_id);
 			io.in(roomId).emit('endRound', answers);
 		}
 
