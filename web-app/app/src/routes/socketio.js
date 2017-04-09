@@ -217,7 +217,8 @@ module.exports = function (server) {
 						id: question.id,
 						question: question.text
 					},
-					endTime: endTime.toString()
+					endTime: endTime.toString(),
+					scores: gameMap[game.id].scores
 				};
 				
 				return question.getAnswers().then(function (answers) {
@@ -246,10 +247,10 @@ module.exports = function (server) {
 			var rounds = gameMap[game_id].rounds;
 			var round = rounds[rounds.length - 1];
 			console.log(round);
-			var answers = [{ userId: 0, answer: round.question.question.correct_answer }];
+			var answers = [{ userId: -1, answer: round.question.question.correct_answer }];
 
 			for (var i = 0; i < (5 - Object.keys(round.answers).length); i++) {
-				answers.push({ userId: 0, answer: round.question.question.incorrect_answers[i] });
+				answers.push({ userId: -2, answer: round.question.question.incorrect_answers[i] });
 			}
 			round.answers.forEach(function (answer) {
 				answers.push(answer);
@@ -275,6 +276,15 @@ module.exports = function (server) {
 			});
 			game.getUsers().then(function (users) {
 				gameMap[game.id].rounds = [];
+				gameMap[game.id].scores = [];
+
+				users.forEach(function (user) {
+					gameMap[game.id].scores.push({
+						username: user.username,
+						score: 0
+					});
+				});
+
 				sendQuestion(game, socket);
 			});
 		});
