@@ -111,7 +111,7 @@
                            <th>Game Started</th>
                            <th>Game Ended</th>
                            <th>Number of Players</th>
-                           <th>Status</th>
+                          
                         </tr>
                      </thead>
                      <tbody>
@@ -121,7 +121,7 @@
                            <td>{{game.createdAt}}</td>
                            <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">{{game.updatedAt}}</span><span ng-switch-when="hold">Waiting</span></td>
                            <td>{{game.users.length}}</td>
-                           <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
+                  
                         </tr>
                      </tbody>
                   </table>
