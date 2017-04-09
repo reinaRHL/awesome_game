@@ -54,6 +54,7 @@ app.factory('webServices', ['$http', function ($http) {
 		$scope.current_question = [];
 		webServices.getUser().then(function (user) {
 			document.user = user.data.username;
+			$scope.userId = user.data.id;
 			$scope.username = user.data.username;
 			$scope.score = user.data.score;
 			$scope.gamesPlayed = user.data.gamesPlayed;
@@ -175,7 +176,7 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 
 		socket.on('gameJoined', function (data) {
-
+			console.log('we joined fam');
 			$('.gameTitle').filter(function () {
 				return $(this).text() == data.title;
 			}).prev().html("players: " + data.numPlayers)
@@ -214,7 +215,7 @@ app.factory('webServices', ['$http', function ($http) {
 		socket.on('endRound', function (data) {
 			$scope.current_question = [];
 			for(var i = 0; i<data.length; i++){
-				if($scope.username != data[i].username){
+				if($scope.userId != data[i].userId){
 					$scope.current_question.push(data[i]);
 				}
 			}

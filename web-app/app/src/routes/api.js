@@ -6,6 +6,7 @@ api.getUser = function (req, res) {
 	// populate the data for response
 	res.setHeader('Content-Type', 'text/json');
 	res.send({
+		id: current_user.id,
 		username: current_user.username,
 		score: current_user.score,
 		gamesWon: current_user.gamesWon,
@@ -63,12 +64,12 @@ api.getAllGames = function (req, res) {
     	if (nofg > 0){
     		models.Game.findAll()
 			.then(function (games){
-				console.log(games.length);
+				//console.log(games.length);
 				var gamesArray = [];
 				games.forEach(function(game) {
 		            var array = [] // put user ids in array
 		            game.getUsers().then(function(users) {
-		            	console.log("users" + users)
+		            	//console.log("users" + users)
 		                users.forEach(function(user) {
 		                    array.push(user.username)
 		                })
@@ -79,7 +80,7 @@ api.getAllGames = function (req, res) {
 		                counter++ // respond the game array when every game is processed
 		                if (counter === nofg) {
 		                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
-		                  	console.log(saved)
+		                  	//console.log(saved)
 		                    res.end(saved);
 		                }
 
@@ -121,7 +122,7 @@ api.getLobbyGame = function (req, res){
 			                })
 			                game.dataValues.users = userArray
 			                
-							console.log(JSON.stringify(game) + "game")
+							//console.log(JSON.stringify(game) + "game")
 							res.send(JSON.stringify(game));
 
 			            })

@@ -3,7 +3,7 @@ var path = require('path');
 var Sequelize = require('sequelize');
 
 //TODO move credentials to somewhere less conspicuous
-var sequelize = new Sequelize('gameDB', 'root', 'hello', { dialect: 'mysql' })
+var sequelize = new Sequelize('gameDB', 'root', 'hello', { dialect: 'mysql', logging: false })
 
 var db = {};
 
