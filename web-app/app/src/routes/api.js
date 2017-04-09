@@ -14,11 +14,31 @@ api.getUser = function (req, res) {
 	});
 };
 
+api.getDBUser = function(req, res){
+	models.User.findOne({
+		where:{
+			username: req.params['username']
+		}
+	}).then(function(user){
+		res.setHeader('Content-Type', 'text/json');
+		res.send({
+		username: user.username,
+		score: user.score,
+		gamesWon: user.gamesWon,
+		gamesPlayed: user.gamesPlayed,
+		lastLoggedIn: user.lastLoggedIn
+		});
+	});
+};
+
 // Returns a list of friend objects(containing id & username) of the current user.
 api.getUserFriends = function (req, res) {
 	current_user = req.user;
 	// Find all, where status is 1 and either (UserId or FriendId) is equal to the current user id.
-	models.UserFriend.findAll({where: {status: 1, $or: [{UserId: current_user.id}, {FriendId: current_user.id}]}})
+	// JA: removed status: 1, from where clause
+	// {$or: [{UserId: current_user.id}, {FriendId: current_user.id}]
+	// now this just returns friends added by whoever added them.
+	models.UserFriend.findAll({where: {UserId: current_user.id }})
 	.then(function(friends){
 
 		var friendIds = []

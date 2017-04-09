@@ -136,4 +136,27 @@ user.getLoginPage = function (req, res) {
 	res.sendFile(path.resolve('../static/login.html'));
 };
 
+user.addFriend = function (req, res){
+	var srcUser = req.body.srcUser;
+	var dstUser = req.body.destUser;
+
+	models.User.findOne({
+		where: {
+			username: srcUser
+		}
+	}).then(function (logged_in_user){
+		models.User.findOne({
+			where: {
+				username: dstUser
+			}
+		}).then(function (other_user){
+			//force friend request
+			// not sure if the through: is updating the status field properly.
+			logged_in_user.addFriend(other_user, { through: { status: 1 }});
+			res.end();
+		});
+	});
+
+};
+
 module.exports = user;

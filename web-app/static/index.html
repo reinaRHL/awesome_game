@@ -35,14 +35,14 @@
                     <br>
                     <label for="select" class="col-lg-2 control-label">Friends</label>
                     <select multiple="" class="selectpicker form-control" data-max-options="5" data-live-search="true" id="inputPlayers" data-style="btn-primary">
-                        <optgroup label="online">
-                        <option>Friend</option>
+                        <optgroup id='friendsOnline' label="Users on your Friends List">
+                        <!--<option>Friend</option>
                         <option>Other Friend</option>
                         <option>Other Friend2</option>
                         </optgroup>
                         <optgroup label="offline">
                         <option>Friend 3</option>
-                        <option>user123</option>
+                        <option>user123</option>-->
                         </optgroup>
                     </select>
                 </div>
@@ -61,7 +61,6 @@
                     <h1 class="text-center">{{lobbyTitle}}</h1>
                 </div>
                 <div class="modal-body"  >
-                    <h3 id="countdown" class='text-center label-default'>Time 8 minutes 32 seconds</h3>
                     <div class="list-group">
                     <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
                         {{host}}
@@ -73,7 +72,7 @@
                     </a>
                     </div>
                 <button id="joinBtn" ng-click='joinGame()' class="btn btn-success">Join Game</button>
-                <button id="cancelBtn" ng-click='closeGame()' class="btn btn-default">Cancel Game</button>
+                <button id="cancelBtn" ng-click='closeGame()' class="btn btn-default">Close Game</button>
                 </div>
           </div>
           </div>
@@ -89,7 +88,7 @@
                         <h3 class=""> {{gamesPlayed}} </h3>
                      </div>
                      <div class="col-md-4 col-xs-12">
-                        <h3>Score:</h3>
+                        <h3>Overall Score:</h3>
                         <span class="fa-stack fa-5x ">
                         <span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
                         <span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
@@ -161,7 +160,7 @@
                <div class="panel-body">
                 <div class="panel panel-default">
                     <div class="btn-group btn-block">
-                        <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends Online <span class="caret"></span></button>
+                        <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users Online <span class="caret"></span></button>
                         <ul class="dropdown-menu" id="friendsDropdown">
 
                         </ul>
