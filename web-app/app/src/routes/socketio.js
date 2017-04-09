@@ -239,7 +239,7 @@ module.exports = function (server) {
 					})
 					games[game.title]={} // initialize game.id info to be empty set
 					games[game.title]["users"] = []
-					
+
 					gameQuestions.round = round
 					gameQuestions.endTime = endTime
 					game.getUsers().then(function(users){
@@ -364,7 +364,13 @@ module.exports = function (server) {
 			        	game.update({
 						state: "done",
 					})
+			        	game.getUsers().then(function(users){
 
+							users.forEach(function(user){//only send questions to users in the game 
+								user.increment('games_played', {by: 1})//increment games_played by 1
+
+							})
+						})
 					
 				});
 		})
