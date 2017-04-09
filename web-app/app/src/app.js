@@ -20,9 +20,12 @@ app.use(bodyParser.urlencoded({   // to support URL-encoded bodies
 }));
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use("/user", express.static(path.join(__dirname, 'static'))); //serving for /user paths
+
 
 // Routes
 app.get('/api/user', authentication.isAuthenticated, routes.api.getUser);
+app.get('/getuser/:username', routes.api.getDBUser);
 app.get('/api/user/friends', authentication.isAuthenticated, routes.api.getUserFriends);
 app.get('/api/user/history', authentication.isAuthenticated, routes.api.getUserGameHistory);
 app.get('/api/lobbyGame/:id',authentication.isAuthenticated, routes.api.getLobbyGame);
@@ -31,7 +34,8 @@ app.get('/api/games', authentication.isAuthenticated, routes.api.getAllGames);
 app.get('/api/game/current', authentication.isAuthenticated, routes.api.getCurrentGame);
 app.post('/signup', routes.user.doSignup);
 app.post('/login', routes.user.doLogin);
-app.get('/login', routes.user.getLoginPage);
+app.post('/addfriend', routes.user.addFriend);
+app.get('/login', authentication.authenticatedToProfile, routes.user.getLoginPage);
 app.delete('/logout', routes.user.doLogout);
 app.get('/', function (req,res) {
 	res.status(301);
@@ -49,6 +53,26 @@ app.get('/games', authentication.isAuthenticated, function (req, res) {
 });
 app.get('/friends', authentication.isAuthenticated, function (req, res) {
 	res.sendFile(path.resolve('../static/index.html'));
+});
+
+app.get('/user/:username', function(req, res){
+
+	models.User.count({
+		where: {
+			username: req.params['username']
+		}
+	}).then(function (exists){
+		if(exists){
+			res.sendFile(path.resolve("../static/profiles.html"));
+		}else{
+			res.redirect('/login');
+		}
+	});
+	
+});
+
+app.get('*', function(req, res){
+	res.redirect('/login');
 });
 
 // Start server
