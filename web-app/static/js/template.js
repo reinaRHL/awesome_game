@@ -114,6 +114,7 @@ app.factory('webServices', ['$http', function ($http) {
 			var toSend = {};
 			toSend.questionID = localStorage.getItem('currentQuestion');
 			answer = $("#inputAnswer").val();
+			$("#inputAnswer").val('');
 			if (roundQuestion.question.correct_answer === answer) {
 				console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
 			}
@@ -178,14 +179,17 @@ app.factory('webServices', ['$http', function ($http) {
 		socket.on('sendQuestions', function (data) {
 			$("#question").text(data.question.question.question);
 			$scope.gameScores = data.question.scores;
+			$scope
 			$scope.$apply();
 			timerUpdate(data.question.endTime);
 			localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
 			roundQuestion = data.question;
 			$("#inputAnswer").removeAttr("disabled");
 			$("#inputAnswerButton").removeClass("disabled");
+			$("#questionStateDiv").removeClass('hidden').addClass('show');
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
+			$("#votingStateDiv").removeClass('show').addClass('hidden');
 		});
 
 		socket.on('gameJoined', function (data) {
@@ -248,6 +252,11 @@ app.factory('webServices', ['$http', function ($http) {
 				+ "</p></a>")($scope);
 			$('#gameDisplay').append(button);
 		});
+
+	socket.on('endGame', function (data){
+		//	TO DO: SHIT SHOULD HAPPEN WHEN THE GAME IS DONE! DO SOMETHING
+	});		
+
 	}]);
 
 

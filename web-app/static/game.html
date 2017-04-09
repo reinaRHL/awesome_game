@@ -67,7 +67,7 @@
                   </div>
               </div>
               <div class="row hidden" id="votingStateDiv">
-                  <button ng-repeat="answers in current_question" class="btn btn-primary btn-sm btn-block sendChoice" ng-click="sendChoice(answers.answer.userId)">{{answers.answer}}</button>
+                  <button ng-repeat="answers in current_question" class="btn btn-primary btn-sm btn-block sendChoice" ng-click="sendChoice(answers.userId)">{{answers.answer}}</button>
               </div>
           </div>
       </div>
