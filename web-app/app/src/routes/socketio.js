@@ -271,7 +271,8 @@ module.exports = function (server) {
 		}
 
 		function endGame(game, socket) {
-			
+			$('#endOfGame').modal();
+
 		}
 
 		function endRoundScoring(game_id, socket) {

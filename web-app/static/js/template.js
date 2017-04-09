@@ -146,6 +146,14 @@ app.factory('webServices', ['$http', function ($http) {
 			});
 		};
 
+		/*$scope.EndOfGameSummary = function(){
+			$('#endOfGame').modal();
+		};*/
+
+		$scope.backtoLobby = function(){
+			document.location.href="/lobby";
+		}
+
 		$scope.joinGame = function () {
 			//TODO: need logic here => add user to game, redirect...
 			socket.emit('joinGame', { game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1] });
