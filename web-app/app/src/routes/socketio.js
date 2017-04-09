@@ -206,10 +206,11 @@ module.exports = function (server) {
 			findRandomQuestion(game).then(function (question) {
 				var round = {
 					question: null,
-					answers: []
+					answers: [],
+					choices: []
 				};
 
-				var endTime = moment().add(1, 'minutes');
+				var endTime = moment().add(30, 'seconds');
 				var gameQuestion = {
 					question: {
 						incorrect_answers: [],
@@ -246,23 +247,67 @@ module.exports = function (server) {
 			console.log('----- END ROUND VOTING -----');
 			var rounds = gameMap[game_id].rounds;
 			var round = rounds[rounds.length - 1];
-			console.log(round);
+			var endTime = moment().add(30, 'seconds');
 			var answers = [{ userId: -1, answer: round.question.question.correct_answer }];
 
-			for (var i = 0; i < (5 - Object.keys(round.answers).length); i++) {
+			for (var i = 0; i < (3 - Object.keys(round.answers).length); i++) {
 				answers.push({ userId: -2, answer: round.question.question.incorrect_answers[i] });
 			}
 			round.answers.forEach(function (answer) {
 				answers.push(answer);
 			});
 
+			var data = {
+				answers: answers,
+				endTime: endTime.toString()
+			}
+
 			var roomId = "GAME".concat(game_id);
-			io.in(roomId).emit('endRound', answers);
+			io.in(roomId).emit('endRound', data);
+
+			var j = schedule.scheduleJob(endTime.toDate(), function(){
+				endRoundScoring(game_id, socket);
+			});
 		}
 
-		function endRoundScoring(){
-
+		function endGame(game, socket) {
+			
 		}
+
+		function endRoundScoring(game_id, socket) {
+			console.log('----- END ROUND SCORING -----');
+			var rounds = gameMap[game_id].rounds;
+			var round = rounds[rounds.length - 1];
+			round.choices.forEach(function (choice) {
+				var choseMine = 0;
+				round.choices.forEach(function (otherChoice) {
+					if (otherChoice.choice === choice.userId && otherChoice.userId !== choice.userId)
+						choseMine++;
+				});
+				
+				var score = gameMap[game_id].scores.find(function (score) {
+					return score.userId === choice.userId;
+				});
+				score.score += (choice.choice === -1 ? 1 : 0) * 100 + choseMine * 50;
+			});
+
+			if (rounds.length < 6) {
+				sendQuestion(gameMap[game_id], socket);
+			} else {
+				endGame(gameMap[game_id], socket);
+			}
+		}
+
+		socket.on('sendChoice', function (data) {
+			console.log('----- SEND CHOICE -----');
+			var user = userMap.get(null, socket.id);
+			var rounds = gameMap[user.memory.currentGame].rounds;
+			var round = rounds[rounds.length - 1];
+			round.choices.push({
+				userId: user.id,
+				choice: parseInt(data)
+			});
+		});
 
 		socket.on('startGame', function (data) {
 			console.log('----- START GAME -----');
@@ -280,6 +325,7 @@ module.exports = function (server) {
 
 				users.forEach(function (user) {
 					gameMap[game.id].scores.push({
+						userId: user.id,
 						username: user.username,
 						score: 0
 					});
