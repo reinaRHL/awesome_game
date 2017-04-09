@@ -60,6 +60,7 @@ app.factory('webServices', ['$http', function ($http) {
 		$scope.current_question = [];
 		webServices.getUser().then(function (user) {
 			document.user = user.data.username;
+			$scope.userId = user.data.id;
 			$scope.username = user.data.username;
 			$scope.score = user.data.score;
 			$scope.gamesPlayed = user.data.gamesPlayed;
@@ -91,6 +92,14 @@ app.factory('webServices', ['$http', function ($http) {
 				$scope.host = resp.data.createdBy;
 				$scope.lobbyTitle = resp.data.title;
 				$scope.users = resp.data.users;
+				$scope.gameScores = {};
+				if(resp.data.users != undefined){
+					resp.data.users.forEach(function(e){
+						$scope.gameScores.username = e;
+						$scope.gameScores.score = 0;
+					});
+				}
+
 			})
 		});
 
@@ -105,7 +114,12 @@ app.factory('webServices', ['$http', function ($http) {
 			//socket.emit('cancelNewGame', { title: 'playGame' });
 			socket.emit('cancelNewGame', { title: $("#inLobby > h1").text() });
 		};
-
+		$scope.sendChoice = function(id){
+			socket.emit('sendChoice', id);
+			$(".sendChoice").each(function(){
+				$(this).addClass('disabled');
+			});
+		}
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
 			// debugging: this shows the question/answer  before the current one
@@ -119,21 +133,9 @@ app.factory('webServices', ['$http', function ($http) {
 			var toSend = {};
 			toSend.questionID = localStorage.getItem('currentQuestion');
 			answer = $("#inputAnswer").val();
-			if (localStorage.getItem('currentQuestionsAnswer')=== answer) {
-				// grab whatever current users score is in memory
-				var tempScore = parseInt($('#playerScore').text());
-				// correct answer gives 50 points
-				tempScore = tempScore + 50;
-				//create animation -> previous score incremented to new score after points
-				popScoreInGame(tempScore);
-				// send stuff
-				toSend.answer = answer;
-				socket.emit('sendAnswer', toSend);
-				$("#inputAnswer").attr('disabled', 'disabled');
-				//hide the button instead of disabling, because you can still click it
-				// and if your answer is right, the user can spam it and generate infinite
-				// amount of points.
-				$("#inputAnswerButton").hide();
+			$("#inputAnswer").val('');
+			if (roundQuestion.question.correct_answer === answer) {
+				console.log("CAN'T SUBMIT CORRECT ANSWER"); //TO DO: add user feedback
 			}
 			else {
 				toSend.answer = answer;
@@ -162,6 +164,14 @@ app.factory('webServices', ['$http', function ($http) {
 				}
 			});
 		};
+
+		/*$scope.EndOfGameSummary = function(){
+			$('#endOfGame').modal();
+		};*/
+
+		$scope.backtoLobby = function(){
+			document.location.href="/lobby";
+		}
 
 		$scope.joinGame = function () {
 			//TODO: need logic here => add user to game, redirect...
@@ -196,20 +206,19 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 
 		socket.on('sendQuestions', function (data) {
-			if (document.user == data.user) {
-				//debugging: shows questions and answers
-				//console.log(data);
-				$("#question").text(data.question.question.question);
-				timerUpdate(data.question.endTime);
-				localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
-				localStorage.setItem("currentQuestionsAnswer", data.question.question.correct_answer);
-				roundQuestion = data.question;
-				
-				$("#inputAnswer").removeAttr("disabled");
-				$("#inputAnswerButton").removeClass("disabled");
-			}
+			$("#question").text(data.question.question.question);
+			$scope.gameScores = data.question.scores;
+			$scope
+			$scope.$apply();
+			timerUpdate(data.question.endTime);
+			localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
+			roundQuestion = data.question;
+			$("#inputAnswer").removeAttr("disabled");
+			$("#inputAnswerButton").removeClass("disabled");
+			$("#questionStateDiv").removeClass('hidden').addClass('show');
 			$("#inLobby").removeClass('show').addClass('hidden');
 			$("#inGame").removeClass('hidden').addClass('show');
+			$("#votingStateDiv").removeClass('show').addClass('hidden');
 		});
 
 		socket.on('gameJoined', function (data) {
@@ -223,8 +232,6 @@ app.factory('webServices', ['$http', function ($http) {
 			if (($scope.host != data.user)) {
 				$('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span class= "userInGame">'
 					+ data.user + '</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>');
-
-				$('#startGameUsers').append('<h4 ng-repeat="user in users"><span class= "userInStartGame">' + data.user + '</span><span class="label label-default pull-right">200</span></h4>');
 			}
 		});
 
@@ -250,10 +257,12 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 		// Commence voting of choices
 		socket.on('endRound', function (data) {
+			var endTime = data.endTime;
+			timerUpdate(endTime);
 			$scope.current_question = [];
-			for(var i = 0; i<data.length; i++){
-				if($scope.username != data[i].username){
-					$scope.current_question.push(data[i]);
+			for(var i = 0; i<data.answers.length; i++){
+				if($scope.userId != data.answers[i].userId){
+					$scope.current_question.push(data.answers[i]);
 				}
 			}
 			$scope.$apply();
@@ -272,6 +281,11 @@ app.factory('webServices', ['$http', function ($http) {
 				+ "</p></a>")($scope);
 			$('#gameDisplay').append(button);
 		});
+
+	socket.on('endGame', function (data){
+		//	TO DO: SHIT SHOULD HAPPEN WHEN THE GAME IS DONE! DO SOMETHING
+	});		
+
 	}]);
 
 

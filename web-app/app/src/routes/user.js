@@ -83,7 +83,7 @@ user.doLogin = function(req, res){
 							res.setHeader("Content-Type", "application/json; charset=UTF-8");
 							res.status(200);
 							res.send(JSON.stringify('/profile')); //redirect
-							console.log("That user is in DB");
+							//console.log("That user is in DB");
 						});
 					});
 					} else { //bcrypt fails
@@ -101,7 +101,7 @@ user.doLogin = function(req, res){
 
 user.doLogout = function (req,res) {
 	var name= req.body['name'];
-	console.log(name)
+	//console.log(name)
 	models.User.count({
 		where: {
 			username: name
@@ -114,7 +114,7 @@ user.doLogout = function (req,res) {
 				}
 			}).then(function(user){
 				
-					console.log(req.body)
+					//console.log(req.body)
 					//find session and delete it
 					models.Session.findOne({
 						where: {
