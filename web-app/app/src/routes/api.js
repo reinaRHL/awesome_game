@@ -59,21 +59,9 @@ api.getAllGames = function (req, res) {
 	//should return all games that are on hold
 	var counter = 0
     
-    models.Game.count({
-    			where: {
-					state:  {
-				      $not: "done"
-				    }
-			}
-    		}).then(function(nofg) {//show games if games are more than 0 to prevent 504
+    models.Game.count().then(function(nofg) {//show games if games are more than 0 to prevent 504
     	if (nofg > 0){
-    		models.Game.findAll({
-    			where: {
-				state:  {
-				      $not: "done"
-				    }
-			}
-    		})
+    		models.Game.findAll()
 			.then(function (games){
 				console.log(games.length);
 				var gamesArray = [];

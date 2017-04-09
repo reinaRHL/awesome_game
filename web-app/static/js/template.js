@@ -73,6 +73,16 @@ app.factory('webServices', ['$http', function($http){
 
 	  webServices.getGames().then(function (resp){
 		  $scope.games = resp.data.games;
+    
+      $scope.lobbyGames = []
+      resp.data.games.forEach(function (game) {
+        console.log(game)
+        if(game.state != "done"){
+            $scope.lobbyGames.push(game)
+        }
+        
+      });
+      console.log($scope.lobbyGames)
 	  });
 
    

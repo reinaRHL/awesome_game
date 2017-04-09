@@ -119,7 +119,7 @@
                         <tr ng-class="{'info': game.state === 'done', 'success': game.state === 'in_progress', 'warning': game.state === 'hold'}" 
                         <tr ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
-                           <td></td>
+                           <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">{{game.updatedAt}}</span><span ng-switch-when="hold">Waiting</span></td>
                            <td>{{game.users.length}}</td>
                            <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
                         </tr>
@@ -147,10 +147,10 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group" id="gameDisplay">
-                     <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in games">
-                        <span class="badge">players: {{game.users.length}}</span>
-                        <span class="gameTitle">{{game.title}}</span>
-                        <p class="text-primary">Created By {{game.createdBy}} </p>
+                     <a class="list-group-item" ng-click='gameInfo(lobbyGame.id)' ng-repeat="lobbyGame in lobbyGames">
+                        <span class="badge">players: {{lobbyGame.users.length}}</span>
+                        <span class="gameTitle">{{lobbyGame.title}}</span>
+                        <p class="text-primary">Created By {{lobbyGame.createdBy}} </p>
                      </a>
                   </ul>
                   <button data-toggle="modal" data-target="#createGameModal" id='createGameButton'class="btn btn-primary btn-lg">Create a Game</button>
