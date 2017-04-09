@@ -47,13 +47,12 @@
 						<h3>Score:</h3>
 						<span class="fa-stack fa-5x ">
 						<span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
-						<span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">245</span>
+						<span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">0</span>
 						</span>
 					  </div>
 					  <hr>
                     <div id="startGameUsers">
-                      <h4><span>{{host}}</span><span class="label label-success pull-right">300</span></h4>
-                      <h4 ng-repeat="user in users"><span class="userInStartGame">{{user}}</span><span class="label label-default pull-right">200</span></h4>
+                      <h4 ng-repeat="score in gameScores"><span class="userInStartGame">{{score.username}}</span><span class="label label-default pull-right">{{score.score}}</span></h4>
                     </div>
                   </div>
                 <div id="divGameplay"class="col-sm-12">
@@ -68,12 +67,7 @@
                   </div>
               </div>
               <div class="row hidden" id="votingStateDiv">
-                  <button ng-repeat="answers in current_question" class="btn btn-primary btn-sm btn-block">{{answers.answer}}</button>
-                  <!--<button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                    <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                    <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>
-                  <button class="btn btn-primary btn-sm btn-block">Voting Buttons</button>-->
+                  <button ng-repeat="answers in current_question" class="btn btn-primary btn-sm btn-block sendChoice" ng-click="sendChoice(answers.answer.userId)">{{answers.answer}}</button>
               </div>
           </div>
       </div>

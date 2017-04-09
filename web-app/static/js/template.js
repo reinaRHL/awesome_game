@@ -77,6 +77,14 @@ app.factory('webServices', ['$http', function ($http) {
 				$scope.host = resp.data.createdBy;
 				$scope.lobbyTitle = resp.data.title;
 				$scope.users = resp.data.users;
+				$scope.gameScores = {};
+				if(resp.data.users != undefined){
+					resp.data.users.forEach(function(e){
+						$scope.gameScores.username = e;
+						$scope.gameScores.score = 0;
+					});
+				}
+
 			})
 		});
 
@@ -91,7 +99,12 @@ app.factory('webServices', ['$http', function ($http) {
 			//socket.emit('cancelNewGame', { title: 'playGame' });
 			socket.emit('cancelNewGame', { title: $("#inLobby > h1").text() });
 		};
-
+		$scope.sendChoice = function(id){
+			socket.emit('sendChoice', id);
+			$(".sendChoice").each(function(){
+				$(this).addClass('disabled');
+			});
+		}
 		$scope.startGame = function () {
 			socket.emit('startGame', { title: $("#inLobby > h1").text() });
 			$("#inLobby").removeClass('show').addClass('hidden');
@@ -164,6 +177,8 @@ app.factory('webServices', ['$http', function ($http) {
 
 		socket.on('sendQuestions', function (data) {
 			$("#question").text(data.question.question.question);
+			$scope.gameScores = data.question.scores;
+			$scope.$apply();
 			timerUpdate(data.question.endTime);
 			localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
 			roundQuestion = data.question;
@@ -184,8 +199,6 @@ app.factory('webServices', ['$http', function ($http) {
 			if (($scope.host != data.user)) {
 				$('#inGameUser').append('<a href="#" class="list-group-item text-center clearfix"><span class= "userInGame">'
 					+ data.user + '</span><span class="label label-success pull-left">Accepted</span><span class="pull-right"><button class="list-group-item-text btn-danger btn btn-sm disabled pull-right">Revoke Invite</button></span></a>');
-
-				$('#startGameUsers').append('<h4 ng-repeat="user in users"><span class= "userInStartGame">' + data.user + '</span><span class="label label-default pull-right">200</span></h4>');
 			}
 		});
 
@@ -211,6 +224,7 @@ app.factory('webServices', ['$http', function ($http) {
 		});
 		// Commence voting of choices
 		socket.on('endRound', function (data) {
+			var endRound = data.endRound
 			$scope.current_question = [];
 			for(var i = 0; i<data.length; i++){
 				if($scope.userId != data[i].userId){
