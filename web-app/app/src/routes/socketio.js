@@ -271,8 +271,17 @@ module.exports = function (server) {
 		}
 
 		function endGame(game, socket) {
-			$('#endOfGame').modal();
+			console.log('----- END GAME -----')
 
+			var data = {
+				scores: gameMap[game.id].scores
+			};
+			var roomId = "GAME".concat(game.id);
+			io.in(roomId).emit('endGame', data);
+
+			game.update({
+				state: 'done'
+			});
 		}
 
 		function endRoundScoring(game_id, socket) {
@@ -292,7 +301,7 @@ module.exports = function (server) {
 				score.score += (choice.choice === -1 ? 1 : 0) * 100 + choseMine * 50;
 			});
 
-			if (rounds.length < 6) {
+			if (rounds.length < 5) {
 				sendQuestion(gameMap[game_id], socket);
 			} else {
 				endGame(gameMap[game_id], socket);

@@ -282,9 +282,9 @@ app.factory('webServices', ['$http', function ($http) {
 			$('#gameDisplay').append(button);
 		});
 
-	socket.on('endGame', function (data){
-		//	TO DO: SHIT SHOULD HAPPEN WHEN THE GAME IS DONE! DO SOMETHING
-	});		
+		socket.on('endGame', function (data){
+			$('#endOfGame').modal();
+		});		
 
 	}]);
 
