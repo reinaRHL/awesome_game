@@ -11,7 +11,7 @@ To get the machine up and running simply
 
 ### Playing the game
 To play you wll need to do the following:
-1. Create two accounts
+1. Create two accounts (click "Don't have an account?" on the login page)
 2. Login to both (An easy way to do this is to use private tab or another browser)
 3. Have one account create the game
 4. Have the other account join
