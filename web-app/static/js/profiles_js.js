@@ -48,6 +48,10 @@ app.factory('webServices', ['$http', function ($http) {
             $scope.lastSeen = time;
 		});
 
+        webServices.getGames().then(function (resp) {
+			$scope.games = resp.data.games;
+		});
+
             webServices.getLoggedInUser().then(function (current_user){
                 // prevent the logged in user from adding themselves
                 if(current_user.data.username === window.location.pathname.split("/").pop()){
