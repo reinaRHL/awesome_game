@@ -1,11 +1,11 @@
 import json
-import html
+from HTMLParser import HTMLParser
 import os
 
 jsonDict = {}
 jsonList = []
 counter = 0
-
+html = HTMLParser()
 with open('questions1_raw.json', 'r') as f:
 	question1File = f.read()
 

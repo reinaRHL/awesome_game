@@ -22,7 +22,7 @@ $("#password_show_checkbox").click(function () {
        url: '/login',
        statusCode: {
          401: function(){
-           s.innerHTML = "Credentials entered are incorrect."
+           s.innerHTML = "Credentials entered are incorrect.";
          }
        },
        data: $("#log_in").serialize(),
@@ -39,18 +39,19 @@ $("#password_show_checkbox").click(function () {
    var s = document.getElementById('errorContent');
    e.preventDefault(); // Prevents the page from refreshing
 
-
-   if(password.value != password_confirm.value && username.value != ""){
+   if(password.value != password_confirm.value){
        //display error
-       s.innerHTML = "Passwords don't match."
+       s.innerHTML = "Passwords don't match.";
        //console.log("not same value");
+     }else if(username.value === ""){
+       s.innerHTML = "Username cannot be blank.";
      }else{
      $.ajax({
        type: "POST",
        url: '/signup',
        statusCode: {
          401: function(){
-           s.innerHTML = "Username is already taken."
+           s.innerHTML = "Username is already taken.";
          }
        },
        data: $("#sign_up").serialize(),

@@ -1,0 +1,175 @@
+<html>
+<head>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-socket-io/0.7.0/socket.min.js"></script>
+
+
+<script>
+// in the top-level module of the app
+var socket = io();
+
+angular.module('myApp', [
+  'btford.socket-io',
+  'myApp.myCtrl'
+]).
+factory('mySocket', function (socketFactory) {
+  var mySocket = socketFactory();
+  mySocket.forward('error');
+  return mySocket;
+});
+
+// in one of your controllers
+angular.module('myApp.myCtrl', []).
+  controller('myCtrl', ['mySocket',function ($scope,socket) {
+  
+  var mySocket=null;
+  $scope.answers=[];
+  $scope.roundType="";
+  $scope.waiting=false;
+  $scope.inputText="";
+  
+  //Socket event handlers
+  
+  $scope.setTimer= function(data)
+  {
+  	//Show prompt from data
+  	
+  }
+  
+  $scope.serverNotifyPromptInput= function(data)
+  {
+  	//$scope.prompt=data.prompt;
+  	$scope.inputText="";
+  }
+  
+  $scope.serverNotifyPromptVote= function(data)
+  {
+  	//Show possible votes from data
+  	
+  }
+  
+  $scope.serverNotifyResults= function(data)
+  {
+  	//Show scores, delta scores and end game if applicable
+  }
+  
+  $scope.serverSyncTimer= function(data)
+  {
+  	//Show scores, delta scores and end game if applicable
+  }
+  
+  $scope.doWait = function()
+  {
+  	//show waiting message
+  	$scope.waiting=true;
+  }
+  
+  
+  ///Client event handlers
+  
+  $scope.joinGame = function()
+  {
+  	//Tell the server we would like a status update now.
+  	socket.emit("sync");
+  	$scope.doWait();
+  }
+  
+  $scope.submitAnswer = function()
+  {
+  	//Tell the server our fibb
+  	socket.emit("submitAnswer",$scope.inputText);
+  	$scope.doWait();
+  	
+  }
+  
+  $scope.pick = function(idx)
+  {
+  	//Tell the server our selection
+  	socket.emit("pickAnswer",idx);
+  	
+  	$scope.doWait();
+  	
+  }
+  
+  
+  
+  
+    $scope.on('socket:advanceRound', function (ev, data) {
+		
+		$scope.waiting=false;
+		$scope.roundType=data.roundType;
+		switch(data.roundType)
+		{
+			case "input":
+				$scope.serverNotifyPromptInput(data);
+			break;
+			
+			case "vote":
+				$scope.serverNotifyPromptVote(data);
+			break;
+			
+			case "result":
+				$scope.serverNotifyResult(data);
+			break;
+		}
+		
+		
+    });
+    
+    $scope.on('socket:syncTimer', function (ev, data) 
+    {
+		$scope.setTimer( parseInt(data.time) )
+    });
+    
+    $scope.on('socket:chatMessage', function (ev, data) 
+    {
+		var from=data.from;
+		var message=data.message;
+    });
+    
+  }]);
+</script>
+
+</head>
+
+<body>
+<h1> Socket Test </h1>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<div>
+<h2>{{gameName}}</h2>
+</div>
+
+<div>
+	<div>
+	<p>{{prompt}}</p>
+	</div>
+
+	<div ng-show="!waiting && roundType=='input'">
+	<input type="text" ng-model="inputText"></input> <button ng-click="submitAnswer">submit<button>
+	</div>
+	
+	<div ng-show="!waiting && roundType=='vote'">
+	<ul>
+	<li ng-repeat="x in answers" ng-click="pick(x)">{{x}}</li>
+	</ul>
+	</div>
+	
+	<div ng-show="!waiting && roundType=='results'">
+	<!--todo-->
+	</div>
+	
+	
+</div>
+
+
+</div>
+
+
+</body>
+</html>

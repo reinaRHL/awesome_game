@@ -91,6 +91,17 @@ border: 1px solid white;
   text-decoration: underline;
 }
 
+#errorContent_Login{
+  font-size: 1.3em;
+  color: red;
+}
+
+#errorContent{
+  font-size: 1.3em;
+  color: red;
+}
+
+
 
 /* center modal in middle of page vertically and set height */
 .modal {
@@ -115,8 +126,9 @@ border: 1px solid white;
 .modal-dialog,
 .modal-content {
     /* 80% of window height */
-    height: 80%;
+    height: 87.5%;
 }
+
 /* */
 
 /* end login page css */
@@ -143,6 +155,11 @@ border: 1px solid white;
     #gameStart{
       left: 20%
   }
+
+  .modal-dialog,
+  .modal-content{
+    height: 95%;
+  }
 }
 
 /*iPhone6*/
@@ -156,6 +173,11 @@ border: 1px solid white;
 @media screen and (min-width: 768px) {
     #gameStart{
       left: 35%
+  }
+  .modal-dialog,
+  .modal-content {
+      /* 80% of window height */
+      height: 80%;
   }
 }
 

@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="css/index.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+      
    </head>
    <body ng-app="indexApp">
       <div ng-controller="indexCtrl">
@@ -18,7 +19,7 @@
             <ul class="nav nav-tabs">
                <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="true">Profile</a></li>
                <li><a href="#lobby" data-toggle="tab" aria-expanded="true">Lobby</a></li>
-               <li><a href="#friendsList" data-toggle="tab" aria-expanded="true">Friends</a></li>
+               <li><a href="#friendsList" data-toggle="tab" aria-expanded="true">Chat</a></li>
                <li ><a id="log_out" href="/login" aria-expanded="true" class="navbar-right">Logout</a></li>
             </ul>
          </nav>
@@ -34,14 +35,14 @@
                     <br>
                     <label for="select" class="col-lg-2 control-label">Friends</label>
                     <select multiple="" class="selectpicker form-control" data-max-options="5" data-live-search="true" id="inputPlayers" data-style="btn-primary">
-                        <optgroup label="online">
-                        <option>Friend</option>
+                        <optgroup id='friendsOnline' label="Users on your Friends List">
+                        <!--<option>Friend</option>
                         <option>Other Friend</option>
                         <option>Other Friend2</option>
                         </optgroup>
                         <optgroup label="offline">
                         <option>Friend 3</option>
-                        <option>user123</option>
+                        <option>user123</option>-->
                         </optgroup>
                     </select>
                 </div>
@@ -51,6 +52,30 @@
                 </div>
                 </div>
             </div>
+        </div>
+        <div class="modal" id="gameInfo">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h1 class="text-center">{{lobbyTitle}}</h1>
+                </div>
+                <div class="modal-body"  >
+                    <div class="list-group">
+                    <a id="#lobbyCreator" href="#" class="list-group-item text-center clearfix">
+                        {{host}}
+                        <span class="label label-info pull-left">Creator</span>
+                    </a>
+                    <a href="#" class="list-group-item text-center clearfix" ng-repeat="user in users">
+                        <span>{{user}}</span>
+                        <span class="label label-success pull-left">Accepted</span>
+                    </a>
+                    </div>
+                <button id="joinBtn" ng-click='joinGame()' class="btn btn-success">Join Game</button>
+                <button id="cancelBtn" ng-click='closeGame()' class="btn btn-default">Close Game</button>
+                </div>
+          </div>
+          </div>
         </div>
          <div class="tab-content">
             <div class="tab-pane fade active in panel panel-default" id="profile">
@@ -63,7 +88,7 @@
                         <h3 class=""> {{gamesPlayed}} </h3>
                      </div>
                      <div class="col-md-4 col-xs-12">
-                        <h3>Score:</h3>
+                        <h3>Overall Score:</h3>
                         <span class="fa-stack fa-5x ">
                         <span class="fa fa-superpowers fa-stack-2x scoreInfo"></span>
                         <span id="playerScore" class="fa-stack-1x calendar-text scoreInfo">{{score}}</span>
@@ -89,11 +114,13 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr ng-class="{'sucess': game.state === 'win', 'danger': game.state === 'lose', 'warning': game.state === 'hold'}" ng-repeat="game in games">
+                        <!-- Use below incase you want to make table with different row color depending on the state-->
+                        <tr ng-class="{'info': game.state === 'done', 'success': game.state === 'in_progress', 'warning': game.state === 'hold'}" 
+                        <tr ng-repeat="game in games">
                            <td>{{game.createdAt}}</td>
-                           <td ng-switch="game.state"><span ng-switch-when="won">Initializing</span><span ng-switch-when="lost">Loading</span><span ng-switch-when="hold">In Progess</span></td>
-                           <td>{{game.playersUsername.length}}</td>
-                           <td>{{game.state}}</td>
+                           <td></td>
+                           <td>{{game.users.length}}</td>
+                           <td ng-switch="game.state"><span ng-switch-when="in_progress">In Progress</span><span ng-switch-when="done">Ended</span><span ng-switch-when="hold">Waiting</span></td>
                         </tr>
                      </tbody>
                   </table>
@@ -105,7 +132,7 @@
                   <div class="input-group">
                      <input type="text" class="form-control" aria-label="...">
                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                        <button type="button" class="btn btn-default dropdown-toggle" ng-click="gameInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right">
                            <li><a href="#">By Created User</a></li>
                            <li><a href="#">Game Name</a></li>
@@ -119,9 +146,9 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group" id="gameDisplay">
-                     <a class="list-group-item" ng-repeat="game in games">
-                        <span class="badge">players: {{game.playersUsername.length}}</span>
-                        {{game.title}}
+                     <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in openGames">
+                        <span class="badge">players: {{game.users.length}}</span>
+                        <span class="gameTitle">{{game.title}}</span>
                         <p class="text-primary">Created By {{game.createdBy}} </p>
                      </a>
                   </ul>
@@ -133,31 +160,33 @@
                <div class="panel-body">
                 <div class="panel panel-default">
                     <div class="btn-group btn-block">
-                        <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends Online <span class="caret"></span></button>
+                        <button type="button" class="btn btn-block btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users Online <span class="caret"></span></button>
                         <ul class="dropdown-menu" id="friendsDropdown">
-                            
-                        </ul>  
+
+                        </ul>
                     </div>
-                    <div class="panel-body msg_container_base" id="chatDisplay">    
-                    </div>     
+                    <div class="panel-body msg_container_base" id="chatDisplay">
+                    </div>
                     <div class="input-group" id = "chatBox">
                         <input id="btn-input" type="text" class="form-control  chat_input" placeholder="Write your message here...">
                         <span class="input-group-btn">
                         <button class="btn btn-primary " id="btn-chat">Send</button>
                         </span>
-                    </div> 
+                    </div>
                 </div>
                </div>
                <!-- /.row -->
             </div>
          </div>
       </div>
-      <script src="/socket.io/socket.io.js"></script> 
+      <script src="/socket.io/socket.io.js"></script>
+
       <script src="js/template.js"></script>
+      
       <script src="js/chat.js"></script>
       <script src="js/share.js"></script>
       <script src="js/logout.js"></script>
-      
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
       <script src="https://use.fontawesome.com/fd9dba5260.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
