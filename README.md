@@ -52,6 +52,11 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 3. `sudo journalctl -u gameapp -f`
 
 
+## Known Issues
+
+* The filter box on the game list performs no function
+* On occasion you may see a question twice in the same game
+
 ## File Structure
 * Dynamic-Content: `web-app/app/`
 * Static-Content: `web-app/static/`
