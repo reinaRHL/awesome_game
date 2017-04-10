@@ -1,16 +1,15 @@
 # Awesome Game
 CMPT 470 Final Project developed by James Araujo, Jay Svoboda, Lin Cong, Twilight Summerland, Hwayoung Lee, Abram Wiebe.
 
-## Project Checkpoint
-For the project checkpoint, the node application will run directly on the host machine with SQLite3 as the database. The final submission will use Vagrant and MySQL.
-
-1. `cd web-app/app`
-2. `npm install`
-3. `node populateDb.js -q ../static/questions/questions.json`
-4. `npm start`
-
 ## Project Final
 
+### Setup
+To get the machine up and running simply
+1. `vagrant up --provision`
+2. Navigate a browser to `localhost:8888`
+3. Follow the "Playing the game" section
+
+### Playing the game
 To play you wll need to do the following:
 1. Create two accounts
 2. Login to both (An easy way to do this is to use private tab or another browser)
@@ -23,6 +22,34 @@ Each round
 2. Some server generated fake answers, a real answer and user answers will be displayed, pick which you think is the real one
 3. You will be awarded points for picking the correct answer, your lifetime score is shown in orange, you game score is shown in the leaderboard
 4. Repeat until game ends
+
+### Credentials
+You may wish to access the database for evaluation if so please invoke the following exactly as shown
+```
+vagrant ssh
+mysql -uroot -phello -h127.0.0.1
+```
+Due to how the MySQL recipe is structured it is necessary to provide the hostname, and the password is hello,
+though obviously it would not be in a production system.
+
+### Easy to miss
+There is a global chat feature on the lobby screen, it is sometime missed because it not part of the main game screen
+
+### Future features / Alternatives and Known issues
+The Awesome Game is an open source clone of the game "Fibbage" by "Jackbox", so that could be considered an alternative.
+The goal of awesome game was to provide such a game that could be used on multiple platforms, free of charge and 
+not requireing a Playstation or Xbox to run.
+
+For known issues, please see the section of this readme named **"Known issues"**
+
+## Project Checkpoint
+For the project checkpoint, the node application will run directly on the host machine with SQLite3 as the database. The final submission will use Vagrant and MySQL.
+
+1. `cd web-app/app`
+2. `npm install`
+3. `node populateDb.js -q ../static/questions/questions.json`
+4. `npm start`
+
 
 ## Production Mode
 
