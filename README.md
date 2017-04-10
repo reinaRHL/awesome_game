@@ -112,3 +112,8 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 
 The Questions JSON File was generated via `https://opentdb.com/api_config.php` and was edited
 and stored in the database to suit our particular needs.
+
+Music is made available by
+Kevin MacLeod (incompetech.com) 
+Licensed under Creative Commons: By Attribution 3.0
+http://creativecommons.org/licenses/by/3.0/
