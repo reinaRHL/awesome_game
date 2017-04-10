@@ -146,7 +146,7 @@
                   <!-- /input-group -->
                   <hr>
                   <ul class="list-group" id="gameDisplay">
-                     <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in games">
+                     <a class="list-group-item" ng-click='gameInfo(game.id)' ng-repeat="game in openGames">
                         <span class="badge">players: {{game.users.length}}</span>
                         <span class="gameTitle">{{game.title}}</span>
                         <p class="text-primary">Created By {{game.createdBy}} </p>

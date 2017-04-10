@@ -70,6 +70,11 @@ app.factory('webServices', ['$http', function ($http) {
 
 		webServices.getGames().then(function (resp) {
 			$scope.games = resp.data.games;
+			$scope.openGames = [];
+			$scope.games.forEach(function (game) {
+				if (game.state === 'hold')
+					$scope.openGames.push(game);
+			});
 		});
 		
 		webServices.getUserFriends().then(function (resp) {
