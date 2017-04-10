@@ -1,3 +1,4 @@
+var ping = new Audio('../audio/sfx/ping.wav');
 var app = angular.module('indexApp', [])
 var socket = io.connect();
 
@@ -184,7 +185,7 @@ app.factory('webServices', ['$http', function ($http) {
 			socket.emit('joinGame', { game: this.lobbyTitle, username: $("#profile > div.panel-body > h1").text().split('  ')[1] });
 			document.location.href = "/games";
 			console.log('join the game');
-			console.log(this)
+			console.log(this);
 		}
 
 		$scope.closeGame = function () {
@@ -218,6 +219,7 @@ app.factory('webServices', ['$http', function ($http) {
 			timerUpdate(data.question.endTime);
 			localStorage.setItem("currentQuestion", data.question.question.id);//store question in local storage
 			roundQuestion = data.question;
+			ping.play();
 			$("#inputAnswer").removeAttr("disabled");
 			$("#inputAnswerButton").removeClass("disabled");
 			$("#questionStateDiv").removeClass('hidden').addClass('show');
