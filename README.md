@@ -9,6 +9,20 @@ For the project checkpoint, the node application will run directly on the host m
 3. `node populateDb.js -q ../static/questions/questions.json`
 4. `npm start`
 
+## Project Final
+
+To play you wll need to do the following:
+1. Create two accounts
+2. Login to both (An easy way to do this is to use private tab or another browser)
+3. Have one account create the game
+4. Have the other account join
+5. Start
+
+Each round
+1. You will be prompted for text input, you should put in a belivable lie at this point
+2. Some server generated fake answers, a real answer and user answers will be displayed, pick which you think is the real one
+3. You will be awarded points for picking the correct answer, your lifetime score is shown in orange, you game score is shown in the leaderboard
+4. Repeat until game ends
 
 ## Production Mode
 
@@ -56,6 +70,7 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 
 * The filter box on the game list performs no function
 * On occasion you may see a question twice in the same game
+* If a game has no players it may still display as running ntil it has ended on the server.
 
 ## File Structure
 * Dynamic-Content: `web-app/app/`
