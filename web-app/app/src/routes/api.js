@@ -6,6 +6,7 @@ api.getUser = function (req, res) {
 	// populate the data for response
 	res.setHeader('Content-Type', 'text/json');
 	res.send({
+		id: current_user.id,
 		username: current_user.username,
 		score: current_user.score,
 		gamesWon: current_user.gamesWon,
@@ -14,11 +15,31 @@ api.getUser = function (req, res) {
 	});
 };
 
+api.getDBUser = function(req, res){
+	models.User.findOne({
+		where:{
+			username: req.params['username']
+		}
+	}).then(function(user){
+		res.setHeader('Content-Type', 'text/json');
+		res.send({
+		username: user.username,
+		score: user.score,
+		gamesWon: user.gamesWon,
+		gamesPlayed: user.gamesPlayed,
+		lastLoggedIn: user.lastLoggedIn
+		});
+	});
+};
+
 // Returns a list of friend objects(containing id & username) of the current user.
 api.getUserFriends = function (req, res) {
 	current_user = req.user;
 	// Find all, where status is 1 and either (UserId or FriendId) is equal to the current user id.
-	models.UserFriend.findAll({where: {status: 1, $or: [{UserId: current_user.id}, {FriendId: current_user.id}]}})
+	// JA: removed status: 1, from where clause
+	// {$or: [{UserId: current_user.id}, {FriendId: current_user.id}]
+	// now this just returns friends added by whoever added them.
+	models.UserFriend.findAll({where: {UserId: current_user.id }})
 	.then(function(friends){
 
 		var friendIds = []
@@ -63,12 +84,12 @@ api.getAllGames = function (req, res) {
     	if (nofg > 0){
     		models.Game.findAll()
 			.then(function (games){
-				console.log(games.length);
+				//console.log(games.length);
 				var gamesArray = [];
 				games.forEach(function(game) {
 		            var array = [] // put user ids in array
 		            game.getUsers().then(function(users) {
-		            	console.log("users" + users)
+		            	//console.log("users" + users)
 		                users.forEach(function(user) {
 		                    array.push(user.username)
 		                })
@@ -79,7 +100,7 @@ api.getAllGames = function (req, res) {
 		                counter++ // respond the game array when every game is processed
 		                if (counter === nofg) {
 		                    var saved = '{ "games": ' + JSON.stringify(games) + '}'
-		                  	console.log(saved)
+		                  	//console.log(saved)
 		                    res.end(saved);
 		                }
 
@@ -121,7 +142,7 @@ api.getLobbyGame = function (req, res){
 			                })
 			                game.dataValues.users = userArray
 			                
-							console.log(JSON.stringify(game) + "game")
+							//console.log(JSON.stringify(game) + "game")
 							res.send(JSON.stringify(game));
 
 			            })

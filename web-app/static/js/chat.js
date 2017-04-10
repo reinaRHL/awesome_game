@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 	socket.on('newMessage', function(data){
 		var myDate = new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+data.msg+'</p><time>'+data.name+' • '+myDate+'</time></div></div><div class="col-md-3 col-xs-3 avatar"><img src="../../img/avatar.png" class=" img-responsive "></div>');
+		$chatDisplay.append('<div class="row msg_container base_sent"><div class="col-md-9 col-xs-9"><div class="messages msg_sent"><p>'+ '('+ myDate + ') ' + data.name + ': ' + data.msg+'</p></div></div>');
 		
 	})
 
@@ -56,8 +56,8 @@ $(document).ready(function(){
     socket.on('getUsers', function(data){
         var html = '';
         for (i =0;i <data.length; i++){
-            html += '<li><a href="#">'+data[i]+'</a></li><li class="divider"></li>'
-            console.log("here" + data)
+            html += '<li><a>'+data[i]+'</a></li><li class="divider"></li>'
+            //console.log("here" + data)
         }
         $("#friendsDropdown").html(html)
     })
