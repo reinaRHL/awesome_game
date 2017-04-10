@@ -282,6 +282,21 @@ module.exports = function (server) {
 			game.update({
 				state: 'done'
 			});
+
+			data.scores.forEach(function (score) {
+				models.User.findOne({
+					where: {
+						id: score.userId
+					}
+				}).then(function (user) {
+					if (user) {
+						console.log('----- UPDATING SCORE -----');
+						return user.update({
+							score: user.score + score.score
+						});
+					}
+				});
+			});
 		}
 
 		function endRoundScoring(game_id, socket) {
