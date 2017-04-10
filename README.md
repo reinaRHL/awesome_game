@@ -70,7 +70,7 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 
 * The filter box on the game list performs no function
 * On occasion you may see a question twice in the same game
-* If a game has no players it may still display as running ntil it has ended on the server.
+* If a game has no players it may still display as running until it has ended on the server.
 
 ## File Structure
 * Dynamic-Content: `web-app/app/`
