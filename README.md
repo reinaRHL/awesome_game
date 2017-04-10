@@ -101,6 +101,8 @@ To get a live-feed of node's output when running, execute the log with the -f fl
 * If the user reloads the page during a game or disconnects no reconnection method is available.
 * The game will update the score to reflect who scored in a round, but there is no visual indication of which answers were lies and which was the truth.
 * For games to work properly server and client clocks must be synced
+* Games of the same name cannot be used, so no game may ever have the same name even if the old game has ended.
+* The score of the final round is lost for some reason.
 
 ## File Structure
 * Dynamic-Content: `web-app/app/`
